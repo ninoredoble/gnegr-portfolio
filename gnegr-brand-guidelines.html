@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GNEGR — Brand Identity Guidelines</title>
+<link rel="icon" type="image/svg+xml" href="img/GNEGR.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1F;
+    --steel:#585A61;
+    --fog:#DEDED9;
+    --fog-soft:#EDEDE9;
+    --paper:#FAF9F6;
+    --white:#FFFFFF;
+    --indigo:#2B4C82;
+    --ember:#E24E1B;
+    --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-6:48px; --sp-8:64px; --sp-12:96px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display); font-weight:700; margin:0; letter-spacing:-0.01em;}
+  p{margin:0 0 var(--sp-2);}
+  a{color:var(--indigo);}
+  .gn-prose{max-width:700px;}
+  .gn-prose p{max-width:700px;}
+
+  /* ---- layout ---- */
+  .gn-chapter{padding:var(--sp-12) var(--sp-3); max-width:1040px; margin:0 auto; border-bottom:1px solid var(--fog);}
+  .gn-chapter:last-of-type{border-bottom:none;}
+  .gn-chapter-head{display:flex; align-items:baseline; gap:var(--sp-2); margin-bottom:var(--sp-6);}
+  .gn-num{font-family:var(--font-mono); font-size:0.8125rem; color:var(--indigo); min-width:2ch;}
+  .gn-chapter h2{font-size:2rem; line-height:1.2;}
+  .gn-chapter-intro{color:var(--steel); max-width:640px; margin-top:var(--sp-1);}
+
+  /* ---- top nav ---- */
+  .gn-nav{position:sticky; top:0; z-index:10; background:rgba(250,249,246,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--fog);}
+  .gn-nav-inner{display:flex; gap:6px; overflow-x:auto; padding:14px var(--sp-3); max-width:1040px; margin:0 auto; scrollbar-width:none;}
+  .gn-nav-inner::-webkit-scrollbar{display:none;}
+  .gn-nav a{white-space:nowrap; text-decoration:none; color:var(--steel); font-size:0.8125rem; padding:7px 13px; border:1px solid var(--fog); border-radius:999px; transition:color .15s, border-color .15s;}
+  .gn-nav a:hover, .gn-nav a:focus-visible{color:var(--ink); border-color:var(--steel);}
+
+  /* ---- tread pattern divider ---- */
+  .gn-tread{height:9px; background-image:repeating-linear-gradient(45deg, var(--ink) 0, var(--ink) 2px, transparent 2px, transparent 11px); opacity:0.14;}
+
+  /* ---- cover ---- */
+  .gn-cover{padding:var(--sp-12) var(--sp-3) var(--sp-8); max-width:1040px; margin:0 auto; text-align:left;}
+  .gn-cover .gn-mark{width:min(560px, 100%); color:var(--ink); margin-bottom:var(--sp-6);}
+  .gn-cover h1{font-size:clamp(2.5rem, 6vw, 4rem); line-height:1.05; margin-bottom:var(--sp-2);}
+  .gn-cover .gn-sub{font-size:1.125rem; color:var(--steel); max-width:560px;}
+  .gn-cover .gn-meta{margin-top:var(--sp-6); font-family:var(--font-mono); font-size:0.8125rem; color:var(--steel); line-height:1.8;}
+
+  /* ---- marks ---- */
+  .gn-mark{display:block;}
+  .gn-mark-img{display:inline-block; vertical-align:middle; width:auto; height:auto; max-width:100%; object-fit:contain;}
+  .gn-logo-swatch.is-ink .gn-mark-img,
+  .gn-avatar .gn-mark-img,
+  .gn-bcard.back .gn-mark-img {
+    filter: brightness(0) invert(1);
+  }
+  .gn-cover-lockup{display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-6);}
+  .gn-cover-lockup .gn-mark-img{height:88px; width:auto;}
+  .gn-cover-lockup .gn-cover-wordmark{font-family:var(--font-display); font-weight:700; font-size:clamp(2.5rem, 5vw, 3.75rem); letter-spacing:-0.01em; color:var(--ink); line-height:1;}
+  svg use, svg text{color:inherit;}
+  .gn-wordmark-text{font-family:var(--font-display); font-weight:700; letter-spacing:0.01em;}
+
+  /* ---- generic grid ---- */
+  .gn-grid{display:grid; gap:var(--sp-3);}
+  .gn-grid-2{grid-template-columns:repeat(2,1fr);}
+  .gn-grid-3{grid-template-columns:repeat(3,1fr);}
+  .gn-grid-4{grid-template-columns:repeat(4,1fr);}
+  @media (max-width:760px){ .gn-grid-2, .gn-grid-3, .gn-grid-4{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .gn-grid-2, .gn-grid-3, .gn-grid-4{grid-template-columns:1fr;} }
+
+  /* ---- cards / panels ---- */
+  .gn-panel{border:1px solid var(--fog); padding:var(--sp-3); background:var(--white);}
+  .gn-panel-title{font-family:var(--font-display); font-weight:700; font-size:1rem; margin-bottom:4px;}
+  .gn-panel-note{color:var(--steel); font-size:0.875rem;}
+
+  .gn-clip{clip-path:polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);}
+
+  /* ---- logo system swatches ---- */
+  .gn-logo-swatch{border:1px solid var(--fog); background:var(--white); padding:var(--sp-3); display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:180px; gap:var(--sp-2);}
+  .gn-logo-swatch.is-ink{background:var(--ink);}
+  .gn-logo-swatch .gn-mark{width:220px;}
+  .gn-lockup-primary{display:flex; align-items:center; justify-content:center; gap:12px;}
+  .gn-lockup-primary .gn-mark-img{height:54px;}
+  .gn-lockup-primary .gn-wordmark-text{font-size:2rem;}
+  .gn-lockup-stacked{display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .gn-lockup-stacked .gn-mark-img{height:58px;}
+  .gn-lockup-stacked .gn-wordmark-text{font-size:1.5rem;}
+  .gn-wordmark-row{display:flex; align-items:center; gap:14px;}
+  .gn-wordmark-row .gn-wordmark-text{font-size:2rem;}
+  .gn-wordmark-row .gn-mark{width:56px;}
+  .gn-swatch-label{font-size:0.8125rem; color:var(--steel); text-align:center;}
+  .gn-swatch-label b{color:var(--ink); display:block; font-family:var(--font-body); font-weight:600; margin-bottom:2px;}
+
+  /* ---- responsive scale row ---- */
+  .gn-scale-row{display:flex; align-items:flex-end; gap:var(--sp-4); flex-wrap:wrap; padding:var(--sp-4) var(--sp-3); border:1px solid var(--fog); background:var(--white);}
+  .gn-scale-item{display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .gn-scale-item .gn-mark{color:var(--ink);}
+  .gn-scale-item span{font-family:var(--font-mono); font-size:0.75rem; color:var(--steel);}
+
+  /* ---- color palette ---- */
+  .gn-swatch{border:1px solid var(--fog);}
+  .gn-swatch-fill{height:104px;}
+  .gn-swatch-info{padding:12px 14px; background:var(--white);}
+  .gn-swatch-info b{display:block; font-size:0.9375rem;}
+  .gn-swatch-info .gn-hex{font-family:var(--font-mono); font-size:0.8125rem; color:var(--steel); margin-top:2px;}
+  .gn-swatch-info .gn-use{font-size:0.8125rem; color:var(--steel); margin-top:6px;}
+
+  /* ---- typography specimens ---- */
+  .gn-specimen{border:1px solid var(--fog); padding:var(--sp-3); background:var(--white); margin-bottom:var(--sp-3);}
+  .gn-specimen-label{font-family:var(--font-mono); font-size:0.75rem; color:var(--indigo); margin-bottom:10px;}
+  .gn-specimen-display{font-family:var(--font-display); font-weight:700; font-size:clamp(1.75rem,4vw,2.5rem); line-height:1.1;}
+  .gn-specimen-body{font-family:var(--font-body); font-size:1.0625rem; max-width:640px; color:var(--ink);}
+  .gn-specimen-mono{font-family:var(--font-mono); font-size:0.9375rem; color:var(--ink); line-height:1.9;}
+
+  table.gn-type-scale{width:100%; border-collapse:collapse; font-size:0.9375rem;}
+  table.gn-type-scale th, table.gn-type-scale td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--fog);}
+  table.gn-type-scale th{font-family:var(--font-mono); font-weight:500; font-size:0.75rem; color:var(--steel);}
+
+  /* ---- icon style ---- */
+  .gn-icon-row{display:flex; gap:var(--sp-6); flex-wrap:wrap; align-items:center;}
+  .gn-icon-item{display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .gn-icon-item svg{width:28px; height:28px; color:var(--ink);}
+  .gn-icon-item span{font-size:0.8125rem; color:var(--steel);}
+
+  ul.gn-wheel-list{list-style:none; padding:0; margin:0;}
+  ul.gn-wheel-list li{position:relative; padding-left:24px; margin-bottom:10px;}
+  ul.gn-wheel-list li::before{content:""; position:absolute; left:0; top:7px; width:9px; height:9px; border:1.6px solid var(--indigo); border-radius:50%;}
+
+  /* ---- chips ---- */
+  .gn-chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .gn-chip{border:1px solid var(--fog); padding:6px 12px; border-radius:999px; font-size:0.8125rem; color:var(--ink); background:var(--white);}
+  .gn-chip.is-mono{font-family:var(--font-mono); font-size:0.75rem;}
+
+  /* ---- voice do/dont ---- */
+  .gn-voice-cols{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3);}
+  @media (max-width:640px){.gn-voice-cols{grid-template-columns:1fr;}}
+  .gn-voice-col{border:1px solid var(--fog); padding:var(--sp-3); background:var(--white);}
+  .gn-voice-col h3{font-size:1rem; margin-bottom:10px;}
+  .gn-voice-col ul{margin:0; padding-left:18px; color:var(--steel); font-size:0.9375rem;}
+  .gn-voice-col ul li{margin-bottom:6px;}
+
+  .gn-copy-block{border-left:2px solid var(--indigo); padding-left:var(--sp-3); margin:var(--sp-2) 0;}
+  .gn-copy-block .gn-copy-label{font-family:var(--font-mono); font-size:0.75rem; color:var(--steel); margin-bottom:4px;}
+  .gn-copy-block p{font-family:var(--font-display); font-weight:500; font-size:1.125rem; color:var(--ink);}
+  .gn-copy-block.is-body p{font-family:var(--font-body); font-weight:400; font-size:1rem;}
+
+  /* ---- application mockups ---- */
+  .gn-app-block{margin-bottom:var(--sp-6);}
+  .gn-app-block h3{font-size:1.0625rem; margin-bottom:6px;}
+  .gn-app-block .gn-app-note{color:var(--steel); font-size:0.9375rem; max-width:640px; margin-bottom:var(--sp-2);}
+
+  .gn-bcard-row{display:flex; gap:var(--sp-3); flex-wrap:wrap;}
+  .gn-bcard{width:300px; height:172px; border:1px solid var(--fog); padding:20px; display:flex; flex-direction:column; justify-content:space-between; position:relative;}
+  .gn-bcard.front{background:var(--paper);}
+  .gn-bcard.front .gn-mark{width:64px; align-self:center; margin:auto; color:var(--ink);}
+  .gn-bcard.back{background:var(--ink); color:var(--paper);}
+  .gn-bcard.back::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--indigo);}
+  .gn-bcard.back .gn-wordmark-text{font-size:1.375rem; color:var(--paper);}
+  .gn-bcard.back .gn-bcard-contact{font-family:var(--font-mono); font-size:0.6875rem; color:var(--fog); line-height:1.7;}
+  .gn-bcard.back .gn-bcard-role{font-size:0.8125rem; color:var(--fog-soft); margin-top:2px;}
+
+  .gn-avatar{width:132px; height:132px; border-radius:50%; background:var(--ink); display:flex; align-items:center; justify-content:center;}
+  .gn-avatar .gn-mark{width:66px; color:var(--paper);}
+  .gn-social-row{display:flex; gap:var(--sp-4); align-items:center; flex-wrap:wrap;}
+  .gn-banner{flex:1; min-width:280px; height:110px; border:1px solid var(--fog); background:var(--white); display:flex; align-items:center; justify-content:space-between; padding:0 var(--sp-3);}
+  .gn-banner .gn-mark{width:150px; color:var(--ink);}
+  .gn-banner .gn-tagline{font-size:0.8125rem; color:var(--steel); max-width:180px; text-align:right;}
+
+  .gn-email-sig{border-left:2px solid var(--indigo); padding-left:var(--sp-3); max-width:380px;}
+  .gn-email-sig .gn-wordmark-text{font-size:1.125rem; display:block; margin-bottom:6px;}
+  .gn-email-sig .gn-sig-name{font-family:var(--font-display); font-weight:700; font-size:0.9375rem;}
+  .gn-email-sig .gn-sig-role{font-size:0.8125rem; color:var(--steel); margin-bottom:6px;}
+  .gn-email-sig .gn-sig-contact{font-family:var(--font-mono); font-size:0.75rem; color:var(--steel); line-height:1.8;}
+
+  .gn-header-mock{border:1px solid var(--fog); background:var(--white); display:flex; align-items:center; justify-content:space-between; padding:16px var(--sp-3);}
+  .gn-header-mock .gn-mark{width:150px; color:var(--ink);}
+  .gn-header-mock nav{display:flex; gap:22px; font-size:0.875rem; color:var(--indigo);}
+
+  /* ---- appendix ---- */
+  .gn-appendix-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:6px; margin-bottom:var(--sp-4);}
+  @media (max-width:640px){.gn-appendix-grid{grid-template-columns:repeat(3,1fr);}}
+  .gn-appendix-swatch{padding:10px 8px; font-family:var(--font-mono); font-size:0.6875rem; text-align:center;}
+
+  .gn-footer{padding:var(--sp-6) var(--sp-3); max-width:1040px; margin:0 auto; color:var(--steel); font-size:0.8125rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+
+  @media print{
+    .gn-nav{display:none;}
+    .gn-chapter{page-break-before:always; padding:40px 20px;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SYMBOL DEFS ============ -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="gn-icon" viewBox="0 0 420 190">
+    <circle cx="78" cy="128" r="36" fill="none" stroke="currentColor" stroke-width="7"/>
+    <circle cx="78" cy="128" r="13" fill="none" stroke="currentColor" stroke-width="4"/>
+    <circle cx="322" cy="128" r="36" fill="none" stroke="currentColor" stroke-width="7"/>
+    <circle cx="322" cy="128" r="13" fill="none" stroke="currentColor" stroke-width="4"/>
+    <path d="M45,110 L78,92 L120,65 L165,50 L205,62 L245,42 L285,55 L315,38 L355,68 L378,88 L322,92" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="gn-icon-small" viewBox="0 0 100 60">
+    <circle cx="25" cy="35" r="16" fill="currentColor"/>
+    <circle cx="75" cy="35" r="16" fill="currentColor"/>
+    <line x1="25" y1="35" x2="75" y2="35" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="gn-motion" viewBox="0 0 60 24">
+    <line x1="0" y1="4" x2="44" y2="4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="12" x2="30" y2="12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    <line x1="0" y1="20" x2="16" y2="20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="gn-circuit" viewBox="0 0 40 40">
+    <path d="M2,38 L2,14 L26,14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="26" cy="14" r="3" fill="currentColor"/>
+  </symbol>
+  <symbol id="gn-icon-code" viewBox="0 0 24 24">
+    <polyline points="9,6 4,12 9,18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="15,6 20,12 15,18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="gn-icon-network" viewBox="0 0 24 24">
+    <circle cx="12" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="5" cy="19" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="19" cy="19" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="10.6" y1="7.3" x2="6.4" y2="17.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="13.4" y1="7.3" x2="17.6" y2="17.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="gn-icon-terminal" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <polyline points="7,9 10,12 7,15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="12" y1="15" x2="16" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ============ NAV ============ -->
+<div class="gn-nav">
+  <div class="gn-nav-inner">
+    <a href="#overview">01 Overview</a>
+    <a href="#audience">02 Audience</a>
+    <a href="#rationale">03 Rationale</a>
+    <a href="#logo-system">04 Logo system</a>
+    <a href="#color">05 Color</a>
+    <a href="#type">06 Typography</a>
+    <a href="#elements">07 Elements</a>
+    <a href="#principles">08 Principles</a>
+    <a href="#voice">09 Voice</a>
+    <a href="#applications">10 Applications</a>
+    <a href="#appendix">11 Quick reference</a>
+  </div>
+</div>
+<div class="gn-tread"></div>
+
+<!-- ============ COVER ============ -->
+<header class="gn-cover">
+  <div class="gn-cover-lockup">
+    <img src="img/GNEGR.svg" alt="GNEGR Logo" class="gn-mark-img">
+    <div class="gn-cover-wordmark">GNEGR</div>
+  </div>
+  <h1>Brand identity guidelines</h1>
+  <p class="gn-sub">The personal brand of G. Niño Emmanuel G. Redoble — full-stack developer and CCNA-certified network specialist.</p>
+  <div class="gn-meta">
+    Version 1.0<br>
+    Cagayan de Oro, Philippines, 2026
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 01 OVERVIEW ============ -->
+<section class="gn-chapter" id="overview">
+  <div class="gn-chapter-head">
+    <span class="gn-num">01</span>
+    <h2>Brand overview</h2>
+  </div>
+
+  <div class="gn-prose">
+    <p><b>Brand name.</b> GNEGR is built from the initials of Niño's full government name: <b>G</b>. <b>N</b>iño <b>E</b>mmanuel <b>G</b>. Redoble. Five letters, five parts of one name, condensed into something that reads like a badge rather than a byline.</p>
+    <p>Said aloud, the letters land close to "engineer" and "energy" — a coincidence worth letting the brand lean into, even though the name's real origin is simply his own initials.</p>
+
+    <p style="margin-top:var(--sp-4);"><b>Purpose.</b> GNEGR exists to give Niño's technical work — from network configurations to shipped applications — one consistent identity to stand behind, whether it's on a résumé, a case study, or a business card handed across a table.</p>
+
+    <p><b>Mission.</b> To apply a disciplined, systems-first approach across databases, infrastructure, and application development, building software and networks that hold up under real use — the same standard proven during his internship deployments at CEPALCO.</p>
+
+    <p><b>Vision.</b> To grow from IT graduate into a versatile technology professional trusted to own a project end to end, from the first architecture decision to the server it finally runs on.</p>
+  </div>
+
+  <div style="margin-top:var(--sp-6);">
+    <h3 style="font-size:1.125rem; margin-bottom:var(--sp-3);">Values</h3>
+    <div class="gn-grid gn-grid-2">
+      <div class="gn-panel">
+        <div class="gn-panel-title">Precision</div>
+        <div class="gn-panel-note">Backed by a CCNA certification in enterprise networking, security, and automation — nothing ships without accounting for how it behaves under load.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Discipline</div>
+        <div class="gn-panel-note">Graduated Magna Cum Laude and a Dean's Lister across every year from 2022–2026 — consistency treated as a habit, not a one-time achievement.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Momentum</div>
+        <div class="gn-panel-note">Balanced full-time study with freelance development and mentoring from 2021 onward — work that keeps moving even outside the classroom.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Craft</div>
+        <div class="gn-panel-note">A full asynchronous database migration and comprehensive technical documentation at CEPALCO — a preference for solving the underlying problem, not just the visible one.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Collaboration</div>
+        <div class="gn-panel-note">Led a five-person team on BuyNaBay and mentored 10+ students as an Academic Projects Consultant — building things is rarely a solo act.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Range</div>
+        <div class="gn-panel-note">Comfortable moving between Figma prototypes, React front ends, FastAPI back ends, and CCNA-level network configuration in the same week.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-6);" class="gn-prose">
+    <h3 style="font-size:1.125rem; margin-bottom:10px;">Personality</h3>
+    <p><b>Grounded</b> — as comfortable in Linux CLI and network configs as in Figma. <b>Precise</b> — a network-security mindset applied to every decision, visual or technical. <b>Quietly confident</b> — lets shipped work carry the proof rather than adjectives. <b>Forward-moving</b> — always the next stack, the next certification, the next deployment.</p>
+
+    <h3 style="font-size:1.125rem; margin:var(--sp-4) 0 10px;">Positioning</h3>
+    <p>For employers, clients, and collaborators who need someone equally comfortable architecting a backend, securing the network underneath it, and shipping the interface on top, GNEGR is the personal brand of a CCNA-certified full-stack developer who treats every build like a well-tuned machine — engineered, tested, and built to move.</p>
+  </div>
+</section>
+
+<!-- ============ 02 AUDIENCE ============ -->
+<section class="gn-chapter" id="audience">
+  <div class="gn-chapter-head">
+    <span class="gn-num">02</span>
+    <h2>Audience</h2>
+  </div>
+  <p class="gn-chapter-intro">Who the identity needs to work for, drawn directly from the shape of Niño's experience so far.</p>
+
+  <div class="gn-grid gn-grid-2" style="margin-top:var(--sp-4);">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Employers &amp; recruiters</div>
+      <div class="gn-panel-note">Software, IT infrastructure, and network roles evaluating the CCNA certification, the Magna Cum Laude / Dean's Lister record, and hands-on deployment experience at CEPALCO. They want proof of range across databases, infrastructure, and application development.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Freelance &amp; project clients</div>
+      <div class="gn-panel-note">Small organizations or campus groups needing a working web or mobile product, in the spirit of BuyNaBay and his freelance development work. They want reliability, clear documentation, and someone who delivers.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Collaborators &amp; dev teams</div>
+      <div class="gn-panel-note">Fellow developers on team projects or future hackathons. They want to know he can lead — Team Lead and System Analyst on BuyNaBay — collaborate over Git, and work within Agile methodologies.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Students &amp; mentees</div>
+      <div class="gn-panel-note">From his ongoing work as an Academic Projects Consultant. They want approachable, honest technical guidance grounded in real academic integrity standards.</div>
+    </div>
+  </div>
+
+  <div class="gn-panel" style="margin-top:var(--sp-3);">
+    <div class="gn-panel-title">Broader tech &amp; creative community</div>
+    <div class="gn-panel-note">Portfolio visitors, LinkedIn network, and future collaborators who sit at the overlap of UI/UX and engineering. They want to see that design — Figma, Adobe CC, responsive and GUI design — and engineering live under one roof.</div>
+  </div>
+</section>
+
+<!-- ============ 03 RATIONALE ============ -->
+<section class="gn-chapter" id="rationale">
+  <div class="gn-chapter-head">
+    <span class="gn-num">03</span>
+    <h2>Logo rationale</h2>
+  </div>
+
+  <div class="gn-copy-block is-body" style="max-width:720px;">
+    <div class="gn-copy-label">Why a motorcycle</div>
+    <p>The motorcycle isn't decoration on top of the GNEGR mark — it's the argument for the whole brand. A motorcycle is one of the most honest machines there is: every part is visible, every part has a job, and if the engineering is off, it simply doesn't move. That's the standard Niño holds his own work to, whether he's tracing a concurrency bug through an asynchronous database migration or configuring a network under a CCNA framework — nothing is hidden, and nothing works by accident. The bike's forward lean captures momentum: the pace of finishing a CCNA certification, a full internship deployment, and a five-person product build inside the same stretch of years. Its independence — one rider, one machine, full control — mirrors the freelance and mentoring work he's carried alongside full-time study since 2021. And in the original mark, the wordmark doesn't sit on the bike as a label; it's built into the chassis itself, the letters forming the body the wheels carry. That single detail is the whole case study in miniature: his name isn't attached to the work, it's the structure underneath it.</p>
+  </div>
+</section>
+
+<!-- ============ 04 LOGO SYSTEM ============ -->
+<section class="gn-chapter" id="logo-system">
+  <div class="gn-chapter-head">
+    <span class="gn-num">04</span>
+    <h2>Logo system</h2>
+  </div>
+  <p class="gn-chapter-intro">Six constructions built from one mark, so the identity holds up from a business card to a favicon. Production vector files should be traced from the original artwork at full resolution; the constructions below define the system's proportions and rules.</p>
+
+  <div class="gn-grid gn-grid-3" style="margin-top:var(--sp-4);">
+    <div>
+      <div class="gn-logo-swatch">
+        <div class="gn-lockup-primary" style="color:var(--ink);">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img">
+          <span class="gn-wordmark-text">GNEGR</span>
+        </div>
+      </div>
+      <p class="gn-swatch-label"><b>Primary logo</b>Full lockup, motorcycle mark with wordmark. Default use — headers, covers, title slides.</p>
+    </div>
+
+    <div>
+      <div class="gn-logo-swatch">
+        <div class="gn-lockup-stacked" style="color:var(--ink);">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img">
+          <span class="gn-wordmark-text">GNEGR</span>
+        </div>
+      </div>
+      <p class="gn-swatch-label"><b>Secondary logo</b>Stacked icon and wordmark. For square or tall formats — profile frames, certificates, banners.</p>
+    </div>
+
+    <div>
+      <div class="gn-logo-swatch">
+        <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:70px;">
+      </div>
+      <p class="gn-swatch-label"><b>Icon / submark</b>Motorcycle silhouette alone. For app icons, favicons, watermarks, repeating patterns.</p>
+    </div>
+
+    <div>
+      <div class="gn-logo-swatch">
+        <div class="gn-wordmark-row" style="color:var(--ink);">
+          <span class="gn-wordmark-text">GNEGR</span>
+          <svg class="gn-mark" viewBox="0 0 60 24"><use href="#gn-motion"></use></svg>
+        </div>
+      </div>
+      <p class="gn-swatch-label"><b>Wordmark</b>Type only, with a trailing motion accent. For narrow spaces — signatures, footers, résumé headers.</p>
+    </div>
+
+    <div>
+      <div class="gn-logo-swatch is-ink">
+        <div class="gn-lockup-primary" style="color:var(--paper);">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img">
+          <span class="gn-wordmark-text">GNEGR</span>
+        </div>
+      </div>
+      <p class="gn-swatch-label"><b>Black &amp; white</b>Single-color ink-on-paper, or reversed for dark grounds. For one-color print, scans, and low-fidelity output.</p>
+    </div>
+
+    <div>
+      <div class="gn-logo-swatch">
+        <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:32px;">
+      </div>
+      <p class="gn-swatch-label"><b>Small-size mark</b>Compact standalone icon. For anything under 32px — favicons, tiny avatars.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-6);">
+    <h3 style="font-size:1.0625rem; margin-bottom:var(--sp-2);">Responsive scale</h3>
+    <div class="gn-scale-row">
+      <div class="gn-scale-item">
+        <div class="gn-lockup-primary">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:48px;">
+          <span class="gn-wordmark-text" style="font-size:1.5rem;">GNEGR</span>
+        </div>
+        <span>≥ 120px — primary lockup</span>
+      </div>
+      <div class="gn-scale-item">
+        <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:36px;">
+        <span>32–120px — icon only</span>
+      </div>
+      <div class="gn-scale-item">
+        <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:20px;">
+        <span>&lt; 32px — simplified mark</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="gn-grid gn-grid-2" style="margin-top:var(--sp-4);">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Clear space &amp; minimum size</div>
+      <div class="gn-panel-note">Keep clear space around the mark equal to at least the radius of one wheel circle on every side. Never scale the primary lockup below 120px wide — switch to the icon at that point instead of letting the wordmark blur.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Avoid</div>
+      <div class="gn-panel-note">Don't recolor outside the approved palette. Don't stretch or skew the proportions. Don't rotate off the horizontal baseline. Don't place it on a background that drops below the accessibility minimums in chapter 08. Don't rebuild the wordmark in another typeface.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 COLOR ============ -->
+<section class="gn-chapter" id="color">
+  <div class="gn-chapter-head">
+    <span class="gn-num">05</span>
+    <h2>Color palette</h2>
+  </div>
+  <p class="gn-chapter-intro">Four neutrals from the original mark, plus two accents that split the brand's two disciplines: engineering precision and motorcycle motion.</p>
+
+  <div class="gn-grid gn-grid-3" style="margin-top:var(--sp-4);">
+    <div class="gn-swatch">
+      <div class="gn-swatch-fill" style="background:var(--ink);"></div>
+      <div class="gn-swatch-info"><b>GNEGR Ink</b><div class="gn-hex">#1C1C1F</div><div class="gn-use">Primary mark color, headlines, body text</div></div>
+    </div>
+    <div class="gn-swatch">
+      <div class="gn-swatch-fill" style="background:var(--steel);"></div>
+      <div class="gn-swatch-info"><b>Asphalt Steel</b><div class="gn-hex">#585A61</div><div class="gn-use">Secondary text, icon strokes, muted UI</div></div>
+    </div>
+    <div class="gn-swatch">
+      <div class="gn-swatch-fill" style="background:var(--fog);"></div>
+      <div class="gn-swatch-info"><b>Fog Grey</b><div class="gn-hex">#DEDED9</div><div class="gn-use">Dividers, borders, subtle backgrounds</div></div>
+    </div>
+    <div class="gn-swatch">
+      <div class="gn-swatch-fill" style="background:var(--paper); border-bottom:1px solid var(--fog);"></div>
+      <div class="gn-swatch-info"><b>Paper White</b><div class="gn-hex">#FAF9F6</div><div class="gn-use">Primary background</div></div>
+    </div>
+    <div class="gn-swatch">
+      <div class="gn-swatch-fill" style="background:var(--indigo);"></div>
+      <div class="gn-swatch-info"><b>Torque Indigo</b><div class="gn-hex">#2B4C82</div><div class="gn-use">Primary accent — links, buttons, structure</div></div>
+    </div>
+    <div class="gn-swatch">
+      <div class="gn-swatch-fill" style="background:var(--ember);"></div>
+      <div class="gn-swatch-info"><b>Ignition Ember</b><div class="gn-hex">#E24E1B</div><div class="gn-use">Secondary accent — sparing emphasis only</div></div>
+    </div>
+  </div>
+
+  <div class="gn-prose" style="margin-top:var(--sp-4);">
+    <p><b>Usage ratio.</b> Neutrals carry most of the identity — ink, steel, fog, and paper should cover roughly nine parts in ten of any layout. Torque Indigo does the interactive and structural work. Ignition Ember is reserved for the moments that should feel like the bike's headlight: rare, and rare is what makes it work. One highlight per screen, never body text.</p>
+    <p><b>Accessibility.</b> GNEGR Ink on Paper White clears 16:1 contrast — far beyond the 4.5:1 minimum for body text. Torque Indigo on white clears 8.5:1, safe for body text and UI, not just large elements. Ignition Ember on white sits around 3.9:1 — strong enough for large text, icons, and graphic accents, but not for small body copy, and never the only signal for meaning.</p>
+  </div>
+</section>
+
+<!-- ============ 06 TYPOGRAPHY ============ -->
+<section class="gn-chapter" id="type">
+  <div class="gn-chapter-head">
+    <span class="gn-num">06</span>
+    <h2>Typography</h2>
+  </div>
+  <p class="gn-chapter-intro">Three faces, three jobs — nothing decorative, everything functional.</p>
+
+  <div style="margin-top:var(--sp-4);">
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">Space Grotesk — display / headings</div>
+      <div class="gn-specimen-display">Full-stack development. Network engineering.</div>
+    </div>
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">Inter — body / UI</div>
+      <div class="gn-specimen-body">GNEGR is the personal brand of a CCNA-certified developer who treats every build like a well-tuned machine — engineered, tested, and built to move.</div>
+    </div>
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">JetBrains Mono — technical references only</div>
+      <div class="gn-specimen-mono">#1C1C1F&nbsp;&nbsp;#2B4C82&nbsp;&nbsp;React&nbsp;&nbsp;FastAPI&nbsp;&nbsp;SQLAlchemy&nbsp;&nbsp;Docker</div>
+    </div>
+  </div>
+
+  <table class="gn-type-scale" style="margin-top:var(--sp-4);">
+    <tr><th>Style</th><th>Typeface / weight</th><th>Size / line-height</th><th>Use</th></tr>
+    <tr><td>H1</td><td>Space Grotesk Bold</td><td>48 / 56 (32 / 40 mobile)</td><td>Page titles, cover headlines</td></tr>
+    <tr><td>H2</td><td>Space Grotesk Bold</td><td>32 / 40 (24 / 32 mobile)</td><td>Section titles</td></tr>
+    <tr><td>H3</td><td>Space Grotesk Medium</td><td>22 / 30</td><td>Sub-sections, card titles</td></tr>
+    <tr><td>Body</td><td>Inter Regular</td><td>16 / 26</td><td>Paragraphs, résumé body copy</td></tr>
+    <tr><td>Small</td><td>Inter Regular</td><td>13 / 20</td><td>Captions, meta text</td></tr>
+    <tr><td>Mono</td><td>JetBrains Mono Regular</td><td>14 / 22</td><td>Hex values, stack labels, code</td></tr>
+  </table>
+</section>
+
+<!-- ============ 07 ELEMENTS ============ -->
+<section class="gn-chapter" id="elements">
+  <div class="gn-chapter-head">
+    <span class="gn-num">07</span>
+    <h2>Graphic elements &amp; icon style</h2>
+  </div>
+  <p class="gn-chapter-intro">A small set of recurring devices, each one earned from the mark itself rather than borrowed from a template.</p>
+
+  <div class="gn-grid gn-grid-2" style="margin-top:var(--sp-4);">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Motion line</div>
+      <svg style="width:60px; height:24px; color:var(--ink); margin:10px 0;"><use href="#gn-motion"></use></svg>
+      <div class="gn-panel-note">Three strokes, shortening left to right. Trails the wordmark, or marks a transition between sections.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Circuit corner</div>
+      <svg style="width:32px; height:32px; color:var(--indigo); margin:10px 0;"><use href="#gn-circuit"></use></svg>
+      <div class="gn-panel-note">A single right-angle trace, anchoring one corner of a card or section. A quiet nod to the network and software side of the work.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Wheel bullet</div>
+      <ul class="gn-wheel-list" style="margin-top:10px;">
+        <li>Open circle, not a filled dot</li>
+        <li>Used for list markers and small frames</li>
+      </ul>
+      <div class="gn-panel-note">A direct callback to the mark's wheels.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Clipped corner</div>
+      <div class="gn-clip" style="width:100%; height:44px; background:var(--fog-soft); margin:10px 0;"></div>
+      <div class="gn-panel-note">One corner cut at 45°, instead of soft rounding and drop shadows. The system's one recurring shape signature — used consistently, not everywhere.</div>
+    </div>
+  </div>
+
+  <div class="gn-panel" style="margin-top:var(--sp-3);">
+    <div class="gn-panel-title">Tread pattern</div>
+    <div class="gn-tread" style="height:16px; margin:12px 0;"></div>
+    <div class="gn-panel-note">A repeating diagonal tick — a literal tire tread — used as a thin divider or a very low-opacity background texture. Never as a loud pattern; it should read as a detail, not wallpaper.</div>
+  </div>
+
+  <div style="margin-top:var(--sp-4);">
+    <h3 style="font-size:1.0625rem; margin-bottom:var(--sp-2);">Icon style</h3>
+    <p class="gn-app-note">Line icons only, 1.5–2px stroke, rounded caps, built on a 24px grid. No fills except an occasional single Ember dot for status or emphasis.</p>
+    <div class="gn-icon-row">
+      <div class="gn-icon-item"><svg><use href="#gn-icon-code"></use></svg><span>Code</span></div>
+      <div class="gn-icon-item"><svg><use href="#gn-icon-network"></use></svg><span>Network</span></div>
+      <div class="gn-icon-item"><svg><use href="#gn-icon-terminal"></use></svg><span>CLI / tools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 PRINCIPLES ============ -->
+<section class="gn-chapter" id="principles">
+  <div class="gn-chapter-head">
+    <span class="gn-num">08</span>
+    <h2>Design principles</h2>
+  </div>
+
+  <div class="gn-grid gn-grid-2" style="margin-top:var(--sp-4);">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Hierarchy</div>
+      <div class="gn-panel-note">Lead with type weight and size before color. On any single view, only one element should carry an accent color.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Spacing &amp; grid</div>
+      <div class="gn-panel-note">An 8px base unit (8 / 16 / 24 / 32 / 48 / 64 / 96). Body copy in a column no wider than about 720px. Margins scale from 24px on mobile to 96px on wide desktop.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Contrast &amp; accessibility</div>
+      <div class="gn-panel-note">Body text meets at least 4.5:1 contrast; large text and icons meet at least 3:1. Color is never the only carrier of meaning. Focus states stay visible; motion respects reduced-motion preferences.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Consistency</div>
+      <div class="gn-panel-note">Reuse the clipped-corner and motion-line devices as the system's signature. Don't introduce new decorative shapes per project.</div>
+    </div>
+    <div class="gn-panel" style="grid-column:1 / -1;">
+      <div class="gn-panel-title">Responsive use</div>
+      <div class="gn-panel-note">The mark degrades gracefully as shown in chapter 04 — full lockup, then icon, then simplified mark. Layouts drop from multi-column to single-column below 720px, and navigation collapses to a simple scrollable list.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 VOICE ============ -->
+<section class="gn-chapter" id="voice">
+  <div class="gn-chapter-head">
+    <span class="gn-num">09</span>
+    <h2>Brand voice</h2>
+  </div>
+  <p class="gn-chapter-intro">Professional, confident, precise, authentic, quietly bold, forward-looking.</p>
+
+  <div class="gn-voice-cols" style="margin-top:var(--sp-4);">
+    <div class="gn-voice-col">
+      <h3>Do</h3>
+      <ul>
+        <li>Use plain verbs and concrete specifics — name the stack, the certification, the deployment</li>
+        <li>Let finished work carry the confidence, not adjectives</li>
+        <li>Write the way he'd explain a project to another engineer</li>
+      </ul>
+    </div>
+    <div class="gn-voice-col">
+      <h3>Don't</h3>
+      <ul>
+        <li>Reach for hype language — no "rockstar," no "ninja," no "passionate"</li>
+        <li>Overstate scope beyond what actually shipped</li>
+        <li>Bury a real detail under jargon</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-4);">
+    <h3 style="font-size:1rem; margin-bottom:10px;">Keywords</h3>
+    <div class="gn-chips">
+      <span class="gn-chip">Precision</span>
+      <span class="gn-chip">Momentum</span>
+      <span class="gn-chip">Systems</span>
+      <span class="gn-chip">Reliability</span>
+      <span class="gn-chip">Craft</span>
+      <span class="gn-chip">Discipline</span>
+      <span class="gn-chip">Build</span>
+      <span class="gn-chip">Ship</span>
+      <span class="gn-chip">Engineer</span>
+      <span class="gn-chip">Forward</span>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-6);">
+    <h3 style="font-size:1rem; margin-bottom:10px;">Sample copy</h3>
+    <div class="gn-copy-block">
+      <div class="gn-copy-label">Portfolio hero headline</div>
+      <p>Full-stack development. Network engineering. Built to move.</p>
+    </div>
+    <div class="gn-copy-block is-body">
+      <div class="gn-copy-label">Short bio</div>
+      <p>G. Niño Emmanuel G. Redoble is a CCNA-certified IT graduate who builds full-stack systems and keeps the networks underneath them running. His recent work includes a live ticketing and fuel-tracking platform built during his internship at CEPALCO, a campus marketplace app led with a five-person team, and a freelance practice mentoring student developers. He graduated Magna Cum Laude from the University of Science and Technology of Southern Philippines.</p>
+    </div>
+    <div class="gn-copy-block is-body">
+      <div class="gn-copy-label">Signature tagline</div>
+      <p>Full-stack developer and CCNA-certified network specialist.</p>
+    </div>
+    <div class="gn-copy-block is-body">
+      <div class="gn-copy-label">Social bio</div>
+      <p>Building full-stack systems and the networks under them, one deployment at a time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 APPLICATIONS ============ -->
+<section class="gn-chapter" id="applications">
+  <div class="gn-chapter-head">
+    <span class="gn-num">10</span>
+    <h2>Portfolio applications</h2>
+  </div>
+  <p class="gn-chapter-intro">How the system shows up across the places Niño's audiences will actually meet it.</p>
+
+  <div style="margin-top:var(--sp-6);">
+    <div class="gn-app-block">
+      <h3>Portfolio homepage</h3>
+      <p class="gn-app-note">Primary lockup in the header on Paper White, Torque Indigo for navigation, hero headline in Space Grotesk, one Ignition Ember accent reserved for the single most important call to action.</p>
+      <div class="gn-header-mock">
+        <div class="gn-lockup-primary">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:36px;">
+          <span class="gn-wordmark-text" style="font-size:1.25rem;">GNEGR</span>
+        </div>
+        <nav><span>Work</span><span>About</span><span>Contact</span></nav>
+      </div>
+    </div>
+
+    <div class="gn-app-block">
+      <h3>Project case-study pages</h3>
+      <p class="gn-app-note">The icon-only submark runs quietly in the footer or corner. Project titles in Space Grotesk, body in Inter, and the stack named in JetBrains Mono chips.</p>
+      <div class="gn-chips">
+        <span class="gn-chip is-mono">React</span>
+        <span class="gn-chip is-mono">FastAPI</span>
+        <span class="gn-chip is-mono">SQLAlchemy</span>
+        <span class="gn-chip is-mono">Docker</span>
+        <span class="gn-chip is-mono">Nginx</span>
+      </div>
+    </div>
+
+    <div class="gn-app-block">
+      <h3>Résumé / CV</h3>
+      <p class="gn-app-note">Wordmark-only, not the full lockup, set beside his name at the top. The rest of the résumé stays mostly ink-on-paper for print and ATS-friendliness, with Torque Indigo limited to the section-dividing rules.</p>
+    </div>
+
+    <div class="gn-app-block">
+      <h3>Business card</h3>
+      <p class="gn-app-note">The icon-only mark centered on the front; the wordmark, name, and contact details on the back, with a single thin indigo edge.</p>
+      <div class="gn-bcard-row">
+        <div class="gn-bcard front">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:54px; margin:auto;">
+        </div>
+        <div class="gn-bcard back">
+          <span class="gn-wordmark-text">GNEGR</span>
+          <div>
+            <div class="gn-bcard-role">G. Niño Emmanuel G. Redoble</div>
+            <div class="gn-bcard-contact">redoble.gninoemmanuel@gmail.com<br>+63 909 678 1803<br>linkedin.com/in/g-redoble</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gn-app-block">
+      <h3>Social media profile</h3>
+      <p class="gn-app-note">Avatar uses the icon inside a safe circular crop. Banner uses the primary lockup left-aligned, tagline set right-aligned.</p>
+      <div class="gn-social-row">
+        <div class="gn-avatar"><img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:56px;"></div>
+        <div class="gn-banner">
+          <div class="gn-lockup-primary">
+            <img src="img/GNEGR.svg" alt="GNEGR Mark" class="gn-mark-img" style="height:44px;">
+            <span class="gn-wordmark-text" style="font-size:1.375rem;">GNEGR</span>
+          </div>
+          <div class="gn-tagline">Full-stack developer &amp; CCNA-certified network specialist</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gn-app-block">
+      <h3>Email signature</h3>
+      <p class="gn-app-note">Small wordmark, name, role line, and contact — no Ember, no more than two lines beyond the name.</p>
+      <div class="gn-email-sig">
+        <span class="gn-wordmark-text">GNEGR</span>
+        <div class="gn-sig-name">G. Niño Emmanuel G. Redoble</div>
+        <div class="gn-sig-role">Full-stack Developer &amp; Network Specialist</div>
+        <div class="gn-sig-contact">redoble.gninoemmanuel@gmail.com<br>+63 909 678 1803 · Cagayan de Oro, PH</div>
+      </div>
+    </div>
+
+    <div class="gn-app-block">
+      <h3>Presentation deck</h3>
+      <p class="gn-app-note">Title slide carries the full primary lockup with name and subtitle. Section dividers use the icon as a quiet corner watermark with a motion-line accent. Content slides keep Space Grotesk for headers, Inter for body, and Torque Indigo reserved for the one chart or number that matters most on that slide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 APPENDIX ============ -->
+<section class="gn-chapter" id="appendix">
+  <div class="gn-chapter-head">
+    <span class="gn-num">11</span>
+    <h2>Quick reference</h2>
+  </div>
+
+  <div class="gn-appendix-grid">
+    <div class="gn-appendix-swatch" style="background:var(--ink); color:var(--paper);">#1C1C1F</div>
+    <div class="gn-appendix-swatch" style="background:var(--steel); color:var(--paper);">#585A61</div>
+    <div class="gn-appendix-swatch" style="background:var(--fog); color:var(--ink);">#DEDED9</div>
+    <div class="gn-appendix-swatch" style="background:var(--paper); color:var(--ink); border:1px solid var(--fog);">#FAF9F6</div>
+    <div class="gn-appendix-swatch" style="background:var(--indigo); color:var(--paper);">#2B4C82</div>
+    <div class="gn-appendix-swatch" style="background:var(--ember); color:var(--paper);">#E24E1B</div>
+  </div>
+
+  <div class="gn-grid gn-grid-2">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Type</div>
+      <div class="gn-panel-note">Space Grotesk — display &amp; headings<br>Inter — body &amp; UI<br>JetBrains Mono — technical references only</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Minimum sizes</div>
+      <div class="gn-panel-note">Primary lockup ≥ 120px wide<br>Icon-only ≥ 32px<br>Simplified mark ≥ 16px</div>
+    </div>
+  </div>
+
+  <div class="gn-panel" style="margin-top:var(--sp-3);">
+    <div class="gn-panel-title">The one rule</div>
+    <div class="gn-panel-note">Ink and paper first, indigo second, ember last — and only one ember moment per screen.</div>
+  </div>
+</section>
+
+</main>
+
+<div class="gn-tread"></div>
+<footer class="gn-footer">
+  <span>GNEGR Brand Identity Guidelines — v1.0</span>
+  <span>Prepared by G. Niño Emmanuel G. Redoble</span>
+</footer>
+
+</body>
+</html>

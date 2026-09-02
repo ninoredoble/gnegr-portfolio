@@ -21,9 +21,18 @@
   --text-muted: #5e6676;
   --text-inverse: #0b0d11;
 
-  --accent-primary: #3b82f6; /* Precision Cobalt */
+  /* Brand Guidelines Colors */
+  --brand-ink: #1C1C1F;
+  --brand-steel: #585A61;
+  --brand-fog: #DEDED9;
+  --brand-paper: #FAF9F6;
+  --brand-indigo: #2B4C82; /* Torque Indigo */
+  --brand-ember: #E24E1B;  /* Ignition Ember */
+
+  --accent-primary: #3b82f6; /* Precision Cobalt / Torque Indigo */
   --accent-glow: rgba(59, 130, 246, 0.15);
   --accent-amber: #f59e0b;
+  --accent-ember: #E24E1B;
   --accent-emerald: #10b981;
   --accent-crimson: #ef4444;
 
@@ -187,6 +196,20 @@ code, pre, .mono {
   font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.brand-logo-icon {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.brand-logo:hover .brand-logo-icon {
+  transform: scale(1.06);
 }
 
 .brand-badge {

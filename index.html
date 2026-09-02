@@ -10,6 +10,7 @@
   <link rel="canonical" href="https://ninoredoble.is-a.dev/">
   
   <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="img/GNEGR.svg">
   <link rel="icon" type="image/png" href="img/FAVICON.png">
 
   <!-- Typography: Google Fonts (Space Grotesk, Plus Jakarta Sans, JetBrains Mono) -->
@@ -25,7 +26,8 @@
   <!-- Site Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a href="#hero" class="brand-logo">
+      <a href="#hero" class="brand-logo" aria-label="GNEGR Portfolio Home">
+        <img src="img/GNEGR.svg" alt="GNEGR Logo" class="brand-logo-icon">
         <span>GNEGR</span>
         <span class="brand-badge">DEV // CREATIVE</span>
       </a>
@@ -576,9 +578,12 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-content">
-        <div>
-          <div class="footer-stamp">&copy; 2026 G. Niño Emmanuel G. Redoble. All rights reserved.</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Built with zero-bloat Vanilla web architecture. No gradient blobs or fake buzzwords.</div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="brand-logo-icon" style="height: 24px; opacity: 0.85;">
+          <div>
+            <div class="footer-stamp">&copy; 2026 G. Niño Emmanuel G. Redoble. All rights reserved.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Built with zero-bloat Vanilla web architecture. Engineered with precision.</div>
+          </div>
         </div>
 
         <div style="display: flex; align-items: center; gap: 1.5rem;">
