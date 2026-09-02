@@ -41,7 +41,7 @@ Put the following JSON into `domains/ninoredoble.json`:
 3. Once merged (usually within a few hours to a day), `ninoredoble.is-a.dev` will be active worldwide.
 
 ### 5. Verify in GitHub Pages Settings
-1. Go to your GitHub repository: `https://github.com/ninoredoble/ninoredoble.github.io`
+1. Go to your GitHub repository: `https://git hub.com/ninoredoble/ninoredoble.github.io`
 2. Go to **Settings** > **Pages**.
 3. Under **Custom Domain**, confirm `ninoredoble.is-a.dev` is listed (the `CNAME` file in the repo configures this automatically).
 4. Check **Enforce HTTPS**.
