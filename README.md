@@ -9,35 +9,29 @@
 ---
 
 ## 🌟 Highlights
-- **100% Free Custom Domain**: Configured for `ninoredoble.is-a.dev` with automatic SSL on GitHub Pages.
-- **Zero-Bloat Architectural Design**: Crisp typography, high-contrast dark slate theme, hairline borders, no gradient blobs or generic clichés.
+- **Custom Domain**: Hosted at [`ninoredoble.is-a.dev`](https://ninoredoble.is-a.dev) with automatic HTTPS via GitHub Pages.
+- **Zero-Bloat Architectural Design**: Crisp typography, high-contrast dark slate theme, hairline borders, and fluid responsive layouts.
 - **Interactive Developer Console**: In-browser terminal emulator supporting interactive commands (`whoami`, `projects`, `stack`, `tools`, `domain`, `contact`).
-- **22+ Tools & Workflow Explorer**: Searchable and filterable registry of AI agents, Google Labs tools, motion libraries, and open source repositories.
-- **Ultra-Smooth Kinematics**: 60fps Lenis smooth momentum scrolling.
+- **Tools & Workflow Explorer**: Searchable and filterable registry of developer tools, frameworks, and engineering utilities.
+- **Kinematics & Smooth Motion**: 60fps Lenis smooth momentum scrolling.
 
 ---
 
 ## 📁 Repository Structure
 ```text
-├── .agents/
-│   └── skills/
-│       └── portfolio-publisher/   # Antigravity publishing & validation skill
 ├── css/
 │   └── style.css                  # Architectural CSS token design system
 ├── js/
 │   └── main.js                    # Terminal engine, tools catalog, Lenis scroll
-├── img/                           # Project media & posters
+├── img/                           # Project media & icons
 ├── vid/                           # Motion & video media
 ├── CNAME                          # Custom domain target (ninoredoble.is-a.dev)
-├── DOMAIN_SETUP.md                # 3-minute free custom domain setup guide
-├── WORKFLOW_ECOSYSTEM.md          # Comprehensive AI & dev tooling breakdown
+├── .nojekyll                      # Disable Jekyll processing on GitHub Pages
 ├── index.html                     # Master single-page portfolio
 └── README.md
 ```
 
 ---
 
-## 🌐 Free Custom Domain Setup
-To claim `ninoredoble.is-a.dev` for free:
-1. Follow the 3-minute pull request instructions in [`DOMAIN_SETUP.md`](./DOMAIN_SETUP.md).
-2. GitHub Pages automatically serves from the root branch with HTTPS enforced.
+## 🌐 Live Website
+Visit the official live deployment at [**https://ninoredoble.is-a.dev**](https://ninoredoble.is-a.dev).
