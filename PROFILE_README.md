@@ -101,13 +101,17 @@ Want to explore my engineering case studies, system architectures, and live depl
 
 ---
 
-## 📊 GitHub Activity & Streak
+## 🏆 GitHub Trophies & Streaks
 
 <div align="center">
 
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=ninoredoble&theme=tokyonight&hide_border=true&background=0D1117&ring=3B82F6&fire=E24E1B&currStreakLabel=3B82F6)](https://github.com/ninoredoble)
 
-[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ninoredoble&theme=tokyo-night&bg_color=0D1117&color=3B82F6&line=3B82F6&point=E24E1B&hide_border=true)](https://github.com/ninoredoble)
+<div style="margin-top: 10px;">
+  <a href="https://github.com/ninoredoble">
+    <img src="https://github-profile-trophy.vercel.app/?username=ninoredoble&theme=tokyonight&no-frame=true&no-bg=true&margin-w=4" alt="GitHub Trophies" />
+  </a>
+</div>
 
 </div>
 
