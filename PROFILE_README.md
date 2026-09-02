@@ -3,7 +3,7 @@
 # Hi 👋, I'm Niño Redoble
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&weight=700&size=20&duration=3000&pause=1000&color=3B82F6&center=true&vCenter=true&width=620&lines=Full-Stack+Developer+%26+Network+Engineer;BS+Information+Technology+%E2%80%94+Magna+Cum+Laude;CCNA+Certified+%E2%80%94+Enterprise+Networking+%26+Security;Architecting+Modern+Web+%26+Cloud+Deployments" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&weight=700&size=20&duration=3000&pause=1000&color=3B82F6&center=true&vCenter=true&width=650&lines=Full-Stack+Developer+%26+Network+Engineer;BS+Information+Technology+%E2%80%94+Magna+Cum+Laude;CCNA+Certified+%E2%80%94+Enterprise+Networking+%26+Security;Architecting+Modern+Web+%26+Cloud+Deployments" alt="Typing SVG" />
 </p>
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-ninoredoble.is--a.dev-2B4C82?style=for-the-badge&logo=googlechrome&logoColor=white)](https://ninoredoble.is-a.dev/)
@@ -101,15 +101,14 @@ Want to explore my engineering case studies, system architectures, and live depl
 
 ---
 
-## 📊 GitHub Stats
+## 📊 GitHub Activity & Streak
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=ninoredoble&theme=tokyonight&hide_border=true&background=0D1117&ring=3B82F6&fire=E24E1B&currStreakLabel=3B82F6" alt="GitHub Streak" />
-</div>
 
-<div align="center" style="margin-top: 10px;">
-  <img src="https://github-readme-stats.vercel.app/api?username=ninoredoble&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=3B82F6&icon_color=E24E1B&text_color=9AA2B1" alt="Niño Redoble GitHub Stats" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ninoredoble&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=3B82F6&text_color=9AA2B1" alt="Top Languages" height="165" />
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=ninoredoble&theme=tokyonight&hide_border=true&background=0D1117&ring=3B82F6&fire=E24E1B&currStreakLabel=3B82F6)](https://github.com/ninoredoble)
+
+[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ninoredoble&theme=tokyo-night&bg_color=0D1117&color=3B82F6&line=3B82F6&point=E24E1B&hide_border=true)](https://github.com/ninoredoble)
+
 </div>
 
 ---
