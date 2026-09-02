@@ -1,117 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title> GNEGR Personal Website - Home</title>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G. Niño Emmanuel G. Redoble // Portfolio & Workflow Engine</title>
+  <meta name="description" content="Portfolio and digital engineering showcase of G. Niño Emmanuel G. Redoble (GNEGR). Web developer, creative technologist, and AI workflow practitioner.">
+  
+  <!-- Canonical & Domain -->
+  <link rel="canonical" href="https://ninoredoble.is-a.dev/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/FAVICON.png">
 
-        <!-- Favicons -->
-        <link href="../ninoredoble.github.io/img/FAVICON.png" rel="icon">
-        
-        <!-- Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Typography: Google Fonts (Space Grotesk, Plus Jakarta Sans, JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-        <!-- CSS Libraries -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo">
+        <span>GNEGR</span>
+        <span class="brand-badge">DEV // CREATIVE</span>
+      </a>
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#work" class="nav-link"><span>01.</span>Work</a></li>
+          <li><a href="#stack" class="nav-link"><span>02.</span>Stack</a></li>
+          <li><a href="#tools" class="nav-link"><span>03.</span>Workflow Engine</a></li>
+          <li><a href="#terminal" class="nav-link"><span>04.</span>Console</a></li>
+          <li><a href="#contact" class="nav-link"><span>05.</span>Contact</a></li>
+        </ul>
+      </nav>
 
-
-        <!-- Nav Bar Start -->
-        <div class="navbar navbar-expand-lg bg-light navbar-light">
-            <div class="container-fluid">
-                <a href="index.html" class="navbar-brand">GNEGR</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="skills.html" class="nav-item nav-link">Skills</a>
-                        <a href="projects.html" class="nav-item nav-link">Projects</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </div>
+      <div class="nav-actions">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Available for Projects</span>
         </div>
-        <!-- Nav Bar End -->
+        <a href="#contact" class="btn btn-primary">Connect</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">&#9776;</button>
+      </div>
+    </div>
+  </header>
 
-
-        <!-- Hero Start -->
-        <div class="hero" id="home">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="hero-content">
-                            <div class="hero-text">
-                                <p>Welcome to My Personal Website My Name is </p>
-                                <h1>G. Niño Emmanuel G. Redoble</h1>
-                                <h2></h2>
-                                <div class="typed-text">Aspiring Web Designer, Aspiring Web Developer, Aspiring Front End Developer, Aspiring Apps Designer, Aspiring Apps Developer</div>
-                            </div>
-                            <div class="hero-btn">
-                                <a href="./about.html" class="btn" href="">Explore</a>
-                                <a href="./contact.html" class="btn" href="">Contact Me</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <main>
+    <!-- Hero / Manifesto Section -->
+    <section id="hero" class="section hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text-block">
+            <div class="hero-meta-bar">
+              <span class="meta-pill">Location: Cagayan de Oro City, PH</span>
+              <span class="meta-pill">Domain: ninoredoble.is-a.dev</span>
+              <span class="meta-pill">Status: Active Builder</span>
             </div>
-        </div>
-        <!-- Hero End -->
 
-        <!-- Footer Start -->
-        <div class="footer wow fadeIn" data-wow-delay="0.5s">
-            <div class="container-fluid">
-                <div class="container">
-                    <div class="footer-info">
-                        <h2>G. Niño Emmanuel G. Redoble</h2>
-                        <h3> Cagayan de Oro City, Philippines</h3>
-                        <div class="footer-menu">
-                            <p>[REDACTED]</p>
-                            <p>redoble.gninoemmanuel@gmail.com</p>
-                        </div>
-                        <div class="footer-social">
-                            <a href="https://discord.com/channels/1064225869180178481/1064225869624786956"><i class="fa-brands fa-discord"></i></a>
-                            <a href="https://www.facebook.com/redoble.gnino"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.youtube.com/channel/UCohYH3lAbq4zjwwvqScVjBQ"><i class="fab fa-youtube"></i></a>
-                            <a href="https://www.instagram.com/gnegr/"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="container copyright">
-                    <p></a> All Right Reserved | Designed By GNEGR</a></p>
-                </div>
+            <h1 class="hero-title">
+              Engineering <span class="highlight">digital systems</span>, agent workflows & motion experiences.
+            </h1>
+
+            <p class="hero-manifesto">
+              I am G. Niño Emmanuel G. Redoble—a developer and creative technologist. I build responsive web platforms, explore autonomous AI workflows, and design clean visual systems that prioritize clarity over gimmicks.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#work" class="btn btn-primary">Explore Featured Work &darr;</a>
+              <a href="#tools" class="btn btn-secondary">Explore 22+ Tools & Engine</a>
+              <a href="#terminal" class="btn btn-secondary">Open Terminal &gt;_</a>
             </div>
-        </div>
-        <!-- Footer End -->
-    
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/typed/typed.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="lib/lightbox/js/lightbox.min.js"></script>
-        
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
+          </div>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-    </body>
+          <!-- Spec Sheet Panel -->
+          <div class="hero-spec-sheet">
+            <div class="spec-header">
+              <span>// SYSTEM_PROFILE</span>
+              <span>VER_2026.1</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Developer</span>
+              <span class="spec-val">G. Niño Emmanuel G. Redoble</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Core Competency</span>
+              <span class="spec-val">Web Engineering & AI Workflow</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Target Domain</span>
+              <span class="spec-val">ninoredoble.is-a.dev</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Hosting Engine</span>
+              <span class="spec-val">GitHub Pages + SSL</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Architecture</span>
+              <span class="spec-val">Zero-Bloat Vanilla Web</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Open Source Stack</span>
+              <span class="spec-val">Lenis &bull; GSAP &bull; Ruflo &bull; Markitdown</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work & Projects Section -->
+    <section id="work" class="section">
+      <div class="container">
+        <div class="section-tag">Featured Portfolio</div>
+        <h2 class="section-title">Selected Works & Case Studies</h2>
+        <p class="section-desc">
+          Authentic projects spanning software engineering, video production, and visual design. No stock mockups or generic templates.
+        </p>
+
+        <div class="work-filters">
+          <button class="filter-btn active" data-filter="all">All Projects [04]</button>
+          <button class="filter-btn" data-filter="web">Web & Software [02]</button>
+          <button class="filter-btn" data-filter="creative">Creative & Motion [02]</button>
+        </div>
+
+        <div class="work-grid">
+          <!-- Project 1: Digital Portfolio & Workflow Platform -->
+          <article class="work-card" data-category="web">
+            <div class="work-media">
+              <span class="work-badge-overlay">Web Platform // 2026</span>
+              <img src="img/BACK.png" alt="Digital Platform Architecture Preview" style="object-position: center; filter: brightness(0.85);">
+            </div>
+            <div class="work-body">
+              <div class="work-meta">
+                <span>// 01. SOFTWARE ARCHITECTURE</span>
+                <span>PRODUCTION</span>
+              </div>
+              <h3 class="work-title">Digital Experience & Workflow Platform</h3>
+              <p class="work-summary">
+                High-performance portfolio engine featuring 60fps Lenis smooth momentum scrolling, an interactive command-line terminal, custom domain routing (is-a.dev), and an interactive 22+ tool catalog.
+              </p>
+              <div class="work-tags">
+                <span class="tech-tag">HTML5 / ES6</span>
+                <span class="tech-tag">CSS Custom Props</span>
+                <span class="tech-tag">Lenis Scroll</span>
+                <span class="tech-tag">is-a.dev</span>
+                <span class="tech-tag">GitHub Pages</span>
+              </div>
+              <div class="work-actions">
+                <a href="#hero" class="btn btn-secondary">Active View</a>
+                <a href="https://github.com/ninoredoble/ninoredoble.github.io" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Source Code &nearr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Video Production -->
+          <article class="work-card" data-category="creative">
+            <div class="work-media">
+              <span class="work-badge-overlay">Video Production // Motion</span>
+              <video controls src="vid/INTRODUCTION VIDEO.mp4" preload="metadata"></video>
+            </div>
+            <div class="work-body">
+              <div class="work-meta">
+                <span>// 02. MOTION & CREATIVE</span>
+                <span>ORIGINAL MEDIA</span>
+              </div>
+              <h3 class="work-title">Introduction Video Production</h3>
+              <p class="work-summary">
+                Original video production and self-introduction showcase featuring multi-track timeline editing, audio equalization, and narrative pacing.
+              </p>
+              <div class="work-tags">
+                <span class="tech-tag">Video Production</span>
+                <span class="tech-tag">Motion Design</span>
+                <span class="tech-tag">Audio Mastering</span>
+                <span class="tech-tag">Visual Storytelling</span>
+              </div>
+              <div class="work-actions">
+                <a href="vid/INTRODUCTION VIDEO.mp4" target="_blank" class="btn btn-secondary">Open Video &nearr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: Slogan Campaign & Poster Design -->
+          <article class="work-card" data-category="creative">
+            <div class="work-media">
+              <span class="work-badge-overlay">Visual Design // Typography</span>
+              <img src="img/SLOGAN CAMPAIN.png" alt="Slogan Campaign Poster Artwork">
+            </div>
+            <div class="work-body">
+              <div class="work-meta">
+                <span>// 03. GRAPHIC DESIGN</span>
+                <span>CAMPAIGN</span>
+              </div>
+              <h3 class="work-title">Slogan Campaign & Visual Identity</h3>
+              <p class="work-summary">
+                Typographic hierarchy, grid layouts, and visual messaging crafted for community campaign initiatives and poster collateral.
+              </p>
+              <div class="work-tags">
+                <span class="tech-tag">Typography</span>
+                <span class="tech-tag">Graphic Design</span>
+                <span class="tech-tag">Poster Art</span>
+                <span class="tech-tag">Layout Composition</span>
+              </div>
+              <div class="work-actions">
+                <a href="img/SLOGAN CAMPAIN.png" target="_blank" class="btn btn-secondary">View High-Res &nearr;</a>
+                <a href="img/MORECA POSTER.jpg" target="_blank" class="btn btn-secondary">MORECA Poster &nearr;</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Technical Resume & Background Specs -->
+          <article class="work-card" data-category="web">
+            <div class="work-media">
+              <span class="work-badge-overlay">Documentation // Specs</span>
+              <img src="img/RESUME.png" alt="Curriculum Vitae Preview">
+            </div>
+            <div class="work-body">
+              <div class="work-meta">
+                <span>// 04. ENGINEERING SPEC</span>
+                <span>CURRICULUM VITAE</span>
+              </div>
+              <h3 class="work-title">Technical Resume & Academic Foundation</h3>
+              <p class="work-summary">
+                Comprehensive overview of computer science fundamentals, algorithm practice in C/C++, web development coursework, and software proficiencies.
+              </p>
+              <div class="work-tags">
+                <span class="tech-tag">C / C++</span>
+                <span class="tech-tag">Data Structures</span>
+                <span class="tech-tag">Web Architecture</span>
+                <span class="tech-tag">Problem Solving</span>
+              </div>
+              <div class="work-actions">
+                <a href="img/RESUME.png" target="_blank" class="btn btn-secondary">View Full Resume &nearr;</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Stack & Capabilities Section -->
+    <section id="stack" class="section">
+      <div class="container">
+        <div class="section-tag">Capabilities</div>
+        <h2 class="section-title">Engineering Stack & Skills</h2>
+        <p class="section-desc">
+          Structured taxonomy of languages, frameworks, and agentic workflows. Focus on practical execution and continuous mastery.
+        </p>
+
+        <div class="stack-matrix">
+          <!-- Pillar 1: Core Languages -->
+          <div class="stack-column">
+            <div class="stack-col-header">
+              <span class="stack-col-icon">01</span>
+              <h3 class="stack-col-title">Core Languages</h3>
+            </div>
+            <div class="stack-list">
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">C++ & C</div>
+                  <div class="stack-item-meta">Systems programming & algorithms</div>
+                </div>
+                <span class="tech-tag">Core</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">JavaScript (ES6+)</div>
+                  <div class="stack-item-meta">Modern DOM APIs & async runtimes</div>
+                </div>
+                <span class="tech-tag">Modern</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">HTML5 & Semantic Web</div>
+                  <div class="stack-item-meta">Clean markup & accessibility</div>
+                </div>
+                <span class="tech-tag">Standard</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">CSS3 & Modular Tokens</div>
+                  <div class="stack-item-meta">Responsive layouts & custom properties</div>
+                </div>
+                <span class="tech-tag">Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Motion & Interaction -->
+          <div class="stack-column">
+            <div class="stack-col-header">
+              <span class="stack-col-icon">02</span>
+              <h3 class="stack-col-title">Motion & Interaction</h3>
+            </div>
+            <div class="stack-list">
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Lenis Smooth Scroll</div>
+                  <div class="stack-item-meta">Momentum scroll kinematics</div>
+                </div>
+                <span class="tech-tag">60fps</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">GSAP (GreenSock)</div>
+                  <div class="stack-item-meta">Sequenced animation timelines</div>
+                </div>
+                <span class="tech-tag">Timeline</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Raylight.app</div>
+                  <div class="stack-item-meta">Motion prototyping & easing curves</div>
+                </div>
+                <span class="tech-tag">Motion</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">react-bits Patterns</div>
+                  <div class="stack-item-meta">Micro-interaction design</div>
+                </div>
+                <span class="tech-tag">Tactile</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 3: AI & Autonomous Agents -->
+          <div class="stack-column">
+            <div class="stack-col-header">
+              <span class="stack-col-icon">03</span>
+              <h3 class="stack-col-title">AI & Agent Workflows</h3>
+            </div>
+            <div class="stack-list">
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Antigravity IDE</div>
+                  <div class="stack-item-meta">Agent-first planning & execution</div>
+                </div>
+                <span class="tech-tag">Primary</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Jules & Ruflo</div>
+                  <div class="stack-item-meta">Autonomous CI/CD & orchestration</div>
+                </div>
+                <span class="tech-tag">Multi-Agent</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Google AI Studio & Gemini</div>
+                  <div class="stack-item-meta">Prompt engineering & API testing</div>
+                </div>
+                <span class="tech-tag">LLM</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Microsoft Markitdown</div>
+                  <div class="stack-item-meta">Markdown data extraction pipelines</div>
+                </div>
+                <span class="tech-tag">Parser</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 4: UI/UX & Prototyping -->
+          <div class="stack-column">
+            <div class="stack-col-header">
+              <span class="stack-col-icon">04</span>
+              <h3 class="stack-col-title">UI/UX & Prototyping</h3>
+            </div>
+            <div class="stack-list">
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Watermelon.UI & Variant</div>
+                  <div class="stack-item-meta">Layout architecture & contrast test</div>
+                </div>
+                <span class="tech-tag">Systems</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">GrayBlocks Wireframing</div>
+                  <div class="stack-item-meta">Structural content hierarchy</div>
+                </div>
+                <span class="tech-tag">Wireframes</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Mockuply & Appshots</div>
+                  <div class="stack-item-meta">Authentic device presentations</div>
+                </div>
+                <span class="tech-tag">Assets</span>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <div class="stack-item-name">Mixboard & Stitch</div>
+                  <div class="stack-item-meta">AI moodboards & UI scaffolding</div>
+                </div>
+                <span class="tech-tag">Google Labs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow & AI Tools Explorer Section -->
+    <section id="tools" class="section">
+      <div class="container">
+        <div class="section-tag">Ecosystem</div>
+        <h2 class="section-title">Workflow Tools & Repositories Engine</h2>
+        <p class="section-desc">
+          Interactive registry of 22+ curated tools, experimental Google labs, autonomous coding agents, and open-source repositories integrated into my development workflow.
+        </p>
+
+        <!-- Search & Filter Bar -->
+        <div class="tools-filter-bar">
+          <div class="tools-filters">
+            <button class="filter-btn active" data-tool-filter="all">All [22]</button>
+            <button class="filter-btn" data-tool-filter="agent">AI Agents</button>
+            <button class="filter-btn" data-tool-filter="google">Google Labs</button>
+            <button class="filter-btn" data-tool-filter="motion">Motion & Scroll</button>
+            <button class="filter-btn" data-tool-filter="design">UI/UX Design</button>
+            <button class="filter-btn" data-tool-filter="repo">Open Source</button>
+          </div>
+          <input type="text" id="tools-search" class="tools-search" placeholder="Filter tools or keywords...">
+        </div>
+
+        <!-- Dynamic Tools Grid Container -->
+        <div id="tools-grid" class="tools-grid"></div>
+      </div>
+    </section>
+
+    <!-- Interactive Developer Console Section -->
+    <section id="terminal" class="section">
+      <div class="container">
+        <div class="section-tag">Interactive Shell</div>
+        <h2 class="section-title">Developer Terminal</h2>
+        <p class="section-desc">
+          Query project metadata, inspect custom domain configurations, or trigger direct commands in real-time.
+        </p>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-controls">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+            </div>
+            <span>bash — gnegr@portfolio: ~ (is-a.dev)</span>
+            <span>UTF-8</span>
+          </div>
+
+          <div id="terminal-body" class="terminal-body">
+            <div class="term-log">GNEGR CLI Terminal [Version 2026.1.0]</div>
+            <div class="term-log">Connected to <span class="term-log info">ninoredoble.is-a.dev</span> // Free Custom Domain Engine.</div>
+            <div class="term-log output">Type <span class="term-log info">help</span> to view all commands, or click the quick pills below:</div>
+          </div>
+
+          <div style="padding: 0 1.5rem 1.5rem 1.5rem;">
+            <div class="term-prompt-line">
+              <span class="term-prompt-label">visitor@gnegr:~$</span>
+              <input type="text" id="terminal-input" class="term-input" placeholder="Type a command (e.g. projects, domain, tools, whoami)..." autocomplete="off" spellcheck="false">
+            </div>
+
+            <div class="term-pill-commands">
+              <span class="term-pill" data-cmd="whoami">whoami</span>
+              <span class="term-pill" data-cmd="projects">projects</span>
+              <span class="term-pill" data-cmd="stack">stack</span>
+              <span class="term-pill" data-cmd="domain">domain</span>
+              <span class="term-pill" data-cmd="tools">tools</span>
+              <span class="term-pill" data-cmd="contact">contact</span>
+              <span class="term-pill" data-cmd="clear">clear</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Connect Section -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-tag">Direct Comms</div>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-desc">
+          Let's collaborate on engineering projects, creative systems, or autonomous workflow implementations.
+        </p>
+
+        <div class="contact-grid">
+          <!-- Direct Channels Panel -->
+          <div class="contact-info-panel">
+            <div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Verified Channels</h3>
+
+              <div class="contact-item">
+                <div>
+                  <div class="contact-item-label">Direct Email</div>
+                  <div class="contact-item-val">redoble.gninoemmanuel@gmail.com</div>
+                </div>
+                <button class="copy-btn" data-copy="redoble.gninoemmanuel@gmail.com">Copy</button>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <div class="contact-item-label">Phone & SMS</div>
+                  <div class="contact-item-val">[REDACTED]</div>
+                </div>
+                <button class="copy-btn" data-copy="[REDACTED]">Copy</button>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <div class="contact-item-label">Location</div>
+                  <div class="contact-item-val">Cagayan de Oro City, Philippines</div>
+                </div>
+                <span class="tech-tag">UTC+8</span>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <div class="contact-item-label">GitHub Repository</div>
+                  <div class="contact-item-val">github.com/ninoredoble</div>
+                </div>
+                <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer" class="copy-btn">Open &nearr;</a>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <div class="contact-item-label">Custom Domain Host</div>
+                  <div class="contact-item-val">ninoredoble.is-a.dev</div>
+                </div>
+                <span class="tech-tag" style="color: var(--accent-emerald);">Active</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+              Response time: Typically within 24 hours.
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form">
+            <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Send a Direct Message</h3>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="form-name" class="form-label">YOUR NAME</label>
+                <input type="text" id="form-name" class="form-control" placeholder="e.g. Alex Rivera" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email" class="form-label">YOUR EMAIL</label>
+                <input type="email" id="form-email" class="form-control" placeholder="e.g. alex@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-message" class="form-label">PROJECT SCOPE OR MESSAGE</label>
+                <textarea id="form-message" class="form-control" placeholder="Describe the collaboration, inquiry, or project..." required></textarea>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem;">
+                <button type="submit" class="btn btn-primary">Dispatch Message &rarr;</button>
+                <span id="form-status" style="font-family: var(--font-mono); font-size: 0.75rem;"></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="footer-stamp">&copy; 2026 G. Niño Emmanuel G. Redoble. All rights reserved.</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Built with zero-bloat Vanilla web architecture. No gradient blobs or fake buzzwords.</div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <div class="footer-domain-badge">
+            <span>&bull;</span>
+            <span id="live-time">--:--:-- PHT</span>
+          </div>
+          <a href="#hero" class="copy-btn">Back to Top &uarr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Motion & Scroll Scripts: Lenis -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <!-- Main Application Script -->
+  <script src="js/main.js"></script>
+</body>
 </html>
