@@ -551,77 +551,61 @@ a {
   border-color: var(--border-hover);
 }
 
-.project-card-banner {
-  height: 190px;
+.project-card-media {
+  height: 210px;
   position: relative;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  background: var(--bg-subtle);
   overflow: hidden;
+  border-bottom: 1px solid var(--border-light);
 }
 
-/* Distinctive card background themes */
-.banner-aether {
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F766E 100%);
-  color: #FFFFFF;
+.project-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform var(--transition-normal), filter var(--transition-fast);
 }
 
-.banner-clima {
-  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 60%, #93C5FD 100%);
-  color: #FFFFFF;
+.project-card:hover .project-screenshot {
+  transform: scale(1.04);
 }
 
-.banner-relay {
-  background: linear-gradient(135deg, #18181B 0%, #27272A 70%, #52525B 100%);
-  color: #22C55E;
-}
-
-.banner-hablon {
-  background: linear-gradient(135deg, #451A03 0%, #9A3412 60%, #F97316 100%);
-  color: #FFF7ED;
-}
-
-.banner-grid {
-  background: linear-gradient(135deg, #1C1917 0%, #292524 60%, #EAB308 100%);
-  color: #FEF08A;
-}
-
-.banner-marine {
-  background: linear-gradient(135deg, #082F49 0%, #0284C7 60%, #38BDF8 100%);
-  color: #F0F9FF;
-}
-
-.banner-basin {
-  background: linear-gradient(135deg, #14532D 0%, #15803D 60%, #86EFAC 100%);
-  color: #F0FDF4;
+.media-overlay-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
 }
 
 .card-brand-tag {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
-  font-weight: 600;
-  opacity: 0.85;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  background: rgba(20, 20, 25, 0.82);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .card-metric-badge {
-  align-self: flex-start;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   padding: 0.25rem 0.65rem;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.92);
+  color: #141419;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.banner-title-overlay {
-  font-family: var(--font-sans);
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .project-card-content {
