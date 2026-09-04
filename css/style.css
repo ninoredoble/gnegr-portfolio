@@ -2135,14 +2135,14 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
    DYNAMIC TEXT SCRAMBLE IN HERO (Recommendation 2)
    ========================================================================== */
 .hero-scramble-wrapper {
-  display: inline-block;
-  min-width: 220px;
+  display: inline;
 }
 .hero-scramble {
   color: #E24E1B;
   font-family: var(--font-display);
   font-weight: 800;
   display: inline-block;
+  vertical-align: baseline;
   transition: color 0.2s ease;
 }
 
@@ -2439,7 +2439,7 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
 
 .hero-scramble {
   display: inline-block;
-  min-width: 10ch;
+  vertical-align: baseline;
   white-space: nowrap;
   background: linear-gradient(135deg, #FF6B35 0%, #E24E1B 100%);
   -webkit-background-clip: text;

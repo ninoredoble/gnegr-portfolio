@@ -625,7 +625,7 @@ function initHeroScramble() {
   const scrambleEl = document.getElementById('hero-scramble');
   if (!scrambleEl) return;
 
-  const words = ['Full-Stack', 'Distributed', 'Systems', 'Architecture'];
+  const words = ['Full-Stack', 'Systems', 'Distributed', 'Backend'];
   let wordIndex = 0;
   const chars = '!<>-_\\/[]{}*^?#01X_=+/~';
 
