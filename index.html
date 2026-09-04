@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>G. Niño Emmanuel G. Redoble // Portfolio & Workflow Engine</title>
-  <meta name="description" content="Portfolio and digital engineering showcase of G. Niño Emmanuel G. Redoble (GNEGR). Web developer, creative technologist, and AI workflow practitioner.">
+  <title>Niño Redoble // Full-Stack & Systems Developer</title>
+  <meta name="description" content="Portfolio of G. Niño Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Builder, and CCNA Network Specialist. BS Information Technology Magna Cum Laude graduate from USTP.">
   
   <!-- Canonical & Domain -->
   <link rel="canonical" href="https://ninoredoble.is-a.dev/">
@@ -13,593 +13,549 @@
   <link rel="icon" type="image/svg+xml" href="img/GNEGR.svg">
   <link rel="icon" type="image/png" href="img/FAVICON.png">
 
-  <!-- Typography: Google Fonts (Space Grotesk, Plus Jakarta Sans, JetBrains Mono) -->
+  <!-- Typography: Google Fonts (Instrument Serif, Plus Jakarta Sans, JetBrains Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Synchronous Theme Check
+    try {
+      const savedTheme = localStorage.getItem('gnegr_theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch(e) {}
+  </script>
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- Site Navigation Header -->
   <header class="site-header">
-    <div class="nav-container">
-      <a href="#hero" class="brand-logo" aria-label="GNEGR Portfolio Home">
-        <img src="img/GNEGR.svg" alt="GNEGR Logo" class="brand-logo-icon">
-        <span>GNEGR</span>
-        <span class="brand-badge">DEV // CREATIVE</span>
-      </a>
+    <div class="header-inner">
+      <div class="status-pill">
+        <span class="status-indicator-dot"></span>
+        <span class="status-pill-text">Available for Projects & Engineering</span>
+      </div>
 
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="#work" class="nav-link"><span>01.</span>Work</a></li>
-          <li><a href="#stack" class="nav-link"><span>02.</span>Stack</a></li>
-          <li><a href="#tools" class="nav-link"><span>03.</span>Workflow Engine</a></li>
-          <li><a href="#terminal" class="nav-link"><span>04.</span>Console</a></li>
-          <li><a href="#contact" class="nav-link"><span>05.</span>Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <div class="status-indicator">
-          <span class="status-dot"></span>
-          <span>Available for Projects</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Connect</a>
-        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">&#9776;</button>
+      <div class="header-controls">
+        <button id="theme-toggle" class="control-btn" aria-label="Toggle Color Theme" title="Toggle Light/Dark Theme">
+          <span class="theme-icon light-icon">&#9728;</span>
+          <span class="theme-icon dark-icon">&#9790;</span>
+        </button>
+        <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-pill-primary">Contact</a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- Hero / Manifesto Section -->
-    <section id="hero" class="section hero-section">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-text-block">
-            <div class="hero-meta-bar">
-              <span class="meta-pill">Location: Cagayan de Oro City, PH</span>
-              <span class="meta-pill">Domain: ninoredoble.is-a.dev</span>
-              <span class="meta-pill">Status: Active Builder</span>
+    <!-- Hero / Masthead Section -->
+    <section class="hero-section" id="intro">
+      <div class="hero-container">
+        <div class="hero-badge-wrap">
+          <div class="hero-avatar-circle">
+            <img src="img/GNEGR.svg" alt="Niño Redoble (GNEGR) Emblem" class="hero-avatar-img">
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-title-accent">Full-Stack & Systems</span>
+          <span class="hero-title-main">Developer.</span>
+        </h1>
+
+        <p class="hero-bio">
+          I am <strong>G. Niño Emmanuel G. Redoble</strong> (GNEGR)—a developer and systems engineer focused on architecting resilient web platforms, cloud micro-services, and interactive digital interfaces. Magna Cum Laude graduate in IT from USTP and Cisco CCNA certified.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="mailto:redoble.gninoemmanuel@gmail.com" class="hero-cta-btn primary">
+            <span>Contact Me</span>
+          </a>
+          <a href="#work" class="hero-cta-btn secondary">
+            <span>Explore Work &rarr;</span>
+          </a>
+        </div>
+
+        <div class="hero-subtext">
+          <span>Based in Cagayan de Oro City, PH</span>
+          <span class="sep">&bull;</span>
+          <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="sep">&bull;</span>
+          <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Tech Stack Cloud Section -->
+    <section class="skills-cloud-section" id="stack">
+      <div class="skills-cloud-header">
+        <h2 class="cloud-headline">Always Building. Always Growing.</h2>
+        <p class="cloud-subline">Interactive engineering stack across distributed systems, frontend engineering, and networks.</p>
+      </div>
+
+      <div class="skills-cloud-canvas" id="skills-cloud">
+        <!-- Floating Badges dynamically populated and interactable -->
+        <div class="skill-badge" style="--pos-x: 12%; --pos-y: 18%; --speed: 5s;" data-tech="Python">
+          <span class="badge-icon">&#x1F40D;</span>
+          <span class="badge-text">Python / FastAPI</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 82%; --pos-y: 20%; --speed: 6.2s;" data-tech="TypeScript">
+          <span class="badge-icon">&#x26A1;</span>
+          <span class="badge-text">TypeScript & Node</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 22%; --pos-y: 42%; --speed: 4.8s;" data-tech="React">
+          <span class="badge-icon">&#x269B;</span>
+          <span class="badge-text">React & Next.js</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 75%; --pos-y: 45%; --speed: 5.8s;" data-tech="Docker">
+          <span class="badge-icon">&#x1F433;</span>
+          <span class="badge-text">Docker & Containers</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 10%; --pos-y: 72%; --speed: 6.5s;" data-tech="CCNA">
+          <span class="badge-icon">&#x1F310;</span>
+          <span class="badge-text">Cisco CCNA (Credly)</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 48%; --pos-y: 28%; --speed: 5.2s;" data-tech="Linux">
+          <span class="badge-icon">&#x1F427;</span>
+          <span class="badge-text">Linux & Bash</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 85%; --pos-y: 76%; --speed: 4.5s;" data-tech="PostgreSQL">
+          <span class="badge-icon">&#x1F5C4;</span>
+          <span class="badge-text">PostgreSQL & Redis</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 34%; --pos-y: 82%; --speed: 6.8s;" data-tech="Mobile">
+          <span class="badge-icon">&#x1F4F1;</span>
+          <span class="badge-text">React Native & Jetpack</span>
+        </div>
+        <div class="skill-badge" style="--pos-x: 65%; --pos-y: 80%; --speed: 5.4s;" data-tech="C++">
+          <span class="badge-icon">&#x2699;</span>
+          <span class="badge-text">C / C++ Algorithms</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find My Work (Showcase Projects) Section -->
+    <section class="work-section" id="work">
+      <div class="section-header-wrap">
+        <h2 class="section-title-editorial">Find My Work</h2>
+        <p class="section-sub-editorial">Curated selection of production-grade systems, environmental models, and developer infrastructure.</p>
+        
+        <!-- Filter Tabs -->
+        <div class="category-filters">
+          <button class="filter-pill active" data-filter="all">All [7]</button>
+          <button class="filter-pill" data-filter="systems">AI & Systems [3]</button>
+          <button class="filter-pill" data-filter="web">Web & Data [2]</button>
+          <button class="filter-pill" data-filter="mobile">Mobile & Embedded [2]</button>
+        </div>
+      </div>
+
+      <div class="work-showcase-grid">
+
+        <!-- Project 1: Aether Report 2026 -->
+        <article class="project-card" data-category="systems">
+          <div class="project-card-banner banner-aether">
+            <div class="card-brand-tag">FLAGSHIP // 2026</div>
+            <div class="card-metric-badge">Zero-Carbon AI Edge</div>
+            <div class="banner-title-overlay">Aether Report 2026</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">Aether Report 2026: Northern Mindanao Mesh</h3>
+              <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
             </div>
-
-            <h1 class="hero-title">
-              Engineering <span class="highlight">digital systems</span>, agent workflows & motion experiences.
-            </h1>
-
-            <p class="hero-manifesto">
-              I am G. Niño Emmanuel G. Redoble—a developer and creative technologist. I build responsive web platforms, explore autonomous AI workflows, and design clean visual systems that prioritize clarity over gimmicks.
+            <p class="project-desc">
+              Apple & Stripe Press-inspired interactive annual report and scrollytelling analysis on Northern Mindanao zero-carbon AI edge compute clusters, grid decarbonization telemetry, and in-context auditor reasoning.
             </p>
-
-            <div class="hero-actions">
-              <a href="#work" class="btn btn-primary">Explore Featured Work &darr;</a>
-              <a href="#tools" class="btn btn-secondary">Explore 22+ Tools & Engine</a>
-              <a href="#terminal" class="btn btn-secondary">Open Terminal &gt;_</a>
+            <div class="project-tech-tags">
+              <span class="tech-tag">HTML5 / Vanilla JS</span>
+              <span class="tech-tag">Interactive Canvas</span>
+              <span class="tech-tag">AI Auditor Engine</span>
+              <span class="tech-tag">GitHub Pages</span>
+            </div>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/aether-report-2026" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
             </div>
           </div>
+        </article>
 
-          <!-- Spec Sheet Panel -->
-          <div class="hero-spec-sheet">
-            <div class="spec-header">
-              <span>// SYSTEM_PROFILE</span>
-              <span>VER_2026.1</span>
+        <!-- Project 2: ClimaPocket Android -->
+        <article class="project-card" data-category="mobile">
+          <div class="project-card-banner banner-clima">
+            <div class="card-brand-tag">MOBILE & IOT // 2026</div>
+            <div class="card-metric-badge">Material You 3.5</div>
+            <div class="banner-title-overlay">ClimaPocket Android</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">ClimaPocket Android Agrometeorology</h3>
+              <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
             </div>
-            <div class="spec-row">
-              <span class="spec-label">Developer</span>
-              <span class="spec-val">G. Niño Emmanuel G. Redoble</span>
+            <p class="project-desc">
+              Google Pixel 9 Pro device mockup showcasing regional Northern Mindanao microclimate sensors, soil moisture telemetry, typhoon tracking radars, and hyper-local agrometeorological insights.
+            </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Android Studio</span>
+              <span class="tech-tag">Jetpack Compose UI</span>
+              <span class="tech-tag">SVG Radar Canvas</span>
+              <span class="tech-tag">Telemetry API</span>
             </div>
-            <div class="spec-row">
-              <span class="spec-label">Core Competency</span>
-              <span class="spec-val">Web Engineering & AI Workflow</span>
-            </div>
-            <div class="spec-row">
-              <span class="spec-label">Target Domain</span>
-              <span class="spec-val">ninoredoble.is-a.dev</span>
-            </div>
-            <div class="spec-row">
-              <span class="spec-label">Hosting Engine</span>
-              <span class="spec-val">GitHub Pages + SSL</span>
-            </div>
-            <div class="spec-row">
-              <span class="spec-label">Architecture</span>
-              <span class="spec-val">Zero-Bloat Vanilla Web</span>
-            </div>
-            <div class="spec-row">
-              <span class="spec-label">Open Source Stack</span>
-              <span class="spec-val">Lenis &bull; GSAP &bull; Ruflo &bull; Markitdown</span>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/clima-pocket-android" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
             </div>
           </div>
+        </article>
+
+        <!-- Project 3: Relay Core API -->
+        <article class="project-card" data-category="systems">
+          <div class="project-card-banner banner-relay">
+            <div class="card-brand-tag">INFRASTRUCTURE // 2026</div>
+            <div class="card-metric-badge">UNIX TUI Sandbox</div>
+            <div class="banner-title-overlay">Relay Core API</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">Relay Core: Distributed Webhook Sandbox</h3>
+              <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
+            </div>
+            <p class="project-desc">
+              High-throughput distributed webhook ingestion engine with HMAC-SHA256 signature verification, exponential backoff retries, Redis idempotency keys, and an authentic interactive terminal CLI (<code>relayctl</code>).
+            </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Node / TypeScript</span>
+              <span class="tech-tag">HMAC Verification</span>
+              <span class="tech-tag">Interactive Terminal</span>
+              <span class="tech-tag">Redis Idempotency</span>
+            </div>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/relay-core-api" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: Hablon Textile Archive -->
+        <article class="project-card" data-category="web">
+          <div class="project-card-banner banner-hablon">
+            <div class="card-brand-tag">CULTURAL ARCHIVE // 2025</div>
+            <div class="card-metric-badge">Generative Loom</div>
+            <div class="banner-title-overlay">Hablon Textile Archive</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">Hablon Textile: Living Vector Loom</h3>
+              <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
+            </div>
+            <p class="project-desc">
+              Minimalist Scandinavian/Japanese museum folio preserving indigenous Northern Mindanao handwoven textiles. Features an interactive mathematical loom simulator rendering procedural weft and warp weave physics in SVG.
+            </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Generative SVG</span>
+              <span class="tech-tag">Vector Mathematics</span>
+              <span class="tech-tag">Editorial Typography</span>
+              <span class="tech-tag">Cultural Heritage</span>
+            </div>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/hablon-textile-archive" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: Mindanao Grid Mesh -->
+        <article class="project-card" data-category="systems">
+          <div class="project-card-banner banner-grid">
+            <div class="card-brand-tag">SCADA & ENERGY // 2025</div>
+            <div class="card-metric-badge">Sub-Transmission SCADA</div>
+            <div class="banner-title-overlay">Mindanao Grid Mesh</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">Mindanao Grid Mesh: SCADA Mimic Board</h3>
+              <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
+            </div>
+            <p class="project-desc">
+              Mission-critical industrial power dispatch mimic board modeling 69kV/13.8kV feeders across Macasandig, Carmen, and Tagoloan. Features real-time telemetry, trip simulation, active load shedding, and frequency regulation.
+            </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Industrial SCADA</span>
+              <span class="tech-tag">Power Grid Dispatch</span>
+              <span class="tech-tag">Switchgear Telemetry</span>
+              <span class="tech-tag">Canvas State Engine</span>
+            </div>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/mindanao-grid-mesh" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Archipelago Marine Cadence -->
+        <article class="project-card" data-category="web">
+          <div class="project-card-banner banner-marine">
+            <div class="card-brand-tag">OCEANOGRAPHY // 2025</div>
+            <div class="card-metric-badge">Bathymetric Cartography</div>
+            <div class="banner-title-overlay">Marine Cadence</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">Archipelago Marine: Bathymetric Telemetry</h3>
+              <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
+            </div>
+            <p class="project-desc">
+              Deep oceanic bathymetric cartography and pelagic telemetry modeling benthic ecosystems from Macajalar Bay to Tubbataha Reefs. Interactive depth sounders, salinity charts, and tidal cycle harmonics.
+            </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Bathymetric Canvas</span>
+              <span class="tech-tag">Ocean Sensor Feeds</span>
+              <span class="tech-tag">Tidal Harmonics</span>
+              <span class="tech-tag">Geospatial UI</span>
+            </div>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/archipelago-marine-cadence" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7: Cagayan Basin Corridor -->
+        <article class="project-card" data-category="mobile">
+          <div class="project-card-banner banner-basin">
+            <div class="card-brand-tag">HYDROLOGY // 2025</div>
+            <div class="card-metric-badge">Agro-Forestry Model</div>
+            <div class="banner-title-overlay">Cagayan Basin</div>
+          </div>
+          <div class="project-card-content">
+            <div class="project-header">
+              <h3 class="project-name">Cagayan Basin Corridor: Watershed Resilience</h3>
+              <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Live Site">&#8599;</a>
+            </div>
+            <p class="project-desc">
+              Warm editorial watershed hydrology simulator and native stingless bee (Tetragonula biroi / Kiwot) agroforestry corridor model for Cagayan de Oro River's upper basin headwaters.
+            </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Hydrology Simulation</span>
+              <span class="tech-tag">Agroforestry Corridor</span>
+              <span class="tech-tag">Runoff Telemetry</span>
+              <span class="tech-tag">Botanical Research</span>
+            </div>
+            <div class="project-footer-actions">
+              <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">Live Demo &nearr;</a>
+              <a href="https://github.com/ninoredoble/cagayan-basin-corridor" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Highlights & Impact Counter Strip -->
+    <section class="highlights-strip">
+      <div class="strip-container">
+        <div class="highlight-stat">
+          <div class="stat-number">1st</div>
+          <div class="stat-label">Magna Cum Laude (USTP)</div>
+        </div>
+        <div class="highlight-stat">
+          <div class="stat-number">CCNA</div>
+          <div class="stat-label">Cisco Enterprise Certified</div>
+        </div>
+        <div class="highlight-stat">
+          <div class="stat-number">7+</div>
+          <div class="stat-label">Shipped Production Systems</div>
+        </div>
+        <div class="highlight-stat">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Software Students Mentored</div>
         </div>
       </div>
     </section>
 
-    <!-- Work & Projects Section -->
-    <section id="work" class="section">
-      <div class="container">
-        <div class="section-tag">Featured Portfolio</div>
-        <h2 class="section-title">Selected Works & Case Studies</h2>
-        <p class="section-desc">
-          Authentic projects spanning software engineering, video production, and visual design. No stock mockups or generic templates.
-        </p>
+    <!-- Work Experience & Journey Timeline -->
+    <section class="experience-section" id="experience">
+      <div class="experience-container">
+        <h2 class="section-title-editorial center">
+          <span class="serif-accent">Destructuring</span> My Work Experience.
+        </h2>
+        <p class="section-sub-editorial center">A breakdown of roles, industry engineering, leadership, and technical foundations.</p>
 
-        <div class="work-filters">
-          <button class="filter-btn active" data-filter="all">All Projects [04]</button>
-          <button class="filter-btn" data-filter="web">Web & Software [02]</button>
-          <button class="filter-btn" data-filter="creative">Creative & Motion [02]</button>
-        </div>
+        <div class="experience-timeline">
+          
+          <!-- Role 1: CEPALCO -->
+          <div class="timeline-node">
+            <div class="node-marker">
+              <span class="node-year">2026</span>
+            </div>
+            <div class="node-card">
+              <div class="node-header">
+                <div>
+                  <h3 class="node-role">UI/UX & System Development Intern</h3>
+                  <div class="node-company">CEPALCO (Cagayan Electric Power & Light Co., Inc.)</div>
+                </div>
+                <span class="node-pill">Enterprise Intern // 2026</span>
+              </div>
+              <ul class="node-points">
+                <li>Architected full-stack enterprise web ticketing and internal fuel-tracking systems utilizing React, FastAPI, SQLAlchemy, and PostgreSQL.</li>
+                <li>Dockerized backend microservices and configured reverse-proxy routing with Nginx for resilient deployment across local infrastructure.</li>
+                <li>Collaborated closely with system administrators and network engineers to streamline operational workflows and reduce dispatch turnaround times.</li>
+              </ul>
+              <div class="node-tags">
+                <span>FastAPI</span>
+                <span>React.js</span>
+                <span>Docker</span>
+                <span>PostgreSQL</span>
+                <span>Nginx</span>
+              </div>
+            </div>
+          </div>
 
-        <div class="work-grid">
-          <!-- Project 1: Digital Portfolio & Workflow Platform -->
-          <article class="work-card" data-category="web">
-            <div class="work-media">
-              <span class="work-badge-overlay">Web Platform // 2026</span>
-              <img src="img/BACK.png" alt="Digital Platform Architecture Preview" style="object-position: center; filter: brightness(0.85);">
+          <!-- Role 2: BuyNaBay -->
+          <div class="timeline-node">
+            <div class="node-marker">
+              <span class="node-year">2024 &ndash; 2025</span>
             </div>
-            <div class="work-body">
-              <div class="work-meta">
-                <span>// 01. SOFTWARE ARCHITECTURE</span>
-                <span>PRODUCTION</span>
+            <div class="node-card">
+              <div class="node-header">
+                <div>
+                  <h3 class="node-role">Team Lead & System Analyst</h3>
+                  <div class="node-company">BuyNaBay (Campus E-Commerce & Logistics Platform)</div>
+                </div>
+                <span class="node-pill">Project Lead</span>
               </div>
-              <h3 class="work-title">Digital Experience & Workflow Platform</h3>
-              <p class="work-summary">
-                High-performance portfolio engine featuring 60fps Lenis smooth momentum scrolling, an interactive command-line terminal, custom domain routing (is-a.dev), and an interactive 22+ tool catalog.
-              </p>
-              <div class="work-tags">
-                <span class="tech-tag">HTML5 / ES6</span>
-                <span class="tech-tag">CSS Custom Props</span>
-                <span class="tech-tag">Lenis Scroll</span>
-                <span class="tech-tag">is-a.dev</span>
-                <span class="tech-tag">GitHub Pages</span>
-              </div>
-              <div class="work-actions">
-                <a href="#hero" class="btn btn-secondary">Active View</a>
-                <a href="https://github.com/ninoredoble/ninoredoble.github.io" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Source Code &nearr;</a>
+              <ul class="node-points">
+                <li>Directed an agile team of 5 developers and designers from conceptual architecture to production deployment on Vercel.</li>
+                <li>Engineered core marketplace state engines, user authentication routines, and asynchronous catalog searching in React Native and Node.js.</li>
+                <li>Conducted systematic sprint reviews, code reviews, and schema optimizations, delivering 100% on-time milestone achievements.</li>
+              </ul>
+              <div class="node-tags">
+                <span>React Native</span>
+                <span>Node.js</span>
+                <span>System Architecture</span>
+                <span>Agile Scrum</span>
+                <span>Vercel</span>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Project 2: Video Production -->
-          <article class="work-card" data-category="creative">
-            <div class="work-media">
-              <span class="work-badge-overlay">Video Production // Motion</span>
-              <video controls src="vid/INTRODUCTION VIDEO.mp4" preload="metadata"></video>
+          <!-- Role 3: CCNA Credential -->
+          <div class="timeline-node">
+            <div class="node-marker">
+              <span class="node-year">2024</span>
             </div>
-            <div class="work-body">
-              <div class="work-meta">
-                <span>// 02. MOTION & CREATIVE</span>
-                <span>ORIGINAL MEDIA</span>
+            <div class="node-card">
+              <div class="node-header">
+                <div>
+                  <h3 class="node-role">Cisco Certified Network Associate (CCNA)</h3>
+                  <div class="node-company">Cisco Systems // Credly Verified</div>
+                </div>
+                <span class="node-pill">Certification</span>
               </div>
-              <h3 class="work-title">Introduction Video Production</h3>
-              <p class="work-summary">
-                Original video production and self-introduction showcase featuring multi-track timeline editing, audio equalization, and narrative pacing.
-              </p>
-              <div class="work-tags">
-                <span class="tech-tag">Video Production</span>
-                <span class="tech-tag">Motion Design</span>
-                <span class="tech-tag">Audio Mastering</span>
-                <span class="tech-tag">Visual Storytelling</span>
-              </div>
-              <div class="work-actions">
-                <a href="vid/INTRODUCTION VIDEO.mp4" target="_blank" class="btn btn-secondary">Open Video &nearr;</a>
+              <ul class="node-points">
+                <li>Demonstrated proficiency across enterprise network access, IP connectivity, IP services (DHCP/DNS/NAT), and network security fundamentals.</li>
+                <li>Specialized in router/switch configuration, VLAN segmentation, OSPF routing topologies, and automated network operations via Python & REST APIs.</li>
+              </ul>
+              <div class="node-tags">
+                <span>Enterprise Routing</span>
+                <span>VLAN & Subnetting</span>
+                <span>Network Security</span>
+                <span>Cisco IOS</span>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Project 3: Slogan Campaign & Poster Design -->
-          <article class="work-card" data-category="creative">
-            <div class="work-media">
-              <span class="work-badge-overlay">Visual Design // Typography</span>
-              <img src="img/SLOGAN CAMPAIN.png" alt="Slogan Campaign Poster Artwork">
+          <!-- Role 4: USTP Magna Cum Laude -->
+          <div class="timeline-node">
+            <div class="node-marker">
+              <span class="node-year">2021 &ndash; 2025</span>
             </div>
-            <div class="work-body">
-              <div class="work-meta">
-                <span>// 03. GRAPHIC DESIGN</span>
-                <span>CAMPAIGN</span>
+            <div class="node-card">
+              <div class="node-header">
+                <div>
+                  <h3 class="node-role">BS in Information Technology (Magna Cum Laude)</h3>
+                  <div class="node-company">University of Science and Technology of Southern Philippines (USTP)</div>
+                </div>
+                <span class="node-pill">Academic Honors</span>
               </div>
-              <h3 class="work-title">Slogan Campaign & Visual Identity</h3>
-              <p class="work-summary">
-                Typographic hierarchy, grid layouts, and visual messaging crafted for community campaign initiatives and poster collateral.
-              </p>
-              <div class="work-tags">
-                <span class="tech-tag">Typography</span>
-                <span class="tech-tag">Graphic Design</span>
-                <span class="tech-tag">Poster Art</span>
-                <span class="tech-tag">Layout Composition</span>
-              </div>
-              <div class="work-actions">
-                <a href="img/SLOGAN CAMPAIN.png" target="_blank" class="btn btn-secondary">View High-Res &nearr;</a>
-                <a href="img/MORECA POSTER.jpg" target="_blank" class="btn btn-secondary">MORECA Poster &nearr;</a>
+              <ul class="node-points">
+                <li>Graduated with highest departmental honors (Magna Cum Laude), maintaining exceptional scholastic standing in computer algorithms and systems design.</li>
+                <li>Served as an academic consultant and technical mentor for lower-year engineering cohorts, tutoring 10+ students in web technologies and data structures.</li>
+              </ul>
+              <div class="node-tags">
+                <span>Magna Cum Laude</span>
+                <span>Data Structures</span>
+                <span>Software Engineering</span>
+                <span>Academic Tutoring</span>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Project 4: Technical Resume & Background Specs -->
-          <article class="work-card" data-category="web">
-            <div class="work-media">
-              <span class="work-badge-overlay">Documentation // Specs</span>
-              <img src="img/RESUME.png" alt="Curriculum Vitae Preview">
-            </div>
-            <div class="work-body">
-              <div class="work-meta">
-                <span>// 04. ENGINEERING SPEC</span>
-                <span>CURRICULUM VITAE</span>
-              </div>
-              <h3 class="work-title">Technical Resume & Academic Foundation</h3>
-              <p class="work-summary">
-                Comprehensive overview of computer science fundamentals, algorithm practice in C/C++, web development coursework, and software proficiencies.
-              </p>
-              <div class="work-tags">
-                <span class="tech-tag">C / C++</span>
-                <span class="tech-tag">Data Structures</span>
-                <span class="tech-tag">Web Architecture</span>
-                <span class="tech-tag">Problem Solving</span>
-              </div>
-              <div class="work-actions">
-                <a href="img/RESUME.png" target="_blank" class="btn btn-secondary">View Full Resume &nearr;</a>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
 
-    <!-- Technical Stack & Capabilities Section -->
-    <section id="stack" class="section">
-      <div class="container">
-        <div class="section-tag">Capabilities</div>
-        <h2 class="section-title">Engineering Stack & Skills</h2>
-        <p class="section-desc">
-          Structured taxonomy of languages, frameworks, and agentic workflows. Focus on practical execution and continuous mastery.
+    <!-- Connect & Contact Section -->
+    <section class="connect-section" id="contact">
+      <div class="connect-container">
+        <h2 class="section-title-editorial center">
+          <span class="serif-accent">Start a</span> Conversation.
+        </h2>
+        <p class="section-sub-editorial center">
+          Whether you want to discuss full-stack platforms, network engineering, or future collaborations, my inbox is always open.
         </p>
 
-        <div class="stack-matrix">
-          <!-- Pillar 1: Core Languages -->
-          <div class="stack-column">
-            <div class="stack-col-header">
-              <span class="stack-col-icon">01</span>
-              <h3 class="stack-col-title">Core Languages</h3>
+        <div class="contact-card-box">
+          <div class="verified-channel-item">
+            <div class="channel-info">
+              <span class="channel-label">Official Email</span>
+              <span class="channel-value">redoble.gninoemmanuel@gmail.com</span>
             </div>
-            <div class="stack-list">
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">C++ & C</div>
-                  <div class="stack-item-meta">Systems programming & algorithms</div>
-                </div>
-                <span class="tech-tag">Core</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">JavaScript (ES6+)</div>
-                  <div class="stack-item-meta">Modern DOM APIs & async runtimes</div>
-                </div>
-                <span class="tech-tag">Modern</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">HTML5 & Semantic Web</div>
-                  <div class="stack-item-meta">Clean markup & accessibility</div>
-                </div>
-                <span class="tech-tag">Standard</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">CSS3 & Modular Tokens</div>
-                  <div class="stack-item-meta">Responsive layouts & custom properties</div>
-                </div>
-                <span class="tech-tag">Responsive</span>
-              </div>
+            <div class="channel-actions">
+              <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-channel primary">Email Directly &nearr;</a>
+              <button class="btn-channel copy-email-btn" data-email="redoble.gninoemmanuel@gmail.com">Copy Address</button>
             </div>
           </div>
 
-          <!-- Pillar 2: Motion & Interaction -->
-          <div class="stack-column">
-            <div class="stack-col-header">
-              <span class="stack-col-icon">02</span>
-              <h3 class="stack-col-title">Motion & Interaction</h3>
-            </div>
-            <div class="stack-list">
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Lenis Smooth Scroll</div>
-                  <div class="stack-item-meta">Momentum scroll kinematics</div>
-                </div>
-                <span class="tech-tag">60fps</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">GSAP (GreenSock)</div>
-                  <div class="stack-item-meta">Sequenced animation timelines</div>
-                </div>
-                <span class="tech-tag">Timeline</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Raylight.app</div>
-                  <div class="stack-item-meta">Motion prototyping & easing curves</div>
-                </div>
-                <span class="tech-tag">Motion</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">react-bits Patterns</div>
-                  <div class="stack-item-meta">Micro-interaction design</div>
-                </div>
-                <span class="tech-tag">Tactile</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pillar 3: AI & Autonomous Agents -->
-          <div class="stack-column">
-            <div class="stack-col-header">
-              <span class="stack-col-icon">03</span>
-              <h3 class="stack-col-title">AI & Agent Workflows</h3>
-            </div>
-            <div class="stack-list">
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Antigravity IDE</div>
-                  <div class="stack-item-meta">Agent-first planning & execution</div>
-                </div>
-                <span class="tech-tag">Primary</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Jules & Ruflo</div>
-                  <div class="stack-item-meta">Autonomous CI/CD & orchestration</div>
-                </div>
-                <span class="tech-tag">Multi-Agent</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Google AI Studio & Gemini</div>
-                  <div class="stack-item-meta">Prompt engineering & API testing</div>
-                </div>
-                <span class="tech-tag">LLM</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Microsoft Markitdown</div>
-                  <div class="stack-item-meta">Markdown data extraction pipelines</div>
-                </div>
-                <span class="tech-tag">Parser</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pillar 4: UI/UX & Prototyping -->
-          <div class="stack-column">
-            <div class="stack-col-header">
-              <span class="stack-col-icon">04</span>
-              <h3 class="stack-col-title">UI/UX & Prototyping</h3>
-            </div>
-            <div class="stack-list">
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Watermelon.UI & Variant</div>
-                  <div class="stack-item-meta">Layout architecture & contrast test</div>
-                </div>
-                <span class="tech-tag">Systems</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">GrayBlocks Wireframing</div>
-                  <div class="stack-item-meta">Structural content hierarchy</div>
-                </div>
-                <span class="tech-tag">Wireframes</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Mockuply & Appshots</div>
-                  <div class="stack-item-meta">Authentic device presentations</div>
-                </div>
-                <span class="tech-tag">Assets</span>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <div class="stack-item-name">Mixboard & Stitch</div>
-                  <div class="stack-item-meta">AI moodboards & UI scaffolding</div>
-                </div>
-                <span class="tech-tag">Google Labs</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Workflow & AI Tools Explorer Section -->
-    <section id="tools" class="section">
-      <div class="container">
-        <div class="section-tag">Ecosystem</div>
-        <h2 class="section-title">Workflow Tools & Repositories Engine</h2>
-        <p class="section-desc">
-          Interactive registry of 22+ curated tools, experimental Google labs, autonomous coding agents, and open-source repositories integrated into my development workflow.
-        </p>
-
-        <!-- Search & Filter Bar -->
-        <div class="tools-filter-bar">
-          <div class="tools-filters">
-            <button class="filter-btn active" data-tool-filter="all">All [22]</button>
-            <button class="filter-btn" data-tool-filter="agent">AI Agents</button>
-            <button class="filter-btn" data-tool-filter="google">Google Labs</button>
-            <button class="filter-btn" data-tool-filter="motion">Motion & Scroll</button>
-            <button class="filter-btn" data-tool-filter="design">UI/UX Design</button>
-            <button class="filter-btn" data-tool-filter="repo">Open Source</button>
-          </div>
-          <input type="text" id="tools-search" class="tools-search" placeholder="Filter tools or keywords...">
-        </div>
-
-        <!-- Dynamic Tools Grid Container -->
-        <div id="tools-grid" class="tools-grid"></div>
-      </div>
-    </section>
-
-    <!-- Interactive Developer Console Section -->
-    <section id="terminal" class="section">
-      <div class="container">
-        <div class="section-tag">Interactive Shell</div>
-        <h2 class="section-title">Developer Terminal</h2>
-        <p class="section-desc">
-          Query project metadata, inspect custom domain configurations, or trigger direct commands in real-time.
-        </p>
-
-        <div class="terminal-window">
-          <div class="terminal-header">
-            <div class="terminal-controls">
-              <span class="term-dot red"></span>
-              <span class="term-dot yellow"></span>
-              <span class="term-dot green"></span>
-            </div>
-            <span>bash — gnegr@portfolio: ~ (is-a.dev)</span>
-            <span>UTF-8</span>
-          </div>
-
-          <div id="terminal-body" class="terminal-body">
-            <div class="term-log">GNEGR CLI Terminal [Version 2026.1.0]</div>
-            <div class="term-log">Connected to <span class="term-log info">ninoredoble.is-a.dev</span> // Free Custom Domain Engine.</div>
-            <div class="term-log output">Type <span class="term-log info">help</span> to view all commands, or click the quick pills below:</div>
-          </div>
-
-          <div style="padding: 0 1.5rem 1.5rem 1.5rem;">
-            <div class="term-prompt-line">
-              <span class="term-prompt-label">visitor@gnegr:~$</span>
-              <input type="text" id="terminal-input" class="term-input" placeholder="Type a command (e.g. projects, domain, tools, whoami)..." autocomplete="off" spellcheck="false">
-            </div>
-
-            <div class="term-pill-commands">
-              <span class="term-pill" data-cmd="whoami">whoami</span>
-              <span class="term-pill" data-cmd="projects">projects</span>
-              <span class="term-pill" data-cmd="stack">stack</span>
-              <span class="term-pill" data-cmd="domain">domain</span>
-              <span class="term-pill" data-cmd="tools">tools</span>
-              <span class="term-pill" data-cmd="contact">contact</span>
-              <span class="term-pill" data-cmd="clear">clear</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact & Connect Section -->
-    <section id="contact" class="section">
-      <div class="container">
-        <div class="section-tag">Direct Comms</div>
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="section-desc">
-          Let's collaborate on engineering projects, creative systems, or autonomous workflow implementations.
-        </p>
-
-        <div class="contact-grid">
-          <!-- Direct Channels Panel -->
-          <div class="contact-info-panel">
-            <div>
-              <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Verified Channels</h3>
-
-              <div class="contact-item">
-                <div>
-                  <div class="contact-item-label">Direct Email</div>
-                  <div class="contact-item-val">redoble.gninoemmanuel@gmail.com</div>
-                </div>
-                <button class="copy-btn" data-copy="redoble.gninoemmanuel@gmail.com">Copy</button>
-              </div>
-
-              <div class="contact-item">
-                <div>
-                  <div class="contact-item-label">Phone & SMS</div>
-                  <div class="contact-item-val">[REDACTED]</div>
-                </div>
-                <button class="copy-btn" data-copy="[REDACTED]">Copy</button>
-              </div>
-
-              <div class="contact-item">
-                <div>
-                  <div class="contact-item-label">Location</div>
-                  <div class="contact-item-val">Cagayan de Oro City, Philippines</div>
-                </div>
-                <span class="tech-tag">UTC+8</span>
-              </div>
-
-              <div class="contact-item">
-                <div>
-                  <div class="contact-item-label">GitHub Repository</div>
-                  <div class="contact-item-val">github.com/ninoredoble</div>
-                </div>
-                <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer" class="copy-btn">Open &nearr;</a>
-              </div>
-
-              <div class="contact-item">
-                <div>
-                  <div class="contact-item-label">Custom Domain Host</div>
-                  <div class="contact-item-val">ninoredoble.is-a.dev</div>
-                </div>
-                <span class="tech-tag" style="color: var(--accent-emerald);">Active</span>
-              </div>
-            </div>
-
-            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
-              Response time: Typically within 24 hours.
-            </div>
-          </div>
-
-          <!-- Contact Form -->
-          <div class="contact-form">
-            <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Send a Direct Message</h3>
-            <form id="contact-form">
-              <div class="form-group">
-                <label for="form-name" class="form-label">YOUR NAME</label>
-                <input type="text" id="form-name" class="form-control" placeholder="e.g. Alex Rivera" required>
-              </div>
-
-              <div class="form-group">
-                <label for="form-email" class="form-label">YOUR EMAIL</label>
-                <input type="email" id="form-email" class="form-control" placeholder="e.g. alex@example.com" required>
-              </div>
-
-              <div class="form-group">
-                <label for="form-message" class="form-label">PROJECT SCOPE OR MESSAGE</label>
-                <textarea id="form-message" class="form-control" placeholder="Describe the collaboration, inquiry, or project..." required></textarea>
-              </div>
-
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem;">
-                <button type="submit" class="btn btn-primary">Dispatch Message &rarr;</button>
-                <span id="form-status" style="font-family: var(--font-mono); font-size: 0.75rem;"></span>
-              </div>
-            </form>
+          <div class="social-channels-strip">
+            <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer" class="social-link-item">
+              <span class="social-name">LinkedIn</span>
+              <span class="social-handle">in/g-redoble &nearr;</span>
+            </a>
+            <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer" class="social-link-item">
+              <span class="social-name">GitHub</span>
+              <span class="social-handle">github.com/ninoredoble &nearr;</span>
+            </a>
+            <a href="https://ninoredoble.is-a.dev/img/RESUME.png" target="_blank" rel="noopener noreferrer" class="social-link-item">
+              <span class="social-name">Resume / CV</span>
+              <span class="social-handle">View Specs &nearr;</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Site Footer -->
+  <!-- Clean Minimalist Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="brand-logo-icon" style="height: 24px; opacity: 0.85;">
-          <div>
-            <div class="footer-stamp">&copy; 2026 G. Niño Emmanuel G. Redoble. All rights reserved.</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Built with zero-bloat Vanilla web architecture. Engineered with precision.</div>
-          </div>
-        </div>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble.</span>
+        <span class="footer-sub">Engineered with high craft. Cagayan de Oro City, Philippines.</span>
+      </div>
 
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-          <div class="footer-domain-badge">
-            <span>&bull;</span>
-            <span id="live-time">--:--:-- PHT</span>
-          </div>
-          <a href="#hero" class="copy-btn">Back to Top &uarr;</a>
+      <div class="footer-right">
+        <div class="footer-time-badge">
+          <span class="time-pulse"></span>
+          <span id="pht-time">--:--:-- PHT</span>
         </div>
+        <a href="#intro" class="footer-top-link">Back to Top &uarr;</a>
       </div>
     </div>
   </footer>
 
-  <!-- Motion & Scroll Scripts: Lenis -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-  <!-- Main Application Script -->
+  <!-- Main Application Script (Natural Physics, Theme, and Filters) -->
   <script src="js/main.js"></script>
 </body>
 </html>

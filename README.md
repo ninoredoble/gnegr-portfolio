@@ -1,37 +1,45 @@
-# GNEGR — Portfolio & Workflow Engine
+# Niño Redoble (GNEGR) — Personal Portfolio & Showcase
 
-> High-performance personal portfolio and digital engineering showcase for **G. Niño Emmanuel G. Redoble**.
+> Modern editorial portfolio and digital systems showcase for **G. Niño Emmanuel G. Redoble**.
 
-[![Domain](https://img.shields.io/badge/Domain-ninoredoble.is--a.dev-3b82f6?style=flat-square)](https://ninoredoble.is-a.dev)
+[![Domain](https://img.shields.io/badge/Domain-ninoredoble.is--a.dev-E25822?style=flat-square)](https://ninoredoble.is-a.dev)
 [![Status](https://img.shields.io/badge/Status-Active-10b981?style=flat-square)](#)
-[![Stack](https://img.shields.io/badge/Stack-Vanilla%20Web%20%7C%20ES6%20%7C%20Lenis-white?style=flat-square)](#)
+[![Stack](https://img.shields.io/badge/Stack-Vanilla%20Web%20%7C%20ES6%20%7C%20Native%20Scroll-black?style=flat-square)](#)
 
 ---
 
 ## 🌟 Highlights
-- **Custom Domain**: Hosted at [`ninoredoble.is-a.dev`](https://ninoredoble.is-a.dev) with automatic HTTPS via GitHub Pages.
-- **Zero-Bloat Architectural Design**: Crisp typography, high-contrast dark slate theme, hairline borders, and fluid responsive layouts.
-- **Interactive Developer Console**: In-browser terminal emulator supporting interactive commands (`whoami`, `projects`, `stack`, `tools`, `domain`, `contact`).
-- **Tools & Workflow Explorer**: Searchable and filterable registry of developer tools, frameworks, and engineering utilities.
-- **Kinematics & Smooth Motion**: 60fps Lenis smooth momentum scrolling.
+- **Inspired by High-Craft Editorial Web (avivashishta.com)**: Warm paper cream aesthetic (`#FFF8F4`), editorial display typography (`Instrument Serif`), and fluid dark mode toggle.
+- **Natural Browser Scrolling**: Zero scroll-jacking or laggy momentum traps; 100% native smooth browser performance.
+- **7 Live Showcase Projects**:
+  1. **Aether Report 2026**: Northern Mindanao Zero-Carbon AI Edge Mesh & Scrollytelling Annual Report.
+  2. **ClimaPocket Android**: Google Pixel 9 Pro Material You 3.5 Agrometeorology Telemetry Studio.
+  3. **Relay Core API**: Distributed Webhook Engine with HMAC-SHA256 & UNIX TUI sandbox (`relayctl`).
+  4. **Hablon Textile Archive**: Living Vector Loom & Indigenous Handwoven Textile Preservation Folio.
+  5. **Mindanao Grid Mesh**: Real-Time Sub-Transmission SCADA & Power Dispatch Mimic Board.
+  6. **Archipelago Marine Cadence**: Oceanographic Bathymetry & Coastal Telemetry (Macajalar Bay to Tubbataha).
+  7. **Cagayan Basin Corridor**: Watershed Hydrology & Agroforestry Corridor Model.
+- **Destructuring My Work Experience**: Structured career timeline highlighting USTP Magna Cum Laude, CEPALCO (2026), CCNA certification, and BuyNaBay project leadership.
+- **Clean Contact & Privacy**: Verified direct communication via email, LinkedIn, and GitHub. No public phone numbers or SMS displayed.
 
 ---
 
 ## 📁 Repository Structure
 ```text
+├── .agents/
+│   └── skills/
+│       └── portfolio-publisher/   # Antigravity publishing & validation skill
 ├── css/
-│   └── style.css                  # Architectural CSS token design system
+│   └── style.css                  # Warm editorial CSS token system
 ├── js/
-│   └── main.js                    # Terminal engine, tools catalog, Lenis scroll
-├── img/                           # Project media & icons
-├── vid/                           # Motion & video media
+│   └── main.js                    # Category filters, theme toggle, gentle badge physics
+├── img/                           # Brand marks & emblems
 ├── CNAME                          # Custom domain target (ninoredoble.is-a.dev)
-├── .nojekyll                      # Disable Jekyll processing on GitHub Pages
 ├── index.html                     # Master single-page portfolio
 └── README.md
 ```
 
 ---
 
-## 🌐 Live Website
-Visit the official live deployment at [**https://ninoredoble.is-a.dev**](https://ninoredoble.is-a.dev).
+## 🌐 Custom Domain
+Configured for `ninoredoble.is-a.dev` with automatic SSL on GitHub Pages.
