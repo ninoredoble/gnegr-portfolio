@@ -240,18 +240,9 @@ a {
   color: var(--text-muted);
 }
 
+/* Clean Indicator */
 .status-indicator-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: var(--accent-emerald);
-  box-shadow: 0 0 8px var(--accent-emerald);
-  animation: pulse-dot 2.5s infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
+  display: none;
 }
 
 .header-controls {
@@ -2168,17 +2159,9 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
   border-color: rgba(226, 78, 27, 0.28);
   color: #FF6B35;
 }
+/* Clean Status Badge */
 .status-pulse-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #E24E1B;
-  box-shadow: 0 0 7px #E24E1B;
-  animation: pulseEmber 2s infinite ease-in-out;
-}
-@keyframes pulseEmber {
-  0%, 100% { opacity: 0.5; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.2); }
+  display: none;
 }
 
 /* ==========================================================================
@@ -2601,18 +2584,9 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
 /* ==========================================================================
    3D CHASSIS ORANGE PULSE & INTERACTIVE COLOR PICKER
    ========================================================================== */
+/* 3D Chassis WebGL Status Badge */
 .pulse-dot-orange {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #E24E1B;
-  box-shadow: 0 0 8px #E24E1B;
-  animation: pulseOrange 2s infinite ease-in-out;
-}
-
-@keyframes pulseOrange {
-  0%, 100% { opacity: 0.5; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.25); }
+  display: none;
 }
 
 .chassis-color-picker {
