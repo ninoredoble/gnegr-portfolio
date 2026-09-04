@@ -240,10 +240,7 @@ a {
   color: var(--text-muted);
 }
 
-/* Clean Indicator */
-.status-indicator-dot {
-  display: none;
-}
+
 
 .header-controls {
   display: flex;
@@ -2159,10 +2156,7 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
   border-color: rgba(226, 78, 27, 0.28);
   color: #FF6B35;
 }
-/* Clean Status Badge */
-.status-pulse-dot {
-  display: none;
-}
+
 
 /* ==========================================================================
    HERO 2-COLUMN SPLIT GRID & INTERACTIVE 3D STAGE
@@ -2584,10 +2578,7 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
 /* ==========================================================================
    3D CHASSIS ORANGE PULSE & INTERACTIVE COLOR PICKER
    ========================================================================== */
-/* 3D Chassis WebGL Status Badge */
-.pulse-dot-orange {
-  display: none;
-}
+
 
 .chassis-color-picker {
   display: flex;
