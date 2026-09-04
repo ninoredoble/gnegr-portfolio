@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GNEGR — Brand Identity Guidelines</title>
+<link rel="icon" type="image/svg+xml" href="img/GNEGR.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /*
+    BLANKA — free display font by Troisième Type / Emmeran Richard
+    (troisiemetype.gumroad.com/l/blanka). It is the exact typeface built
+    into the GNEGR wordmark: minimalist, geometric, uppercase-only, a very
+    small glyph set. Save your licensed copy alongside this file as
+    fonts/Blanka-Regular.woff2 (or .otf) so the specimen below renders in
+    the real typeface — otherwise it falls back to Sora automatically.
+  */
+  @font-face{
+    font-family:'Blanka';
+    src:url('fonts/Blanka-Regular.woff2') format('woff2'),
+        url('fonts/Blanka-Regular.otf') format('opentype');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --ink:#1C1C1F;
+    --steel:#585A61;
+    --fog:#DEDED9;
+    --fog-soft:#EDEDE9;
+    --paper:#FAF9F6;
+    --white:#FFFFFF;
+    --indigo:#2B4C82;
+    --ember:#E24E1B;
+    --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-6:48px; --sp-8:64px; --sp-12:96px;
+    --font-wordmark:'Blanka', 'Sora', sans-serif;
+    --font-display:'Sora', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display); font-weight:700; margin:0; letter-spacing:-0.01em;}
+  p{margin:0 0 var(--sp-2);}
+  a{color:var(--indigo);}
+  .gn-prose{max-width:700px;}
+  .gn-prose p{max-width:700px;}
+
+  /* ---- layout ---- */
+  .gn-chapter{padding:var(--sp-12) var(--sp-3); max-width:1040px; margin:0 auto; border-bottom:1px solid var(--fog);}
+  .gn-chapter:last-of-type{border-bottom:none;}
+  .gn-chapter-head{display:flex; align-items:baseline; gap:var(--sp-2); margin-bottom:var(--sp-6);}
+  .gn-num{font-family:var(--font-mono); font-size:0.8125rem; color:var(--indigo); min-width:2ch;}
+  .gn-chapter h2{font-size:2rem; line-height:1.2;}
+  .gn-chapter-intro{color:var(--steel); max-width:640px; margin-top:var(--sp-1);}
+
+  /* ---- top nav ---- */
+  .gn-nav{position:sticky; top:0; z-index:10; background:rgba(250,249,246,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--fog);}
+  .gn-nav-inner{display:flex; gap:6px; overflow-x:auto; padding:14px var(--sp-3); max-width:1040px; margin:0 auto; scrollbar-width:none;}
+  .gn-nav-inner::-webkit-scrollbar{display:none;}
+  .gn-nav a{white-space:nowrap; text-decoration:none; color:var(--steel); font-size:0.8125rem; padding:7px 13px; border:1px solid var(--fog); border-radius:999px; transition:color .15s, border-color .15s;}
+  .gn-nav a:hover, .gn-nav a:focus-visible{color:var(--ink); border-color:var(--steel);}
+
+  /* ---- tread pattern divider ---- */
+  .gn-tread{height:9px; background-image:repeating-linear-gradient(45deg, var(--ink) 0, var(--ink) 2px, transparent 2px, transparent 11px); opacity:0.14;}
+
+  /* ---- cover ---- */
+  .gn-cover{padding:var(--sp-12) var(--sp-3) var(--sp-8); max-width:1040px; margin:0 auto; text-align:left;}
+  .gn-cover .gn-mark{width:min(560px, 100%); color:var(--ink); margin-bottom:var(--sp-6);}
+  .gn-cover h1{font-size:clamp(2.5rem, 6vw, 4rem); line-height:1.05; margin-bottom:var(--sp-2);}
+  .gn-cover .gn-sub{font-size:1.125rem; color:var(--steel); max-width:560px;}
+  .gn-cover .gn-meta{margin-top:var(--sp-6); font-family:var(--font-mono); font-size:0.8125rem; color:var(--steel); line-height:1.8;}
+
+  /* ---- marks ---- */
+  .gn-mark{display:block;}
+  .gn-mark-img{display:inline-block; vertical-align:middle; width:auto; height:auto; max-width:100%; object-fit:contain;}
+  .gn-cover-lockup{display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-6);}
+  .gn-cover-lockup .gn-mark-img{height:88px; width:auto;}
+  .gn-cover-lockup .gn-cover-wordmark{font-family:var(--font-wordmark); font-weight:400; text-transform:uppercase; letter-spacing:0.01em; font-size:clamp(2.5rem, 5vw, 3.75rem); color:var(--ink); line-height:1;}
+  .gn-wordmark-text{font-family:var(--font-wordmark); font-weight:400; text-transform:uppercase; letter-spacing:0.02em;}
+
+  /* ---- generic grid ---- */
+  .gn-grid{display:grid; gap:var(--sp-3);}
+  .gn-grid-2{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:520px){ .gn-grid-2{grid-template-columns:1fr;} }
+
+  /* ---- cards / panels ---- */
+  .gn-panel{border:1px solid var(--fog); padding:var(--sp-3); background:var(--white);}
+  .gn-panel-title{font-family:var(--font-display); font-weight:700; font-size:1rem; margin-bottom:4px;}
+  .gn-panel-note{color:var(--steel); font-size:0.875rem;}
+
+  /* ---- typography specimens ---- */
+  .gn-specimen{border:1px solid var(--fog); padding:var(--sp-3); background:var(--white); margin-bottom:var(--sp-3);}
+  .gn-specimen-label{font-family:var(--font-mono); font-size:0.75rem; color:var(--indigo); margin-bottom:10px;}
+  .gn-specimen-display{font-family:var(--font-display); font-weight:700; font-size:clamp(1.75rem,4vw,2.5rem); line-height:1.1;}
+  .gn-specimen-body{font-family:var(--font-body); font-size:1.0625rem; max-width:640px; color:var(--ink);}
+  .gn-specimen-mono{font-family:var(--font-mono); font-size:0.9375rem; color:var(--ink); line-height:1.9;}
+
+  table.gn-type-scale{width:100%; border-collapse:collapse; font-size:0.9375rem;}
+  table.gn-type-scale th, table.gn-type-scale td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--fog);}
+  table.gn-type-scale th{font-family:var(--font-mono); font-weight:500; font-size:0.75rem; color:var(--steel);}
+
+  /* ---- voice do/dont ---- */
+  .gn-voice-cols{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3);}
+  @media (max-width:640px){.gn-voice-cols{grid-template-columns:1fr;}}
+  .gn-voice-col{border:1px solid var(--fog); padding:var(--sp-3); background:var(--white);}
+  .gn-voice-col h3{font-size:1rem; margin-bottom:10px;}
+  .gn-voice-col ul{margin:0; padding-left:18px; color:var(--steel); font-size:0.9375rem;}
+  .gn-voice-col ul li{margin-bottom:6px;}
+
+  .gn-copy-block{border-left:2px solid var(--indigo); padding-left:var(--sp-3); margin:var(--sp-2) 0;}
+  .gn-copy-block .gn-copy-label{font-family:var(--font-mono); font-size:0.75rem; color:var(--steel); margin-bottom:4px;}
+  .gn-copy-block p{font-family:var(--font-display); font-weight:500; font-size:1.125rem; color:var(--ink);}
+  .gn-copy-block.is-body p{font-family:var(--font-body); font-weight:400; font-size:1rem;}
+
+  /* ---- chips ---- */
+  .gn-chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .gn-chip{border:1px solid var(--fog); padding:6px 12px; border-radius:999px; font-size:0.8125rem; color:var(--ink); background:var(--white);}
+  .gn-chip.is-mono{font-family:var(--font-mono); font-size:0.75rem;}
+
+  .gn-footer{padding:var(--sp-6) var(--sp-3); max-width:1040px; margin:0 auto; color:var(--steel); font-size:0.8125rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+
+  @media print{
+    .gn-nav{display:none;}
+    .gn-chapter{page-break-before:always; padding:40px 20px;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<div class="gn-nav">
+  <div class="gn-nav-inner">
+    <a href="#overview">01 Overview</a>
+    <a href="#audience">02 Audience</a>
+    <a href="#rationale">03 Rationale</a>
+    <a href="#type">04 Typography</a>
+    <a href="#principles">05 Principles</a>
+    <a href="#voice">06 Voice</a>
+    <a href="#appendix">07 Quick reference</a>
+  </div>
+</div>
+<div class="gn-tread"></div>
+
+<!-- ============ COVER ============ -->
+<header class="gn-cover">
+  <div class="gn-cover-lockup">
+    <img src="img/GNEGR.svg" alt="GNEGR Logo" class="gn-mark-img">
+    <div class="gn-cover-wordmark">GNEGR</div>
+  </div>
+  <h1>Brand identity guidelines</h1>
+  <p class="gn-sub">The personal brand of G. Niño Emmanuel G. Redoble — full-stack developer and CCNA-certified network specialist.</p>
+  <div class="gn-meta">
+    Version 1.1 — Strategy, typography &amp; voice edition<br>
+    Cagayan de Oro, Philippines, 2026
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 01 OVERVIEW ============ -->
+<section class="gn-chapter" id="overview">
+  <div class="gn-chapter-head">
+    <span class="gn-num">01</span>
+    <h2>Brand overview</h2>
+  </div>
+
+  <div class="gn-prose">
+    <p><b>Brand name.</b> GNEGR is built from the initials of Niño's full government name: <b>G</b>. <b>N</b>iño <b>E</b>mmanuel <b>G</b>. Redoble. Five letters, five parts of one name, condensed into something that reads like a badge rather than a byline.</p>
+    <p>Said aloud, the letters land close to "engineer" and "energy" — a coincidence worth letting the brand lean into, even though the name's real origin is simply his own initials.</p>
+
+    <p style="margin-top:var(--sp-4);"><b>Purpose.</b> GNEGR exists to give Niño's technical work — from network configurations to shipped applications — one consistent identity to stand behind, whether it's on a résumé, a case study, or a business card handed across a table.</p>
+
+    <p><b>Mission.</b> To apply a disciplined, systems-first approach across databases, infrastructure, and application development, building software and networks that hold up under real use — the same standard proven during his internship deployments at CEPALCO.</p>
+
+    <p><b>Vision.</b> To grow from IT graduate into a versatile technology professional trusted to own a project end to end, from the first architecture decision to the server it finally runs on.</p>
+  </div>
+
+  <div style="margin-top:var(--sp-6);">
+    <h3 style="font-size:1.125rem; margin-bottom:var(--sp-3);">Values</h3>
+    <div class="gn-grid gn-grid-2">
+      <div class="gn-panel">
+        <div class="gn-panel-title">Precision</div>
+        <div class="gn-panel-note">Backed by a CCNA certification in enterprise networking, security, and automation — nothing ships without accounting for how it behaves under load.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Discipline</div>
+        <div class="gn-panel-note">Graduated Magna Cum Laude and a Dean's Lister across every year from 2022–2026 — consistency treated as a habit, not a one-time achievement.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Momentum</div>
+        <div class="gn-panel-note">Balanced full-time study with freelance development and mentoring from 2021 onward — work that keeps moving even outside the classroom.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Craft</div>
+        <div class="gn-panel-note">A full asynchronous database migration and comprehensive technical documentation at CEPALCO — a preference for solving the underlying problem, not just the visible one.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Collaboration</div>
+        <div class="gn-panel-note">Led a five-person team on BuyNaBay and mentored 10+ students as an Academic Projects Consultant — building things is rarely a solo act.</div>
+      </div>
+      <div class="gn-panel">
+        <div class="gn-panel-title">Range</div>
+        <div class="gn-panel-note">Comfortable moving between Figma prototypes, React front ends, FastAPI back ends, and CCNA-level network configuration in the same week.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-6);" class="gn-prose">
+    <h3 style="font-size:1.125rem; margin-bottom:10px;">Personality</h3>
+    <p><b>Grounded</b> — as comfortable in Linux CLI and network configs as in Figma. <b>Precise</b> — a network-security mindset applied to every decision, visual or technical. <b>Quietly confident</b> — lets shipped work carry the proof rather than adjectives. <b>Forward-moving</b> — always the next stack, the next certification, the next deployment.</p>
+
+    <h3 style="font-size:1.125rem; margin:var(--sp-4) 0 10px;">Positioning</h3>
+    <p>For employers, clients, and collaborators who need someone equally comfortable architecting a backend, securing the network underneath it, and shipping the interface on top, GNEGR is the personal brand of a CCNA-certified full-stack developer who treats every build like a well-tuned machine — engineered, tested, and built to move.</p>
+  </div>
+</section>
+
+<!-- ============ 02 AUDIENCE ============ -->
+<section class="gn-chapter" id="audience">
+  <div class="gn-chapter-head">
+    <span class="gn-num">02</span>
+    <h2>Audience</h2>
+  </div>
+  <p class="gn-chapter-intro">Who the identity needs to work for, drawn directly from the shape of Niño's experience so far.</p>
+
+  <div class="gn-grid gn-grid-2" style="margin-top:var(--sp-4);">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Employers &amp; recruiters</div>
+      <div class="gn-panel-note">Software, IT infrastructure, and network roles evaluating the CCNA certification, the Magna Cum Laude / Dean's Lister record, and hands-on deployment experience at CEPALCO. They want proof of range across databases, infrastructure, and application development.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Freelance &amp; project clients</div>
+      <div class="gn-panel-note">Small organizations or campus groups needing a working web or mobile product, in the spirit of BuyNaBay and his freelance development work. They want reliability, clear documentation, and someone who delivers.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Collaborators &amp; dev teams</div>
+      <div class="gn-panel-note">Fellow developers on team projects or future hackathons. They want to know he can lead — Team Lead and System Analyst on BuyNaBay — collaborate over Git, and work within Agile methodologies.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Students &amp; mentees</div>
+      <div class="gn-panel-note">From his ongoing work as an Academic Projects Consultant. They want approachable, honest technical guidance grounded in real academic integrity standards.</div>
+    </div>
+  </div>
+
+  <div class="gn-panel" style="margin-top:var(--sp-3);">
+    <div class="gn-panel-title">Broader tech &amp; creative community</div>
+    <div class="gn-panel-note">Portfolio visitors, LinkedIn network, and future collaborators who sit at the overlap of UI/UX and engineering. They want to see that design — Figma, Adobe CC, responsive and GUI design — and engineering live under one roof.</div>
+  </div>
+</section>
+
+<!-- ============ 03 RATIONALE ============ -->
+<section class="gn-chapter" id="rationale">
+  <div class="gn-chapter-head">
+    <span class="gn-num">03</span>
+    <h2>Logo rationale</h2>
+  </div>
+
+  <div class="gn-copy-block is-body" style="max-width:720px;">
+    <div class="gn-copy-label">Why a motorcycle</div>
+    <p>The motorcycle isn't decoration on top of the GNEGR mark — it's the argument for the whole brand. A motorcycle is one of the most honest machines there is: every part is visible, every part has a job, and if the engineering is off, it simply doesn't move. That's the standard Niño holds his own work to, whether he's tracing a concurrency bug through an asynchronous database migration or configuring a network under a CCNA framework — nothing is hidden, and nothing works by accident. The bike's forward lean captures momentum: the pace of finishing a CCNA certification, a full internship deployment, and a five-person product build inside the same stretch of years. Its independence — one rider, one machine, full control — mirrors the freelance and mentoring work he's carried alongside full-time study since 2021. And in the original mark, the wordmark doesn't sit on the bike as a label; it's built into the chassis itself, the letters forming the body the wheels carry. That single detail is the whole case study in miniature: his name isn't attached to the work, it's the structure underneath it.</p>
+  </div>
+</section>
+
+<!-- ============ 04 TYPOGRAPHY ============ -->
+<section class="gn-chapter" id="type">
+  <div class="gn-chapter-head">
+    <span class="gn-num">04</span>
+    <h2>Typography</h2>
+  </div>
+  <p class="gn-chapter-intro">One typeface locked to the mark, one built to complement it, one for reading, one for code.</p>
+
+  <div class="gn-panel" style="margin-top:var(--sp-4); border-style:dashed;">
+    <div class="gn-panel-title">Setup note</div>
+    <div class="gn-panel-note">Blanka is a free display font by Troisième Type (troisiemetype.gumroad.com/l/blanka) — the same file used to set the wordmark in the logo itself. Save your licensed copy next to this document as <code>fonts/Blanka-Regular.woff2</code> (or <code>.otf</code>) so the specimen below renders correctly; until then it falls back to Sora automatically.</div>
+  </div>
+
+  <div style="margin-top:var(--sp-3);">
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">BLANKA — wordmark only</div>
+      <div class="gn-specimen-display" style="font-family:var(--font-wordmark); text-transform:uppercase;">GNEGR</div>
+      <p class="gn-panel-note" style="margin-top:10px;">The exact typeface built into the logo — minimalist, geometric, uppercase-only, designed for huge sizes. It has no lowercase and a very small character set, so its job stops at the mark. Never reset it as a headline, a UI label, or body copy, and never rebuild the wordmark in a substitute font.</p>
+    </div>
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">Sora — display / headings</div>
+      <div class="gn-specimen-display">Full-stack development. Network engineering.</div>
+      <p class="gn-panel-note" style="margin-top:10px;">Chosen specifically to sit next to Blanka: the same squared-off, monoline geometry and technical confidence, but with a full weight range and complete character set Blanka doesn't have. Carries every H1–H3 in the system.</p>
+    </div>
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">Inter — body / UI</div>
+      <div class="gn-specimen-body">GNEGR is the personal brand of a CCNA-certified developer who treats every build like a well-tuned machine — engineered, tested, and built to move.</div>
+    </div>
+    <div class="gn-specimen">
+      <div class="gn-specimen-label">JetBrains Mono — technical references only</div>
+      <div class="gn-specimen-mono">#1C1C1F&nbsp;&nbsp;#2B4C82&nbsp;&nbsp;React&nbsp;&nbsp;FastAPI&nbsp;&nbsp;SQLAlchemy&nbsp;&nbsp;Docker</div>
+    </div>
+  </div>
+
+  <table class="gn-type-scale" style="margin-top:var(--sp-4);">
+    <tr><th>Style</th><th>Typeface / weight</th><th>Size / line-height</th><th>Use</th></tr>
+    <tr><td>Wordmark</td><td>Blanka Regular</td><td>Set at logo scale only</td><td>The GNEGR mark — nowhere else</td></tr>
+    <tr><td>H1</td><td>Sora Bold</td><td>48 / 56 (32 / 40 mobile)</td><td>Page titles, cover headlines</td></tr>
+    <tr><td>H2</td><td>Sora Bold</td><td>32 / 40 (24 / 32 mobile)</td><td>Section titles</td></tr>
+    <tr><td>H3</td><td>Sora SemiBold</td><td>22 / 30</td><td>Sub-sections, card titles</td></tr>
+    <tr><td>Body</td><td>Inter Regular</td><td>16 / 26</td><td>Paragraphs, résumé body copy</td></tr>
+    <tr><td>Small</td><td>Inter Regular</td><td>13 / 20</td><td>Captions, meta text</td></tr>
+    <tr><td>Mono</td><td>JetBrains Mono Regular</td><td>14 / 22</td><td>Hex values, stack labels, code</td></tr>
+  </table>
+
+  <div class="gn-panel" style="margin-top:var(--sp-4);">
+    <div class="gn-panel-title">Why this pairing</div>
+    <div class="gn-panel-note">Blanka is a specialist — a minimalist display face built for exactly one job at huge sizes, which is exactly why it works inside the mark and exactly why it can't carry a paragraph. Sora sits beside it without competing: related geometric DNA, but built as a full working typeface with the weights and glyphs a real layout needs. Inter and JetBrains Mono continue underneath, handling reading and code the way they always have.</div>
+  </div>
+</section>
+
+<!-- ============ 05 PRINCIPLES ============ -->
+<section class="gn-chapter" id="principles">
+  <div class="gn-chapter-head">
+    <span class="gn-num">05</span>
+    <h2>Design principles</h2>
+  </div>
+
+  <div class="gn-grid gn-grid-2" style="margin-top:var(--sp-4);">
+    <div class="gn-panel">
+      <div class="gn-panel-title">Hierarchy</div>
+      <div class="gn-panel-note">Lead with type weight and size before color. On any single view, only one element should carry an accent color.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Spacing &amp; grid</div>
+      <div class="gn-panel-note">An 8px base unit (8 / 16 / 24 / 32 / 48 / 64 / 96). Body copy in a column no wider than about 720px. Margins scale from 24px on mobile to 96px on wide desktop.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Contrast &amp; accessibility</div>
+      <div class="gn-panel-note">Body text meets at least 4.5:1 contrast; large text and icons meet at least 3:1. Color is never the only carrier of meaning. Focus states stay visible; motion respects reduced-motion preferences.</div>
+    </div>
+    <div class="gn-panel">
+      <div class="gn-panel-title">Consistency</div>
+      <div class="gn-panel-note">Keep typeface roles fixed — Blanka in the mark, Sora in headings, Inter in body, mono for technical labels. Don't introduce a fifth typeface, and don't reassign a face to a job it wasn't chosen for.</div>
+    </div>
+    <div class="gn-panel" style="grid-column:1 / -1;">
+      <div class="gn-panel-title">Responsive use</div>
+      <div class="gn-panel-note">The mark should scale predictably — full lockup at large sizes, down to a simplified icon at small sizes — with full construction rules maintained in the dedicated logo system reference. Layouts drop from multi-column to single-column below 720px, and navigation collapses to a simple scrollable list.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 VOICE ============ -->
+<section class="gn-chapter" id="voice">
+  <div class="gn-chapter-head">
+    <span class="gn-num">06</span>
+    <h2>Brand voice</h2>
+  </div>
+  <p class="gn-chapter-intro">Professional, confident, precise, authentic, quietly bold, forward-looking.</p>
+
+  <div class="gn-voice-cols" style="margin-top:var(--sp-4);">
+    <div class="gn-voice-col">
+      <h3>Do</h3>
+      <ul>
+        <li>Use plain verbs and concrete specifics — name the stack, the certification, the deployment</li>
+        <li>Let finished work carry the confidence, not adjectives</li>
+        <li>Write the way he'd explain a project to another engineer</li>
+      </ul>
+    </div>
+    <div class="gn-voice-col">
+      <h3>Don't</h3>
+      <ul>
+        <li>Reach for hype language — no "rockstar," no "ninja," no "passionate"</li>
+        <li>Overstate scope beyond what actually shipped</li>
+        <li>Bury a real detail under jargon</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-4);">
+    <h3 style="font-size:1rem; margin-bottom:10px;">Keywords</h3>
+    <div class="gn-chips">
+      <span class="gn-chip">Precision</span>
+      <span class="gn-chip">Momentum</span>
+      <span class="gn-chip">Systems</span>
+      <span class="gn-chip">Reliability</span>
+      <span class="gn-chip">Craft</span>
+      <span class="gn-chip">Discipline</span>
+      <span class="gn-chip">Build</span>
+      <span class="gn-chip">Ship</span>
+      <span class="gn-chip">Engineer</span>
+      <span class="gn-chip">Forward</span>
+    </div>
+  </div>
+
+  <div style="margin-top:var(--sp-6);">
+    <h3 style="font-size:1rem; margin-bottom:10px;">Sample copy</h3>
+    <div class="gn-copy-block">
+      <div class="gn-copy-label">Portfolio hero headline</div>
+      <p>Full-stack development. Network engineering. Built to move.</p>
+    </div>
+    <div class="gn-copy-block is-body">
+      <div class="gn-copy-label">Short bio</div>
+      <p>G. Niño Emmanuel G. Redoble is a CCNA-certified IT graduate who builds full-stack systems and keeps the networks underneath them running. His recent work includes a live ticketing and fuel-tracking platform built during his internship at CEPALCO, a campus marketplace app led with a five-person team, and a freelance practice mentoring student developers. He graduated Magna Cum Laude from the University of Science and Technology of Southern Philippines.</p>
+    </div>
+    <div class="gn-copy-block is-body">
+      <div class="gn-copy-label">Signature tagline</div>
+      <p>Full-stack developer and CCNA-certified network specialist.</p>
+    </div>
+    <div class="gn-copy-block is-body">
+      <div class="gn-copy-label">Social bio</div>
+      <p>Building full-stack systems and the networks under them, one deployment at a time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 QUICK REFERENCE ============ -->
+<section class="gn-chapter" id="appendix">
+  <div class="gn-chapter-head">
+    <span class="gn-num">07</span>
+    <h2>Quick reference</h2>
+  </div>
+
+  <div class="gn-panel">
+    <div class="gn-panel-title">Type</div>
+    <div class="gn-panel-note">BLANKA — wordmark only, never for text<br>Sora — headings (H1–H3)<br>Inter — body &amp; UI<br>JetBrains Mono — technical references only</div>
+  </div>
+
+  <div class="gn-panel" style="margin-top:var(--sp-3);">
+    <div class="gn-panel-title">The one rule</div>
+    <div class="gn-panel-note">Blanka does exactly one job — the mark, and nothing else. Everywhere else, Sora leads, Inter reads, and mono documents the stack. That division is what keeps four typefaces from ever feeling like four typefaces.</div>
+  </div>
+
+  <div class="gn-panel" style="margin-top:var(--sp-3);">
+    <div class="gn-panel-title">What's next</div>
+    <div class="gn-panel-note">This edition covers strategy, rationale, typography, principles, and voice. Logo construction rules, the full color system, graphic devices, and applied examples live in the next edition of this document.</div>
+  </div>
+</section>
+
+</main>
+
+<div class="gn-tread"></div>
+<footer class="gn-footer">
+  <span>GNEGR Brand Identity Guidelines — v1.1</span>
+  <span>Prepared by G. Niño Emmanuel G. Redoble</span>
+</footer>
+
+</body>
+</html>

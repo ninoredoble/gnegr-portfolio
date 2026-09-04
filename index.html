@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NiÃ±o Redoble // Full-Stack & Systems Developer</title>
-  <meta name="description" content="Portfolio of G. NiÃ±o Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Builder, and CCNA Network Specialist. BS Information Technology Magna Cum Laude graduate from USTP.">
+  <title>Niño Redoble // Full-Stack & Systems Developer</title>
+  <meta name="description" content="Portfolio of G. Niño Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Builder, and CCNA Network Specialist. BS Information Technology Magna Cum Laude graduate from USTP.">
   
   <!-- Canonical & Domain -->
   <link rel="canonical" href="https://ninoredoble.is-a.dev/">
@@ -16,7 +16,7 @@
   <!-- Typography: Google Fonts (Space Grotesk for Headings, Inter for Body, JetBrains Mono for Tech) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -43,6 +43,25 @@
 </head>
 <body>
 
+  <!-- Intro Split Loader (0% - 100% Progress & Split Reveal) -->
+  <div class="intro-loader" id="intro-loader" aria-hidden="true">
+    <div class="loader-half loader-top"></div>
+    <div class="loader-half loader-bottom"></div>
+    <div class="loader-content" id="loader-content">
+      <div class="loader-brand">GNEGR</div>
+      <div class="loader-sub">
+        <span class="loader-status">Loading...</span>
+        <span class="loader-percent" id="loader-percent">0%</span>
+      </div>
+      <div class="loader-track">
+        <div class="loader-bar" id="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle Full-Screen Noise/Grain Overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
   <!-- Custom Dual Cursor (Dot + Lagging Difference Ring) -->
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
@@ -61,12 +80,20 @@
         </div>
       </div>
 
+      <nav class="site-nav" id="site-nav" aria-label="Main Navigation">
+        <a href="#intro" class="nav-link active">Home</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#stack" class="nav-link">Stack</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
       <div class="header-controls">
         <button id="theme-toggle" class="control-btn" aria-label="Toggle Color Theme" title="Toggle Light/Dark Theme">
           <span class="theme-icon light-icon">&#9728;</span>
           <span class="theme-icon dark-icon">&#9790;</span>
         </button>
-        <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-pill-primary">Contact</a>
+        <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-pill-primary magnetic-btn">Contact</a>
       </div>
     </div>
   </header>
@@ -84,13 +111,13 @@
       </div>
 
       <!-- Hero HTML Typography Overlay (z-index: 2) -->
-      <div class="hero-container">
+      <div class="hero-container reveal">
         <!-- Brand Logo Reveal Video Emblem -->
         <div class="hero-badge-wrap">
           <div class="hero-reveal-container" title="GNEGR Brand Reveal">
             <video class="hero-reveal-video" autoplay muted playsinline loop preload="auto" poster="img/gnegr.svg">
               <source src="img/gnegr-logo-reveal.webm" type="video/webm">
-              <img src="img/gnegr.svg" alt="NiÃ±o Redoble (GNEGR) Emblem" class="hero-avatar-img">
+              <img src="img/gnegr.svg" alt="Niño Redoble (GNEGR) Emblem" class="hero-avatar-img">
             </video>
           </div>
         </div>
@@ -98,17 +125,17 @@
         <h1 class="hero-title">
           <span class="hero-title-accent">Full-Stack Systems & Network Engineering</span>
           <span class="hero-title-main">
-            NiÃ±o Redoble
+            Niño Redoble
             <span class="hero-title-outline">Built to Move.</span>
           </span>
         </h1>
 
         <p class="hero-bio">
-          I am <strong>G. NiÃ±o Emmanuel G. Redoble</strong> (GNEGR)â€”a CCNA-certified IT graduate and systems developer who builds resilient full-stack applications and keeps the networks underneath them running. Graduated <strong>Magna Cum Laude</strong> from USTP, engineered enterprise ticketing and fuel tracking at CEPALCO, and led platforms with a disciplined systems-first mindset.
+          I am <strong>G. Niño Emmanuel G. Redoble</strong> (GNEGR)—a CCNA-certified IT graduate and systems developer who builds resilient full-stack applications and keeps the networks underneath them running. Graduated <strong>Magna Cum Laude</strong> from USTP, engineered enterprise ticketing and fuel tracking at CEPALCO, and led platforms with a disciplined systems-first mindset.
         </p>
 
         <div class="hero-cta-group">
-          <a href="mailto:redoble.gninoemmanuel@gmail.com" class="hero-cta-btn primary">
+          <a href="mailto:redoble.gninoemmanuel@gmail.com" class="hero-cta-btn primary magnetic-btn">
             <span>Contact Me</span>
           </a>
           <a href="#work" class="hero-cta-btn secondary">
@@ -135,7 +162,7 @@
         </video>
       </div>
       <div class="video-overlay"></div>
-      <div class="container">
+      <div class="container reveal">
         <div class="media-kicker">CINEMATIC INTERMISSION // THE GNEGR PHILOSOPHY</div>
         <h2 class="media-headline">Every Component Visible.<br>Every Line Engineered.</h2>
         <p class="media-body">
@@ -152,12 +179,12 @@
 
     <!-- Floating Tech Stack Cloud Section -->
     <section class="skills-cloud-section" id="stack">
-      <div class="skills-cloud-header">
+      <div class="skills-cloud-header reveal">
         <h2 class="cloud-headline">Always Building. Always Growing.</h2>
         <p class="cloud-subline">Interactive engineering stack across distributed systems, frontend engineering, and networks.</p>
       </div>
 
-      <div class="skills-cloud-canvas" id="skills-cloud">
+      <div class="skills-cloud-canvas reveal" id="skills-cloud">
         <!-- Floating Badges dynamically populated and interactable -->
         <div class="skill-badge" style="--pos-x: 12%; --pos-y: 18%; --speed: 5s;" data-tech="Python">
           <span class="badge-icon">&#x1F40D;</span>
@@ -200,7 +227,7 @@
 
     <!-- Find My Work (Showcase Projects) Section -->
     <section class="work-section" id="work">
-      <div class="section-header-wrap">
+      <div class="section-header-wrap reveal">
         <h2 class="section-title-editorial">Find My Work</h2>
         <p class="section-sub-editorial">Curated selection of production-grade systems, environmental models, and developer infrastructure.</p>
         
@@ -216,7 +243,7 @@
       <div class="work-showcase-grid">
 
         <!-- Project 1: Aether Report 2026 -->
-        <article class="project-card" data-category="systems">
+        <article class="project-card reveal" data-category="systems">
           <div class="project-card-media">
             <img src="img/projects/aether.png" alt="Aether Report 2026 Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -239,13 +266,13 @@
               <span class="tech-tag">GitHub Pages</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
 
         <!-- Project 2: ClimaPocket Android -->
-        <article class="project-card" data-category="mobile">
+        <article class="project-card reveal" data-category="mobile">
           <div class="project-card-media">
             <img src="img/projects/clima.png" alt="ClimaPocket Android Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -268,13 +295,13 @@
               <span class="tech-tag">Telemetry API</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
 
         <!-- Project 3: Relay Core API -->
-        <article class="project-card" data-category="systems">
+        <article class="project-card reveal" data-category="systems">
           <div class="project-card-media">
             <img src="img/projects/relay.png" alt="Relay Core API Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -297,13 +324,13 @@
               <span class="tech-tag">Redis Idempotency</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
 
         <!-- Project 4: Hablon Textile Archive -->
-        <article class="project-card" data-category="web">
+        <article class="project-card reveal" data-category="web">
           <div class="project-card-media">
             <img src="img/projects/hablon.png" alt="Hablon Textile Archive Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -326,13 +353,13 @@
               <span class="tech-tag">Cultural Heritage</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
 
         <!-- Project 5: Mindanao Grid Mesh -->
-        <article class="project-card" data-category="systems">
+        <article class="project-card reveal" data-category="systems">
           <div class="project-card-media">
             <img src="img/projects/grid.png" alt="Mindanao Grid Mesh Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -355,13 +382,13 @@
               <span class="tech-tag">Canvas State Engine</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
 
         <!-- Project 6: Archipelago Marine Cadence -->
-        <article class="project-card" data-category="web">
+        <article class="project-card reveal" data-category="web">
           <div class="project-card-media">
             <img src="img/projects/marine.png" alt="Archipelago Marine Cadence Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -384,13 +411,13 @@
               <span class="tech-tag">Geospatial UI</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
 
         <!-- Project 7: Cagayan Basin Corridor -->
-        <article class="project-card" data-category="mobile">
+        <article class="project-card reveal" data-category="mobile">
           <div class="project-card-media">
             <img src="img/projects/basin.png" alt="Cagayan Basin Corridor Live Interface Preview" class="project-screenshot" loading="lazy">
             <div class="media-overlay-badge">
@@ -413,7 +440,7 @@
               <span class="tech-tag">Botanical Research</span>
             </div>
             <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary">View Live Demo &nearr;</a>
+              <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
             </div>
           </div>
         </article>
@@ -454,7 +481,7 @@
         <div class="experience-timeline">
           
           <!-- Role 1: CEPALCO -->
-          <div class="timeline-node">
+          <div class="timeline-node reveal">
             <div class="node-marker">
               <span class="node-year">2026</span>
             </div>
@@ -482,7 +509,7 @@
           </div>
 
           <!-- Role 2: BuyNaBay -->
-          <div class="timeline-node">
+          <div class="timeline-node reveal">
             <div class="node-marker">
               <span class="node-year">2024 &ndash; 2025</span>
             </div>
@@ -510,7 +537,7 @@
           </div>
 
           <!-- Role 3: CCNA Credential -->
-          <div class="timeline-node">
+          <div class="timeline-node reveal">
             <div class="node-marker">
               <span class="node-year">2024</span>
             </div>
@@ -536,7 +563,7 @@
           </div>
 
           <!-- Role 4: USTP Magna Cum Laude -->
-          <div class="timeline-node">
+          <div class="timeline-node reveal">
             <div class="node-marker">
               <span class="node-year">2021 &ndash; 2025</span>
             </div>
@@ -567,7 +594,7 @@
 
     <!-- Connect & Contact Section -->
     <section class="connect-section" id="contact">
-      <div class="connect-container">
+      <div class="connect-container reveal">
         <h2 class="section-title-editorial center">
           Start a Conversation
         </h2>
@@ -582,7 +609,7 @@
               <span class="channel-value">redoble.gninoemmanuel@gmail.com</span>
             </div>
             <div class="channel-actions">
-              <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-channel primary">Email Directly &nearr;</a>
+              <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-channel primary magnetic-btn">Email Directly &nearr;</a>
               <button class="btn-channel copy-email-btn" data-email="redoble.gninoemmanuel@gmail.com">Copy Address</button>
             </div>
           </div>
@@ -615,7 +642,7 @@
       <div class="footer-left">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
           <img src="img/gnegr.svg" alt="GNEGR Mark" style="height: 18px; width: auto;" class="brand-header-icon">
-          <span class="footer-brand">&copy; 2026 G. NiÃ±o Emmanuel G. Redoble (GNEGR).</span>
+          <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble (GNEGR).</span>
         </div>
         <span class="footer-sub">Full-stack developer and CCNA-certified network specialist. Built to move.</span>
       </div>

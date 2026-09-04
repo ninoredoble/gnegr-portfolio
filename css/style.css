@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    GNEGR // NIÃ‘O REDOBLE PORTFOLIO STYLES
    Aesthetic: Bruno Simon WebGL Depth, Lynn Fisher Playful Micro-Interactions,
               Obsidian Void (#0b0b0f), Space Grotesk & Inter Typography
@@ -25,7 +25,7 @@
   --accent-pink: #ff3366;   /* Neon Pink */
   --accent-emerald: #10B981;
 
-  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Sora', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -45,7 +45,7 @@
 
 /* Dark Void Theme (#0b0b0f) */
 [data-theme="dark"] {
-  --bg-page: #0b0b0f;
+  --bg-page: #0A0A0A;
   --bg-surface: #121218;
   --bg-card: #15151c;
   --bg-subtle: #1c1c24;
@@ -101,10 +101,10 @@ body {
 
 .cursor-dot {
   position: fixed;
-  top: -5px;
-  left: -5px;
-  width: 10px;
-  height: 10px;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
   background-color: #ffffff;
   border-radius: 50%;
   pointer-events: none;
@@ -126,12 +126,18 @@ body {
   z-index: 99998;
   mix-blend-mode: difference;
   transform: translate3d(-100px, -100px, 0);
-  transition: border-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .cursor-ring.cursor-hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  border-color: #00e5ff;
+  border-color: #E24E1B !important;
+  background-color: rgba(226, 78, 27, 0.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input {
+    cursor: none;
+  }
 }
 
 /* Typography Headings in Space Grotesk */
@@ -852,10 +858,24 @@ a {
   transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-fast);
 }
 
+.project-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
 .project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--border-hover);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #E24E1B;
+}
+
+[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: #E24E1B;
+}
+
+.project-card:hover .project-screenshot {
+  transform: scale(1.05);
 }
 
 .project-card-media {
@@ -1410,4 +1430,264 @@ a {
 
 .footer-top-link:hover {
   color: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   AWARD-WINNING STANDARDS PASS: MICRO-INTERACTIONS, SCROLL & BRAND
+   ========================================================================== */
+
+/* Text Selection Color */
+::selection {
+  background: #E24E1B;
+  color: #FAF9F6;
+}
+::-moz-selection {
+  background: #E24E1B;
+  color: #FAF9F6;
+}
+
+/* Custom Styled Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #DEDED9;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4C4BC;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #2A2A2E;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #3E3E45;
+}
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #DEDED9 transparent;
+}
+[data-theme="dark"] html {
+  scrollbar-color: #2A2A2E transparent;
+}
+
+/* Noise / Grain Fullscreen Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Intro Split Screen Loader */
+.intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+.intro-loader.is-loaded {
+  pointer-events: none;
+}
+.intro-loader.is-hidden {
+  display: none !important;
+}
+.loader-half {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #0A0A0A;
+  transition: transform 0.85s cubic-bezier(0.85, 0, 0.15, 1);
+  will-change: transform;
+}
+.loader-top {
+  top: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.loader-bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.intro-loader.is-loaded .loader-top {
+  transform: translateY(-100%);
+}
+.intro-loader.is-loaded .loader-bottom {
+  transform: translateY(100%);
+}
+.loader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  color: #FAF9F6;
+  transition: opacity 0.35s ease, transform 0.4s ease;
+}
+.intro-loader.is-loaded .loader-content {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.loader-brand {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: #FAF9F6;
+}
+.loader-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #A1A1AA;
+  display: flex;
+  gap: 1.25rem;
+}
+.loader-track {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.loader-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: #E24E1B;
+  transition: width 0.12s ease-out;
+}
+
+/* Site Navigation Header Links */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  position: relative;
+  padding: 0.35rem 0;
+  transition: color 0.25s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #E24E1B;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #E24E1B;
+}
+.nav-link.active::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+@media (max-width: 860px) {
+  .site-nav {
+    display: none;
+  }
+}
+
+/* Reveal on Scroll (Phase 1) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Magnetic Buttons (Phase 2) */
+.magnetic-btn {
+  will-change: transform;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* Animated Text Underline on Hover (Phase 2) */
+.hero-bio a,
+.media-body a,
+.node-points a,
+.footer-top-link,
+.social-link-item,
+.brand-link {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.hero-bio a::after,
+.media-body a::after,
+.node-points a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: #E24E1B;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-bio a:hover::after,
+.media-body a:hover::after,
+.node-points a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Hero Parallax Elements */
+.hero-3d-wrapper,
+.hero-container {
+  will-change: transform;
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cursor-dot, .cursor-ring, .noise-overlay, .intro-loader {
+    display: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  body, a, button, input {
+    cursor: auto !important;
+  }
 }
