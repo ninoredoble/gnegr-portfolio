@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Niño Redoble // Full-Stack & Systems Developer</title>
-  <meta name="description" content="Portfolio of G. Niño Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Builder, and CCNA Network Specialist. BS Information Technology Magna Cum Laude graduate from USTP.">
+  <title>NiÃ±o Redoble // Full-Stack & Systems Developer</title>
+  <meta name="description" content="Portfolio of G. NiÃ±o Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Builder, and CCNA Network Specialist. BS Information Technology Magna Cum Laude graduate from USTP.">
   
   <!-- Canonical & Domain -->
   <link rel="canonical" href="https://ninoredoble.is-a.dev/">
@@ -13,18 +13,26 @@
   <link rel="icon" type="image/svg+xml" href="img/GNEGR.svg">
   <link rel="icon" type="image/png" href="img/FAVICON.png">
 
-  <!-- Typography: Google Fonts (Sora for headings, Inter for body, JetBrains Mono for tech) -->
+  <!-- Typography: Google Fonts (Space Grotesk for Headings, Inter for Body, JetBrains Mono for Tech) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Interactive 3D Model Viewer Engine -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <!-- Three.js ES Modules Importmap -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
   <script>
-    // Synchronous Theme Check
+    // Synchronous Theme Detection
     try {
       const savedTheme = localStorage.getItem('gnegr_theme');
       if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -34,6 +42,10 @@
   </script>
 </head>
 <body>
+
+  <!-- Custom Dual Cursor (Dot + Lagging Difference Ring) -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
   <!-- Site Navigation Header -->
   <header class="site-header">
@@ -60,26 +72,39 @@
   </header>
 
   <main>
-    <!-- Hero / Masthead Section -->
+    <!-- SECTION 1: The 3D Hero (Bruno Simon Style) -->
     <section class="hero-section" id="intro">
+      <!-- Full-Screen Interactive Three.js WebGL Canvas (Behind HTML text) -->
+      <div class="hero-3d-wrapper" id="hero-3d-wrapper">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-3d-loader" id="hero-3d-loader">
+          <div class="hero-3d-spinner"></div>
+          <span class="hero-3d-text">INITIALIZING 3D CHASSIS...</span>
+        </div>
+      </div>
+
+      <!-- Hero HTML Typography Overlay (z-index: 2) -->
       <div class="hero-container">
-        <!-- Brand Logo Reveal Video & Interactive Emblem -->
+        <!-- Brand Logo Reveal Video Emblem -->
         <div class="hero-badge-wrap">
           <div class="hero-reveal-container" title="GNEGR Brand Reveal">
             <video class="hero-reveal-video" autoplay muted playsinline loop preload="auto" poster="img/GNEGR.svg">
               <source src="img/GNEGR_logo_reveal.webm" type="video/webm">
-              <img src="img/GNEGR.svg" alt="Niño Redoble (GNEGR) Emblem" class="hero-avatar-img">
+              <img src="img/GNEGR.svg" alt="NiÃ±o Redoble (GNEGR) Emblem" class="hero-avatar-img">
             </video>
           </div>
         </div>
 
         <h1 class="hero-title">
-          <span class="hero-title-accent">Full-Stack Development. Network Engineering.</span>
-          <span class="hero-title-main">Built to Move.</span>
+          <span class="hero-title-accent">Full-Stack Systems & Network Engineering</span>
+          <span class="hero-title-main">
+            NiÃ±o Redoble
+            <span class="hero-title-outline">Built to Move.</span>
+          </span>
         </h1>
 
         <p class="hero-bio">
-          I am <strong>G. Niño Emmanuel G. Redoble</strong> (GNEGR)—a CCNA-certified IT graduate and systems developer who builds full-stack applications and keeps the networks underneath them running. Graduated <strong>Magna Cum Laude</strong> from USTP, engineered enterprise ticketing and fuel tracking at CEPALCO, and led full-stack platforms with a disciplined systems-first mindset.
+          I am <strong>G. NiÃ±o Emmanuel G. Redoble</strong> (GNEGR)â€”a CCNA-certified IT graduate and systems developer who builds resilient full-stack applications and keeps the networks underneath them running. Graduated <strong>Magna Cum Laude</strong> from USTP, engineered enterprise ticketing and fuel tracking at CEPALCO, and led platforms with a disciplined systems-first mindset.
         </p>
 
         <div class="hero-cta-group">
@@ -97,6 +122,30 @@
           <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <span class="sep">&bull;</span>
           <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: The WebM Background Section (Parallax Intermission) -->
+    <section class="media-section" id="media-intermission">
+      <div class="video-bg">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="GNEGR_logo_reveal.webm" type="video/webm">
+          <source src="img/GNEGR_logo_reveal.webm" type="video/webm">
+        </video>
+      </div>
+      <div class="video-overlay"></div>
+      <div class="container">
+        <div class="media-kicker">CINEMATIC INTERMISSION // THE GNEGR PHILOSOPHY</div>
+        <h2 class="media-headline">Every Component Visible.<br>Every Line Engineered.</h2>
+        <p class="media-body">
+          A motorcycle is one of the most honest machines ever built: every piece has a defined purpose, nothing is hidden, and structural integrity determines survival. In software, every microservice, packet routing table, and client pixel follows that same uncompromised discipline.
+        </p>
+        <div class="media-tags">
+          <span class="media-tag-pill">Torque &bull; Velocity</span>
+          <span class="media-tag-pill">Zero-Defect Code</span>
+          <span class="media-tag-pill">Autonomous Systems</span>
+          <span class="media-tag-pill">Resilient Networks</span>
         </div>
       </div>
     </section>
@@ -372,69 +421,6 @@
       </div>
     </section>
 
-    <!-- Interactive 3D Brand Artifact / Emblem Section -->
-    <section class="brand-3d-section" id="artifact">
-      <div class="brand-3d-container">
-        <div class="brand-3d-header">
-          <div class="brand-3d-badge">
-            <span class="badge-dot-ember"></span>
-            <span>Spatial Brand Architecture // GLB 3D</span>
-          </div>
-          <h2 class="section-title-editorial center">
-            Engineered Identity: The 3D GNEGR Chassis
-          </h2>
-          <p class="section-sub-editorial center">
-            A motorcycle is one of the most honest machines: every component is visible, every part has a job, and the wordmark forms the chassis itself. Drag, rotate, and examine the official 3D spatial artifact below.
-          </p>
-        </div>
-
-        <div class="model-viewer-wrapper">
-          <model-viewer
-            id="gnegr-3d-model"
-            src="3d-gnegr.glb"
-            alt="Interactive 3D GNEGR Brand Model"
-            camera-controls
-            auto-rotate
-            auto-rotate-delay="1500"
-            rotation-per-second="22deg"
-            shadow-intensity="1.5"
-            shadow-softness="0.85"
-            exposure="1.05"
-            camera-orbit="45deg 75deg 105%"
-            min-camera-orbit="auto auto 50%"
-            max-camera-orbit="auto auto 200%"
-            touch-action="pan-y"
-            loading="lazy"
-            reveal="auto"
-            tabindex="0"
-            aria-label="3D model of GNEGR emblem chassis">
-            
-            <!-- Poster / Fallback loading state -->
-            <div slot="poster" class="model-poster-fallback">
-              <div class="model-loader-spinner"></div>
-              <span class="model-loader-text">Loading 3D Model...</span>
-            </div>
-
-            <!-- Model Control Overlay UI -->
-            <div class="model-ui-overlay">
-              <div class="model-hint-pill">
-                <span class="hint-icon">&#x21BB;</span>
-                <span class="hint-text">Drag to rotate &bull; Pinch/Scroll to zoom</span>
-              </div>
-              <div class="model-actions-row">
-                <button type="button" class="model-btn" id="btn-reset-camera" title="Reset View">
-                  <span>Reset Camera</span>
-                </button>
-                <button type="button" class="model-btn" id="btn-toggle-spin" title="Toggle Auto-Rotation">
-                  <span id="spin-btn-text">Pause Rotation</span>
-                </button>
-              </div>
-            </div>
-          </model-viewer>
-        </div>
-      </div>
-    </section>
-
     <!-- Highlights & Impact Counter Strip -->
     <section class="highlights-strip">
       <div class="strip-container">
@@ -629,7 +615,7 @@
       <div class="footer-left">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
           <img src="img/GNEGR.svg" alt="GNEGR Mark" style="height: 18px; width: auto;" class="brand-header-icon">
-          <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble (GNEGR).</span>
+          <span class="footer-brand">&copy; 2026 G. NiÃ±o Emmanuel G. Redoble (GNEGR).</span>
         </div>
         <span class="footer-sub">Full-stack developer and CCNA-certified network specialist. Built to move.</span>
       </div>
@@ -644,7 +630,7 @@
     </div>
   </footer>
 
-  <!-- Main Application Script (Natural Physics, Theme, and Filters) -->
-  <script src="js/main.js"></script>
+  <!-- Main Application Script (ES Module with Three.js, Parallax & Cursor Physics) -->
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
