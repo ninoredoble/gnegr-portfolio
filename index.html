@@ -13,10 +13,10 @@
   <link rel="icon" type="image/svg+xml" href="img/GNEGR.svg">
   <link rel="icon" type="image/png" href="img/FAVICON.png">
 
-  <!-- Typography: Google Fonts (Instrument Serif, Plus Jakarta Sans, JetBrains Mono) -->
+  <!-- Typography: Google Fonts (Sora for headings, Inter for body, JetBrains Mono for tech) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -35,9 +35,15 @@
   <!-- Site Navigation Header -->
   <header class="site-header">
     <div class="header-inner">
-      <div class="status-pill">
-        <span class="status-indicator-dot"></span>
-        <span class="status-pill-text">Available for Projects & Engineering</span>
+      <div class="brand-lockup-header">
+        <a href="#intro" class="brand-link" aria-label="GNEGR Home">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" class="brand-header-icon">
+          <span class="brand-header-wordmark">GNEGR</span>
+        </a>
+        <div class="status-pill">
+          <span class="status-indicator-dot"></span>
+          <span class="status-pill-text">Available for Projects & Engineering</span>
+        </div>
       </div>
 
       <div class="header-controls">
@@ -54,19 +60,23 @@
     <!-- Hero / Masthead Section -->
     <section class="hero-section" id="intro">
       <div class="hero-container">
+        <!-- Brand Logo Reveal Video & Interactive Emblem -->
         <div class="hero-badge-wrap">
-          <div class="hero-avatar-circle">
-            <img src="img/GNEGR.svg" alt="Niño Redoble (GNEGR) Emblem" class="hero-avatar-img">
+          <div class="hero-reveal-container" title="GNEGR Brand Reveal">
+            <video class="hero-reveal-video" autoplay muted playsinline loop preload="auto" poster="img/GNEGR.svg">
+              <source src="img/GNEGR_logo_reveal.webm" type="video/webm">
+              <img src="img/GNEGR.svg" alt="Niño Redoble (GNEGR) Emblem" class="hero-avatar-img">
+            </video>
           </div>
         </div>
 
         <h1 class="hero-title">
-          <span class="hero-title-accent">Full-Stack & Systems</span>
-          <span class="hero-title-main">Developer.</span>
+          <span class="hero-title-accent">Full-Stack Development. Network Engineering.</span>
+          <span class="hero-title-main">Built to Move.</span>
         </h1>
 
         <p class="hero-bio">
-          I am <strong>G. Niño Emmanuel G. Redoble</strong> (GNEGR)—a developer and systems engineer focused on architecting resilient web platforms, cloud micro-services, and interactive digital interfaces. Magna Cum Laude graduate in IT from USTP and Cisco CCNA certified.
+          I am <strong>G. Niño Emmanuel G. Redoble</strong> (GNEGR)—a CCNA-certified IT graduate and systems developer who builds full-stack applications and keeps the networks underneath them running. Graduated <strong>Magna Cum Laude</strong> from USTP, engineered enterprise ticketing and fuel tracking at CEPALCO, and led full-stack platforms with a disciplined systems-first mindset.
         </p>
 
         <div class="hero-cta-group">
@@ -385,7 +395,7 @@
     <section class="experience-section" id="experience">
       <div class="experience-container">
         <h2 class="section-title-editorial center">
-          <span class="serif-accent">Destructuring</span> My Work Experience.
+          Destructuring My Work Experience
         </h2>
         <p class="section-sub-editorial center">A breakdown of roles, industry engineering, leadership, and technical foundations.</p>
 
@@ -507,7 +517,7 @@
     <section class="connect-section" id="contact">
       <div class="connect-container">
         <h2 class="section-title-editorial center">
-          <span class="serif-accent">Start a</span> Conversation.
+          Start a Conversation
         </h2>
         <p class="section-sub-editorial center">
           Whether you want to discuss full-stack platforms, network engineering, or future collaborations, my inbox is always open.
@@ -544,12 +554,18 @@
     </section>
   </main>
 
+  <!-- Brand Tread Pattern Divider -->
+  <div class="gn-tread-divider"></div>
+
   <!-- Clean Minimalist Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-left">
-        <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble.</span>
-        <span class="footer-sub">Engineered with high craft. Cagayan de Oro City, Philippines.</span>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+          <img src="img/GNEGR.svg" alt="GNEGR Mark" style="height: 18px; width: auto;" class="brand-header-icon">
+          <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble (GNEGR).</span>
+        </div>
+        <span class="footer-sub">Full-stack developer and CCNA-certified network specialist. Built to move.</span>
       </div>
 
       <div class="footer-right">
