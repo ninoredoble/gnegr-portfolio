@@ -1,5 +1,5 @@
-﻿/* ==========================================================================
-   GNEGR // NIÃ‘O REDOBLE PORTFOLIO STYLES
+/* ==========================================================================
+   GNEGR // NINO REDOBLE PORTFOLIO STYLES
    Aesthetic: Bruno Simon WebGL Depth, Lynn Fisher Playful Micro-Interactions,
               Obsidian Void (#0b0b0f), Space Grotesk & Inter Typography
    ========================================================================== */
@@ -432,16 +432,25 @@ a {
 
 .hero-title-accent {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-size: clamp(0.95rem, 2.0vw, 1.3rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-cyan);
-  text-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+  background: linear-gradient(135deg, #FF6B35 0%, #E24E1B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #E24E1B;
+  display: inline-block;
+  margin-bottom: 0.35rem;
 }
 
 [data-theme="light"] .hero-title-accent {
-  color: var(--brand-indigo);
+  background: linear-gradient(135deg, #FF6B35 0%, #E24E1B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #E24E1B;
   text-shadow: none;
 }
 
@@ -530,10 +539,10 @@ a {
 }
 
 .hero-cta-btn.secondary:hover {
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
+  border-color: #E24E1B;
+  color: #E24E1B;
   transform: translateY(-2px);
-  box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 16px rgba(226, 78, 27, 0.3);
 }
 
 .hero-subtext {
@@ -2281,4 +2290,250 @@ html {
     font-size: 0.5625rem !important;
     line-height: 1.15 !important;
   }
+}
+
+/* ==========================================================================
+   HERO TITLE STABILITY & ZERO LAYOUT SHIFT (Fix shift issue)
+   ========================================================================== */
+.hero-title {
+  margin-bottom: 1.5rem;
+  min-height: 175px;
+}
+
+.hero-title-accent {
+  background: linear-gradient(135deg, #FF6B35 0%, #E24E1B 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: #E24E1B !important;
+  text-shadow: none !important;
+  display: inline-block !important;
+  margin-bottom: 0.35rem !important;
+}
+
+.hero-title-main {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5.2vw, 4.0rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--text-main);
+}
+
+.hero-title-outline {
+  display: block;
+  white-space: nowrap;
+  min-height: 1.2em;
+  font-size: clamp(1.85rem, 4.2vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.hero-scramble {
+  display: inline-block;
+  min-width: 10ch;
+  white-space: nowrap;
+  background: linear-gradient(135deg, #FF6B35 0%, #E24E1B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #E24E1B;
+}
+
+/* Radiant Orange Gradient on Primary Contact Me Buttons */
+.hero-cta-btn.primary {
+  background: linear-gradient(135deg, #FF6B35 0%, #E24E1B 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(226, 78, 27, 0.4) !important;
+}
+
+.hero-cta-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(226, 78, 27, 0.6) !important;
+}
+
+/* ==========================================================================
+   THEME-ADAPTIVE INTRO SPLIT LOADER WITH GNEGR EMBLEM & TELEMETRY
+   ========================================================================== */
+.loader-half {
+  background: #FAF9F6 !important;
+}
+
+[data-theme="dark"] .loader-half {
+  background: #0A0A0A !important;
+}
+
+.loader-top {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="dark"] .loader-top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.loader-bottom {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="dark"] .loader-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.loader-content {
+  color: #18181B !important;
+  gap: 0.75rem !important;
+}
+
+[data-theme="dark"] .loader-content {
+  color: #FAF9F6 !important;
+}
+
+.loader-emblem-wrap {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 24px;
+  background: rgba(226, 78, 27, 0.08);
+  border: 1px solid rgba(226, 78, 27, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.35rem;
+  box-shadow: 0 10px 30px rgba(226, 78, 27, 0.22);
+  animation: emblemFloat 3s ease-in-out infinite;
+}
+
+@keyframes emblemFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.loader-emblem-halo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 30px;
+  background: radial-gradient(circle, rgba(226, 78, 27, 0.3) 0%, transparent 70%);
+  animation: haloPulse 2.5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes haloPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.95); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+.loader-emblem-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.loader-brand {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.0rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.25em !important;
+  color: #18181B !important;
+}
+
+[data-theme="dark"] .loader-brand {
+  color: #FAF9F6 !important;
+}
+
+.loader-telemetry {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #71717A;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  min-height: 1.2em;
+}
+
+[data-theme="dark"] .loader-telemetry {
+  color: #A1A1AA;
+}
+
+.loader-track {
+  width: 240px !important;
+  height: 3px !important;
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-radius: 3px !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+[data-theme="dark"] .loader-track {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.loader-bar {
+  background: linear-gradient(90deg, #FF6B35 0%, #E24E1B 100%) !important;
+  box-shadow: 0 0 14px rgba(226, 78, 27, 0.7) !important;
+}
+
+.loader-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  color: #71717A !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 240px !important;
+}
+
+[data-theme="dark"] .loader-sub {
+  color: #A1A1AA !important;
+}
+
+/* ==========================================================================
+   3D CHASSIS ORANGE PULSE & INTERACTIVE COLOR PICKER
+   ========================================================================== */
+.pulse-dot-orange {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E24E1B;
+  box-shadow: 0 0 8px #E24E1B;
+  animation: pulseOrange 2s infinite ease-in-out;
+}
+
+@keyframes pulseOrange {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+.chassis-color-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.color-swatch-btn {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--swatch);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+  outline: none;
+}
+
+.color-swatch-btn:hover {
+  transform: scale(1.25);
+}
+
+.color-swatch-btn.active {
+  border-color: #FAF9F6;
+  box-shadow: 0 0 0 2px #E24E1B;
+  transform: scale(1.2);
+}
+
+[data-theme="light"] .color-swatch-btn.active {
+  border-color: #18181B;
 }

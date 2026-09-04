@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -43,18 +43,23 @@
 </head>
 <body>
 
-  <!-- Intro Split Loader (0% - 100% Progress & Split Reveal) -->
+  <!-- Intro Split Loader (Theme-Adaptive with GNEGR Emblem & Telemetry Engine) -->
   <div class="intro-loader" id="intro-loader" aria-hidden="true">
     <div class="loader-half loader-top"></div>
     <div class="loader-half loader-bottom"></div>
     <div class="loader-content" id="loader-content">
-      <div class="loader-brand">GNEGR</div>
-      <div class="loader-sub">
-        <span class="loader-status">Loading...</span>
-        <span class="loader-percent" id="loader-percent">0%</span>
+      <div class="loader-emblem-wrap">
+        <div class="loader-emblem-halo"></div>
+        <img src="img/gnegr.png" alt="GNEGR Official Emblem" class="loader-emblem-img">
       </div>
+      <div class="loader-brand">GNEGR</div>
+      <div class="loader-telemetry" id="loader-telemetry">INITIALIZING ARCHITECTURAL RUNTIME...</div>
       <div class="loader-track">
         <div class="loader-bar" id="loader-progress-bar"></div>
+      </div>
+      <div class="loader-sub">
+        <span class="loader-status-tag">CORE // RUNTIME</span>
+        <span class="loader-percent" id="loader-percent">0%</span>
       </div>
     </div>
   </div>
@@ -107,7 +112,7 @@
           <!-- Left Column: Editorial Typography -->
           <div class="hero-content-col">
             <h1 class="hero-title">
-              <span class="hero-title-accent">Systems Architecture &amp; Full-Stack Engineering</span>
+              <span class="hero-title-accent">Systems Architecture // Full-Stack Engineering</span>
               <span class="hero-title-main">
                 Ni&ntilde;o Redoble
                 <span class="hero-title-outline"><span id="hero-scramble" class="hero-scramble">Full-Stack</span> Developer.</span>
@@ -141,7 +146,7 @@
             <div class="hero-3d-card" id="hero-3d-card">
               <div class="card-3d-header">
                 <div class="card-3d-status">
-                  <span class="pulse-dot-cyan"></span>
+                  <span class="pulse-dot-orange"></span>
                   <span class="card-3d-label">3D CHASSIS // INTERACTIVE</span>
                 </div>
                 <span class="card-3d-hint">DRAG TO ORBIT &bull; WHEEL TO ZOOM</span>
@@ -154,7 +159,13 @@
                 </div>
               </div>
               <div class="card-3d-footer">
-                <span class="spec-label">GNEGR MOTORSPORT SPEC-01</span>
+                <div class="chassis-color-picker">
+                  <span class="spec-label">COLOR:</span>
+                  <button class="color-swatch-btn active" data-color="#E24E1B" title="GNEGR Sunset Orange" style="--swatch:#E24E1B;"></button>
+                  <button class="color-swatch-btn" data-color="#D4D4D8" title="Cyber Titanium" style="--swatch:#D4D4D8;"></button>
+                  <button class="color-swatch-btn" data-color="#18181B" title="Stealth Obsidian" style="--swatch:#18181B;"></button>
+                  <button class="color-swatch-btn" data-color="#00E5FF" title="Electric Cyan" style="--swatch:#00E5FF;"></button>
+                </div>
                 <button class="reset-view-btn" id="reset-3d-view-btn" title="Reset View Angle">&#8635; Reset View</button>
               </div>
             </div>

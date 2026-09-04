@@ -1,4 +1,4 @@
-﻿/**
+/**
  * GNEGR // NI&Ntilde;O REDOBLE PORTFOLIO - CORE RUNTIME & THREE.JS ENGINE
  * Elevated to Award-Winning Standard:
  *  - Bruno Simon 3D Obsidian Sculpture & Lighting Art Direction
@@ -43,35 +43,53 @@ function initIntroLoader() {
   const introLoader = document.getElementById('intro-loader');
   const percentText = document.getElementById('loader-percent');
   const progressBar = document.getElementById('loader-progress-bar');
+  const telemetryText = document.getElementById('loader-telemetry');
   if (!introLoader) return;
 
-  // Once per session check
-  const introSeen = sessionStorage.getItem('gnegr_intro_seen');
-  if (introSeen) {
-    introLoader.classList.add('is-hidden');
-    return;
+  function updateTelemetry(p) {
+    if (!telemetryText) return;
+    if (p < 25) {
+      telemetryText.textContent = 'INITIALIZING ARCHITECTURAL RUNTIME...';
+    } else if (p < 55) {
+      telemetryText.textContent = 'COMPUTING 3D CHASSIS GEOMETRY...';
+    } else if (p < 85) {
+      telemetryText.textContent = 'SYNCHRONIZING TELEMETRY & API MESH...';
+    } else if (p < 100) {
+      telemetryText.textContent = 'SYSTEMS ONLINE // BUILT TO MOVE...';
+    } else {
+      telemetryText.textContent = 'SYSTEMS ARMED // LAUNCHING...';
+    }
   }
 
   let currentPercent = 0;
-  let targetPercent = 25;
+  let targetPercent = 35;
+
+  const ticker = setInterval(() => {
+    if (targetPercent < 90) {
+      targetPercent += Math.floor(Math.random() * 8) + 4;
+      if (targetPercent > 90) targetPercent = 90;
+    }
+  }, 120);
 
   const progressInterval = setInterval(() => {
     if (currentPercent < targetPercent) {
       currentPercent += 1;
       if (percentText) percentText.textContent = `${currentPercent}%`;
       if (progressBar) progressBar.style.width = `${currentPercent}%`;
+      updateTelemetry(currentPercent);
     }
-  }, 20);
+  }, 16);
 
-  // Hook into model load progress
   onModelProgress = (percent) => {
     targetPercent = Math.max(targetPercent, percent);
     if (percent >= 100) {
       targetPercent = 100;
+      clearInterval(ticker);
       clearInterval(progressInterval);
       currentPercent = 100;
       if (percentText) percentText.textContent = '100%';
       if (progressBar) progressBar.style.width = '100%';
+      updateTelemetry(100);
 
       setTimeout(() => {
         introLoader.classList.add('is-loaded');
@@ -79,7 +97,7 @@ function initIntroLoader() {
         setTimeout(() => {
           introLoader.classList.add('is-hidden');
         }, 900);
-      }, 250);
+      }, 350);
     }
   };
 
@@ -88,14 +106,15 @@ function initIntroLoader() {
     if (!introLoader.classList.contains('is-loaded')) {
       if (onModelProgress) onModelProgress(100);
     }
-  }, 2200);
+  }, 2400);
 }
 
 // ==========================================================================
 // 1. SECTION 1: THE 3D HERO (INTERACTIVE CHASSIS WITH ORBIT CONTROLS)
 // ==========================================================================
 let heroControls;
-const defaultCameraPos = new THREE.Vector3(0, 1.6, 5.5);
+const defaultCameraPos = new THREE.Vector3(0, 1.5, 5.2);
+let currentChassisColor = 0xE24E1B; // Default GNEGR Sunset Orange
 
 function initThreeHero() {
   const container = document.getElementById('hero-3d-wrapper');
@@ -105,14 +124,11 @@ function initThreeHero() {
   const width = container.clientWidth || 460;
   const height = container.clientHeight || 380;
 
-  // Scene
   scene = new THREE.Scene();
 
-  // Camera
   camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
   camera.position.copy(defaultCameraPos);
 
-  // Renderer
   renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     alpha: true,
@@ -123,35 +139,38 @@ function initThreeHero() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
+  renderer.toneMappingExposure = 1.35;
 
-  // OrbitControls for 360-degree inspection
   heroControls = new OrbitControls(camera, canvas);
   heroControls.enableDamping = true;
   heroControls.dampingFactor = 0.05;
   heroControls.autoRotate = true;
-  heroControls.autoRotateSpeed = 1.3;
+  heroControls.autoRotateSpeed = 1.2;
   heroControls.enablePan = false;
-  heroControls.minDistance = 3.2;
-  heroControls.maxDistance = 8.5;
+  heroControls.minDistance = 3.0;
+  heroControls.maxDistance = 8.0;
   heroControls.maxPolarAngle = Math.PI / 2 + 0.05;
   heroControls.target.set(0, 0, 0);
 
-  // Lighting
+  // Lighting with vibrant studio definition
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 1.0 : 1.6);
+  ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 1.6 : 2.2);
   scene.add(ambientLight);
 
-  keyLight = new THREE.DirectionalLight(0xffffff, isDark ? 3.0 : 3.5);
+  keyLight = new THREE.DirectionalLight(0xffffff, 4.2);
   keyLight.position.set(5, 8, 5);
   scene.add(keyLight);
 
-  rimLight = new THREE.PointLight(0xE24E1B, isDark ? 4.5 : 3.0, 15);
-  rimLight.position.set(-4, 3, -3);
+  const fillLight = new THREE.DirectionalLight(0xffffff, 2.2);
+  fillLight.position.set(-5, 4, -4);
+  scene.add(fillLight);
+
+  rimLight = new THREE.PointLight(0xFF6B35, 5.5, 20);
+  rimLight.position.set(0, 4, -4);
   scene.add(rimLight);
 
-  accentLight = new THREE.PointLight(0x00E5FF, isDark ? 3.5 : 2.5, 15);
-  accentLight.position.set(4, 2, -2);
+  accentLight = new THREE.PointLight(0xFF8A50, 4.0, 16);
+  accentLight.position.set(4, 2, 3);
   scene.add(accentLight);
 
   // Subtle contact shadow
@@ -161,7 +180,7 @@ function initThreeHero() {
   const ctx = shadowCanvas.getContext('2d');
   const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 120);
   gradient.addColorStop(0, 'rgba(0, 0, 0, 0.65)');
-  gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.25)');
+  gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.22)');
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, 256, 256);
@@ -180,15 +199,14 @@ function initThreeHero() {
   scene.add(shadowMesh);
 
   // Pedestal grid inside the card floor
-  const cardGrid = new THREE.GridHelper(6, 12, 0xE24E1B, 0x444455);
+  const cardGrid = new THREE.GridHelper(6, 12, 0xE24E1B, 0x554433);
   cardGrid.position.y = -1.16;
   if (cardGrid.material) {
-    cardGrid.material.opacity = isDark ? 0.35 : 0.15;
+    cardGrid.material.opacity = isDark ? 0.35 : 0.18;
     cardGrid.material.transparent = true;
   }
   scene.add(cardGrid);
 
-  // Model Group
   modelGroup = new THREE.Group();
   scene.add(modelGroup);
 
@@ -197,21 +215,23 @@ function initThreeHero() {
     'gnegr.glb',
     (gltf) => {
       const root = gltf.scene;
-      const mat = new THREE.MeshStandardMaterial({
-        color: isDark ? 0x222228 : 0x2e2e38,
-        metalness: 0.85,
-        roughness: 0.22
-      });
 
       root.traverse((child) => {
         if (child.isMesh) {
-          child.material = mat;
+          if (child.geometry) {
+            child.geometry.computeVertexNormals();
+          }
+          child.material = new THREE.MeshStandardMaterial({
+            color: currentChassisColor,
+            metalness: 0.35,
+            roughness: 0.28,
+            side: THREE.DoubleSide
+          });
           child.castShadow = true;
           child.receiveShadow = true;
         }
       });
 
-      // Normalize scale to fit the card prominently
       const box = new THREE.Box3().setFromObject(root);
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
@@ -219,7 +239,6 @@ function initThreeHero() {
       const scale = targetSize / maxDim;
       root.scale.set(scale, scale, scale);
 
-      // Center above shadow
       const updatedBox = new THREE.Box3().setFromObject(root);
       const center = updatedBox.getCenter(new THREE.Vector3());
       root.position.x = -center.x;
@@ -233,10 +252,37 @@ function initThreeHero() {
         loaderIndicator.style.opacity = '0';
         setTimeout(() => { loaderIndicator.style.display = 'none'; }, 400);
       }
+      if (onModelProgress) onModelProgress(100);
     },
-    undefined,
-    (err) => console.error('Error loading 3D motorcycle model:', err)
+    (xhr) => {
+      if (xhr.lengthComputable && xhr.total > 0) {
+        const p = Math.round((xhr.loaded / xhr.total) * 95);
+        if (onModelProgress) onModelProgress(p);
+      }
+    },
+    (err) => {
+      console.error('Error loading 3D motorcycle model:', err);
+      if (onModelProgress) onModelProgress(100);
+    }
   );
+
+  // Interactive Color Swatch Customizer
+  const swatchBtns = document.querySelectorAll('.color-swatch-btn');
+  swatchBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      swatchBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const hex = btn.getAttribute('data-color');
+      if (hex && modelGroup) {
+        currentChassisColor = parseInt(hex.replace('#', '0x'));
+        modelGroup.traverse((child) => {
+          if (child.isMesh && child.material) {
+            child.material.color.setHex(currentChassisColor);
+          }
+        });
+      }
+    });
+  });
 
   // Reset view button
   const resetBtn = document.getElementById('reset-3d-view-btn');
@@ -251,21 +297,11 @@ function initThreeHero() {
   // Theme change adaptation
   window.addEventListener('gnegr-theme-changed', (e) => {
     const isDarkNow = e.detail.theme === 'dark';
-    if (ambientLight) ambientLight.intensity = isDarkNow ? 1.0 : 1.6;
-    if (keyLight) keyLight.intensity = isDarkNow ? 3.0 : 3.5;
-    if (rimLight) rimLight.intensity = isDarkNow ? 4.5 : 3.0;
+    if (ambientLight) ambientLight.intensity = isDarkNow ? 1.6 : 2.2;
     if (shadowMesh && shadowMesh.material) shadowMesh.material.opacity = isDarkNow ? 0.75 : 0.4;
-    if (cardGrid && cardGrid.material) cardGrid.material.opacity = isDarkNow ? 0.35 : 0.15;
-    if (modelGroup) {
-      modelGroup.traverse((child) => {
-        if (child.isMesh && child.material) {
-          child.material.color.setHex(isDarkNow ? 0x222228 : 0x2e2e38);
-        }
-      });
-    }
+    if (cardGrid && cardGrid.material) cardGrid.material.opacity = isDarkNow ? 0.35 : 0.18;
   });
 
-  // Resize handler
   const resizeObserver = new ResizeObserver(() => {
     if (!container || !camera || !renderer) return;
     const w = container.clientWidth;
@@ -276,7 +312,6 @@ function initThreeHero() {
   });
   resizeObserver.observe(container);
 
-  // Animation loop
   function renderLoop() {
     requestAnimationFrame(renderLoop);
     heroControls.update();
@@ -588,7 +623,7 @@ function initHeroScramble() {
   const scrambleEl = document.getElementById('hero-scramble');
   if (!scrambleEl) return;
 
-  const words = ['Full-Stack', 'Systems', 'Distributed', 'High-Performance'];
+  const words = ['Full-Stack', 'Distributed', 'Systems', 'Architecture'];
   let wordIndex = 0;
   const chars = '!<>-_\\/[]{}*^?#01X_=+/~';
 
