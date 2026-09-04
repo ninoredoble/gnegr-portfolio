@@ -2239,19 +2239,7 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
   gap: 0.5rem;
 }
 
-.pulse-dot-cyan {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #E24E1B;
-  box-shadow: 0 0 8px #E24E1B;
-  animation: pulseCyan 2s infinite ease-in-out;
-}
 
-@keyframes pulseCyan {
-  0%, 100% { opacity: 0.5; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
 
 .card-3d-label {
   font-family: var(--font-mono);
@@ -2651,10 +2639,7 @@ html:not([data-theme="dark"]) .terminal-input::placeholder,
   border-color: rgba(226, 78, 27, 0.28) !important;
 }
 
-.status-pulse-dot {
-  background: #E24E1B !important;
-  box-shadow: 0 0 8px #E24E1B !important;
-}
+
 
 .btn-card-action.primary,
 .btn-channel.primary {
