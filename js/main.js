@@ -1,22 +1,21 @@
 ﻿/**
- * GNEGR // NIÃ‘O REDOBLE PORTFOLIO - CORE RUNTIME & THREE.JS ENGINE
- * Inspired by: Bruno Simon (interactive 3D canvas) & Lynn Fisher (creative polish)
+ * GNEGR // NIÑO REDOBLE PORTFOLIO - CORE RUNTIME & THREE.JS ENGINE
+ * Inspired by: Bruno Simon (interactive 3D canvas depth) & Lynn Fisher (creative polish)
  *
  * Deliverables & Architecture:
  *  1. Full-screen interactive Three.js Hero Section:
  *     - ES Modules (three & GLTFLoader)
  *     - Transparent renderer showing dark site background (#0b0b0f)
- *     - Dark metallic sculpture material override (#1a1a24, metalness: 0.8, roughness: 0.2)
- *     - Neon GridHelper (pink #ff3366 & cyan #00e5ff) at y = -1
- *     - Ambient & dual point lights (pink/cyan)
- *     - Hover sine-wave bobbing physics
- *     - Camera orbit lerp tracking user mouse (up to 10 deg)
- *     - Responsive mobile handling (<768px z: 12, auto-rotation)
- *     - Theme switching (window.updateTheme(mode))
- *  2. Cinematic WebM Parallax Section:
- *     - RequestAnimationFrame throttled parallax scroll
- *  3. Custom Dual Cursor:
- *     - Instant 10px dot + smooth lerp 30px lagging ring with mix-blend-mode: difference
+ *     - Dark obsidian sculpture material override (#111111, metalness: 1.0, roughness: 0.05)
+ *     - Directional Key Light (#ffffff, 2.5) at (5, 10, 5)
+ *     - Rim Light behind model (#ff3366, 30) at (0, 3, -5)
+ *     - Accent Light (#00e5ff, 20) at (-5, 1, 2)
+ *     - Desaturated dark GridHelper (0x331a22, 0x1a3333) with ground contact shadow
+ *     - Camera at (0, 5, 12) looking down at (0, 0, 0), FOV 55
+ *     - Camera orbit lerp tracking user mouse (subtle <= 8 deg)
+ *     - Responsive mobile handling (<768px auto-rotation)
+ *  2. Cinematic WebM Parallax Section
+ *  3. Custom Dual Cursor (dot + lerp lagging ring)
  *  4. Showcase Projects filter, Philippines live clock, and clipboard copy utilities
  */
 
@@ -24,10 +23,10 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 // Global Three.js Scene References
-let scene, camera, renderer, modelGroup, gridHelper;
-let ambientLight, pointLight1, pointLight2;
+let scene, camera, renderer, modelGroup, gridHelper, shadowMesh;
+let ambientLight, keyLight, rimLight, accentLight;
 let mouseX = 0, mouseY = 0;
-let targetCameraX = 0, targetCameraY = 2;
+let targetCameraX = 0, targetCameraY = 5;
 let isMobile = window.innerWidth < 768;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================================================
-// 1. SECTION 1: THE 3D HERO (BRUNO SIMON STYLE)
+// 1. SECTION 1: THE 3D HERO (BRUNO SIMON ART DIRECTION)
 // ==========================================================================
 function initThreeHero() {
   const container = document.getElementById('hero-3d-wrapper');
@@ -51,14 +50,16 @@ function initThreeHero() {
 
   // Scene
   scene = new THREE.Scene();
+  // Deep void fog matching site background
+  scene.fog = new THREE.Fog(0x0b0b0f, 5, 25);
 
   // Dimensions
   const width = container.clientWidth || window.innerWidth;
   const height = container.clientHeight || window.innerHeight;
 
-  // Camera starting position: (0, 2, 10). Looking at (0, 0, 0)
-  camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-  camera.position.set(0, 2, isMobile ? 12 : 10);
+  // Camera: FOV 55, Position (0, 5, 12) looking at (0, 0, 0)
+  camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
+  camera.position.set(0, 5, isMobile ? 14 : 12);
   camera.lookAt(0, 0, 0);
 
   // Renderer: alpha: true (transparent for #0b0b0f), antialias: true, pixelRatio <= 2
@@ -74,63 +75,90 @@ function initThreeHero() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
 
-  // Lighting System
-  // AmbientLight with intensity 0.5
-  ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  // --- Lighting Setup (Bruno Simon Aesthetic) ---
+  // 1. AmbientLight: heavily reduced to 0.1 for deep, dramatic shadows
+  ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
   scene.add(ambientLight);
 
-  // PointLight 1: Color #ff3366, Intensity 20, Position (5, 5, 5)
-  pointLight1 = new THREE.PointLight(0xff3366, 20, 50);
-  pointLight1.position.set(5, 5, 5);
-  scene.add(pointLight1);
+  // 2. Key Light (DirectionalLight): gives the chassis shape and crisp definition
+  keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+  keyLight.position.set(5, 10, 5);
+  scene.add(keyLight);
 
-  // PointLight 2: Color #00e5ff, Intensity 20, Position (-5, 2, -5)
-  pointLight2 = new THREE.PointLight(0x00e5ff, 20, 50);
-  pointLight2.position.set(-5, 2, -5);
-  scene.add(pointLight2);
+  // 3. Rim Light (PointLight): sits behind the car and outlines its silhouette with neon pink
+  rimLight = new THREE.PointLight(0xff3366, 30, 40);
+  rimLight.position.set(0, 3, -5);
+  scene.add(rimLight);
 
-  // Neon Grid: THREE.GridHelper (size: 30, divisions: 30)
-  // Grid colors: #ff3366 (Neon Pink) and #00e5ff (Cyan)
-  // Position the grid at y = -1 so the car floats above it
-  gridHelper = new THREE.GridHelper(30, 30, 0xff3366, 0x00e5ff);
+  // 4. Accent Light (PointLight): cyan front-side highlight
+  accentLight = new THREE.PointLight(0x00e5ff, 20, 35);
+  accentLight.position.set(-5, 1, 2);
+  scene.add(accentLight);
+
+  // --- Subtle & Atmospheric Grid ---
+  // Desaturated dark versions: 0x331a22 and 0x1a3333
+  gridHelper = new THREE.GridHelper(30, 30, 0x331a22, 0x1a3333);
   gridHelper.position.y = -1;
   if (gridHelper.material) {
-    gridHelper.material.opacity = 0.5;
+    gridHelper.material.opacity = 0.45;
     gridHelper.material.transparent = true;
   }
   scene.add(gridHelper);
 
-  // Model Group
+  // --- Ground Contact Shadow (Soft Radial Gradient under chassis) ---
+  const shadowCanvas = document.createElement('canvas');
+  shadowCanvas.width = 256;
+  shadowCanvas.height = 256;
+  const ctx = shadowCanvas.getContext('2d');
+  const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.85)');
+  gradient.addColorStop(0.4, 'rgba(0, 0, 0, 0.5)');
+  gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.15)');
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 256, 256);
+
+  const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+  const shadowGeo = new THREE.PlaneGeometry(6, 6);
+  const shadowMat = new THREE.MeshBasicMaterial({
+    map: shadowTexture,
+    transparent: true,
+    depthWrite: false,
+    opacity: 0.8
+  });
+  shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+  shadowMesh.rotation.x = -Math.PI / 2;
+  shadowMesh.position.y = -0.98;
+  scene.add(shadowMesh);
+
+  // --- Model Group ---
   modelGroup = new THREE.Group();
   scene.add(modelGroup);
 
-  // Load 3D GNEGR.glb
+  // --- Load gnegr.glb ---
   const loader = new GLTFLoader();
-  const primaryModelPath = '3D GNEGR.glb';
-  const fallbackModelPath = '3d-gnegr.glb';
+  const primaryModelPath = 'gnegr.glb';
 
   function applySculptureMaterial(root) {
-    // Dark metallic sculpture material
+    // Polished obsidian mirror reflecting neon lights
     const obsidianMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1a1a24,
-      metalness: 0.8,
-      roughness: 0.2
+      color: 0x111111,
+      metalness: 1.0,
+      roughness: 0.05
     });
 
     root.traverse((child) => {
       if (child.isMesh) {
-        // Remove existing texture map
         if (child.material) {
           child.material.map = null;
         }
-        // Override with new THREE.MeshStandardMaterial
         child.material = obsidianMaterial;
         child.castShadow = true;
         child.receiveShadow = true;
       }
     });
 
-    // Scale the model to 0.5
+    // Scale the model
     root.scale.set(0.5, 0.5, 0.5);
 
     // Center geometry inside the group
@@ -138,12 +166,12 @@ function initThreeHero() {
     const center = box.getCenter(new THREE.Vector3());
     root.position.sub(center);
 
-    // Rotate model so it faces the camera dynamically
+    // Dynamic initial rotation
     root.rotation.y = Math.PI * 0.12;
 
     modelGroup.add(root);
 
-    // Hide loading spinner if present
+    // Hide loading indicator
     const loaderIndicator = document.getElementById('hero-3d-loader');
     if (loaderIndicator) {
       loaderIndicator.style.opacity = '0';
@@ -158,16 +186,13 @@ function initThreeHero() {
     },
     undefined,
     (err) => {
-      console.warn('Could not load primary model URL, attempting fallback:', err);
+      console.error('GLTF loading error for gnegr.glb:', err);
+      // Fallback if needed
       loader.load(
-        fallbackModelPath,
-        (gltf) => {
-          applySculptureMaterial(gltf.scene);
-        },
+        'gnegr.glb',
+        (gltf) => { applySculptureMaterial(gltf.scene); },
         undefined,
-        (fallbackErr) => {
-          console.error('GLTF loading error:', fallbackErr);
-        }
+        (fallbackErr) => { console.error('Fallback error:', fallbackErr); }
       );
     }
   );
@@ -178,10 +203,11 @@ function initThreeHero() {
     mouseX = (e.clientX / window.innerWidth) * 2 - 1;
     mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
 
-    // Maximum orbit angle: 10 degrees left/right
-    const maxOrbitX = 10 * Math.sin(10 * (Math.PI / 180));
-    targetCameraX = mouseX * maxOrbitX;
-    targetCameraY = 2 + mouseY * 0.8;
+    // Maximum orbit angle: subtle 8 degrees (heavy, smooth camera feel)
+    const maxOrbitRadians = 8 * (Math.PI / 180);
+    const orbitDistance = 12;
+    targetCameraX = Math.sin(mouseX * maxOrbitRadians) * orbitDistance;
+    targetCameraY = 5 + mouseY * 0.9;
   });
 
   // Window resize handler
@@ -200,7 +226,7 @@ function onWindowResize() {
   isMobile = window.innerWidth < 768;
 
   camera.aspect = width / height;
-  camera.position.z = isMobile ? 12 : 10;
+  camera.position.z = isMobile ? 14 : 12;
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
@@ -213,27 +239,27 @@ function animate() {
 
   const time = Date.now();
 
-  // Model hover physics: sine wave to Y position Math.sin(Date.now() * 0.002) * 0.2
+  // Model hover physics: sine wave bobbing
   if (modelGroup) {
-    modelGroup.position.y = Math.sin(time * 0.002) * 0.2;
+    modelGroup.position.y = Math.sin(time * 0.002) * 0.15;
 
-    // Responsiveness: mobile auto-rotates slowly
+    // Responsiveness: mobile auto-rotates smoothly
     if (isMobile) {
       modelGroup.rotation.y += 0.006;
     } else {
-      modelGroup.rotation.y = Math.sin(time * 0.0006) * 0.12;
+      modelGroup.rotation.y = Math.sin(time * 0.0006) * 0.1;
     }
   }
 
   // Smoothly orbit camera around the car based on mouse X/Y using lerp
   if (camera) {
     if (!isMobile) {
-      camera.position.x += (targetCameraX - camera.position.x) * 0.05;
-      camera.position.y += (targetCameraY - camera.position.y) * 0.05;
+      camera.position.x += (targetCameraX - camera.position.x) * 0.04;
+      camera.position.y += (targetCameraY - camera.position.y) * 0.04;
       camera.lookAt(0, 0, 0);
     } else {
       camera.position.x = 0;
-      camera.position.y = 2;
+      camera.position.y = 5;
       camera.lookAt(0, 0, 0);
     }
   }
@@ -254,50 +280,50 @@ export function updateTheme(mode) {
     root.setAttribute('data-theme', 'dark');
     try { localStorage.setItem('gnegr_theme', 'dark'); } catch (e) {}
 
-    // Dark mode Three.js parameters:
-    // Grid colors = #ff3366 (Pink) and #00e5ff (Cyan)
-    // Fog color = #0b0b0f
-    // Ambient light intensity = 0.5
-    if (ambientLight) ambientLight.intensity = 0.5;
-    if (pointLight1) {
-      pointLight1.color.set(0xff3366);
-      pointLight1.intensity = 20;
+    // Dark mode Three.js parameters
+    if (ambientLight) ambientLight.intensity = 0.1;
+    if (keyLight) keyLight.intensity = 2.5;
+    if (rimLight) {
+      rimLight.color.set(0xff3366);
+      rimLight.intensity = 30;
     }
-    if (pointLight2) {
-      pointLight2.color.set(0x00e5ff);
-      pointLight2.intensity = 20;
+    if (accentLight) {
+      accentLight.color.set(0x00e5ff);
+      accentLight.intensity = 20;
     }
-    if (scene) scene.fog = new THREE.Fog(0x0b0b0f, 10, 30);
+    if (scene) scene.fog = new THREE.Fog(0x0b0b0f, 5, 25);
 
     if (gridHelper && scene) {
       scene.remove(gridHelper);
       gridHelper.geometry.dispose();
-      gridHelper = new THREE.GridHelper(30, 30, 0xff3366, 0x00e5ff);
+      gridHelper = new THREE.GridHelper(30, 30, 0x331a22, 0x1a3333);
       gridHelper.position.y = -1;
       if (gridHelper.material) {
-        gridHelper.material.opacity = 0.5;
+        gridHelper.material.opacity = 0.45;
         gridHelper.material.transparent = true;
       }
       scene.add(gridHelper);
+    }
+
+    if (shadowMesh) {
+      shadowMesh.material.opacity = 0.8;
     }
   } else {
     root.removeAttribute('data-theme');
     try { localStorage.setItem('gnegr_theme', 'light'); } catch (e) {}
 
-    // Light mode Three.js parameters:
-    // Grid colors = #0055ff (Blue) and #4400ff (Purple)
-    // Fog color = #e0e0e0
-    // Ambient light intensity = 1.0
-    if (ambientLight) ambientLight.intensity = 1.0;
-    if (pointLight1) {
-      pointLight1.color.set(0x0055ff);
-      pointLight1.intensity = 16;
+    // Light mode Three.js parameters
+    if (ambientLight) ambientLight.intensity = 0.8;
+    if (keyLight) keyLight.intensity = 2.0;
+    if (rimLight) {
+      rimLight.color.set(0x0055ff);
+      rimLight.intensity = 18;
     }
-    if (pointLight2) {
-      pointLight2.color.set(0x4400ff);
-      pointLight2.intensity = 16;
+    if (accentLight) {
+      accentLight.color.set(0x7928ca);
+      accentLight.intensity = 15;
     }
-    if (scene) scene.fog = new THREE.Fog(0xe0e0e0, 10, 30);
+    if (scene) scene.fog = new THREE.Fog(0xe0e0e0, 8, 28);
 
     if (gridHelper && scene) {
       scene.remove(gridHelper);
@@ -305,10 +331,14 @@ export function updateTheme(mode) {
       gridHelper = new THREE.GridHelper(30, 30, 0x0055ff, 0x4400ff);
       gridHelper.position.y = -1;
       if (gridHelper.material) {
-        gridHelper.material.opacity = 0.38;
+        gridHelper.material.opacity = 0.35;
         gridHelper.material.transparent = true;
       }
       scene.add(gridHelper);
+    }
+
+    if (shadowMesh) {
+      shadowMesh.material.opacity = 0.4;
     }
   }
 }

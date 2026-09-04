@@ -107,6 +107,3 @@ The current video section looks like a cheap GIF. Make it cinematic.
 3. **Push to GitHub:** Once everything is fixed, commit the changes with a clear message (e.g., `fix: art direction pass and file naming conventions`) and push to the `main` branch of `gnegr-portfolio`.
 
 ---
-
-**Deliverable:**
-Provide a summary of all files renamed, all visual changes made, and confirm that the deployment is successful with zero broken links.
