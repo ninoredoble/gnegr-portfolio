@@ -492,54 +492,22 @@ export function updateTheme(mode) {
     try { localStorage.setItem('gnegr_theme', 'dark'); } catch (e) {}
 
     // Dark mode parameters (Void #0A0A0A)
-    if (ambientLight) ambientLight.intensity = 0.1;
-    if (keyLight) keyLight.intensity = 2.5;
+    if (ambientLight) ambientLight.intensity = 1.6;
+    if (keyLight) keyLight.intensity = 4.2;
     if (rimLight) {
-      rimLight.color.set(0xff3366);
-      rimLight.intensity = 30;
+      rimLight.color.set(0xFF6B35);
+      rimLight.intensity = 5.5;
     }
     if (accentLight) {
-      accentLight.color.set(0x00e5ff);
-      accentLight.intensity = 20;
+      accentLight.color.set(0xFF8A50);
+      accentLight.intensity = 4.0;
     }
     if (scene) scene.fog = new THREE.Fog(0x0A0A0A, 5, 25);
 
     if (gridHelper && scene) {
       scene.remove(gridHelper);
       gridHelper.geometry.dispose();
-      gridHelper = new THREE.GridHelper(30, 30, 0x331a22, 0x1a3333);
-      gridHelper.position.y = -1;
-      if (gridHelper.material) {
-        gridHelper.material.opacity = 0.45;
-        gridHelper.material.transparent = true;
-      }
-      scene.add(gridHelper);
-    }
-
-    if (shadowMesh) {
-      shadowMesh.material.opacity = 0.8;
-    }
-  } else {
-    root.removeAttribute('data-theme');
-    try { localStorage.setItem('gnegr_theme', 'light'); } catch (e) {}
-
-    // Light mode parameters (Paper #FAF9F6)
-    if (ambientLight) ambientLight.intensity = 0.8;
-    if (keyLight) keyLight.intensity = 2.0;
-    if (rimLight) {
-      rimLight.color.set(0x0055ff);
-      rimLight.intensity = 18;
-    }
-    if (accentLight) {
-      accentLight.color.set(0x7928ca);
-      accentLight.intensity = 15;
-    }
-    if (scene) scene.fog = new THREE.Fog(0xe0e0e0, 8, 28);
-
-    if (gridHelper && scene) {
-      scene.remove(gridHelper);
-      gridHelper.geometry.dispose();
-      gridHelper = new THREE.GridHelper(30, 30, 0x0055ff, 0x4400ff);
+      gridHelper = new THREE.GridHelper(30, 30, 0xE24E1B, 0x332211);
       gridHelper.position.y = -1;
       if (gridHelper.material) {
         gridHelper.material.opacity = 0.35;
@@ -549,9 +517,43 @@ export function updateTheme(mode) {
     }
 
     if (shadowMesh) {
+      shadowMesh.material.opacity = 0.75;
+    }
+  } else {
+    root.removeAttribute('data-theme');
+    try { localStorage.setItem('gnegr_theme', 'light'); } catch (e) {}
+
+    // Light mode parameters (Paper #FAF9F6)
+    if (ambientLight) ambientLight.intensity = 2.2;
+    if (keyLight) keyLight.intensity = 4.2;
+    if (rimLight) {
+      rimLight.color.set(0xFF6B35);
+      rimLight.intensity = 4.5;
+    }
+    if (accentLight) {
+      accentLight.color.set(0xFF8A50);
+      accentLight.intensity = 3.5;
+    }
+    if (scene) scene.fog = new THREE.Fog(0xe0e0e0, 8, 28);
+
+    if (gridHelper && scene) {
+      scene.remove(gridHelper);
+      gridHelper.geometry.dispose();
+      gridHelper = new THREE.GridHelper(30, 30, 0xE24E1B, 0x554433);
+      gridHelper.position.y = -1;
+      if (gridHelper.material) {
+        gridHelper.material.opacity = 0.18;
+        gridHelper.material.transparent = true;
+      }
+      scene.add(gridHelper);
+    }
+
+    if (shadowMesh) {
       shadowMesh.material.opacity = 0.4;
     }
   }
+
+  window.dispatchEvent(new CustomEvent('gnegr-theme-changed', { detail: { theme: mode } }));
 }
 
 window.updateTheme = updateTheme;
@@ -751,6 +753,14 @@ function initSystemsTerminal() {
         historyIndex = history.length;
         input.value = '';
       }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const val = input.value.trim().toLowerCase();
+      if (val) {
+        const commands = ['projects', 'stack', 'experience', 'whoami', 'contact', 'theme', 'clear', 'exit', 'help'];
+        const m = commands.find(c => c.startsWith(val));
+        if (m) input.value = m;
+      }
     }
   });
 
@@ -885,7 +895,7 @@ Credo: "Built to move. Zero fluff, pure engineering."
         document.documentElement.setAttribute('data-theme', nextTheme);
         localStorage.setItem('gnegr_theme', nextTheme);
         window.dispatchEvent(new CustomEvent('gnegr-theme-changed', { detail: { theme: nextTheme } }));
-        printOutput(trimmed, `Theme toggled to: <span style="color:#10B981; font-weight:700;">${nextTheme.toUpperCase()}</span> (${nextTheme === 'dark' ? 'Void #0A0A0A' : 'Paper #FAF9F6'})`);
+        printOutput(trimmed, `Theme toggled to: <span style="color:#E24E1B; font-weight:700;">${nextTheme.toUpperCase()}</span> (${nextTheme === 'dark' ? 'Void #0A0A0A' : 'Paper #FAF9F6'})`);
         break;
 
       case 'clear':
