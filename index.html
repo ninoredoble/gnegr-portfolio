@@ -20,6 +20,9 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Interactive 3D Model Viewer Engine -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   <script>
     // Synchronous Theme Check
     try {
@@ -366,6 +369,69 @@
           </div>
         </article>
 
+      </div>
+    </section>
+
+    <!-- Interactive 3D Brand Artifact / Emblem Section -->
+    <section class="brand-3d-section" id="artifact">
+      <div class="brand-3d-container">
+        <div class="brand-3d-header">
+          <div class="brand-3d-badge">
+            <span class="badge-dot-ember"></span>
+            <span>Spatial Brand Architecture // GLB 3D</span>
+          </div>
+          <h2 class="section-title-editorial center">
+            Engineered Identity: The 3D GNEGR Chassis
+          </h2>
+          <p class="section-sub-editorial center">
+            A motorcycle is one of the most honest machines: every component is visible, every part has a job, and the wordmark forms the chassis itself. Drag, rotate, and examine the official 3D spatial artifact below.
+          </p>
+        </div>
+
+        <div class="model-viewer-wrapper">
+          <model-viewer
+            id="gnegr-3d-model"
+            src="3d-gnegr.glb"
+            alt="Interactive 3D GNEGR Brand Model"
+            camera-controls
+            auto-rotate
+            auto-rotate-delay="1500"
+            rotation-per-second="22deg"
+            shadow-intensity="1.5"
+            shadow-softness="0.85"
+            exposure="1.05"
+            camera-orbit="45deg 75deg 105%"
+            min-camera-orbit="auto auto 50%"
+            max-camera-orbit="auto auto 200%"
+            touch-action="pan-y"
+            loading="lazy"
+            reveal="auto"
+            tabindex="0"
+            aria-label="3D model of GNEGR emblem chassis">
+            
+            <!-- Poster / Fallback loading state -->
+            <div slot="poster" class="model-poster-fallback">
+              <div class="model-loader-spinner"></div>
+              <span class="model-loader-text">Loading 3D Model...</span>
+            </div>
+
+            <!-- Model Control Overlay UI -->
+            <div class="model-ui-overlay">
+              <div class="model-hint-pill">
+                <span class="hint-icon">&#x21BB;</span>
+                <span class="hint-text">Drag to rotate &bull; Pinch/Scroll to zoom</span>
+              </div>
+              <div class="model-actions-row">
+                <button type="button" class="model-btn" id="btn-reset-camera" title="Reset View">
+                  <span>Reset Camera</span>
+                </button>
+                <button type="button" class="model-btn" id="btn-toggle-spin" title="Toggle Auto-Rotation">
+                  <span id="spin-btn-text">Pause Rotation</span>
+                </button>
+              </div>
+            </div>
+          </model-viewer>
+        </div>
       </div>
     </section>
 

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectFilters();
   initSkillsPhysics();
   initCopyButtons();
+  init3DModelViewer();
 });
 
 // ==========================================================================
@@ -143,5 +144,57 @@ function initCopyButtons() {
         console.error('Copy failed:', err);
       });
     });
+  });
+}
+
+// ==========================================================================
+// 6. INTERACTIVE 3D MODEL VIEWER CONTROLS
+// ==========================================================================
+function init3DModelViewer() {
+  const modelViewer = document.getElementById('gnegr-3d-model');
+  const btnReset = document.getElementById('btn-reset-camera');
+  const btnToggleSpin = document.getElementById('btn-toggle-spin');
+  const spinText = document.getElementById('spin-btn-text');
+
+  if (!modelViewer) return;
+
+  // Reset Camera Position
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      modelViewer.cameraOrbit = '45deg 75deg 105%';
+      modelViewer.cameraTarget = 'auto auto auto';
+      modelViewer.fieldOfView = 'auto';
+    });
+  }
+
+  // Toggle Auto-rotation
+  if (btnToggleSpin && spinText) {
+    btnToggleSpin.addEventListener('click', () => {
+      const isAutoRotating = modelViewer.hasAttribute('auto-rotate');
+      if (isAutoRotating) {
+        modelViewer.removeAttribute('auto-rotate');
+        spinText.textContent = 'Play Rotation';
+      } else {
+        modelViewer.setAttribute('auto-rotate', '');
+        spinText.textContent = 'Pause Rotation';
+      }
+    });
+  }
+
+  // Handle dark mode theme change reaction on 3D lighting/exposure
+  const observer = new MutationObserver(() => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      modelViewer.exposure = '1.25';
+      modelViewer.shadowIntensity = '2.0';
+    } else {
+      modelViewer.exposure = '1.05';
+      modelViewer.shadowIntensity = '1.5';
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
   });
 }
