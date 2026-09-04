@@ -1,5 +1,5 @@
 ﻿/**
- * GNEGR // NIÃ‘O REDOBLE PORTFOLIO - CORE RUNTIME & THREE.JS ENGINE
+ * GNEGR // NI&Ntilde;O REDOBLE PORTFOLIO - CORE RUNTIME & THREE.JS ENGINE
  * Elevated to Award-Winning Standard:
  *  - Bruno Simon 3D Obsidian Sculpture & Lighting Art Direction
  *  - Intro Split-Screen Loader (Sora Bold, JetBrains Mono, Session-Cached)
@@ -10,6 +10,7 @@
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // Global Three.js Scene References
 let scene, camera, renderer, modelGroup, gridHelper, shadowMesh;
@@ -91,28 +92,27 @@ function initIntroLoader() {
 }
 
 // ==========================================================================
-// 1. SECTION 1: THE 3D HERO (BRUNO SIMON ART DIRECTION)
+// 1. SECTION 1: THE 3D HERO (INTERACTIVE CHASSIS WITH ORBIT CONTROLS)
 // ==========================================================================
+let heroControls;
+const defaultCameraPos = new THREE.Vector3(0, 1.6, 5.5);
+
 function initThreeHero() {
   const container = document.getElementById('hero-3d-wrapper');
   const canvas = document.getElementById('hero-canvas');
   if (!container || !canvas) return;
 
+  const width = container.clientWidth || 460;
+  const height = container.clientHeight || 380;
+
   // Scene
   scene = new THREE.Scene();
-  // Deep void fog matching site background (#0A0A0A)
-  scene.fog = new THREE.Fog(0x0A0A0A, 5, 25);
 
-  // Dimensions
-  const width = container.clientWidth || window.innerWidth;
-  const height = container.clientHeight || window.innerHeight;
+  // Camera
+  camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+  camera.position.copy(defaultCameraPos);
 
-  // Camera: FOV 55, Position (0, 5, 12) looking at (0, 0, 0)
-  camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
-  camera.position.set(0, 5, isMobile ? 14 : 12);
-  camera.lookAt(0, 0, 0);
-
-  // Renderer: alpha: true (transparent for #0A0A0A), antialias: true, pixelRatio <= 2
+  // Renderer
   renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     alpha: true,
@@ -123,186 +123,166 @@ function initThreeHero() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
+  renderer.toneMappingExposure = 1.25;
 
-  // --- Lighting Setup (Bruno Simon Aesthetic) ---
-  // 1. AmbientLight: heavily reduced to 0.1 for deep, dramatic shadows
-  ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+  // OrbitControls for 360-degree inspection
+  heroControls = new OrbitControls(camera, canvas);
+  heroControls.enableDamping = true;
+  heroControls.dampingFactor = 0.05;
+  heroControls.autoRotate = true;
+  heroControls.autoRotateSpeed = 1.3;
+  heroControls.enablePan = false;
+  heroControls.minDistance = 3.2;
+  heroControls.maxDistance = 8.5;
+  heroControls.maxPolarAngle = Math.PI / 2 + 0.05;
+  heroControls.target.set(0, 0, 0);
+
+  // Lighting
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 1.0 : 1.6);
   scene.add(ambientLight);
 
-  // 2. Key Light (DirectionalLight): gives the chassis shape and crisp definition
-  keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
-  keyLight.position.set(5, 10, 5);
+  keyLight = new THREE.DirectionalLight(0xffffff, isDark ? 3.0 : 3.5);
+  keyLight.position.set(5, 8, 5);
   scene.add(keyLight);
 
-  // 3. Rim Light (PointLight): sits behind the car and outlines its silhouette with neon pink
-  rimLight = new THREE.PointLight(0xff3366, 30, 40);
-  rimLight.position.set(0, 3, -5);
+  rimLight = new THREE.PointLight(0xE24E1B, isDark ? 4.5 : 3.0, 15);
+  rimLight.position.set(-4, 3, -3);
   scene.add(rimLight);
 
-  // 4. Accent Light (PointLight): cyan front-side highlight
-  accentLight = new THREE.PointLight(0x00e5ff, 20, 35);
-  accentLight.position.set(-5, 1, 2);
+  accentLight = new THREE.PointLight(0x00E5FF, isDark ? 3.5 : 2.5, 15);
+  accentLight.position.set(4, 2, -2);
   scene.add(accentLight);
 
-  // --- Subtle & Atmospheric Grid ---
-  gridHelper = new THREE.GridHelper(30, 30, 0x331a22, 0x1a3333);
-  gridHelper.position.y = -1;
-  if (gridHelper.material) {
-    gridHelper.material.opacity = 0.45;
-    gridHelper.material.transparent = true;
-  }
-  scene.add(gridHelper);
-
-  // --- Ground Contact Shadow (Soft Radial Gradient under chassis) ---
+  // Subtle contact shadow
   const shadowCanvas = document.createElement('canvas');
   shadowCanvas.width = 256;
   shadowCanvas.height = 256;
   const ctx = shadowCanvas.getContext('2d');
-  const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.85)');
-  gradient.addColorStop(0.4, 'rgba(0, 0, 0, 0.5)');
-  gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.15)');
+  const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 120);
+  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.65)');
+  gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.25)');
   gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, 256, 256);
 
   const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
-  const shadowGeo = new THREE.PlaneGeometry(6, 6);
+  const shadowGeo = new THREE.PlaneGeometry(5.5, 5.5);
   const shadowMat = new THREE.MeshBasicMaterial({
     map: shadowTexture,
     transparent: true,
     depthWrite: false,
-    opacity: 0.8
+    opacity: isDark ? 0.75 : 0.4
   });
   shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
   shadowMesh.rotation.x = -Math.PI / 2;
-  shadowMesh.position.y = -0.98;
+  shadowMesh.position.y = -1.15;
   scene.add(shadowMesh);
 
-  // --- Model Group ---
+  // Pedestal grid inside the card floor
+  const cardGrid = new THREE.GridHelper(6, 12, 0xE24E1B, 0x444455);
+  cardGrid.position.y = -1.16;
+  if (cardGrid.material) {
+    cardGrid.material.opacity = isDark ? 0.35 : 0.15;
+    cardGrid.material.transparent = true;
+  }
+  scene.add(cardGrid);
+
+  // Model Group
   modelGroup = new THREE.Group();
   scene.add(modelGroup);
 
-  // --- Load gnegr.glb ---
   const loader = new GLTFLoader();
-  const primaryModelPath = 'gnegr.glb';
-
-  function applySculptureMaterial(root) {
-    const obsidianMaterial = new THREE.MeshStandardMaterial({
-      color: 0x111111,
-      metalness: 1.0,
-      roughness: 0.05
-    });
-
-    root.traverse((child) => {
-      if (child.isMesh) {
-        if (child.material) {
-          child.material.map = null;
-        }
-        child.material = obsidianMaterial;
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-
-    root.scale.set(0.5, 0.5, 0.5);
-
-    const box = new THREE.Box3().setFromObject(root);
-    const center = box.getCenter(new THREE.Vector3());
-    root.position.sub(center);
-
-    root.rotation.y = Math.PI * 0.12;
-    modelGroup.add(root);
-
-    // Hide hero 3d loader
-    const loaderIndicator = document.getElementById('hero-3d-loader');
-    if (loaderIndicator) {
-      loaderIndicator.style.opacity = '0';
-      setTimeout(() => { loaderIndicator.style.display = 'none'; }, 400);
-    }
-  }
-
   loader.load(
-    primaryModelPath,
+    'gnegr.glb',
     (gltf) => {
-      applySculptureMaterial(gltf.scene);
-      if (onModelProgress) onModelProgress(100);
-    },
-    (xhr) => {
-      if (xhr.lengthComputable && xhr.total > 0) {
-        const p = Math.round((xhr.loaded / xhr.total) * 90);
-        if (onModelProgress) onModelProgress(p);
+      const root = gltf.scene;
+      const mat = new THREE.MeshStandardMaterial({
+        color: isDark ? 0x222228 : 0x2e2e38,
+        metalness: 0.85,
+        roughness: 0.22
+      });
+
+      root.traverse((child) => {
+        if (child.isMesh) {
+          child.material = mat;
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
+      // Normalize scale to fit the card prominently
+      const box = new THREE.Box3().setFromObject(root);
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const targetSize = 3.6;
+      const scale = targetSize / maxDim;
+      root.scale.set(scale, scale, scale);
+
+      // Center above shadow
+      const updatedBox = new THREE.Box3().setFromObject(root);
+      const center = updatedBox.getCenter(new THREE.Vector3());
+      root.position.x = -center.x;
+      root.position.y = -updatedBox.min.y - 1.14;
+      root.position.z = -center.z;
+
+      modelGroup.add(root);
+
+      const loaderIndicator = document.getElementById('hero-3d-loader');
+      if (loaderIndicator) {
+        loaderIndicator.style.opacity = '0';
+        setTimeout(() => { loaderIndicator.style.display = 'none'; }, 400);
       }
     },
-    (err) => {
-      console.error('GLTF loading error for gnegr.glb:', err);
-      if (onModelProgress) onModelProgress(100);
-    }
+    undefined,
+    (err) => console.error('Error loading 3D motorcycle model:', err)
   );
 
-  // Track user mouse
-  window.addEventListener('mousemove', (e) => {
-    if (isMobile) return;
-    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+  // Reset view button
+  const resetBtn = document.getElementById('reset-3d-view-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      camera.position.copy(defaultCameraPos);
+      heroControls.target.set(0, 0, 0);
+      heroControls.update();
+    });
+  }
 
-    // Maximum orbit angle: subtle 8 degrees
-    const maxOrbitRadians = 8 * (Math.PI / 180);
-    const orbitDistance = 12;
-    targetCameraX = Math.sin(mouseX * maxOrbitRadians) * orbitDistance;
-    targetCameraY = 5 + mouseY * 0.9;
+  // Theme change adaptation
+  window.addEventListener('gnegr-theme-changed', (e) => {
+    const isDarkNow = e.detail.theme === 'dark';
+    if (ambientLight) ambientLight.intensity = isDarkNow ? 1.0 : 1.6;
+    if (keyLight) keyLight.intensity = isDarkNow ? 3.0 : 3.5;
+    if (rimLight) rimLight.intensity = isDarkNow ? 4.5 : 3.0;
+    if (shadowMesh && shadowMesh.material) shadowMesh.material.opacity = isDarkNow ? 0.75 : 0.4;
+    if (cardGrid && cardGrid.material) cardGrid.material.opacity = isDarkNow ? 0.35 : 0.15;
+    if (modelGroup) {
+      modelGroup.traverse((child) => {
+        if (child.isMesh && child.material) {
+          child.material.color.setHex(isDarkNow ? 0x222228 : 0x2e2e38);
+        }
+      });
+    }
   });
 
-  window.addEventListener('resize', onWindowResize);
-  animate();
-}
+  // Resize handler
+  const resizeObserver = new ResizeObserver(() => {
+    if (!container || !camera || !renderer) return;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+  resizeObserver.observe(container);
 
-function onWindowResize() {
-  const container = document.getElementById('hero-3d-wrapper');
-  if (!container || !camera || !renderer) return;
-
-  const width = container.clientWidth || window.innerWidth;
-  const height = container.clientHeight || window.innerHeight;
-  isMobile = window.innerWidth < 768;
-
-  camera.aspect = width / height;
-  camera.position.z = isMobile ? 14 : 12;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  const time = Date.now();
-
-  if (modelGroup) {
-    modelGroup.position.y = Math.sin(time * 0.002) * 0.15;
-    if (isMobile) {
-      modelGroup.rotation.y += 0.006;
-    } else {
-      modelGroup.rotation.y = Math.sin(time * 0.0006) * 0.1;
-    }
-  }
-
-  if (camera) {
-    if (!isMobile) {
-      camera.position.x += (targetCameraX - camera.position.x) * 0.04;
-      camera.position.y += (targetCameraY - camera.position.y) * 0.04;
-      camera.lookAt(0, 0, 0);
-    } else {
-      camera.position.x = 0;
-      camera.position.y = 5;
-      camera.lookAt(0, 0, 0);
-    }
-  }
-
-  if (renderer && scene && camera) {
+  // Animation loop
+  function renderLoop() {
+    requestAnimationFrame(renderLoop);
+    heroControls.update();
     renderer.render(scene, camera);
   }
+  renderLoop();
 }
 
 // ==========================================================================
@@ -610,7 +590,7 @@ function initHeroScramble() {
 
   const words = ['Full-Stack', 'Systems', 'Distributed', 'High-Performance'];
   let wordIndex = 0;
-  const chars = '!<>-_\\/[]{}â€”=+*^?#________';
+  const chars = '!<>-_\\/[]{}*^?#01X_=+/~';
 
   function scrambleTo(newWord) {
     let frame = 0;

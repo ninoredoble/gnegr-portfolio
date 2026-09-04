@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Niño Redoble // Full-Stack & Systems Developer</title>
-  <meta name="description" content="Portfolio of G. NiÃ±o Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Architect, and High-Performance Software Engineer building distributed web platforms and real-time telemetry systems.">
+  <title>Ni&ntilde;o Redoble // Full-Stack & Systems Developer</title>
+  <meta name="description" content="Portfolio of G. Ni&ntilde;o Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Architect, and High-Performance Software Engineer building distributed web platforms and real-time telemetry systems.">
   
   <!-- Canonical & Domain -->
   <link rel="canonical" href="https://ninoredoble.is-a.dev/">
@@ -86,7 +86,7 @@
       </nav>
 
       <div class="header-controls">
-        <button id="terminal-toggle" class="control-btn terminal-trigger-btn" aria-label="Open Systems HUD Terminal" title="Systems Console (Ctrl + K)">
+        <button id="terminal-toggle" class="terminal-trigger-btn magnetic-btn" aria-label="Open Systems HUD Terminal" title="Systems Console (Ctrl + K)">
           <span class="term-btn-icon">&gt;_</span>
           <span class="term-btn-kbd">Ctrl+K</span>
         </button>
@@ -100,47 +100,65 @@
   </header>
 
   <main>
-    <!-- SECTION 1: The 3D Hero (Bruno Simon Style) -->
+    <!-- SECTION 1: The 3D Hero & Systems Showcase -->
     <section class="hero-section" id="intro">
-      <!-- Full-Screen Interactive Three.js WebGL Canvas (Behind HTML text) -->
-      <div class="hero-3d-wrapper" id="hero-3d-wrapper">
-        <canvas id="hero-canvas"></canvas>
-        <div class="hero-3d-loader" id="hero-3d-loader">
-          <div class="hero-3d-spinner"></div>
-          <span class="hero-3d-text">INITIALIZING 3D CHASSIS...</span>
-        </div>
-      </div>
-
-      <!-- Hero HTML Typography Overlay (z-index: 2) -->
       <div class="hero-container reveal">
+        <div class="hero-split-grid">
+          <!-- Left Column: Editorial Typography -->
+          <div class="hero-content-col">
+            <h1 class="hero-title">
+              <span class="hero-title-accent">Systems Architecture &amp; Full-Stack Engineering</span>
+              <span class="hero-title-main">
+                Ni&ntilde;o Redoble
+                <span class="hero-title-outline"><span id="hero-scramble" class="hero-scramble">Full-Stack</span> Developer.</span>
+              </span>
+            </h1>
 
-        <h1 class="hero-title">
-          <span class="hero-title-accent">Systems Architecture & Full-Stack Engineering</span>
-          <span class="hero-title-main">
-            NiÃ±o Redoble
-            <span class="hero-title-outline"><span id="hero-scramble" class="hero-scramble">Full-Stack</span> Developer.</span>
-          </span>
-        </h1>
+            <p class="hero-bio">
+              I am <strong>G. Ni&ntilde;o Emmanuel G. Redoble</strong> (GNEGR)&mdash;a systems developer and full-stack software engineer who crafts resilient distributed applications, high-concurrency backends, and sleek digital experiences. Shipped 7+ production systems across enterprise logistics, telemetry, and web platforms with a disciplined systems-first mindset.
+            </p>
 
-        <p class="hero-bio">
-          I am <strong>G. NiÃ±o Emmanuel G. Redoble</strong> (GNEGR)â€”a systems developer and full-stack software engineer who crafts resilient distributed applications, high-concurrency backends, and sleek digital experiences. Shipped 7+ production systems across enterprise logistics, telemetry, and web platforms with a disciplined systems-first mindset.
-        </p>
+            <div class="hero-cta-group">
+              <a href="mailto:redoble.gninoemmanuel@gmail.com" class="hero-cta-btn primary magnetic-btn">
+                <span>Contact Me</span>
+              </a>
+              <a href="#work" class="hero-cta-btn secondary">
+                <span>Explore Work &rarr;</span>
+              </a>
+            </div>
 
-        <div class="hero-cta-group">
-          <a href="mailto:redoble.gninoemmanuel@gmail.com" class="hero-cta-btn primary magnetic-btn">
-            <span>Contact Me</span>
-          </a>
-          <a href="#work" class="hero-cta-btn secondary">
-            <span>Explore Work &rarr;</span>
-          </a>
-        </div>
+            <div class="hero-subtext">
+              <span>Based in Cagayan de Oro City, PH</span>
+              <span class="sep">&bull;</span>
+              <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <span class="sep">&bull;</span>
+              <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
 
-        <div class="hero-subtext">
-          <span>Based in Cagayan de Oro City, PH</span>
-          <span class="sep">&bull;</span>
-          <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <span class="sep">&bull;</span>
-          <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <!-- Right Column: Interactive 3D Chassis Stage -->
+          <div class="hero-3d-col">
+            <div class="hero-3d-card" id="hero-3d-card">
+              <div class="card-3d-header">
+                <div class="card-3d-status">
+                  <span class="pulse-dot-cyan"></span>
+                  <span class="card-3d-label">3D CHASSIS // INTERACTIVE</span>
+                </div>
+                <span class="card-3d-hint">DRAG TO ORBIT &bull; WHEEL TO ZOOM</span>
+              </div>
+              <div class="card-3d-stage" id="hero-3d-wrapper">
+                <canvas id="hero-canvas"></canvas>
+                <div class="hero-3d-loader" id="hero-3d-loader">
+                  <div class="hero-3d-spinner"></div>
+                  <span class="hero-3d-text">INITIALIZING 3D CHASSIS...</span>
+                </div>
+              </div>
+              <div class="card-3d-footer">
+                <span class="spec-label">GNEGR MOTORSPORT SPEC-01</span>
+                <button class="reset-view-btn" id="reset-3d-view-btn" title="Reset View Angle">&#8635; Reset View</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -530,7 +548,7 @@
           <!-- Role 2: BuyNaBay -->
           <div class="timeline-node reveal">
             <div class="node-marker">
-              <span class="node-year">2024 &ndash; 2025</span>
+              <span class="node-year">2024&ndash;<br>2025</span>
             </div>
             <div class="node-card">
               <div class="node-header">
@@ -558,7 +576,7 @@
           <!-- Role 3: Distributed Systems & Open-Source Engineering -->
           <div class="timeline-node reveal">
             <div class="node-marker">
-              <span class="node-year">2024 &ndash; Present</span>
+              <span class="node-year">2024&ndash;<br>Present</span>
             </div>
             <div class="node-card">
               <div class="node-header">
@@ -636,7 +654,7 @@
       <div class="footer-left">
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
           <img src="img/gnegr.svg" alt="GNEGR Mark" style="height: 18px; width: auto;" class="brand-header-icon">
-          <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble (GNEGR).</span>
+          <span class="footer-brand">&copy; 2026 G. Ni&ntilde;o Emmanuel G. Redoble (GNEGR).</span>
         </div>
         <span class="footer-sub">Full-stack developer and systems architect. Built to move.</span>
       </div>
