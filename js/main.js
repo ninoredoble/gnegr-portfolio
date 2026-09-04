@@ -212,7 +212,7 @@ function initThreeHero() {
 
   const loader = new GLTFLoader();
   loader.load(
-    'gnegr.glb',
+    'models/gnegr.glb',
     (gltf) => {
       const root = gltf.scene;
 

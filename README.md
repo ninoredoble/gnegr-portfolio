@@ -1,4 +1,4 @@
-﻿# Niño Redoble (GNEGR) — Personal Portfolio & Showcase
+# Niño Redoble (GNEGR) — Personal Portfolio & Showcase
 
 > Modern editorial portfolio and digital systems showcase for **G. Niño Emmanuel G. Redoble**.
 
@@ -26,14 +26,16 @@
 
 ## 📁 Repository Structure
 ```text
-├── .agents/
-│   └── skills/
-│       └── portfolio-publisher/   # Antigravity publishing & validation skill
 ├── css/
-│   └── style.css                  # Warm editorial CSS token system
+│   └── style.css                  # High-performance design token system
 ├── js/
-│   └── main.js                    # Category filters, theme toggle, gentle badge physics
-├── img/                           # Brand marks & emblems
+│   └── main.js                    # WebGL 3D chassis, systems terminal HUD, theme engine
+├── img/                           # Brand marks, project graphics, and vector emblems
+│   └── projects/                  # Live production platform preview imagery
+├── models/                        # 3D interactive assets
+│   └── gnegr.glb                  # GNEGR Motorsport SPEC-01 3D chassis model
+├── video/                         # Cinematic media assets
+│   └── gnegr-logo-reveal.webm     # GNEGR official logo reveal parallax backdrop
 ├── CNAME                          # Custom domain target (ninoredoble.is-a.dev)
 ├── index.html                     # Master single-page portfolio
 └── README.md
