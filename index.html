@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Niño Redoble // Full-Stack & Systems Developer</title>
-  <meta name="description" content="Portfolio of G. Niño Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Builder, and CCNA Network Specialist. BS Information Technology Magna Cum Laude graduate from USTP.">
+  <meta name="description" content="Portfolio of G. NiÃ±o Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Architect, and High-Performance Software Engineer building distributed web platforms and real-time telemetry systems.">
   
   <!-- Canonical & Domain -->
   <link rel="canonical" href="https://ninoredoble.is-a.dev/">
@@ -74,10 +74,7 @@
           <img src="img/gnegr.svg" alt="GNEGR Mark" class="brand-header-icon">
           <span class="brand-header-wordmark">GNEGR</span>
         </a>
-        <div class="status-pill">
-          <span class="status-indicator-dot"></span>
-          <span class="status-pill-text">Available for Projects & Engineering</span>
-        </div>
+
       </div>
 
       <nav class="site-nav" id="site-nav" aria-label="Main Navigation">
@@ -89,6 +86,10 @@
       </nav>
 
       <div class="header-controls">
+        <button id="terminal-toggle" class="control-btn terminal-trigger-btn" aria-label="Open Systems HUD Terminal" title="Systems Console (Ctrl + K)">
+          <span class="term-btn-icon">&gt;_</span>
+          <span class="term-btn-kbd">Ctrl+K</span>
+        </button>
         <button id="theme-toggle" class="control-btn" aria-label="Toggle Color Theme" title="Toggle Light/Dark Theme">
           <span class="theme-icon light-icon">&#9728;</span>
           <span class="theme-icon dark-icon">&#9790;</span>
@@ -112,26 +113,17 @@
 
       <!-- Hero HTML Typography Overlay (z-index: 2) -->
       <div class="hero-container reveal">
-        <!-- Brand Logo Reveal Video Emblem -->
-        <div class="hero-badge-wrap">
-          <div class="hero-reveal-container" title="GNEGR Brand Reveal">
-            <video class="hero-reveal-video" autoplay muted playsinline loop preload="auto" poster="img/gnegr.svg">
-              <source src="img/gnegr-logo-reveal.webm" type="video/webm">
-              <img src="img/gnegr.svg" alt="Niño Redoble (GNEGR) Emblem" class="hero-avatar-img">
-            </video>
-          </div>
-        </div>
 
         <h1 class="hero-title">
-          <span class="hero-title-accent">Full-Stack Systems & Network Engineering</span>
+          <span class="hero-title-accent">Systems Architecture & Full-Stack Engineering</span>
           <span class="hero-title-main">
-            Niño Redoble
-            <span class="hero-title-outline">Built to Move.</span>
+            NiÃ±o Redoble
+            <span class="hero-title-outline"><span id="hero-scramble" class="hero-scramble">Full-Stack</span> Developer.</span>
           </span>
         </h1>
 
         <p class="hero-bio">
-          I am <strong>G. Niño Emmanuel G. Redoble</strong> (GNEGR)—a CCNA-certified IT graduate and systems developer who builds resilient full-stack applications and keeps the networks underneath them running. Graduated <strong>Magna Cum Laude</strong> from USTP, engineered enterprise ticketing and fuel tracking at CEPALCO, and led platforms with a disciplined systems-first mindset.
+          I am <strong>G. NiÃ±o Emmanuel G. Redoble</strong> (GNEGR)â€”a systems developer and full-stack software engineer who crafts resilient distributed applications, high-concurrency backends, and sleek digital experiences. Shipped 7+ production systems across enterprise logistics, telemetry, and web platforms with a disciplined systems-first mindset.
         </p>
 
         <div class="hero-cta-group">
@@ -177,50 +169,76 @@
       </div>
     </section>
 
-    <!-- Floating Tech Stack Cloud Section -->
-    <section class="skills-cloud-section" id="stack">
-      <div class="skills-cloud-header reveal">
+    <!-- Technical Stack Infinite Marquee Ribbon (Double Row Matching Image 5) -->
+    <section class="tech-marquee-section" id="stack">
+      <div class="tech-marquee-header reveal">
         <h2 class="cloud-headline">Always Building. Always Growing.</h2>
-        <p class="cloud-subline">Interactive engineering stack across distributed systems, frontend engineering, and networks.</p>
+        <p class="cloud-subline">Languages, frameworks, database engines, and deployment toolchains.</p>
       </div>
 
-      <div class="skills-cloud-canvas reveal" id="skills-cloud">
-        <!-- Floating Badges dynamically populated and interactable -->
-        <div class="skill-badge" style="--pos-x: 12%; --pos-y: 18%; --speed: 5s;" data-tech="Python">
-          <span class="badge-icon">&#x1F40D;</span>
-          <span class="badge-text">Python / FastAPI</span>
+      <div class="tech-marquee-container">
+        <!-- Row 1: Forward Infinite Scrolling -->
+        <div class="tech-marquee-row row-forward">
+          <div class="marquee-track">
+            <!-- Set 1 -->
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span class="tile-label">Python</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy"><span class="tile-label">TypeScript</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy"><span class="tile-label">JavaScript</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy"><span class="tile-label">React</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy"><span class="tile-label">Next.js</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" loading="lazy"><span class="tile-label">FastAPI</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy"><span class="tile-label">Node.js</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy"><span class="tile-label">Docker</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span class="tile-label">PostgreSQL</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy"><span class="tile-label">MySQL</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy"><span class="tile-label">Linux</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span class="tile-label">Git</span></div>
+            <!-- Set 2 (Seamless loop duplicate) -->
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span class="tile-label">Python</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy"><span class="tile-label">TypeScript</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy"><span class="tile-label">JavaScript</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy"><span class="tile-label">React</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy"><span class="tile-label">Next.js</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" loading="lazy"><span class="tile-label">FastAPI</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy"><span class="tile-label">Node.js</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy"><span class="tile-label">Docker</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span class="tile-label">PostgreSQL</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy"><span class="tile-label">MySQL</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy"><span class="tile-label">Linux</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span class="tile-label">Git</span></div>
+          </div>
         </div>
-        <div class="skill-badge" style="--pos-x: 82%; --pos-y: 20%; --speed: 6.2s;" data-tech="TypeScript">
-          <span class="badge-icon">&#x26A1;</span>
-          <span class="badge-text">TypeScript & Node</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 22%; --pos-y: 42%; --speed: 4.8s;" data-tech="React">
-          <span class="badge-icon">&#x269B;</span>
-          <span class="badge-text">React & Next.js</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 75%; --pos-y: 45%; --speed: 5.8s;" data-tech="Docker">
-          <span class="badge-icon">&#x1F433;</span>
-          <span class="badge-text">Docker & Containers</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 10%; --pos-y: 72%; --speed: 6.5s;" data-tech="CCNA">
-          <span class="badge-icon">&#x1F310;</span>
-          <span class="badge-text">Cisco CCNA (Credly)</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 48%; --pos-y: 28%; --speed: 5.2s;" data-tech="Linux">
-          <span class="badge-icon">&#x1F427;</span>
-          <span class="badge-text">Linux & Bash</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 85%; --pos-y: 76%; --speed: 4.5s;" data-tech="PostgreSQL">
-          <span class="badge-icon">&#x1F5C4;</span>
-          <span class="badge-text">PostgreSQL & Redis</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 34%; --pos-y: 82%; --speed: 6.8s;" data-tech="Mobile">
-          <span class="badge-icon">&#x1F4F1;</span>
-          <span class="badge-text">React Native & Jetpack</span>
-        </div>
-        <div class="skill-badge" style="--pos-x: 65%; --pos-y: 80%; --speed: 5.4s;" data-tech="C++">
-          <span class="badge-icon">&#x2699;</span>
-          <span class="badge-text">C / C++ Algorithms</span>
+
+        <!-- Row 2: Reverse Infinite Scrolling -->
+        <div class="tech-marquee-row row-reverse">
+          <div class="marquee-track">
+            <!-- Set 1 -->
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" loading="lazy"><span class="tile-label">Tailwind</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="Supabase" loading="lazy"><span class="tile-label">Supabase</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy"><span class="tile-label">MongoDB</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy"><span class="tile-label">GitHub</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" loading="lazy"><span class="tile-label">C++</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy"><span class="tile-label">Java</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy"><span class="tile-label">PHP</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" loading="lazy"><span class="tile-label">Laravel</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy"><span class="tile-label">Figma</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" loading="lazy"><span class="tile-label">Django</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" loading="lazy"><span class="tile-label">Nginx</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" loading="lazy"><span class="tile-label">Bootstrap</span></div>
+            <!-- Set 2 (Seamless loop duplicate) -->
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" loading="lazy"><span class="tile-label">Tailwind</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="Supabase" loading="lazy"><span class="tile-label">Supabase</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy"><span class="tile-label">MongoDB</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy"><span class="tile-label">GitHub</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" loading="lazy"><span class="tile-label">C++</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy"><span class="tile-label">Java</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy"><span class="tile-label">PHP</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" loading="lazy"><span class="tile-label">Laravel</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy"><span class="tile-label">Figma</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" loading="lazy"><span class="tile-label">Django</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" loading="lazy"><span class="tile-label">Nginx</span></div>
+            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" loading="lazy"><span class="tile-label">Bootstrap</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -252,6 +270,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">Aether Report 2026: Northern Mindanao Mesh</h3>
               <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -281,6 +302,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">ClimaPocket Android Agrometeorology</h3>
               <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -310,6 +334,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">Relay Core: Distributed Webhook Sandbox</h3>
               <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -339,6 +366,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">Hablon Textile: Living Vector Loom</h3>
               <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -368,6 +398,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">Mindanao Grid Mesh: SCADA Mimic Board</h3>
               <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -397,6 +430,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">Archipelago Marine: Bathymetric Telemetry</h3>
               <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -426,6 +462,9 @@
             </div>
           </div>
           <div class="project-card-content">
+            <div class="project-status-badge">
+              <span class="status-pulse-dot"></span> Active System // Production Online
+            </div>
             <div class="project-header">
               <h3 class="project-name">Cagayan Basin Corridor: Watershed Resilience</h3>
               <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
@@ -448,27 +487,7 @@
       </div>
     </section>
 
-    <!-- Highlights & Impact Counter Strip -->
-    <section class="highlights-strip">
-      <div class="strip-container">
-        <div class="highlight-stat">
-          <div class="stat-number">1st</div>
-          <div class="stat-label">Magna Cum Laude (USTP)</div>
-        </div>
-        <div class="highlight-stat">
-          <div class="stat-number">CCNA</div>
-          <div class="stat-label">Cisco Enterprise Certified</div>
-        </div>
-        <div class="highlight-stat">
-          <div class="stat-number">7+</div>
-          <div class="stat-label">Shipped Production Systems</div>
-        </div>
-        <div class="highlight-stat">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Software Students Mentored</div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- Work Experience & Journey Timeline -->
     <section class="experience-section" id="experience">
@@ -536,54 +555,29 @@
             </div>
           </div>
 
-          <!-- Role 3: CCNA Credential -->
+          <!-- Role 3: Distributed Systems & Open-Source Engineering -->
           <div class="timeline-node reveal">
             <div class="node-marker">
-              <span class="node-year">2024</span>
+              <span class="node-year">2024 &ndash; Present</span>
             </div>
             <div class="node-card">
               <div class="node-header">
                 <div>
-                  <h3 class="node-role">Cisco Certified Network Associate (CCNA)</h3>
-                  <div class="node-company">Cisco Systems // Credly Verified</div>
+                  <h3 class="node-role">Distributed Systems & Full-Stack Architect</h3>
+                  <div class="node-company">Independent Production Projects & Open-Source Engineering</div>
                 </div>
-                <span class="node-pill">Certification</span>
+                <span class="node-pill">Production Delivery</span>
               </div>
               <ul class="node-points">
-                <li>Demonstrated proficiency across enterprise network access, IP connectivity, IP services (DHCP/DNS/NAT), and network security fundamentals.</li>
-                <li>Specialized in router/switch configuration, VLAN segmentation, OSPF routing topologies, and automated network operations via Python & REST APIs.</li>
+                <li>Shipped and actively maintain 7 live production web applications, data visualization portals, and high-concurrency APIs across Vercel, Supabase, and Docker.</li>
+                <li>Implemented real-time telemetry visualizers, procedural vector SVG canvas simulations, and resilient Redis idempotency caches.</li>
               </ul>
               <div class="node-tags">
-                <span>Enterprise Routing</span>
-                <span>VLAN & Subnetting</span>
-                <span>Network Security</span>
-                <span>Cisco IOS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Role 4: USTP Magna Cum Laude -->
-          <div class="timeline-node reveal">
-            <div class="node-marker">
-              <span class="node-year">2021 &ndash; 2025</span>
-            </div>
-            <div class="node-card">
-              <div class="node-header">
-                <div>
-                  <h3 class="node-role">BS in Information Technology (Magna Cum Laude)</h3>
-                  <div class="node-company">University of Science and Technology of Southern Philippines (USTP)</div>
-                </div>
-                <span class="node-pill">Academic Honors</span>
-              </div>
-              <ul class="node-points">
-                <li>Graduated with highest departmental honors (Magna Cum Laude), maintaining exceptional scholastic standing in computer algorithms and systems design.</li>
-                <li>Served as an academic consultant and technical mentor for lower-year engineering cohorts, tutoring 10+ students in web technologies and data structures.</li>
-              </ul>
-              <div class="node-tags">
-                <span>Magna Cum Laude</span>
-                <span>Data Structures</span>
-                <span>Software Engineering</span>
-                <span>Academic Tutoring</span>
+                <span>FastAPI</span>
+                <span>TypeScript</span>
+                <span>Docker</span>
+                <span>PostgreSQL</span>
+                <span>Vector Math</span>
               </div>
             </div>
           </div>
@@ -644,20 +638,62 @@
           <img src="img/gnegr.svg" alt="GNEGR Mark" style="height: 18px; width: auto;" class="brand-header-icon">
           <span class="footer-brand">&copy; 2026 G. Niño Emmanuel G. Redoble (GNEGR).</span>
         </div>
-        <span class="footer-sub">Full-stack developer and CCNA-certified network specialist. Built to move.</span>
+        <span class="footer-sub">Full-stack developer and systems architect. Built to move.</span>
       </div>
 
       <div class="footer-right">
-        <div class="footer-time-badge">
-          <span class="time-pulse"></span>
-          <span id="pht-time">--:--:-- PHT</span>
-        </div>
+        <button class="footer-term-btn" onclick="window.toggleSystemsTerminal?.()">
+          <span class="term-dot"></span> Terminal HUD (Ctrl+K)
+        </button>
         <a href="#intro" class="footer-top-link">Back to Top &uarr;</a>
       </div>
     </div>
   </footer>
 
-  <!-- Main Application Script (ES Module with Three.js, Parallax & Cursor Physics) -->
+  <!-- Interactive Systems Terminal HUD Modal (Ctrl + K) -->
+  <div class="terminal-modal" id="terminal-modal" aria-hidden="true">
+    <div class="terminal-backdrop" id="terminal-backdrop"></div>
+    <div class="terminal-window" id="terminal-window">
+      <div class="terminal-header" id="terminal-header">
+        <div class="terminal-traffic-lights">
+          <button class="light red" id="terminal-close-btn" aria-label="Close Terminal" title="Close (ESC)"></button>
+          <button class="light yellow" id="terminal-minimize-btn" aria-label="Minimize Terminal" title="Minimize"></button>
+          <button class="light green" id="terminal-maximize-btn" aria-label="Maximize Terminal" title="Maximize"></button>
+        </div>
+        <div class="terminal-title">gnegr@systems-core: ~/portfolio (v2.6)</div>
+        <div class="terminal-actions">
+          <span class="terminal-kbd-badge">ESC to exit</span>
+        </div>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="term-line term-banner">
+  ____ _   _ _____ ____ ____  
+ / ___| \ | | ____/ ___|  _ \ 
+| |  _|  \| |  _|| |  _| |_) |
+| |_| | |\  | |__| |_| |  _ &lt; 
+ \____|_| \_|_____\____|_| \_\
+</div>
+        <div class="term-line term-welcome">GNEGR INTERACTIVE SYSTEMS TERMINAL // NI&Ntilde;O REDOBLE</div>
+        <div class="term-line term-muted">Type <span class="term-hl">help</span> to list commands, or click any shortcut below:</div>
+        <div class="term-shortcuts">
+          <button class="term-quick-btn" data-cmd="projects">projects</button>
+          <button class="term-quick-btn" data-cmd="stack">stack</button>
+          <button class="term-quick-btn" data-cmd="exp">experience</button>
+          <button class="term-quick-btn" data-cmd="whoami">whoami</button>
+          <button class="term-quick-btn" data-cmd="contact">contact</button>
+          <button class="term-quick-btn" data-cmd="theme">theme</button>
+          <button class="term-quick-btn" data-cmd="clear">clear</button>
+        </div>
+        <div id="terminal-output"></div>
+      </div>
+      <div class="terminal-input-bar">
+        <span class="term-prompt">gnegr&gt;</span>
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type command here (e.g. 'projects', 'stack', 'whoami')..." autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+  </div>
+
+    <!-- Main Application Script (ES Module with Three.js, Parallax & Cursor Physics) -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

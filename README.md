@@ -1,4 +1,4 @@
-# Niño Redoble (GNEGR) — Personal Portfolio & Showcase
+﻿# Niño Redoble (GNEGR) — Personal Portfolio & Showcase
 
 > Modern editorial portfolio and digital systems showcase for **G. Niño Emmanuel G. Redoble**.
 
@@ -19,7 +19,7 @@
   5. **Mindanao Grid Mesh**: Real-Time Sub-Transmission SCADA & Power Dispatch Mimic Board.
   6. **Archipelago Marine Cadence**: Oceanographic Bathymetry & Coastal Telemetry (Macajalar Bay to Tubbataha).
   7. **Cagayan Basin Corridor**: Watershed Hydrology & Agroforestry Corridor Model.
-- **Destructuring My Work Experience**: Structured career timeline highlighting USTP Magna Cum Laude, CEPALCO (2026), CCNA certification, and BuyNaBay project leadership.
+- **Destructuring My Work Experience**: Structured career timeline highlighting Distributed Systems Architecture, CEPALCO enterprise engineering (2026), and BuyNaBay full-stack project leadership.
 - **Clean Contact & Privacy**: Verified direct communication via email, LinkedIn, and GitHub. No public phone numbers or SMS displayed.
 
 ---

@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initThreeHero();
   initWebMParallax();
   initThemeEngine();
-  initTimeTracker();
+  initHeroScramble();
+  initSystemsTerminal();
   initProjectFilters();
-  initSkillsPhysics();
   initCopyButtons();
 });
 
@@ -602,26 +602,292 @@ function initWebMParallax() {
 }
 
 // ==========================================================================
-// 7. PHILIPPINES REAL-TIME CLOCK (PHT / UTC+8)
+// 7. DYNAMIC HERO TEXT SCRAMBLER (Recommendation 2)
 // ==========================================================================
-function initTimeTracker() {
-  const timeElem = document.getElementById('pht-time');
-  if (!timeElem) return;
+function initHeroScramble() {
+  const scrambleEl = document.getElementById('hero-scramble');
+  if (!scrambleEl) return;
 
-  function update() {
-    const now = new Date();
-    const options = {
-      timeZone: 'Asia/Manila',
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    };
-    timeElem.textContent = now.toLocaleTimeString('en-GB', options) + ' PHT';
+  const words = ['Full-Stack', 'Systems', 'Distributed', 'High-Performance'];
+  let wordIndex = 0;
+  const chars = '!<>-_\\/[]{}â€”=+*^?#________';
+
+  function scrambleTo(newWord) {
+    let frame = 0;
+    const totalFrames = 22;
+    const oldWord = scrambleEl.textContent;
+
+    const interval = setInterval(() => {
+      let output = '';
+
+      for (let i = 0; i < newWord.length; i++) {
+        const charProgress = Math.floor((frame / totalFrames) * newWord.length);
+        if (i < charProgress) {
+          output += newWord[i];
+        } else {
+          output += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+
+      scrambleEl.textContent = output;
+      frame++;
+
+      if (frame > totalFrames) {
+        clearInterval(interval);
+        scrambleEl.textContent = newWord;
+      }
+    }, 45);
   }
 
-  update();
-  setInterval(update, 1000);
+  setInterval(() => {
+    wordIndex = (wordIndex + 1) % words.length;
+    scrambleTo(words[wordIndex]);
+  }, 3200);
+}
+
+// ==========================================================================
+// 8. INTERACTIVE SYSTEMS TERMINAL / HUD (Recommendation 1)
+// ==========================================================================
+function initSystemsTerminal() {
+  const modal = document.getElementById('terminal-modal');
+  const input = document.getElementById('terminal-input');
+  const output = document.getElementById('terminal-output');
+  const closeBtn = document.getElementById('terminal-close-btn');
+  const backdrop = document.getElementById('terminal-backdrop');
+  const toggleBtn = document.getElementById('terminal-toggle');
+  const quickBtns = document.querySelectorAll('.term-quick-btn');
+
+  if (!modal || !input || !output) return;
+
+  let history = [];
+  let historyIndex = -1;
+
+  function openTerminal() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    setTimeout(() => input.focus(), 80);
+  }
+
+  function closeTerminal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  window.toggleSystemsTerminal = function(force) {
+    if (typeof force === 'boolean') {
+      force ? openTerminal() : closeTerminal();
+    } else {
+      modal.classList.contains('is-open') ? closeTerminal() : openTerminal();
+    }
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.toggleSystemsTerminal();
+    });
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeTerminal);
+  if (backdrop) backdrop.addEventListener('click', closeTerminal);
+
+  // Keyboard shortcut Ctrl+K or Cmd+K or ESC
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      window.toggleSystemsTerminal();
+    } else if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      e.preventDefault();
+      closeTerminal();
+    }
+  });
+
+  // Quick action buttons
+  quickBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (cmd) {
+        input.value = cmd;
+        handleCommand(cmd);
+        input.value = '';
+      }
+    });
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const cmd = input.value.trim();
+      if (cmd) {
+        history.push(cmd);
+        historyIndex = history.length;
+        handleCommand(cmd);
+        input.value = '';
+      }
+    } else if (e.key === 'ArrowUp') {
+      if (history.length > 0 && historyIndex > 0) {
+        historyIndex--;
+        input.value = history[historyIndex];
+      }
+    } else if (e.key === 'ArrowDown') {
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        input.value = history[historyIndex];
+      } else {
+        historyIndex = history.length;
+        input.value = '';
+      }
+    }
+  });
+
+  function printOutput(cmd, content) {
+    const entry = document.createElement('div');
+    entry.className = 'term-output-entry';
+    entry.innerHTML = `
+      <div class="term-cmd-echo"><span style="color:#E24E1B;">gnegr&gt;</span> ${escapeHtml(cmd)}</div>
+      <div class="term-output-text">${content}</div>
+    `;
+    output.appendChild(entry);
+    const body = document.getElementById('terminal-body');
+    if (body) body.scrollTop = body.scrollHeight;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function handleCommand(rawCmd) {
+    const trimmed = rawCmd.trim();
+    const parts = trimmed.split(' ');
+    const command = parts[0].toLowerCase();
+
+    switch (command) {
+      case 'help':
+      case '?':
+        printOutput(trimmed, `
+<span class="term-hl">AVAILABLE SYSTEM COMMANDS:</span>
+  <span style="color:#E24E1B;">projects</span>    - Shipped production platforms & live interactive demos
+  <span style="color:#E24E1B;">stack</span>       - Architectural technology matrix (Frontend, Backend, Infra)
+  <span style="color:#E24E1B;">experience</span>  - Engineering career milestones & systems leadership
+  <span style="color:#E24E1B;">whoami</span>      - Professional background, location, and engineering philosophy
+  <span style="color:#E24E1B;">contact</span>     - Direct contact coordinates (Email, GitHub, LinkedIn)
+  <span style="color:#E24E1B;">theme</span>       - Live toggle between Light (Paper) and Dark (Void) themes
+  <span style="color:#E24E1B;">clear</span>       - Clear terminal buffer
+  <span style="color:#E24E1B;">exit</span>        - Close this Systems Terminal HUD
+        `);
+        break;
+
+      case 'projects':
+      case 'work':
+        printOutput(trimmed, `
+<span class="term-hl">LIVE PRODUCTION PLATFORMS & SYSTEM SPEC SHEETS:</span>
+
+[01] <span style="color:#E24E1B; font-weight:700;">Aether Report 2026</span> // AI Edge Mesh
+     Apple/Stripe Press-inspired annual report on N-Mindanao compute clusters.
+     Live: <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank">https://ninoredoble.github.io/aether-report-2026/</a>
+
+[02] <span style="color:#E24E1B; font-weight:700;">ClimaPocket Android</span> // Mobile & Telemetry
+     Pixel 9 Pro Material You 3.5 Agrometeorology Radar Studio.
+     Live: <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank">https://ninoredoble.github.io/clima-pocket-android/</a>
+
+[03] <span style="color:#E24E1B; font-weight:700;">Relay Core API</span> // Infrastructure Engine
+     Distributed Webhook Ingestion Engine with HMAC-SHA256 & UNIX TUI sandbox.
+     Live: <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank">https://ninoredoble.github.io/relay-core-api/</a>
+
+[04] <span style="color:#E24E1B; font-weight:700;">Hablon Textile Archive</span> // Cultural Vector Loom
+     Indigenous Handwoven Textile Preservation Folio with Procedural Math Loom.
+     Live: <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank">https://ninoredoble.github.io/hablon-textile-archive/</a>
+
+[05] <span style="color:#E24E1B; font-weight:700;">Mindanao Grid Mesh</span> // Sub-Transmission SCADA
+     Industrial Power Dispatch Mimic Board modeling 69kV/13.8kV feeders.
+     Live: <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank">https://ninoredoble.github.io/mindanao-grid-mesh/</a>
+
+[06] <span style="color:#E24E1B; font-weight:700;">Archipelago Marine Cadence</span> // Oceanography
+     Bathymetric Cartography & Pelagic Coastal Telemetry.
+     Live: <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank">https://ninoredoble.github.io/archipelago-marine-cadence/</a>
+
+[07] <span style="color:#E24E1B; font-weight:700;">Cagayan Basin Corridor</span> // Watershed Hydrology
+     Watershed Riparian Resilience Simulation.
+     Live: <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank">https://ninoredoble.github.io/cagayan-basin-corridor/</a>
+        `);
+        break;
+
+      case 'stack':
+      case 'skills':
+        printOutput(trimmed, `
+<span class="term-hl">TECHNOLOGY MATRIX & INFRASTRUCTURE:</span>
+  Languages:   Python, TypeScript, JavaScript (ES6+), C++, Java, PHP, HTML5/CSS3
+  Frameworks:  React, Next.js, FastAPI, Node.js, Express, Django, Laravel, Tailwind
+  Databases:   PostgreSQL, MySQL, Supabase, MongoDB, Redis (Idempotency)
+  DevOps/Ops:  Docker, Linux (Debian/Ubuntu), Git, GitHub Actions, Nginx, Vercel
+  Graphics:    Three.js, WebGL Shaders, Canvas API, Generative SVG Vector Math
+        `);
+        break;
+
+      case 'experience':
+      case 'exp':
+        printOutput(trimmed, `
+<span class="term-hl">CAREER TIMELINE & SYSTEMS ROLES:</span>
+  [2026] <span style="color:#FAF9F6; font-weight:600;">CEPALCO (Cagayan Electric Power & Light Co.)</span>
+         Enterprise Systems Developer Intern
+         - Enterprise internal ticketing & operational asset workflow automation.
+         - High-reliability fleet fuel tracking analytics portal with strict auditing.
+
+  [2024 - Present] <span style="color:#FAF9F6; font-weight:600;">Distributed Systems & Full-Stack Architect</span>
+         Independent Production Engineering & Open Source
+         - Shipped 7 live production platforms across Vercel, Supabase, and Docker.
+         - Procedural vector simulations, SCADA mimics, and distributed engines.
+
+  [2024 - 2025] <span style="color:#FAF9F6; font-weight:600;">BuyNaBay E-Commerce Platform</span>
+         Lead Full-Stack Systems Architect
+         - Regional Northern Mindanao marketplace platform.
+         - Scalable microservices backend, authentication, and inventory sync.
+        `);
+        break;
+
+      case 'whoami':
+      case 'bio':
+        printOutput(trimmed, `
+<span class="term-hl">G. NI&#209;O EMMANUEL G. REDOBLE (GNEGR)</span>
+Full-Stack Systems Developer & Software Architect based in Cagayan de Oro City, PH.
+Focus: Resilient distributed web systems, real-time telemetry, 3D WebGL graphics, and industrial-grade software engineering.
+Credo: "Built to move. Zero fluff, pure engineering."
+        `);
+        break;
+
+      case 'contact':
+        printOutput(trimmed, `
+<span class="term-hl">DIRECT CONTACT CHANNELS:</span>
+  Email:    <a href="mailto:redoble.gninoemmanuel@gmail.com">redoble.gninoemmanuel@gmail.com</a>
+  LinkedIn: <a href="https://linkedin.com/in/g-redoble" target="_blank">https://linkedin.com/in/g-redoble</a>
+  GitHub:   <a href="https://github.com/ninoredoble" target="_blank">https://github.com/ninoredoble</a>
+  Location: Cagayan de Oro City, Philippines
+        `);
+        break;
+
+      case 'theme':
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('gnegr_theme', nextTheme);
+        window.dispatchEvent(new CustomEvent('gnegr-theme-changed', { detail: { theme: nextTheme } }));
+        printOutput(trimmed, `Theme toggled to: <span style="color:#10B981; font-weight:700;">${nextTheme.toUpperCase()}</span> (${nextTheme === 'dark' ? 'Void #0A0A0A' : 'Paper #FAF9F6'})`);
+        break;
+
+      case 'clear':
+      case 'cls':
+        output.innerHTML = '';
+        break;
+
+      case 'exit':
+      case 'quit':
+        closeTerminal();
+        break;
+
+      default:
+        printOutput(trimmed, `zsh: command not found: <span style="color:#ff3366;">${escapeHtml(command)}</span>. Type '<span class="term-hl">help</span>' to list valid commands.`);
+        break;
+    }
+  }
 }
 
 // ==========================================================================
@@ -654,34 +920,7 @@ function initProjectFilters() {
   });
 }
 
-// ==========================================================================
-// 9. INTERACTIVE SKILL BADGES PHYSICS
-// ==========================================================================
-function initSkillsPhysics() {
-  const canvas = document.getElementById('skills-cloud');
-  const badges = document.querySelectorAll('.skill-badge');
 
-  if (!canvas || !badges.length) return;
-
-  canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mX = e.clientX - rect.left - rect.width / 2;
-    const mY = e.clientY - rect.top - rect.height / 2;
-
-    badges.forEach((badge, i) => {
-      const depth = ((i % 3) + 1) * 0.03;
-      const moveX = mX * depth;
-      const moveY = mY * depth;
-      badge.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-  });
-
-  canvas.addEventListener('mouseleave', () => {
-    badges.forEach((badge) => {
-      badge.style.transform = '';
-    });
-  });
-}
 
 // ==========================================================================
 // 10. CLIPBOARD COPY UTILITIES
