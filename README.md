@@ -31,7 +31,9 @@
 ├── js/
 │   └── main.js                    # WebGL 3D chassis, systems terminal HUD, theme engine
 ├── img/                           # Brand marks, project graphics, and vector emblems
-│   └── projects/                  # Live production platform preview imagery
+│   ├── projects/               # Live production platform preview imagery
+│   ├── gnegr.png               # Official GNEGR emblem
+│   └── gnegr.svg               # Vector brand mark
 ├── models/                        # 3D interactive assets
 │   └── gnegr.glb                  # GNEGR Motorsport SPEC-01 3D chassis model
 ├── video/                         # Cinematic media assets
