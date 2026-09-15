@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectFilters();
   initCopyButtons();
   initToastSystem();
-  initResumeModal();
   initContactForm();
 });
 
@@ -796,10 +795,9 @@ function initSystemsTerminal() {
   <span style="color:#E24E1B;">projects</span>    - Shipped production platforms & live interactive demos
   <span style="color:#E24E1B;">stack</span>       - Architectural technology matrix (Frontend, Backend, Infra)
   <span style="color:#E24E1B;">experience</span>  - Engineering career milestones & systems leadership
-  <span style="color:#E24E1B;">resume</span>      - Candidate dossier, credentials, and PDF specs
+  <span style="color:#E24E1B;">resume</span>      - Candidate credentials & official PDF specs
   <span style="color:#E24E1B;">whoami</span>      - Professional background, location, and engineering philosophy
-  <span style="color:#E24E1B;">contact</span>     - Direct contact coordinates (Email, Phone, Profiles)
-  <span style="color:#E24E1B;">phone</span>       - Direct phone and WhatsApp line
+  <span style="color:#E24E1B;">contact</span>     - Direct contact coordinates (Email & verified profiles)
   <span style="color:#E24E1B;">theme</span>       - Live toggle between Light (Paper) and Dark (Void) themes
   <span style="color:#E24E1B;">clear</span>       - Clear terminal buffer
   <span style="color:#E24E1B;">exit</span>        - Close this Systems Terminal HUD
@@ -815,28 +813,6 @@ function initSystemsTerminal() {
   Networking:  CCNA: Enterprise Networking, Security & Automation (Credly 2024)
   Experience:  CEPALCO Intern (2026), Lead Architect @ BuyNaBay (2024-2026), Freelance (2021-2025)
   Document:    <a href="resume.pdf" target="_blank" style="color:#E24E1B; font-weight:700;">View Official PDF &nearr;</a> | <a href="resume.pdf" download="G_Nino_Emmanuel_Redoble_Resume.pdf" style="color:#E24E1B;">Download PDF (100 KB) &darr;</a>
-  Quick Action: <button class="term-quick-btn" style="display:inline-block; margin-top:0.3rem;" onclick="window.openResumeModal?.()">Launch On-Page Dossier Modal</button>
-        `);
-        break;
-
-      case 'phone':
-      case 'call':
-        printOutput(trimmed, `
-<span class="term-hl">VERIFIED DIRECT PHONE / WHATSAPP:</span>
-  Number:   <a href="tel:+639096781803">(+63) 909 678-1803</a>
-  Channel:  Direct Voice Calls & WhatsApp
-  Location: Cagayan De Oro City, Philippines (UTC+8)
-        `);
-        break;
-
-      case 'contact':
-        printOutput(trimmed, `
-<span class="term-hl">DIRECT CONTACT CHANNELS:</span>
-  Email:    <a href="mailto:redoble.gninoemmanuel@gmail.com">redoble.gninoemmanuel@gmail.com</a>
-  Phone:    <a href="tel:+639096781803">(+63) 909 678-1803</a> (Calls & WhatsApp)
-  LinkedIn: <a href="https://linkedin.com/in/g-redoble" target="_blank">https://linkedin.com/in/g-redoble</a>
-  GitHub:   <a href="https://github.com/ninoredoble" target="_blank">https://github.com/ninoredoble</a>
-  Location: Cagayan de Oro City, Philippines (UTC+8)
         `);
         break;
 
@@ -991,7 +967,6 @@ function initProjectFilters() {
 // ==========================================================================
 function initCopyButtons() {
   const emailBtns = document.querySelectorAll('.copy-email-btn');
-  const phoneBtns = document.querySelectorAll('.copy-phone-btn');
 
   emailBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
@@ -1004,29 +979,6 @@ function initCopyButtons() {
         btn.style.color = 'var(--brand-ember)';
 
         window.showToast?.('CLIPBOARD // SYNC', 'Email address copied to clipboard');
-
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.style.borderColor = '';
-          btn.style.color = '';
-        }, 2200);
-      }).catch((err) => {
-        console.error('Copy failed:', err);
-      });
-    });
-  });
-
-  phoneBtns.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const phone = btn.getAttribute('data-phone') || '(+63) 909 678-1803';
-      navigator.clipboard.writeText(phone).then(() => {
-        const originalText = btn.textContent;
-        btn.textContent = 'Copied!';
-        btn.style.borderColor = 'var(--brand-ember)';
-        btn.style.color = 'var(--brand-ember)';
-
-        window.showToast?.('CLIPBOARD // SYNC', 'Phone number copied to clipboard');
 
         setTimeout(() => {
           btn.textContent = originalText;
@@ -1070,69 +1022,7 @@ function initToastSystem() {
 }
 
 // ==========================================================================
-// 12. CANDIDATE DOSSIER & RESUME MODAL CONTROLLER
-// ==========================================================================
-function initResumeModal() {
-  const modal = document.getElementById('resume-modal');
-  const backdrop = document.getElementById('resume-backdrop');
-  const closeBtn = document.getElementById('resume-modal-close');
-  const closeAltBtn = document.querySelector('.resume-modal-close-alt');
-  const tabBtns = document.querySelectorAll('.resume-modal-tab-bar .resume-tab-btn');
-  const tabPanels = document.querySelectorAll('.resume-modal-body .resume-tab-panel');
-
-  if (!modal) return;
-
-  window.openResumeModal = function() {
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closeResumeModal = function() {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-
-  // Triggers across the page
-  const openTriggers = document.querySelectorAll('.open-resume-modal-btn, #hero-resume-trigger, #nav-resume-btn');
-  openTriggers.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
-        e.preventDefault();
-        window.openResumeModal();
-      }
-    });
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', window.closeResumeModal);
-  if (closeAltBtn) closeAltBtn.addEventListener('click', window.closeResumeModal);
-  if (backdrop) backdrop.addEventListener('click', window.closeResumeModal);
-
-  // ESC key to close
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-      e.preventDefault();
-      window.closeResumeModal();
-    }
-  });
-
-  // Tab switching inside modal
-  tabBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach((b) => b.classList.remove('active'));
-      tabPanels.forEach((p) => p.classList.remove('active'));
-
-      btn.classList.add('active');
-      const tabId = btn.getAttribute('data-tab');
-      const targetPanel = document.getElementById(`resume-tab-${tabId}`);
-      if (targetPanel) targetPanel.classList.add('active');
-    });
-  });
-}
-
-// ==========================================================================
-// 13. DIRECT TRANSMISSION CONTACT FORM ENGINE
+// 12. DIRECT TRANSMISSION CONTACT FORM ENGINE
 // ==========================================================================
 function initContactForm() {
   const form = document.getElementById('contact-form');

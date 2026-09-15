@@ -83,10 +83,9 @@
 
       <nav class="site-nav" id="site-nav" aria-label="Main Navigation">
         <a href="#intro" class="nav-link active">Home</a>
-        <a href="#work" class="nav-link">Work</a>
         <a href="#stack" class="nav-link">Stack</a>
+        <a href="#work" class="nav-link">Work</a>
         <a href="#experience" class="nav-link">Experience</a>
-        <a href="resume.pdf" class="nav-link resume-nav-link" id="nav-resume-btn" target="_blank" rel="noopener noreferrer">Resume</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
@@ -99,7 +98,6 @@
           <span class="theme-icon light-icon">&#9728;</span>
           <span class="theme-icon dark-icon">&#9790;</span>
         </button>
-        <a href="#contact" class="btn-pill-primary magnetic-btn header-contact-cta">Contact &darr;</a>
       </div>
     </div>
   </header>
@@ -129,9 +127,6 @@
               </a>
               <a href="#work" class="hero-cta-btn secondary">
                 <span>Explore Work &rarr;</span>
-              </a>
-              <a href="resume.pdf" class="hero-cta-btn outline-spec magnetic-btn" id="hero-resume-trigger" target="_blank" rel="noopener noreferrer">
-                <span>Resume / Specs &nearr;</span>
               </a>
             </div>
 
@@ -627,27 +622,6 @@
               </div>
             </div>
 
-            <!-- Phone & WhatsApp Channel -->
-            <div class="verified-channel-item">
-              <div class="channel-info">
-                <span class="channel-label">Direct Phone / WhatsApp</span>
-                <span class="channel-value">(+63) 909 678-1803</span>
-              </div>
-              <div class="channel-actions">
-                <a href="tel:+639096781803" class="btn-channel primary magnetic-btn">Call / Dial &nearr;</a>
-                <button class="btn-channel copy-phone-btn" data-phone="(+63) 909 678-1803">Copy Number</button>
-              </div>
-            </div>
-
-            <!-- Location & Availability Indicator -->
-            <div class="channel-status-box">
-              <div class="status-indicator-dot"></div>
-              <div class="status-info-text">
-                <span class="status-title">Location & Availability:</span>
-                <span class="status-detail">Cagayan de Oro City, Philippines &bull; UTC+8 (PHT) &bull; Open for Remote & On-Site Roles</span>
-              </div>
-            </div>
-
             <!-- Social Profiles Strip -->
             <div class="social-channels-strip">
               <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer" class="social-link-item">
@@ -658,30 +632,10 @@
                 <span class="social-name">GitHub</span>
                 <span class="social-handle">github.com/ninoredoble &nearr;</span>
               </a>
-            </div>
-
-            <!-- Resume & Credentials Dossier Box -->
-            <div class="resume-dossier-card">
-              <div class="dossier-header">
-                <span class="dossier-kicker">CURRICULUM VITAE // SPECS</span>
-                <h4 class="dossier-title">Official Candidate Dossier</h4>
-                <div class="dossier-badges">
-                  <span class="dossier-badge">BS IT &bull; Magna Cum Laude</span>
-                  <span class="dossier-badge">CCNA Certified</span>
-                  <span class="dossier-badge">PDF (100.6 KB)</span>
-                </div>
-              </div>
-              <div class="dossier-actions">
-                <button type="button" class="btn-channel primary magnetic-btn open-resume-modal-btn">
-                  Preview Resume (Modal) &nearr;
-                </button>
-                <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-channel">
-                  Open PDF &nearr;
-                </a>
-                <a href="resume.pdf" download="G_Nino_Emmanuel_Redoble_Resume.pdf" class="btn-channel">
-                  Download PDF &darr;
-                </a>
-              </div>
+              <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="social-link-item">
+                <span class="social-name">Resume / CV</span>
+                <span class="social-handle">View PDF &nearr;</span>
+              </a>
             </div>
 
           </div>
@@ -820,10 +774,9 @@
         <div class="term-line term-welcome">GNEGR INTERACTIVE SYSTEMS TERMINAL // NI&Ntilde;O REDOBLE</div>
         <div class="term-line term-muted">Type <span class="term-hl">help</span> to list commands, or click any shortcut below:</div>
         <div class="term-shortcuts">
-          <button class="term-quick-btn" data-cmd="projects">projects</button>
           <button class="term-quick-btn" data-cmd="stack">stack</button>
+          <button class="term-quick-btn" data-cmd="projects">projects</button>
           <button class="term-quick-btn" data-cmd="exp">experience</button>
-          <button class="term-quick-btn" data-cmd="resume">resume</button>
           <button class="term-quick-btn" data-cmd="whoami">whoami</button>
           <button class="term-quick-btn" data-cmd="contact">contact</button>
           <button class="term-quick-btn" data-cmd="theme">theme</button>
@@ -833,184 +786,7 @@
       </div>
       <div class="terminal-input-bar">
         <span class="term-prompt">gnegr&gt;</span>
-        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type command here (e.g. 'projects', 'resume', 'stack', 'whoami')..." autocomplete="off" spellcheck="false">
-      </div>
-    </div>
-  </div>
-
-  <!-- Interactive Candidate Dossier & Resume Modal -->
-  <div class="resume-modal" id="resume-modal" aria-hidden="true">
-    <div class="resume-backdrop" id="resume-backdrop"></div>
-    <div class="resume-window" id="resume-window">
-      <div class="resume-modal-header">
-        <div class="resume-modal-title-group">
-          <span class="resume-modal-badge">[DOSSIER // SPECIFICATIONS]</span>
-          <h3 class="resume-modal-name">G. Ni&ntilde;o Emmanuel G. Redoble</h3>
-          <p class="resume-modal-role">Full-Stack Systems Developer &bull; Magna Cum Laude &bull; CCNA Certified</p>
-        </div>
-        <div class="resume-modal-actions">
-          <a href="resume.pdf" download="G_Nino_Emmanuel_Redoble_Resume.pdf" class="btn-channel primary magnetic-btn">
-            Download PDF &darr;
-          </a>
-          <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-channel">
-            Open in Tab &nearr;
-          </a>
-          <button class="resume-modal-close" id="resume-modal-close" aria-label="Close Resume Modal">&times;</button>
-        </div>
-      </div>
-
-      <!-- Modal Tab Controls -->
-      <div class="resume-modal-tab-bar">
-        <button class="resume-tab-btn active" data-tab="summary">Executive Summary</button>
-        <button class="resume-tab-btn" data-tab="pdf">Official PDF Document</button>
-      </div>
-
-      <div class="resume-modal-body">
-        <!-- Tab 1: Executive Summary -->
-        <div class="resume-tab-panel active" id="resume-tab-summary">
-          
-          <div class="dossier-meta-grid">
-            <div class="dossier-meta-item">
-              <span class="meta-label">STATUS</span>
-              <span class="meta-value" style="color: var(--brand-ember); font-weight: 600;">Magna Cum Laude Graduate</span>
-            </div>
-            <div class="dossier-meta-item">
-              <span class="meta-label">NETWORKING</span>
-              <span class="meta-value">CCNA Enterprise & Automation</span>
-            </div>
-            <div class="dossier-meta-item">
-              <span class="meta-label">LOCATION</span>
-              <span class="meta-value">Cagayan De Oro City, PH</span>
-            </div>
-            <div class="dossier-meta-item">
-              <span class="meta-label">PHONE / DIRECT</span>
-              <span class="meta-value">(+63) 909 678-1803</span>
-            </div>
-          </div>
-
-          <!-- Section: Career Objective -->
-          <div class="dossier-block">
-            <h4 class="dossier-heading">Career Objective</h4>
-            <p class="dossier-text">
-              Driven IT graduate and Technical Virtual Assistant adept at bridging systems administration, web management, and streamlined digital operations. Backed by hands-on experience in client consulting, project coordination, and platform maintenance. Seeking a dynamic operational role to apply robust technical troubleshooting and administrative precision toward maximizing business efficiency.
-            </p>
-          </div>
-
-          <!-- Section: Education & Certification -->
-          <div class="dossier-block">
-            <h4 class="dossier-heading">Education & Certifications</h4>
-            <div class="dossier-timeline-entry">
-              <div class="entry-header">
-                <strong>BS in Information Technology</strong> &mdash; <em>Graduated Magna Cum Laude</em>
-                <span class="entry-period">2022 &ndash; 2026</span>
-              </div>
-              <div class="entry-sub">University of Science and Technology of Southern Philippines (USTP)</div>
-              <p class="entry-note">Dean's Lister across all academic terms (2022 &ndash; 2026).</p>
-            </div>
-
-            <div class="dossier-timeline-entry">
-              <div class="entry-header">
-                <strong>CCNA: Enterprise Networking, Security, and Automation</strong>
-                <span class="entry-period">Credly (2024)</span>
-              </div>
-              <div class="entry-sub">Cisco Certified Network Associate</div>
-              <p class="entry-note">Enterprise routing & switching, network security architecture, automated network programming.</p>
-            </div>
-          </div>
-
-          <!-- Section: Work Experience -->
-          <div class="dossier-block">
-            <h4 class="dossier-heading">Work Experience</h4>
-            
-            <div class="dossier-timeline-entry">
-              <div class="entry-header">
-                <strong>UI/UX & System Development Intern</strong> &mdash; <em>CEPALCO</em>
-                <span class="entry-period">2026</span>
-              </div>
-              <div class="entry-sub">Cagayan Electric Power & Light Co. &bull; Cagayan De Oro City</div>
-              <ul class="entry-bullets">
-                <li>Managed full cycle implementation and user interface design for web-based internal tools, improving operational workflow efficiency for internal teams.</li>
-                <li>Authored comprehensive technical documentation, user guides, and system manuals to ensure seamless onboarding and operational continuity.</li>
-                <li>Managed database configurations, system updates, and server reliability using Docker and Nginx environments.</li>
-              </ul>
-            </div>
-
-            <div class="dossier-timeline-entry">
-              <div class="entry-header">
-                <strong>Academic Projects Consultant</strong> &mdash; <em>Freelance</em>
-                <span class="entry-period">2021 &ndash; 2025</span>
-              </div>
-              <ul class="entry-bullets">
-                <li>Provided end-to-end technical virtual assistance and project consulting to 10+ clients, managing timelines, deliverables, and communication.</li>
-                <li>Reviewed and audited technical deliverables to ensure high standards, strict compliance, and timely project completion.</li>
-              </ul>
-            </div>
-
-            <div class="dossier-timeline-entry">
-              <div class="entry-header">
-                <strong>Developer & Team Lead &mdash; BuyNaBay Campus Marketplace</strong>
-                <span class="entry-period">2024 &ndash; 2026</span>
-              </div>
-              <ul class="entry-bullets">
-                <li>Coordinated a 5-member remote team using Agile workflows to manage administrative scheduling, task delegation, and project milestones.</li>
-                <li>Administered the web platform panel, overseeing real-time content moderation, data management, and user issue resolution.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Section: Core Technical Skills -->
-          <div class="dossier-block">
-            <h4 class="dossier-heading">Core Technical Skills</h4>
-            <div class="dossier-skills-cluster">
-              <div class="skill-tag-group">
-                <span class="skill-tag-title">Full-Stack & Systems:</span>
-                <span class="skill-tag">React.js</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">PHP / Laravel</span>
-                <span class="skill-tag">FastAPI</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">HTML5 / CSS3</span>
-              </div>
-              <div class="skill-tag-group">
-                <span class="skill-tag-title">Databases & Infrastructure:</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">Supabase</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">Nginx</span>
-                <span class="skill-tag">Linux / Bash</span>
-              </div>
-              <div class="skill-tag-group">
-                <span class="skill-tag-title">Operations & Virtual Assistance:</span>
-                <span class="skill-tag">Executive Support</span>
-                <span class="skill-tag">Workflow Automation</span>
-                <span class="skill-tag">Agile (Jira / Trello / Asana)</span>
-                <span class="skill-tag">Git / GitHub</span>
-                <span class="skill-tag">Figma</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Tab 2: Embedded PDF Viewer -->
-        <div class="resume-tab-panel" id="resume-tab-pdf">
-          <div class="resume-embed-container">
-            <iframe src="resume.pdf#toolbar=1" class="resume-iframe" title="GNEGR Resume PDF Preview"></iframe>
-            <div class="resume-fallback-banner">
-              <span>Viewing on mobile or browser blocked the embed?</span>
-              <a href="resume.pdf" target="_blank" class="btn-channel primary">View Full PDF in New Tab &nearr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="resume-modal-footer">
-        <span class="resume-footer-meta">Official Document &bull; Verified G. Ni&ntilde;o Emmanuel G. Redoble &bull; Magna Cum Laude</span>
-        <div class="resume-footer-links">
-          <a href="resume.pdf" download="G_Nino_Emmanuel_Redoble_Resume.pdf" class="btn-channel primary magnetic-btn">Download PDF (100 KB) &darr;</a>
-          <button type="button" class="btn-channel resume-modal-close-alt">Close</button>
-        </div>
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type command here (e.g. 'stack', 'projects', 'whoami')..." autocomplete="off" spellcheck="false">
       </div>
     </div>
   </div>
