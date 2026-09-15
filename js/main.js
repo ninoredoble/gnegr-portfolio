@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSystemsTerminal();
   initProjectFilters();
   initCopyButtons();
+  initToastSystem();
+  initResumeModal();
+  initContactForm();
 });
 
 // ==========================================================================
@@ -757,7 +760,7 @@ function initSystemsTerminal() {
       e.preventDefault();
       const val = input.value.trim().toLowerCase();
       if (val) {
-        const commands = ['projects', 'stack', 'experience', 'whoami', 'contact', 'theme', 'clear', 'exit', 'help'];
+        const commands = ['projects', 'stack', 'experience', 'whoami', 'resume', 'contact', 'phone', 'theme', 'clear', 'exit', 'help'];
         const m = commands.find(c => c.startsWith(val));
         if (m) input.value = m;
       }
@@ -793,11 +796,47 @@ function initSystemsTerminal() {
   <span style="color:#E24E1B;">projects</span>    - Shipped production platforms & live interactive demos
   <span style="color:#E24E1B;">stack</span>       - Architectural technology matrix (Frontend, Backend, Infra)
   <span style="color:#E24E1B;">experience</span>  - Engineering career milestones & systems leadership
+  <span style="color:#E24E1B;">resume</span>      - Candidate dossier, credentials, and PDF specs
   <span style="color:#E24E1B;">whoami</span>      - Professional background, location, and engineering philosophy
-  <span style="color:#E24E1B;">contact</span>     - Direct contact coordinates (Email, GitHub, LinkedIn)
+  <span style="color:#E24E1B;">contact</span>     - Direct contact coordinates (Email, Phone, Profiles)
+  <span style="color:#E24E1B;">phone</span>       - Direct phone and WhatsApp line
   <span style="color:#E24E1B;">theme</span>       - Live toggle between Light (Paper) and Dark (Void) themes
   <span style="color:#E24E1B;">clear</span>       - Clear terminal buffer
   <span style="color:#E24E1B;">exit</span>        - Close this Systems Terminal HUD
+        `);
+        break;
+
+      case 'resume':
+      case 'cv':
+        printOutput(trimmed, `
+<span class="term-hl">CANDIDATE DOSSIER & RESUME SPECS:</span>
+  Name:        G. Ni&ntilde;o Emmanuel G. Redoble (GNEGR)
+  Status:      BS in Information Technology, USTP &bull; <span style="color:#E24E1B; font-weight:700;">Magna Cum Laude</span>
+  Networking:  CCNA: Enterprise Networking, Security & Automation (Credly 2024)
+  Experience:  CEPALCO Intern (2026), Lead Architect @ BuyNaBay (2024-2026), Freelance (2021-2025)
+  Document:    <a href="resume.pdf" target="_blank" style="color:#E24E1B; font-weight:700;">View Official PDF &nearr;</a> | <a href="resume.pdf" download="G_Nino_Emmanuel_Redoble_Resume.pdf" style="color:#E24E1B;">Download PDF (100 KB) &darr;</a>
+  Quick Action: <button class="term-quick-btn" style="display:inline-block; margin-top:0.3rem;" onclick="window.openResumeModal?.()">Launch On-Page Dossier Modal</button>
+        `);
+        break;
+
+      case 'phone':
+      case 'call':
+        printOutput(trimmed, `
+<span class="term-hl">VERIFIED DIRECT PHONE / WHATSAPP:</span>
+  Number:   <a href="tel:+639096781803">(+63) 909 678-1803</a>
+  Channel:  Direct Voice Calls & WhatsApp
+  Location: Cagayan De Oro City, Philippines (UTC+8)
+        `);
+        break;
+
+      case 'contact':
+        printOutput(trimmed, `
+<span class="term-hl">DIRECT CONTACT CHANNELS:</span>
+  Email:    <a href="mailto:redoble.gninoemmanuel@gmail.com">redoble.gninoemmanuel@gmail.com</a>
+  Phone:    <a href="tel:+639096781803">(+63) 909 678-1803</a> (Calls & WhatsApp)
+  LinkedIn: <a href="https://linkedin.com/in/g-redoble" target="_blank">https://linkedin.com/in/g-redoble</a>
+  GitHub:   <a href="https://github.com/ninoredoble" target="_blank">https://github.com/ninoredoble</a>
+  Location: Cagayan de Oro City, Philippines (UTC+8)
         `);
         break;
 
@@ -948,19 +987,46 @@ function initProjectFilters() {
 
 
 // ==========================================================================
-// 10. CLIPBOARD COPY UTILITIES
+// 10. CLIPBOARD COPY UTILITIES & FEEDBACK
 // ==========================================================================
 function initCopyButtons() {
-  const copyBtns = document.querySelectorAll('.copy-email-btn');
+  const emailBtns = document.querySelectorAll('.copy-email-btn');
+  const phoneBtns = document.querySelectorAll('.copy-phone-btn');
 
-  copyBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
+  emailBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const email = btn.getAttribute('data-email') || 'redoble.gninoemmanuel@gmail.com';
       navigator.clipboard.writeText(email).then(() => {
         const originalText = btn.textContent;
         btn.textContent = 'Copied!';
-        btn.style.borderColor = 'var(--accent-emerald)';
-        btn.style.color = 'var(--accent-emerald)';
+        btn.style.borderColor = 'var(--brand-ember)';
+        btn.style.color = 'var(--brand-ember)';
+
+        window.showToast?.('CLIPBOARD // SYNC', 'Email address copied to clipboard');
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 2200);
+      }).catch((err) => {
+        console.error('Copy failed:', err);
+      });
+    });
+  });
+
+  phoneBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const phone = btn.getAttribute('data-phone') || '(+63) 909 678-1803';
+      navigator.clipboard.writeText(phone).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.borderColor = 'var(--brand-ember)';
+        btn.style.color = 'var(--brand-ember)';
+
+        window.showToast?.('CLIPBOARD // SYNC', 'Phone number copied to clipboard');
 
         setTimeout(() => {
           btn.textContent = originalText;
@@ -973,3 +1039,265 @@ function initCopyButtons() {
     });
   });
 }
+
+// ==========================================================================
+// 11. GLOBAL HUD TOAST NOTIFICATION ENGINE
+// ==========================================================================
+function initToastSystem() {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  window.showToast = function(tag, message, duration = 3400) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-hud';
+    toast.innerHTML = `
+      <div class="toast-icon">&#10003;</div>
+      <div class="toast-content">
+        <span class="toast-tag">${tag}</span>
+        <span class="toast-text">${message}</span>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('toast-fadeout');
+      setTimeout(() => {
+        toast.remove();
+      }, 350);
+    }, duration);
+  };
+}
+
+// ==========================================================================
+// 12. CANDIDATE DOSSIER & RESUME MODAL CONTROLLER
+// ==========================================================================
+function initResumeModal() {
+  const modal = document.getElementById('resume-modal');
+  const backdrop = document.getElementById('resume-backdrop');
+  const closeBtn = document.getElementById('resume-modal-close');
+  const closeAltBtn = document.querySelector('.resume-modal-close-alt');
+  const tabBtns = document.querySelectorAll('.resume-modal-tab-bar .resume-tab-btn');
+  const tabPanels = document.querySelectorAll('.resume-modal-body .resume-tab-panel');
+
+  if (!modal) return;
+
+  window.openResumeModal = function() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeResumeModal = function() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  // Triggers across the page
+  const openTriggers = document.querySelectorAll('.open-resume-modal-btn, #hero-resume-trigger, #nav-resume-btn');
+  openTriggers.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      if (e.button === 0 && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        window.openResumeModal();
+      }
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', window.closeResumeModal);
+  if (closeAltBtn) closeAltBtn.addEventListener('click', window.closeResumeModal);
+  if (backdrop) backdrop.addEventListener('click', window.closeResumeModal);
+
+  // ESC key to close
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      e.preventDefault();
+      window.closeResumeModal();
+    }
+  });
+
+  // Tab switching inside modal
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach((b) => b.classList.remove('active'));
+      tabPanels.forEach((p) => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const tabId = btn.getAttribute('data-tab');
+      const targetPanel = document.getElementById(`resume-tab-${tabId}`);
+      if (targetPanel) targetPanel.classList.add('active');
+    });
+  });
+}
+
+// ==========================================================================
+// 13. DIRECT TRANSMISSION CONTACT FORM ENGINE
+// ==========================================================================
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const formCard = document.getElementById('contact-form-wrapper');
+  const nameInput = document.getElementById('contact-name');
+  const emailInput = document.getElementById('contact-email');
+  const subjectInput = document.getElementById('contact-subject');
+  const messageInput = document.getElementById('contact-message');
+  const charCounter = document.getElementById('char-counter');
+  const submitBtn = document.getElementById('contact-submit-btn');
+  const successCard = document.getElementById('contact-form-success');
+  const errorCard = document.getElementById('contact-form-error');
+  const errorMsg = document.getElementById('contact-form-error-msg');
+  const resetBtn = document.getElementById('reset-contact-form-btn');
+  const fallbackMailto = document.getElementById('contact-mailto-fallback');
+
+  // Smooth scroll & focus highlight for all #contact triggers
+  const contactLinks = document.querySelectorAll('a[href="#contact"]');
+  contactLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById('contact');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (formCard) {
+          formCard.classList.add('is-focused-highlight');
+          setTimeout(() => {
+            formCard.classList.remove('is-focused-highlight');
+          }, 1800);
+        }
+        if (nameInput) {
+          setTimeout(() => {
+            nameInput.focus();
+          }, 600);
+        }
+      }
+    });
+  });
+
+  // Character counter
+  if (messageInput && charCounter) {
+    messageInput.addEventListener('input', () => {
+      const len = messageInput.value.length;
+      charCounter.textContent = `${len} / 1000`;
+      if (len >= 950) {
+        charCounter.style.color = 'var(--brand-ember)';
+      } else {
+        charCounter.style.color = 'var(--text-subtle)';
+      }
+      updateMailtoFallback();
+    });
+  }
+
+  // Update fallback mailto dynamically
+  function updateMailtoFallback() {
+    if (!fallbackMailto) return;
+    const name = nameInput ? nameInput.value.trim() : '';
+    const subj = subjectInput ? subjectInput.value : 'Project Inquiry';
+    const msg = messageInput ? messageInput.value.trim() : '';
+
+    const subjectStr = encodeURIComponent(`[GNEGR Contact] ${subj}${name ? ` - from ${name}` : ''}`);
+    const bodyStr = encodeURIComponent(`${msg}\n\n--\nSender: ${name || 'Website Visitor'}`);
+    fallbackMailto.href = `mailto:redoble.gninoemmanuel@gmail.com?subject=${subjectStr}&body=${bodyStr}`;
+  }
+
+  if (nameInput) nameInput.addEventListener('input', updateMailtoFallback);
+  if (subjectInput) subjectInput.addEventListener('change', updateMailtoFallback);
+
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (errorCard) errorCard.style.display = 'none';
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const subject = subjectInput ? subjectInput.value : 'General Inquiry';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    // Validation
+    if (!name || !email || !message) {
+      if (errorCard) {
+        errorCard.style.display = 'flex';
+        if (errorMsg) errorMsg.textContent = 'Please fill out all required fields (*).';
+      }
+      window.showToast?.('VALIDATION // ERROR', 'Please complete all required fields.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      if (errorCard) {
+        errorCard.style.display = 'flex';
+        if (errorMsg) errorMsg.textContent = 'Please enter a valid email address.';
+      }
+      window.showToast?.('VALIDATION // ERROR', 'Invalid email format.');
+      if (emailInput) emailInput.focus();
+      return;
+    }
+
+    // Set loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnSpinner = submitBtn.querySelector('.btn-spinner');
+      if (btnText) btnText.textContent = 'Transmitting...';
+      if (btnSpinner) btnSpinner.style.display = 'inline-block';
+    }
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/redoble.gninoemmanuel@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          _subject: `[GNEGR Direct Transmission] ${subject} - from ${name}`,
+          message: message,
+          _captcha: 'false'
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success !== 'false') {
+        // Successful transmission
+        form.style.display = 'none';
+        if (successCard) successCard.style.display = 'block';
+        window.showToast?.('TRANSMISSION // SUCCESS', 'Message transmitted to Nino Redoble.');
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.warn('Asynchronous submission error, falling back to mail client:', err);
+      if (errorCard) {
+        errorCard.style.display = 'flex';
+        if (errorMsg) {
+          errorMsg.innerHTML = `Direct dispatch encountered a network block. <a href="${fallbackMailto.href}" style="color:var(--brand-ember); text-decoration:underline; font-weight:700;">Click here to dispatch directly via your Email Client &nearr;</a>`;
+        }
+      }
+      window.showToast?.('DISPATCH // NOTICE', 'Network block. Click link to launch email app.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnSpinner = submitBtn.querySelector('.btn-spinner');
+        if (btnText) btnText.textContent = 'Transmit Message →';
+        if (btnSpinner) btnSpinner.style.display = 'none';
+      }
+    }
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      if (charCounter) charCounter.textContent = '0 / 1000';
+      if (successCard) successCard.style.display = 'none';
+      if (errorCard) errorCard.style.display = 'none';
+      form.style.display = 'flex';
+      updateMailtoFallback();
+    });
+  }
+}
+
