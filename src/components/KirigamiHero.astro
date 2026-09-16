@@ -1,0 +1,190 @@
+---
+// The home hero: the KIRIGAMI paper diorama (MIT, see src/kirigami/LICENSE.md), unchanged
+// art, plus our Mindanao additions. React hydrates the server-rendered markup below, so it
+// must stay byte-for-byte what scripts/extract-kirigami.mjs wrote.
+import scene from '../kirigami/scene.html?raw';
+
+interface Props {
+  name: string;
+  nav: { href: string; label: string }[];
+}
+const { name, nav } = Astro.props;
+const [first, ...rest] = name.split(' ');
+---
+
+<section class="hero" aria-label="Introduction">
+  <div id="standalone-root" style="display:contents" set:html={scene} />
+
+  <div class="overlay">
+    <nav aria-label="Main">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+    </nav>
+    <div class="foot">
+      <h1 class="name display">
+        <span class="w">{first}</span> <span class="w">{rest.join(' ')}</span>
+      </h1>
+      <a class="scroll" href="#intro">SCROLL ↓</a>
+    </div>
+  </div>
+</section>
+
+<script is:inline defer src="/kirigami/kirigami.js"></script>
+<script is:inline defer src="/kirigami/mindanao.js"></script>
+<script>
+  // Reveal the scene once React has hydrated and folded it for the opening unfold, so the
+  // unfolded server render never snaps shut on screen. Failsafe: show it after 1.5 s anyway.
+  const ready = () => document.body.classList.add('scene-ready');
+  const onReady = () => requestAnimationFrame(() => requestAnimationFrame(ready));
+  if ((window as { __kirigamiReady?: boolean }).__kirigamiReady) onReady();
+  else addEventListener('kirigami:ready', onReady, { once: true });
+  setTimeout(ready, 1500);
+</script>
+
+<style is:global>
+  /* The scene's own elements. Its 450 KB template stylesheet is not shipped; these few
+     rules replace the utilities its markup used. */
+  #standalone-root > main {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+  }
+  .kirigami-svg-root {
+    display: block;
+  }
+  .kirigami-stage {
+    transition: opacity 0.5s ease;
+  }
+  .js body:not(.scene-ready) .kirigami-stage {
+    opacity: 0;
+    animation: scene-failsafe 0s 3s forwards;
+  }
+  @keyframes scene-failsafe {
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<style>
+  .hero {
+    position: relative;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 100dvh;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(16px, 3vw, 40px);
+  }
+  .overlay a {
+    pointer-events: auto;
+  }
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(14px, 2.4vw, 32px);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  nav a {
+    color: var(--rosewood);
+    text-decoration: none;
+    padding: 12px 2px;
+  }
+  nav a:hover {
+    color: var(--sakura);
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+  }
+  .name {
+    color: var(--rosewood);
+    font-size: clamp(64px, 15.5vw, 250px);
+    line-height: 0.8;
+    letter-spacing: -0.005em;
+    overflow: hidden;
+    padding-top: 0.06em;
+    text-shadow:
+      0 2px 0 var(--paper),
+      0 6px 18px rgb(77 41 38 / 0.18);
+  }
+  .w {
+    display: inline-block;
+  }
+  .scroll {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--paper);
+    background: var(--rosewood);
+    padding: 10px 14px;
+    text-decoration: none;
+  }
+
+  /* Entrance: the name rises once the paper has mostly unfolded. */
+  :global(.js) .w {
+    transform: translateY(105%);
+    opacity: 0;
+    animation: rise 1s var(--ease-out) 1.1s forwards;
+  }
+  :global(.js) .w + .w {
+    animation-delay: 1.24s;
+  }
+  :global(.js) nav,
+  :global(.js) .scroll {
+    opacity: 0;
+    animation: fade 0.8s ease 1.6s forwards;
+  }
+  @keyframes rise {
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+  @keyframes fade {
+    to {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .w,
+    :global(.js) nav,
+    :global(.js) .scroll {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (max-width: 600px) {
+    nav {
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+    nav a {
+      padding: 12px 0;
+    }
+    .scroll {
+      display: none;
+    }
+    .name {
+      font-size: clamp(64px, 24vw, 120px);
+      line-height: 0.82;
+    }
+    .overlay {
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+  }
+</style>

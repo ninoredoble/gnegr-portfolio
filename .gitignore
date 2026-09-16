@@ -4,3 +4,10 @@ dist
 # Local notes & user instruction files
 instructions.md
 feedback.md
+
+# Astro
+.astro
+
+# Commercial font: personal-use licence only until a webfont licence is bought.
+# Never commit it to this public repo; the site falls back to a system condensed face.
+public/fonts/analogy.*

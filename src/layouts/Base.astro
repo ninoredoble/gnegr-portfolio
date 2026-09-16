@@ -1,0 +1,70 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import '../styles/global.css';
+
+// Analogy is local-only until its webfont licence is bought (see .gitignore), so the
+// @font-face is emitted only when the file is present: no 404s in production.
+const hasAnalogy = existsSync(join(process.cwd(), 'public', 'fonts', 'analogy.otf'));
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Niño Redoble · AI product engineer',
+  description = 'I design, build and run software, lately with a crew of AI agents. Co-founder of MixCortex, building Kivora.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#fdf6eb" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    {
+      hasAnalogy && (
+        <>
+          <link rel="preload" href="/fonts/analogy.otf" as="font" type="font/otf" crossorigin />
+          <style is:inline set:html={`@font-face{font-family:'Analogy';src:url('/fonts/analogy.otf') format('opentype');font-display:swap}`} />
+        </>
+      )
+    }
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Fade-and-rise for anything marked .reveal; rows in a list stagger via --d.
+      const targets = document.querySelectorAll<HTMLElement>('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+        );
+        targets.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>
