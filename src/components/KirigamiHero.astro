@@ -3,6 +3,7 @@
 // art, plus our Mindanao additions. React hydrates the server-rendered markup below, so it
 // must stay byte-for-byte what scripts/extract-kirigami.mjs wrote.
 import scene from '../kirigami/scene.html?raw';
+import SiteNav from './SiteNav.astro';
 
 interface Props {
   name: string;
@@ -16,9 +17,7 @@ const [first, ...rest] = name.split(' ');
   <div id="standalone-root" style="display:contents" set:html={scene} />
 
   <div class="overlay">
-    <nav aria-label="Main">
-      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
-    </nav>
+    <SiteNav links={nav} />
     <div class="foot">
       <h1 class="name display">
         <span class="w">{first}</span> <span class="w">{rest.join(' ')}</span>
@@ -76,7 +75,7 @@ const [first, ...rest] = name.split(' ');
     position: absolute;
     inset: 0 0 auto 0;
     height: 100dvh;
-    z-index: 1;
+    /* no z-index: it would trap the menu (z 60) under the page content (z 2) */
     pointer-events: none;
     display: flex;
     flex-direction: column;
@@ -85,22 +84,6 @@ const [first, ...rest] = name.split(' ');
   }
   .overlay a {
     pointer-events: auto;
-  }
-  nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: clamp(14px, 2.4vw, 32px);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-  nav a {
-    color: var(--rosewood);
-    text-decoration: none;
-    padding: 12px 2px;
-  }
-  nav a:hover {
-    color: var(--sakura);
   }
   .foot {
     display: flex;
@@ -141,7 +124,7 @@ const [first, ...rest] = name.split(' ');
   :global(.js) .w + .w {
     animation-delay: 1.24s;
   }
-  :global(.js) nav,
+  :global(.js) .overlay > :global(.site-nav),
   :global(.js) .scroll {
     opacity: 0;
     animation: fade 0.8s ease 1.6s forwards;
@@ -159,7 +142,7 @@ const [first, ...rest] = name.split(' ');
   }
   @media (prefers-reduced-motion: reduce) {
     :global(.js) .w,
-    :global(.js) nav,
+    :global(.js) .overlay > :global(.site-nav),
     :global(.js) .scroll {
       animation: none;
       opacity: 1;
@@ -167,15 +150,6 @@ const [first, ...rest] = name.split(' ');
     }
   }
   @media (max-width: 600px) {
-    nav {
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-    }
-    nav a {
-      padding: 12px 0;
-    }
     .scroll {
       display: none;
     }
