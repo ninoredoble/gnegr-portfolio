@@ -18,7 +18,7 @@ const label: Record<CollectionEntry<'work'>['data']['kind'], string> = {
 <section class="wrap" id="work" aria-labelledby="work-h">
   <div class="head reveal">
     <h2 id="work-h" class="display">SELECTED WORK</h2>
-    <span>{items.length} OF {total} · MORE IN THE LAB</span>
+    <a class="more" href="/lab/">{items.length} OF {total} · MORE IN THE LAB →</a>
   </div>
   <ol>
     {
@@ -49,10 +49,16 @@ const label: Record<CollectionEntry<'work'>['data']['kind'], string> = {
     font-size: clamp(44px, 6vw, 84px);
     line-height: 1;
   }
-  .head span {
+  .more {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.1em;
+    color: var(--rosewood);
+    text-decoration: none;
+    padding: 12px 0;
+  }
+  .more:hover {
+    color: var(--sakura);
   }
   ol {
     list-style: none;

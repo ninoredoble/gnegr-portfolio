@@ -1,0 +1,287 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import WeaveBand from '../../components/WeaveBand.astro';
+
+export async function getStaticPaths() {
+  const featured = (await getCollection('work'))
+    .filter((w) => w.data.featured)
+    .sort((a, b) => (a.data.featured ?? 0) - (b.data.featured ?? 0));
+  return featured.map((entry, i) => ({
+    params: { id: entry.id },
+    props: { entry, next: featured[(i + 1) % featured.length], index: i },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  next: CollectionEntry<'work'>;
+  index: number;
+}
+const { entry, next, index } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const kindLabel = {
+  product: 'Product',
+  'ai-workflow': 'AI workflow',
+  production: 'Production',
+  systems: 'Systems',
+  study: 'Study',
+}[d.kind];
+---
+
+<Base title={`${d.title} · Niño Redoble`} description={d.summary}>
+  <SiteHeader />
+  <main id="main">
+    <article>
+      <header class="wrap head">
+        <p class="eyebrow">
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <span>{kindLabel.toUpperCase()}</span>
+        </p>
+        <h1 class="display title reveal">{d.title.toUpperCase()}</h1>
+        <p class="lede reveal" style="--d:.08s">{d.summary}</p>
+      </header>
+
+      <WeaveBand height={20} />
+
+      <div class="wrap grid">
+        <aside class="meta" aria-label="Project details">
+          <dl>
+            <div><dt>Role</dt><dd>{d.role}</dd></div>
+            <div><dt>When</dt><dd>{d.period}</dd></div>
+            <div><dt>Status</dt><dd>{d.status}</dd></div>
+            <div>
+              <dt>Stack</dt>
+              <dd><ul>{d.stack.map((s) => <li>{s}</li>)}</ul></dd>
+            </div>
+            {d.credit && <div><dt>Credit</dt><dd>{d.credit}</dd></div>}
+          </dl>
+          {
+            (d.live || d.repo) && (
+              <div class="actions">
+                {d.live && <a class="btn solid" href={d.live}>Open live ↗</a>}
+                {d.repo && <a class="btn line" href={d.repo}>Source ↗</a>}
+              </div>
+            )
+          }
+        </aside>
+
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      <nav class="wrap next" aria-label="Next case study">
+        <a href={`/work/${next.id}/`}>
+          <span class="label">NEXT</span>
+          <span class="display name">{next.data.title.toUpperCase()} →</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+  <SiteFooter />
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(32px, 6vw, 88px) clamp(28px, 4vw, 56px);
+  }
+  .eyebrow {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .eyebrow span:first-child {
+    color: var(--rosewood);
+  }
+  .title {
+    font-size: clamp(60px, 12vw, 180px);
+    line-height: 0.84;
+    overflow-wrap: anywhere;
+  }
+  .lede {
+    margin-top: 20px;
+    max-width: 34em;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.45;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: clamp(28px, 6vw, 96px);
+    padding-block: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  .meta {
+    position: sticky;
+    top: 24px;
+  }
+  dl {
+    margin: 0;
+  }
+  dl > div {
+    padding: 12px 0;
+    border-top: 1px solid var(--rosewood);
+  }
+  dt {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  dd {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  dd ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  dd li {
+    padding: 2px 8px;
+    border: 1px solid var(--rosewood);
+    font-size: 14px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .actions .btn {
+    min-height: 48px;
+    font-size: 16px;
+    padding: 0 18px;
+  }
+  .btn.solid {
+    background: var(--rosewood);
+    border-color: var(--rosewood);
+    color: var(--paper);
+  }
+  .btn.solid:hover {
+    background: var(--sakura);
+    border-color: var(--sakura);
+  }
+  .btn.line {
+    color: var(--rosewood);
+  }
+  .btn.line:hover {
+    color: var(--sakura);
+  }
+
+  /* Case study body */
+  .prose {
+    max-width: 42em;
+    font-size: clamp(18px, 1.5vw, 20px);
+    line-height: 1.65;
+  }
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 4.4vw, 60px);
+    line-height: 0.95;
+    margin: 1.6em 0 0.5em;
+  }
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .prose :global(h3) {
+    font-size: 1em;
+    font-weight: 700;
+    margin: 1.4em 0 0.3em;
+  }
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1em;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.4em;
+  }
+  .prose :global(a) {
+    color: var(--rosewood);
+    text-decoration-color: var(--sakura);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+  .prose :global(a:hover) {
+    color: var(--sakura);
+  }
+  .prose :global(strong) {
+    font-weight: 700;
+  }
+  .prose :global(code) {
+    font-size: 0.88em;
+    padding: 0 4px;
+    border: 1px solid var(--rosewood);
+  }
+  .prose :global(blockquote) {
+    margin: 1.4em 0;
+    padding-left: 20px;
+    border-left: 4px solid var(--sakura);
+    font-size: 1.1em;
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 1.2em;
+    font-size: 0.9em;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    text-align: left;
+    padding: 8px 10px 8px 0;
+    border-bottom: 1px solid var(--rosewood);
+    vertical-align: top;
+  }
+
+  .next {
+    padding-block: clamp(24px, 4vw, 48px) 0;
+  }
+  .next a {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 3px solid var(--rosewood);
+    color: var(--rosewood);
+    text-decoration: none;
+  }
+  .next .label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .next .name {
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 0.9;
+    transition:
+      color 0.2s,
+      transform 0.3s var(--ease-out);
+  }
+  .next a:hover .name {
+    color: var(--sakura);
+    transform: translateX(8px);
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .meta {
+      position: static;
+    }
+  }
+</style>
