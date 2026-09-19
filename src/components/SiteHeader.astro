@@ -1,0 +1,30 @@
+---
+// Header for every page except home (where the nav floats over the Kirigami hero).
+import SiteNav from './SiteNav.astro';
+import { NAV } from '../data/nav';
+---
+
+<header class="site-header wrap">
+  <a class="mark display" href="/" aria-label="Niño Redoble, home">NIÑO REDOBLE</a>
+  <SiteNav links={NAV} />
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-block: clamp(12px, 2vw, 24px);
+  }
+  .mark {
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1;
+    color: var(--rosewood);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mark:hover {
+    color: var(--sakura);
+  }
+</style>
