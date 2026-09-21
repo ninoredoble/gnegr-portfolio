@@ -12,36 +12,36 @@ export interface Role {
 
 export const RESUME = {
   name: 'Niño Redoble',
-  headline: 'AI product engineer',
-  location: '[[confirm city]], Philippines',
+  headline: 'Designer & developer',
+  location: 'Cagayan de Oro, Philippines',
   links: [
     { label: 'ninoredoble.is-a.dev', href: 'https://ninoredoble.is-a.dev/' },
     { label: 'github.com/ninoredoble', href: 'https://github.com/ninoredoble' },
     { label: 'linkedin.com/in/g-redoble', href: 'https://linkedin.com/in/g-redoble' },
-    { label: '[[confirm-email]]', href: 'mailto:[[confirm-email]]' },
+    { label: 'redoble.gninoemmanuel@gmail.com', href: 'mailto:redoble.gninoemmanuel@gmail.com' },
   ],
   summary:
-    'I design, build and run software, lately by directing a crew of AI coding agents under strict quality gates. Co-founder of MixCortex, where I build Kivora, menu and storefront software for small restaurants.',
+    'I design and build web and mobile apps for businesses, from the first sketch to the version customers use, and I test what I ship. Co-founder of MixCortex, where I built Kivora, now live on the App Store.',
   experience: [
     {
-      title: 'Co-founder',
+      title: 'Co-founder · UI/UX designer and QA',
       org: 'MixCortex IT Solutions',
-      period: '[[confirm start]] to now',
+      period: 'July 2026 to now',
       link: '/work/kivora/',
       bullets: [
-        'Designed and built Kivora for small restaurants: a Flutter staff app for iOS and Android, a Flutter web guest page, and a Supabase backend with row-level security. It is now in pilot [[confirm]].',
-        'Built an AI menu assistant that turns a photo, spreadsheet or text into a proposed menu. It runs on the server, and every proposal is validated before a person applies it.',
-        'Set up an agent workflow that ran 784 tasks between October and November 2026. Every change passed a local gate (analyzer, 544 test files, architecture and contract checks) before a person merged it.',
-        'Made any brand colour a restaurant picks readable, by solving the derived colours to WCAG AA contrast.',
+        'Designed, built and tested Kivora, menu software for restaurants: a Flutter staff app, now live on the App Store, a guest web page that opens from a table tag, and a Supabase backend that keeps each restaurant\'s data separate.',
+        'Built a menu assistant that drafts a menu from a photo, spreadsheet or text; the owner reviews every suggestion before it is applied.',
+        'Set up the quality process every change passes before merging: written specs, test-first bug fixes, hundreds of automated tests and a strict pre-merge check.',
+        'Made any brand colour a restaurant picks stay readable, by adjusting the colours around it to meet WCAG AA contrast.',
       ],
     },
     {
-      title: 'UI/UX and system development intern [[confirm title]]',
+      title: 'UI/UX and system development intern',
       org: 'CEPALCO',
-      period: '[[confirm dates]]',
+      period: 'February to May 2026',
       link: '/work/cepalco/',
       bullets: [
-        'Built most of the complaint ticketing system the utility ran in production (304 of 564 commits on a six-person team), with FastAPI, PostgreSQL and Tailwind.',
+        'Helped build the complaint ticketing system the utility ran in production, with FastAPI, PostgreSQL and Tailwind.',
         'Wrote a rule-based ticket classifier with fuzzy matching for local spellings, so staff can see the words behind every routing decision.',
         'Fixed misrouted outage tickets and alert emails that failed silently; moved ticket filtering to the server with indexes and cursor pagination.',
         "Built FuelTrack, a fuel analytics dashboard for staff that reads the utility's Excel records, computes totals on the server and exports the official report.",
@@ -63,8 +63,8 @@ export const RESUME = {
   ],
   skills: [
     { group: 'Build', items: 'TypeScript, JavaScript, Dart, Python, SQL · Flutter, React, Astro, FastAPI · Supabase, PostgreSQL' },
-    { group: 'AI', items: 'Agent workflows with Claude Code · LLM features with server-side validation · Evaluating and routing models by evidence' },
-    { group: 'Craft', items: 'Product and UI design · Accessibility (WCAG AA) · Design tokens · Test-first fixes and local quality gates' },
+    { group: 'Design', items: 'Product and UI design · Design systems and tokens · Accessibility (WCAG AA)' },
+    { group: 'Quality', items: 'Test-first fixes · Automated tests and pre-merge checks · Code review · AI-assisted development with Claude Code' },
   ],
   education: [{ title: '[[confirm degree]]', org: '[[confirm school]]', period: '[[confirm year]]' }],
 };

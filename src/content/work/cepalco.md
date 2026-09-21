@@ -3,11 +3,11 @@ title: CEPALCO
 summary: A complaint ticketing system an electric utility ran in production, and a fuel analytics tool for its staff.
 kind: production
 featured: 3
-role: UI/UX and system development intern [[confirm title]]
-period: February to May 2026 [[confirm dates]]
+role: UI/UX and system development intern
+period: February to May 2026
 stack: [FastAPI, PostgreSQL, SQLAlchemy, Tailwind CSS, Nginx, React, pandas, Docker]
-status: "Ticketing: deployed in production [[confirm still running]]. FuelTrack: deployed May 2026 [[confirm staff use]]"
-credit: Ticketing was a six-person team project; I made 304 of its 564 commits and 104 of FuelTrack's 115 [[confirm OK to publish]]
+status: "Ticketing: deployed in production in 2026. FuelTrack: deployed to the utility's server in May 2026."
+credit: Ticketing was a team project at the utility.
 sensitive: true
 ---
 
@@ -40,4 +40,4 @@ A dashboard for fuel use. It reads the utility's Excel records, spotting the hea
 
 ## What I'd do differently
 
-Tests were thin: the ticketing system had about one unit test and neither project had CI. That's the gap I've closed since. Every Kivora change has to pass a full local gate before it can merge.
+Tests were thin: the ticketing system had about one unit test and neither project had CI. That's the gap I've closed since: on Kivora nothing merges without passing a full check. [How I ship →](/work/how-i-ship/)
