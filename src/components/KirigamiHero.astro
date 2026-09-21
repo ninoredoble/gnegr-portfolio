@@ -7,9 +7,10 @@ import SiteNav from './SiteNav.astro';
 
 interface Props {
   name: string;
+  tagline: string;
   nav: { href: string; label: string }[];
 }
-const { name, nav } = Astro.props;
+const { name, tagline, nav } = Astro.props;
 const [first, ...rest] = name.split(' ');
 ---
 
@@ -19,9 +20,12 @@ const [first, ...rest] = name.split(' ');
   <div class="overlay">
     <SiteNav links={nav} />
     <div class="foot">
-      <h1 class="name display">
-        <span class="w">{first}</span> <span class="w">{rest.join(' ')}</span>
-      </h1>
+      <div class="id">
+        <p class="tagline">{tagline}</p>
+        <h1 class="name display">
+          <span class="w">{first}</span> <span class="w">{rest.join(' ')}</span>
+        </h1>
+      </div>
       <a class="scroll" href="#about">SCROLL ↓</a>
     </div>
   </div>
@@ -105,6 +109,17 @@ const [first, ...rest] = name.split(' ');
   .w {
     display: inline-block;
   }
+  .tagline {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    background: var(--rosewood);
+    color: var(--paper);
+    font-size: clamp(13px, 1.3vw, 16px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    box-shadow: 0 4px 0 rgb(77 41 38 / 0.25);
+  }
   .scroll {
     font-size: 13px;
     font-weight: 700;
@@ -125,7 +140,8 @@ const [first, ...rest] = name.split(' ');
     animation-delay: 1.24s;
   }
   :global(.js) .overlay > :global(.site-nav),
-  :global(.js) .scroll {
+  :global(.js) .scroll,
+  :global(.js) .tagline {
     opacity: 0;
     animation: fade 0.8s ease 1.6s forwards;
   }
@@ -143,7 +159,8 @@ const [first, ...rest] = name.split(' ');
   @media (prefers-reduced-motion: reduce) {
     :global(.js) .w,
     :global(.js) .overlay > :global(.site-nav),
-    :global(.js) .scroll {
+    :global(.js) .scroll,
+    :global(.js) .tagline {
       animation: none;
       opacity: 1;
       transform: none;

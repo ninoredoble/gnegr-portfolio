@@ -14,21 +14,24 @@ const featured = all
 ---
 
 <Base>
-  <KirigamiHero name="NIÑO REDOBLE" nav={NAV} />
+  <KirigamiHero name="NIÑO REDOBLE" tagline="DESIGNER & DEVELOPER · CAGAYAN DE ORO" nav={NAV} />
 
   <WeaveBand class="band" />
 
   <div class="page">
     <section class="wrap intro" id="about">
-      <h2 class="display reveal">I DESIGN, BUILD AND RUN SOFTWARE. <em>LATELY WITH A CREW OF AI AGENTS.</em></h2>
+      <h2 class="display reveal">I DESIGN AND BUILD WEB AND MOBILE APPS <em>FOR BUSINESSES.</em></h2>
       <div class="reveal" style="--d:.1s">
         <p>
-          AI product engineer and co-founder of MixCortex, where I'm building Kivora. I take a product from the first
-          sketch to the server it runs on, and I direct AI agents to do more of that work than one person could alone.
+          I can take a project from the first sketch to the version your customers use. When something's new to me, I
+          work it out. I treat every project like it matters, because someone trusted me with it.
+        </p>
+        <p class="proof">
+          <a href="/work/kivora/">Kivora</a>, the restaurant app I co-founded, is live on the App Store.
         </p>
         <div class="ctas">
-          <a class="btn solid" href="#work">See the work</a>
-          <a class="btn line" href="#contact">Get in touch</a>
+          <a class="btn solid" href="#work">See my work</a>
+          <a class="btn line" href="#contact">Tell me about your project</a>
         </div>
       </div>
     </section>
@@ -68,6 +71,15 @@ const featured = all
     font-size: clamp(18px, 1.6vw, 21px);
     line-height: 1.55;
     margin-bottom: 24px;
+  }
+  .proof {
+    font-weight: 700;
+  }
+  .proof a {
+    color: var(--rosewood);
+    text-decoration-color: var(--sakura);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
   .ctas {
     display: flex;
