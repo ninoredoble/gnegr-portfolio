@@ -83,6 +83,9 @@ import { RESUME as R } from '../data/resume';
               </p>
             ))
           }
+          <ul class="honours">
+            {R.honours.map((h) => <li>{h}</li>)}
+          </ul>
         </div>
       </section>
     </article>
@@ -203,6 +206,10 @@ import { RESUME as R } from '../data/resume';
   }
   .skills {
     margin: 0;
+  }
+  .honours {
+    margin: 8px 0 0;
+    padding-left: 18px;
   }
   .skills > div {
     margin-bottom: 6px;

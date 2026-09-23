@@ -8,12 +8,25 @@ period: February to May 2026
 stack: [FastAPI, PostgreSQL, SQLAlchemy, Tailwind CSS, Nginx, React, pandas, Docker]
 status: "Ticketing: deployed in production in 2026. FuelTrack: deployed to the utility's server in May 2026."
 credit: Ticketing was a team project at the utility.
+org:
+  name: CEPALCO
+  logo: ../../assets/brands/cepalco-logo.png
+cover:
+  src: ../../assets/work/cepalco/portal-home.jpg
+  alt: "The CEPALCO help center home: How can we help?, with search and buttons for service availability, creating a ticket and tracking one."
+shots:
+  - src: ../../assets/work/cepalco/submit-ticket.jpg
+    alt: "The support ticket request form: reason, ticket type, subcategory, account number, account name and barangay."
+    caption: "Submitting a ticket: each choice narrows the next, so the ticket arrives already sorted."
+  - src: ../../assets/work/cepalco/track-ticket.jpg
+    alt: "The track-your-ticket page: search by ticket number or by email."
+    caption: "Customers track a ticket by its number or their email, with no account needed."
 sensitive: true
 ---
 
 ## Ticketing
 
-Customers of the utility report outages, billing and metering problems through a public portal with a library of help articles, and track their ticket by number. Staff work the tickets in a dashboard: routing to the right team, priorities with response deadlines, work orders, notes, notifications and an audit log.
+Customers of Cagayan de Oro's electric utility report outages, billing and metering problems through a public portal with a library of help articles, and track their ticket by number. Staff work the tickets in a dashboard: routing to the right team, priorities with response deadlines, work orders, notes, notifications and an audit log.
 
 ### Routing without a model
 

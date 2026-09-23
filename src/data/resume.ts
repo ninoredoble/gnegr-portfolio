@@ -48,11 +48,12 @@ export const RESUME = {
       ],
     },
     {
-      title: 'Team lead [[confirm]]',
-      org: 'BuyNaBay, campus marketplace',
-      period: '[[confirm years]]',
+      title: 'Team lead',
+      org: 'BuyNaBay, campus marketplace (capstone)',
+      period: '2024 to 2026',
       bullets: [
-        'Built the admin dashboard (Next.js, Supabase) for user verification, reports and appeals, bans with reasons, and revenue charts and exports. [[confirm team size and what was live]]',
+        'Led a five-person remote team building a marketplace where USTP students buy, sell and rent pre-loved items, from proposal to capstone testing with students.',
+        'Designed the mobile app in Figma and built the admin dashboard (Next.js, Supabase) for verifications, reports and appeals, bans with reasons, and sales exports.',
       ],
     },
   ] satisfies Role[],
@@ -66,5 +67,12 @@ export const RESUME = {
     { group: 'Design', items: 'Product and UI design · Design systems and tokens · Accessibility (WCAG AA)' },
     { group: 'Quality', items: 'Test-first fixes · Automated tests and pre-merge checks · Code review · AI-assisted development with Claude Code' },
   ],
-  education: [{ title: '[[confirm degree]]', org: '[[confirm school]]', period: '[[confirm year]]' }],
+  education: [
+    {
+      title: 'BS Information Technology, magna cum laude',
+      org: 'University of Science and Technology of Southern Philippines',
+      period: '2022 to 2026',
+    },
+  ],
+  honours: ["Dean's Lister, 2022 to 2026", 'CCNA: Enterprise Networking, Security, and Automation (2024)'],
 };

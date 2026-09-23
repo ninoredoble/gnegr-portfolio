@@ -29,6 +29,8 @@ const work = defineCollection({
       cover: z.object({ src: image(), alt: z.string() }).optional(),
       /** Phone screens, shown as a strip. */
       screens: z.array(z.object({ src: image(), alt: z.string() })).optional(),
+      /** Desktop screenshots, each shown in a browser frame. */
+      shots: z.array(z.object({ src: image(), alt: z.string(), caption: z.string() })).optional(),
       /** A real page shown in a browser frame. */
       preview: z.object({ src: image(), alt: z.string(), url: z.string() }).optional(),
       /** Needs an outside sign-off before launch (co-founder, former employer). */
