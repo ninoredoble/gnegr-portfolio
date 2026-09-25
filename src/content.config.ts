@@ -14,6 +14,8 @@ const work = defineCollection({
       summary: z.string(),
       kind: z.enum(['product', 'process', 'production', 'systems', 'study']),
       featured: z.number().int().min(1).max(5).optional(),
+      /** A Lab entry that still gets its own case study page. */
+      page: z.boolean().default(false),
       role: z.string(),
       period: z.string(),
       stack: z.array(z.string()).min(1),
@@ -30,7 +32,19 @@ const work = defineCollection({
       /** Phone screens, shown as a strip. */
       screens: z.array(z.object({ src: image(), alt: z.string() })).optional(),
       /** Desktop screenshots, each shown in a browser frame. */
-      shots: z.array(z.object({ src: image(), alt: z.string(), caption: z.string() })).optional(),
+      shots: z
+        .array(
+          z.object({
+            src: image(),
+            alt: z.string(),
+            caption: z.string(),
+            /** Browser chrome around it (screenshots), or plain (slides, posters, boards). */
+            frame: z.boolean().default(true),
+            /** Span the full width instead of half. */
+            wide: z.boolean().default(false),
+          }),
+        )
+        .optional(),
       /** A real page shown in a browser frame. */
       preview: z.object({ src: image(), alt: z.string(), url: z.string() }).optional(),
       /** Needs an outside sign-off before launch (co-founder, former employer). */

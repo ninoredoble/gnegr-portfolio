@@ -7,13 +7,17 @@ import WeaveBand from '../../components/WeaveBand.astro';
 import { Image, Picture } from 'astro:assets';
 
 export async function getStaticPaths() {
-  const featured = (await getCollection('work'))
-    .filter((w) => w.data.featured)
-    .sort((a, b) => (a.data.featured ?? 0) - (b.data.featured ?? 0));
-  return featured.map((entry, i) => ({
-    params: { id: entry.id },
-    props: { entry, next: featured[(i + 1) % featured.length], index: i },
-  }));
+  const all = await getCollection('work');
+  const featured = all.filter((w) => w.data.featured).sort((a, b) => (a.data.featured ?? 0) - (b.data.featured ?? 0));
+  const lab = all.filter((w) => !w.data.featured && w.data.page);
+  return [
+    ...featured.map((entry, i) => ({
+      params: { id: entry.id },
+      props: { entry, next: featured[(i + 1) % featured.length], index: i },
+    })),
+    // Lab entries with their own page: no number, and "next" leads back to the featured work.
+    ...lab.map((entry) => ({ params: { id: entry.id }, props: { entry, next: featured[0], index: -1 } })),
+  ];
 }
 
 interface Props {
@@ -39,7 +43,7 @@ const kindLabel = {
     <article>
       <header class="wrap head">
         <p class="eyebrow">
-          <span>{String(index + 1).padStart(2, '0')}</span>
+          <span>{index >= 0 ? String(index + 1).padStart(2, '0') : 'LAB'}</span>
           <span>{kindLabel.toUpperCase()}</span>
         </p>
         <h1 class="display title reveal">{d.title.toUpperCase()}</h1>
@@ -118,12 +122,14 @@ const kindLabel = {
         d.shots && (
           <section class="wrap shots" aria-label="Screens">
             {d.shots.map((sh, i) => (
-              <figure class="reveal" style={`--d:${(i * 0.06).toFixed(2)}s`}>
-                <div class="browser">
-                  <div class="bar" aria-hidden="true">
-                    <span class="dots"><i></i><i></i><i></i></span>
-                  </div>
-                  <Picture src={sh.src} alt={sh.alt} widths={[480, 800, 1200]} sizes="(max-width: 820px) 100vw, 620px" formats={['avif', 'webp']} fallbackFormat="jpg" width={1200} />
+              <figure class:list={['reveal', { wide: sh.wide }]} style={`--d:${(i * 0.06).toFixed(2)}s`}>
+                <div class:list={[{ browser: sh.frame, plain: !sh.frame }]}>
+                  {sh.frame && (
+                    <div class="bar" aria-hidden="true">
+                      <span class="dots"><i></i><i></i><i></i></span>
+                    </div>
+                  )}
+                  <Picture src={sh.src} alt={sh.alt} widths={sh.wide ? [640, 1100, 1600, 2200] : [480, 800, 1200]} sizes={sh.wide ? '(max-width: 1280px) 100vw, 1200px' : '(max-width: 820px) 100vw, 620px'} formats={['avif', 'webp']} fallbackFormat="jpg" width={sh.wide ? 2200 : 1200} />
                 </div>
                 <figcaption>{sh.caption}</figcaption>
               </figure>
@@ -228,6 +234,12 @@ const kindLabel = {
   }
   .shots figure {
     margin: 0;
+  }
+  .shots figure.wide {
+    grid-column: 1 / -1;
+  }
+  .plain {
+    box-shadow: 0 10px 24px rgb(77 41 38 / 0.18);
   }
   .shots :global(img) {
     display: block;

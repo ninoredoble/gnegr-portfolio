@@ -60,7 +60,7 @@ export const RESUME = {
   studies: [
     { label: 'Webhook signing simulator', note: 'HMAC signing and retry backoff, in the browser', href: '/work/webhook-signing/' },
     { label: 'Grid mesh', note: 'DC load flow and cascades on an illustrative grid', href: '/work/grid-mesh/' },
-    { label: 'The Lab', note: 'Seven more interactive studies, each labelled for what is real', href: '/lab/' },
+    { label: 'The Lab', note: 'Smaller interactive studies, each labelled for what is real and what is sample data', href: '/lab/' },
   ],
   skills: [
     { group: 'Build', items: 'TypeScript, JavaScript, Dart, Python, SQL · Flutter, React, Astro, FastAPI · Supabase, PostgreSQL' },
