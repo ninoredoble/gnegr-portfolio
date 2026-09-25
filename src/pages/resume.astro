@@ -9,7 +9,7 @@ import { RESUME as R } from '../data/resume';
   <div class="screen-only"><SiteHeader /></div>
   <main id="main" class="wrap">
     <div class="tools screen-only">
-      <button class="btn print" type="button" onclick="window.print()">Save as PDF</button>
+      <a class="btn print" href="/resume.pdf" download="Nino-Redoble-Resume.pdf">Download PDF</a>
     </div>
 
     <article class="sheet">
@@ -255,11 +255,20 @@ import { RESUME as R } from '../data/resume';
       font-size: 10pt;
       line-height: 1.38;
     }
+    /* The PDF uses only the openly licensed face (Familjen Grotesk), never Analogy. */
+    h1,
+    h2 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
     h1 {
-      font-size: 34pt;
+      font-size: 26pt;
+      line-height: 1;
     }
     h2 {
-      font-size: 16pt;
+      font-size: 12.5pt;
+      letter-spacing: 0.06em;
     }
     .headline,
     .summary,

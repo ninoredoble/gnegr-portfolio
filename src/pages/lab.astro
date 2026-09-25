@@ -4,7 +4,6 @@ import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import WeaveBand from '../components/WeaveBand.astro';
-import { Picture } from 'astro:assets';
 
 const lab = (await getCollection('work'))
   .filter((w) => !w.data.featured)
@@ -28,9 +27,6 @@ const rendered = await Promise.all(lab.map(async (w) => ({ w, Content: (await re
         rendered.map(({ w, Content }, i) => (
           <li class="item reveal" style={`--d:${(i * 0.05).toFixed(2)}s`}>
             <div class="top">
-              {w.data.cover && (
-                <Picture class="thumb" src={w.data.cover.src} alt={w.data.cover.alt} widths={[96, 192]} sizes="96px" formats={['avif', 'webp']} width={192} />
-              )}
               <h2 class="display">{w.data.title.toUpperCase()}</h2>
               <p class="status">{w.data.status}</p>
             </div>
@@ -46,6 +42,7 @@ const rendered = await Promise.all(lab.map(async (w) => ({ w, Content: (await re
                 ))}
               </ul>
               <div class="links">
+                {w.data.page && <a href={`/work/${w.id}/`}>Read the case study →</a>}
                 {w.data.live && <a href={w.data.live}>Open live ↗</a>}
                 {w.data.repo && <a href={w.data.repo}>Source ↗</a>}
               </div>
@@ -91,12 +88,6 @@ const rendered = await Promise.all(lab.map(async (w) => ({ w, Content: (await re
     display: flex;
     flex-direction: column;
     gap: 8px;
-  }
-  .top :global(.thumb),
-  .top :global(.thumb img) {
-    display: block;
-    width: 96px;
-    height: 96px;
   }
   h2 {
     font-size: clamp(38px, 4.6vw, 64px);

@@ -16,6 +16,10 @@ import { CONTACT } from '../data/contact';
       </div>
     </div>
   </div>
+  <div class="wrap fine">
+    <span>© 2026 Niño Redoble</span>
+    <a href="/colophon/">Colophon</a>
+  </div>
 </footer>
 
 <style>
@@ -23,6 +27,23 @@ import { CONTACT } from '../data/contact';
     margin-top: clamp(72px, 10vw, 140px);
     background: var(--rosewood);
     color: var(--paper);
+  }
+  .fine {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 18px 24px;
+    border-top: 1px solid var(--paper);
+    font-size: 14px;
+  }
+  .fine a {
+    color: var(--paper);
+    text-underline-offset: 3px;
+    padding: 12px 0;
+    margin: -12px 0;
+  }
+  .fine a:hover {
+    text-decoration-thickness: 3px;
   }
   .inner {
     padding-block: clamp(56px, 8vw, 112px);
