@@ -33,6 +33,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL('/og.jpg', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Niño Redoble, designer and developer, over a paper-cut landscape of a river valley with mountains and a vinta." />
+    <meta name="twitter:card" content="summary_large_image" />
     {
       hasAnalogy && (
         <>
@@ -45,6 +50,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <slot name="head" />
   </head>
   <body>
+    <a class="skip" href="#main">Skip to content</a>
     <slot />
     <script>
       // Fade-and-rise for anything marked .reveal; rows in a list stagger via --d.
