@@ -8,9 +8,9 @@
   --rosewood: #7b3e3b; /* text · dark colour · the scene's most-used colour */
   --sakura: #c46864; /* accent · the blossoms */
 
-  /* Analogy is licensed for personal use only; until a webfont licence is bought it is
-     local-only (gitignored), so production falls back to a condensed system face. */
-  --font-display: 'Analogy', 'Arial Narrow', 'Roboto Condensed', 'Helvetica Neue Condensed', Impact, sans-serif;
+  /* Empanada Bold by Neale Davidson (Pixel Sagas), SIL Open Font License 1.1,
+     self-hosted with its licence at /fonts/empanada/. */
+  --font-display: 'Empanada', 'Arial Narrow', 'Roboto Condensed', sans-serif;
   --font-body: 'Familjen Grotesk', system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
