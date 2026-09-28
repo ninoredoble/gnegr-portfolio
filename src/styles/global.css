@@ -3,6 +3,13 @@
 @import '@fontsource/familjen-grotesk/700.css';
 @import './tokens.css';
 
+@font-face {
+  font-family: 'Empanada';
+  src: url('/fonts/empanada/empanada-bold.otf') format('opentype');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {

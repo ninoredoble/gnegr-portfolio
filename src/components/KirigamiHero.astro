@@ -98,10 +98,12 @@ const [first, ...rest] = name.split(' ');
   .name {
     color: var(--rosewood);
     font-size: clamp(64px, 15.5vw, 250px);
-    line-height: 0.8;
+    line-height: 0.92;
     letter-spacing: -0.005em;
+    /* clips the rise-in; padding leaves room for Empanada's tall ñ and descent */
     overflow: hidden;
-    padding-top: 0.06em;
+    padding: 0.2em 0 0.06em;
+    margin-bottom: -0.06em;
     text-shadow:
       0 2px 0 var(--paper),
       0 6px 18px rgb(77 41 38 / 0.18);
@@ -171,8 +173,8 @@ const [first, ...rest] = name.split(' ');
       display: none;
     }
     .name {
-      font-size: clamp(64px, 24vw, 120px);
-      line-height: 0.82;
+      font-size: clamp(60px, 22vw, 116px);
+      line-height: 0.92;
     }
     .overlay {
       padding-bottom: max(20px, env(safe-area-inset-bottom));

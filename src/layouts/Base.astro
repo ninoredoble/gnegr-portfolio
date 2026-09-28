@@ -1,11 +1,5 @@
 ---
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import '../styles/global.css';
-
-// Analogy is local-only until its webfont licence is bought (see .gitignore), so the
-// @font-face is emitted only when the file is present: no 404s in production.
-const hasAnalogy = existsSync(join(process.cwd(), 'public', 'fonts', 'analogy.otf'));
 
 interface Props {
   title?: string;
@@ -38,14 +32,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Niño Redoble, designer and developer, over a paper-cut landscape of a river valley with mountains and a vinta." />
     <meta name="twitter:card" content="summary_large_image" />
-    {
-      hasAnalogy && (
-        <>
-          <link rel="preload" href="/fonts/analogy.otf" as="font" type="font/otf" crossorigin />
-          <style is:inline set:html={`@font-face{font-family:'Analogy';src:url('/fonts/analogy.otf') format('opentype');font-display:swap}`} />
-        </>
-      )
-    }
+    <link rel="preload" href="/fonts/empanada/empanada-bold.otf" as="font" type="font/otf" crossorigin />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <slot name="head" />
   </head>
