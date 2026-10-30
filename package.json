@@ -1,0 +1,31 @@
+{
+  "name": "gnegr-portfolio",
+  "private": true,
+  "version": "3.0.0",
+  "type": "module",
+  "description": "Niño Redoble: a scroll-driven portfolio. A ride on the GNEGR motorcycle through Northern Mindanao.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninoredoble/gnegr-portfolio.git"
+  },
+  "homepage": "https://ninoredoble.is-a.dev/",
+  "author": "Niño Redoble",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource/overpass": "^5.3.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26"
+  }
+}

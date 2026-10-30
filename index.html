@@ -1,800 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ni&ntilde;o Redoble // Full-Stack & Systems Developer</title>
-  <meta name="description" content="Portfolio of G. Ni&ntilde;o Emmanuel G. Redoble (GNEGR). Full-Stack Developer, Systems Architect, and High-Performance Software Engineer building distributed web platforms and real-time telemetry systems.">
-  
-  <!-- Canonical & Domain -->
-  <link rel="canonical" href="https://ninoredoble.is-a.dev/">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="img/gnegr.svg">
-  <link rel="icon" type="image/png" href="img/gnegr.png">
-
-  <!-- Typography: Google Fonts (Space Grotesk for Headings, Inter for Body, JetBrains Mono for Tech) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Three.js ES Modules Importmap -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-      }
-    }
-  </script>
-
-  <script>
-    // Synchronous Theme Detection
-    try {
-      const savedTheme = localStorage.getItem('gnegr_theme');
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    } catch(e) {}
-  </script>
-</head>
-<body>
-
-  <!-- Intro Split Loader (Theme-Adaptive with GNEGR Emblem & Telemetry Engine) -->
-  <div class="intro-loader" id="intro-loader" aria-hidden="true">
-    <div class="loader-half loader-top"></div>
-    <div class="loader-half loader-bottom"></div>
-    <div class="loader-content" id="loader-content">
-      <div class="loader-emblem-wrap">
-        <div class="loader-emblem-halo"></div>
-        <img src="img/gnegr.png" alt="GNEGR Official Emblem" class="loader-emblem-img">
-      </div>
-      <div class="loader-brand">GNEGR</div>
-      <div class="loader-telemetry" id="loader-telemetry">INITIALIZING ARCHITECTURAL RUNTIME...</div>
-      <div class="loader-track">
-        <div class="loader-bar" id="loader-progress-bar"></div>
-      </div>
-      <div class="loader-sub">
-        <span class="loader-status-tag">CORE // RUNTIME</span>
-        <span class="loader-percent" id="loader-percent">0%</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Subtle Full-Screen Noise/Grain Overlay -->
-  <div class="noise-overlay" aria-hidden="true"></div>
-
-  <!-- Custom Dual Cursor (Dot + Lagging Difference Ring) -->
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
-
-  <!-- Site Navigation Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand-lockup-header">
-        <a href="#intro" class="brand-link" aria-label="GNEGR Home">
-          <img src="img/gnegr.svg" alt="GNEGR Mark" class="brand-header-icon">
-          <span class="brand-header-wordmark">GNEGR</span>
-        </a>
-      </div>
-
-      <nav class="site-nav" id="site-nav" aria-label="Main Navigation">
-        <a href="#intro" class="nav-link active">Home</a>
-        <a href="#stack" class="nav-link">Stack</a>
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#contact" class="nav-link">Contact</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Niño Redoble · Designs and builds software</title>
+    <meta name="description" content="Niño Redoble designs and builds software in Cagayan de Oro, Philippines, and is building a company of his own. Ride along, or skip to the one-page summary." />
+    <meta name="theme-color" content="#F3D9BE" />
+    <link rel="canonical" href="https://ninoredoble.is-a.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Niño Redoble · Designs and builds software" />
+    <meta property="og:description" content="A ride through Cagayan de Oro and Bukidnon on the GNEGR motorcycle: where he studied, what he built, and where he is heading." />
+    <meta property="og:url" content="https://ninoredoble.is-a.dev/" />
+    <meta property="og:image" content="https://ninoredoble.is-a.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body>
+    <!--sprite-->
+    <header class="hud" id="hud">
+      <a class="hud__home" href="#hello" data-goto="hello" aria-label="Niño Redoble, back to the start">
+        <svg class="hud__mark" viewBox="13 123 466 254" aria-hidden="true" focusable="false"><use href="#lg-body" /><use href="#lg-green" /><use href="#lg-r" /><use href="#lg-front" /></svg>
+        <span>Niño Redoble</span>
+      </a>
+      <p class="hud__odo" aria-hidden="true"><b id="odo">KM 00.0</b><span id="odoPlace">Cagayan de Oro</span></p>
+      <nav class="hud__nav" aria-label="Primary">
+        <a class="hud__link" href="/summary/">Skip the ride</a>
+        <a class="hud__link hud__link--wide" href="/resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <a class="hud__cta" href="#ahead" data-goto="ahead">Get in touch</a>
       </nav>
+    </header>
+    <div class="progress" aria-hidden="true"><i></i></div>
 
-      <div class="header-controls">
-        <button id="terminal-toggle" class="terminal-trigger-btn magnetic-btn" aria-label="Open Systems HUD Terminal" title="Systems Console (Ctrl + K)">
-          <span class="term-btn-icon">&gt;_</span>
-          <span class="term-btn-kbd">Ctrl+K</span>
-        </button>
-        <button id="theme-toggle" class="control-btn" aria-label="Toggle Color Theme" title="Toggle Light/Dark Theme">
-          <span class="theme-icon light-icon">&#9728;</span>
-          <span class="theme-icon dark-icon">&#9790;</span>
-        </button>
+    <main class="ride" id="ride">
+      <div class="ride__stage" id="stage">
+        <!--bike:rider-->
+
+        <section class="scene scene--hello" id="hello" data-km="0" data-place="Cagayan de Oro" aria-labelledby="hello-title">
+          <div class="scene__art"><!--art:hello--><!--sign:KM 0|Cagayan de Oro--><!--bike:bike bike--static--></div>
+          <div class="scene__copy">
+            <h1 class="hello__name" id="hello-title"><span class="hello__word">Niño</span> <span class="hello__word">Redoble</span></h1>
+            <p class="lede">Hi, I’m Niño. I design and build software, and I’m building a company of my own. Ride along.</p>
+            <p class="hello__cue"><span class="hello__scroll">Scroll to ride <span aria-hidden="true">↓</span></span><a href="/summary/">Skip the ride, read the one-page summary</a></p>
+          </div>
+        </section>
+
+        <section class="scene scene--ustp" id="ustp" data-km="1" data-place="USTP, Cagayan de Oro" aria-labelledby="ustp-title">
+          <div class="scene__art"><!--art:ustp--><!--sign:KM 01|USTP--><!--bike:bike bike--static--></div>
+          <div class="scene__copy">
+            <h2 id="ustp-title">Four years, every chance taken.</h2>
+            <p>I studied Information Technology at the University of Science and Technology of Southern Philippines. I treated every class project as if it would ship, and spent my spare hours helping clients and classmates ship theirs.</p>
+            <ul class="facts">
+              <li>BS Information Technology, 2022 to 2026</li>
+              <li>Graduated magna cum laude</li>
+              <li>Dean’s List, 2022 to 2026</li>
+              <li>CCNA: Enterprise Networking, Security, and Automation</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="scene scene--buynabay" id="buynabay" data-km="2" data-place="BuyNaBay, campus market" aria-labelledby="buynabay-title">
+          <div class="scene__art"><!--art:buynabay--><!--sign:KM 02|BuyNaBay--><!--bike:bike bike--static--></div>
+          <div class="scene__copy">
+            <h2 id="buynabay-title">Five people, one marketplace.</h2>
+            <p>BuyNaBay is a marketplace where students on campus buy and sell to each other. I led our five-person remote team from the first idea to a live platform: planning the work, sharing it out fairly, and keeping us shipping.</p>
+            <p>I also ran the admin side, moderating listings, keeping the data clean and fixing what users reported. Leading taught me to own the work nobody assigns.</p>
+            <ul class="facts">
+              <li>Team lead and platform admin</li>
+              <li>2024 to 2026</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="scene scene--cepalco" id="cepalco" data-km="3" data-place="CEPALCO, Cagayan de Oro" aria-labelledby="cepalco-title">
+          <div class="scene__art"><!--art:cepalco--><!--sign:KM 03|CEPALCO--><!--bike:bike bike--static--></div>
+          <div class="scene__copy">
+            <h2 id="cepalco-title">Software for a power utility.</h2>
+            <p>As a UI/UX and system development intern at CEPALCO, the electric utility of Cagayan de Oro, I designed and built two internal web tools: a ticketing system and a fuel tracker. I took them from the first screen design to deployment, and wrote the guides their users work from.</p>
+            <p>Both are internal, so there is nothing public to show. I’m glad to walk you through how they work.</p>
+            <ul class="facts">
+              <li>UI/UX and system development intern, 2026</li>
+              <li>React, FastAPI, PostgreSQL, Docker, Nginx</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="scene scene--workshop" id="workshop" data-km="4" data-place="The workshop" aria-labelledby="workshop-title">
+          <div class="scene__art"><!--art:workshop--><!--sign:KM 04|Workshop--></div>
+          <div class="scene__copy">
+            <h2 id="workshop-title">Every component, laid out.</h2>
+            <p class="workshop__lede">The bike, taken apart: what I bring, one part at a time.</p>
+          </div>
+          <ul class="parts" id="parts">
+            <li class="part" data-part="front">
+              <div class="part__slot"><!--part:front--></div>
+              <h3>Interfaces</h3>
+              <p>React, HTML and CSS, Figma. Screens that make sense the first time.</p>
+            </li>
+            <li class="part" data-part="rear">
+              <div class="part__slot"><!--part:rear--></div>
+              <h3>Back end</h3>
+              <p>Node.js, FastAPI, PHP and Laravel, on PostgreSQL, MySQL or Supabase.</p>
+            </li>
+            <li class="part" data-part="frame">
+              <div class="part__slot"><!--part:frame--></div>
+              <h3>Systems</h3>
+              <p>Linux, Docker, Nginx and networking. I like to know what the code runs on.</p>
+            </li>
+            <li class="part" data-part="seat">
+              <div class="part__slot"><!--part:seat--></div>
+              <h3>Teamwork</h3>
+              <p>Planning in the open, documentation people read, steady communication with clients.</p>
+            </li>
+            <li class="part" data-part="tank">
+              <div class="part__slot"><!--part:tank--></div>
+              <h3>KIVORA</h3>
+              <p>In progress: my startup, a menu and storefront platform for restaurants.</p>
+            </li>
+            <li class="part" data-part="name">
+              <div class="part__slot"><!--part:name--></div>
+              <h3>This site</h3>
+              <p>Designed and built by me on an open-source engine. <a href="https://github.com/ninoredoble/gnegr-portfolio" target="_blank" rel="noopener">Read the source</a></p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="scene scene--now" id="now" data-km="5" data-place="Sayre Highway, Bukidnon" aria-labelledby="now-title">
+          <div class="scene__art"><!--art:now--><!--sign:KM 05|Sayre Highway--><!--bike:bike bike--static--></div>
+          <div class="scene__copy">
+            <h2 id="now-title">I chose the road with room to grow.</h2>
+            <p>When I graduated, I turned down offers that left no room to grow, and started building my own company, KIVORA, instead. It is the best decision I have made, and the work goes on every day.</p>
+            <p>Alongside it, I take on a few projects and roles where I can do the best work of my life.</p>
+          </div>
+        </section>
+
+        <section class="scene scene--ahead" id="ahead" data-km="6" data-place="The road ahead" aria-labelledby="ahead-title">
+          <div class="scene__art"><!--art:ahead--><!--bike:bike bike--static--></div>
+          <div class="scene__copy">
+            <h2 id="ahead-title">Give me a hard problem and a fair chance.</h2>
+            <p>I’ll make it count. If you have a project or a role that respects the work and leaves room to grow, I’d like to hear about it.</p>
+            <div class="fork" role="group" aria-label="Start an email about">
+              <a class="fork__sign fork__sign--left" href="mailto:redoble.gninoemmanuel@gmail.com?subject=A%20project%20for%20you&amp;body=Hi%20Ni%C3%B1o%2C%0A%0AI%20have%20a%20project%20in%20mind%3A%20"><span aria-hidden="true">←</span> A project</a>
+              <a class="fork__sign fork__sign--right" href="mailto:redoble.gninoemmanuel@gmail.com?subject=A%20role%20for%20you&amp;body=Hi%20Ni%C3%B1o%2C%0A%0AWe%20have%20a%20role%20that%20could%20fit%20you%3A%20">A role <span aria-hidden="true">→</span></a>
+            </div>
+            <ul class="contact">
+              <li class="contact__email">
+                <a href="mailto:redoble.gninoemmanuel@gmail.com">redoble.gninoemmanuel@gmail.com</a>
+                <button class="copy" type="button" data-copy="redoble.gninoemmanuel@gmail.com" hidden>Copy</button>
+              </li>
+              <li><a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://github.com/ninoredoble" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="/resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a></li>
+            </ul>
+            <p class="copy__status" id="copyStatus" role="status" aria-live="polite"></p>
+          </div>
+        </section>
       </div>
-    </div>
-  </header>
+    </main>
 
-  <main>
-    <!-- SECTION 1: The 3D Hero & Systems Showcase -->
-    <section class="hero-section" id="intro">
-      <div class="hero-container reveal">
-        <div class="hero-split-grid">
-          <!-- Left Column: Editorial Typography -->
-          <div class="hero-content-col">
-            <h1 class="hero-title">
-              <span class="hero-title-accent">Systems Architecture // Full-Stack Engineering</span>
-              <span class="hero-title-main">
-                Ni&ntilde;o Redoble
-                <span class="hero-title-outline"><span id="hero-scramble" class="hero-scramble">Full-Stack</span> Developer.</span>
-              </span>
-            </h1>
+    <footer class="end">
+      <svg class="end__mark" viewBox="13 123 466 254" role="img" aria-label="The GNEGR motorcycle logo"><use href="#lg-body" /><use href="#lg-green" /><use href="#lg-r" /><use href="#lg-front" /></svg>
+      <p>Niño Redoble · Cagayan de Oro, Philippines · <a href="/summary/">One-page summary</a> · © <span id="yearNow">2026</span></p>
+    </footer>
 
-            <p class="hero-bio">
-              I am <strong>G. Ni&ntilde;o Emmanuel G. Redoble</strong> (GNEGR)&mdash;a systems developer and full-stack software engineer who crafts resilient distributed applications, high-concurrency backends, and sleek digital experiences. Shipped 7+ production systems across enterprise logistics, telemetry, and web platforms with a disciplined systems-first mindset.
-            </p>
-
-            <div class="hero-cta-group">
-              <a href="#contact" class="hero-cta-btn primary magnetic-btn hero-contact-trigger">
-                <span>Get in Touch &darr;</span>
-              </a>
-              <a href="#work" class="hero-cta-btn secondary">
-                <span>Explore Work &rarr;</span>
-              </a>
-            </div>
-
-            <div class="hero-subtext">
-              <span>Based in Cagayan de Oro City, PH</span>
-              <span class="sep">&bull;</span>
-              <span class="badge-credential">Magna Cum Laude</span>
-              <span class="sep">&bull;</span>
-              <span class="badge-credential">CCNA Certified</span>
-              <span class="sep">&bull;</span>
-              <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <span class="sep">&bull;</span>
-              <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
-          </div>
-
-          <!-- Right Column: Interactive 3D Chassis Stage -->
-          <div class="hero-3d-col">
-            <div class="hero-3d-card" id="hero-3d-card">
-              <div class="card-3d-header">
-                <div class="card-3d-status">
-                  
-                  <span class="card-3d-label">3D CHASSIS // WEBGL 2.0</span>
-                </div>
-                <span class="card-3d-hint">DRAG TO ORBIT &bull; WHEEL TO ZOOM</span>
-              </div>
-              <div class="card-3d-stage" id="hero-3d-wrapper">
-                <canvas id="hero-canvas"></canvas>
-                <div class="hero-3d-loader" id="hero-3d-loader">
-                  <div class="hero-3d-spinner"></div>
-                  <span class="hero-3d-text">INITIALIZING 3D CHASSIS...</span>
-                </div>
-              </div>
-              <div class="card-3d-footer">
-                <div class="chassis-color-picker">
-                  <span class="spec-label">COLOR:</span>
-                  <button class="color-swatch-btn active" data-color="#E24E1B" title="GNEGR Sunset Orange" style="--swatch:#E24E1B;"></button>
-                  <button class="color-swatch-btn" data-color="#D4D4D8" title="Cyber Titanium" style="--swatch:#D4D4D8;"></button>
-                  <button class="color-swatch-btn" data-color="#18181B" title="Stealth Obsidian" style="--swatch:#18181B;"></button>
-                  <button class="color-swatch-btn" data-color="#F59E0B" title="Solar Amber" style="--swatch:#F59E0B;"></button>
-                </div>
-                <button class="reset-view-btn" id="reset-3d-view-btn" title="Reset View Angle">&#8635; Reset View</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 2: The WebM Background Section (Parallax Intermission) -->
-    <section class="media-section" id="media-intermission">
-      <div class="video-bg">
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="video/gnegr-logo-reveal.webm" type="video/webm">
-        </video>
-      </div>
-      <div class="video-overlay"></div>
-      <div class="container reveal">
-        <div class="media-kicker">CINEMATIC INTERMISSION // THE GNEGR PHILOSOPHY</div>
-        <h2 class="media-headline">Every Component Visible.<br>Every Line Engineered.</h2>
-        <p class="media-body">
-          A motorcycle is one of the most honest machines ever built: every piece has a defined purpose, nothing is hidden, and structural integrity determines survival. In software, every microservice, packet routing table, and client pixel follows that same uncompromised discipline.
-        </p>
-        <div class="media-tags">
-          <span class="media-tag-pill">Torque &bull; Velocity</span>
-          <span class="media-tag-pill">Zero-Defect Code</span>
-          <span class="media-tag-pill">Autonomous Systems</span>
-          <span class="media-tag-pill">Resilient Networks</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Technical Stack Infinite Marquee Ribbon (Double Row Matching Image 5) -->
-    <section class="tech-marquee-section" id="stack">
-      <div class="tech-marquee-header reveal">
-        <h2 class="cloud-headline">Always Building. Always Growing.</h2>
-        <p class="cloud-subline">Languages, frameworks, database engines, and deployment toolchains.</p>
-      </div>
-
-      <div class="tech-marquee-container">
-        <!-- Row 1: Forward Infinite Scrolling -->
-        <div class="tech-marquee-row row-forward">
-          <div class="marquee-track">
-            <!-- Set 1 -->
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span class="tile-label">Python</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy"><span class="tile-label">TypeScript</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy"><span class="tile-label">JavaScript</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy"><span class="tile-label">React</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy"><span class="tile-label">Next.js</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" loading="lazy"><span class="tile-label">FastAPI</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy"><span class="tile-label">Node.js</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy"><span class="tile-label">Docker</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span class="tile-label">PostgreSQL</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy"><span class="tile-label">MySQL</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy"><span class="tile-label">Linux</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span class="tile-label">Git</span></div>
-            <!-- Set 2 (Seamless loop duplicate) -->
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span class="tile-label">Python</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" loading="lazy"><span class="tile-label">TypeScript</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy"><span class="tile-label">JavaScript</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy"><span class="tile-label">React</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy"><span class="tile-label">Next.js</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" loading="lazy"><span class="tile-label">FastAPI</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy"><span class="tile-label">Node.js</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" loading="lazy"><span class="tile-label">Docker</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy"><span class="tile-label">PostgreSQL</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy"><span class="tile-label">MySQL</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy"><span class="tile-label">Linux</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span class="tile-label">Git</span></div>
-          </div>
-        </div>
-
-        <!-- Row 2: Reverse Infinite Scrolling -->
-        <div class="tech-marquee-row row-reverse">
-          <div class="marquee-track">
-            <!-- Set 1 -->
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" loading="lazy"><span class="tile-label">Tailwind</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="Supabase" loading="lazy"><span class="tile-label">Supabase</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy"><span class="tile-label">MongoDB</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy"><span class="tile-label">GitHub</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" loading="lazy"><span class="tile-label">C++</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy"><span class="tile-label">Java</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy"><span class="tile-label">PHP</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" loading="lazy"><span class="tile-label">Laravel</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy"><span class="tile-label">Figma</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" loading="lazy"><span class="tile-label">Django</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" loading="lazy"><span class="tile-label">Nginx</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" loading="lazy"><span class="tile-label">Bootstrap</span></div>
-            <!-- Set 2 (Seamless loop duplicate) -->
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" loading="lazy"><span class="tile-label">Tailwind</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" alt="Supabase" loading="lazy"><span class="tile-label">Supabase</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" loading="lazy"><span class="tile-label">MongoDB</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy"><span class="tile-label">GitHub</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" loading="lazy"><span class="tile-label">C++</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" loading="lazy"><span class="tile-label">Java</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy"><span class="tile-label">PHP</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel" loading="lazy"><span class="tile-label">Laravel</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" loading="lazy"><span class="tile-label">Figma</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django" loading="lazy"><span class="tile-label">Django</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" loading="lazy"><span class="tile-label">Nginx</span></div>
-            <div class="tech-tile"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" loading="lazy"><span class="tile-label">Bootstrap</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Find My Work (Showcase Projects) Section -->
-    <section class="work-section" id="work">
-      <div class="section-header-wrap reveal">
-        <h2 class="section-title-editorial">Find My Work</h2>
-        <p class="section-sub-editorial">Curated selection of production-grade systems, environmental models, and developer infrastructure.</p>
-        
-        <!-- Filter Tabs -->
-        <div class="category-filters">
-          <button class="filter-pill active" data-filter="all">All [7]</button>
-          <button class="filter-pill" data-filter="systems">AI & Systems [3]</button>
-          <button class="filter-pill" data-filter="web">Web & Data [2]</button>
-          <button class="filter-pill" data-filter="mobile">Mobile & Embedded [2]</button>
-        </div>
-      </div>
-
-      <div class="work-showcase-grid">
-
-        <!-- Project 1: Aether Report 2026 -->
-        <article class="project-card reveal" data-category="systems">
-          <div class="project-card-media">
-            <img src="img/projects/aether.png" alt="Aether Report 2026 Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">FLAGSHIP // 2026</span>
-              <span class="card-metric-badge">Zero-Carbon AI Edge</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">Aether Report 2026: Northern Mindanao Mesh</h3>
-              <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              Apple & Stripe Press-inspired interactive annual report and scrollytelling analysis on Northern Mindanao zero-carbon AI edge compute clusters, grid decarbonization telemetry, and in-context auditor reasoning.
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">HTML5 / Vanilla JS</span>
-              <span class="tech-tag">Interactive Canvas</span>
-              <span class="tech-tag">AI Auditor Engine</span>
-              <span class="tech-tag">GitHub Pages</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/aether-report-2026/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: ClimaPocket Android -->
-        <article class="project-card reveal" data-category="mobile">
-          <div class="project-card-media">
-            <img src="img/projects/clima.png" alt="ClimaPocket Android Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">MOBILE & IOT // 2026</span>
-              <span class="card-metric-badge">Material You 3.5</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">ClimaPocket Android Agrometeorology</h3>
-              <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              Google Pixel 9 Pro device mockup showcasing regional Northern Mindanao microclimate sensors, soil moisture telemetry, typhoon tracking radars, and hyper-local agrometeorological insights.
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">Android Studio</span>
-              <span class="tech-tag">Jetpack Compose UI</span>
-              <span class="tech-tag">SVG Radar Canvas</span>
-              <span class="tech-tag">Telemetry API</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/clima-pocket-android/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3: Relay Core API -->
-        <article class="project-card reveal" data-category="systems">
-          <div class="project-card-media">
-            <img src="img/projects/relay.png" alt="Relay Core API Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">INFRASTRUCTURE // 2026</span>
-              <span class="card-metric-badge">UNIX TUI Sandbox</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">Relay Core: Distributed Webhook Sandbox</h3>
-              <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              High-throughput distributed webhook ingestion engine with HMAC-SHA256 signature verification, exponential backoff retries, Redis idempotency keys, and an authentic interactive terminal CLI (<code>relayctl</code>).
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">Node / TypeScript</span>
-              <span class="tech-tag">HMAC Verification</span>
-              <span class="tech-tag">Interactive Terminal</span>
-              <span class="tech-tag">Redis Idempotency</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/relay-core-api/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 4: Hablon Textile Archive -->
-        <article class="project-card reveal" data-category="web">
-          <div class="project-card-media">
-            <img src="img/projects/hablon.png" alt="Hablon Textile Archive Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">CULTURAL ARCHIVE // 2025</span>
-              <span class="card-metric-badge">Generative Loom</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">Hablon Textile: Living Vector Loom</h3>
-              <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              Minimalist Scandinavian/Japanese museum folio preserving indigenous Northern Mindanao handwoven textiles. Features an interactive mathematical loom simulator rendering procedural weft and warp weave physics in SVG.
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">Generative SVG</span>
-              <span class="tech-tag">Vector Mathematics</span>
-              <span class="tech-tag">Editorial Typography</span>
-              <span class="tech-tag">Cultural Heritage</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/hablon-textile-archive/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 5: Mindanao Grid Mesh -->
-        <article class="project-card reveal" data-category="systems">
-          <div class="project-card-media">
-            <img src="img/projects/grid.png" alt="Mindanao Grid Mesh Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">SCADA & ENERGY // 2025</span>
-              <span class="card-metric-badge">Sub-Transmission SCADA</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">Mindanao Grid Mesh: SCADA Mimic Board</h3>
-              <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              Mission-critical industrial power dispatch mimic board modeling 69kV/13.8kV feeders across Macasandig, Carmen, and Tagoloan. Features real-time telemetry, trip simulation, active load shedding, and frequency regulation.
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">Industrial SCADA</span>
-              <span class="tech-tag">Power Grid Dispatch</span>
-              <span class="tech-tag">Switchgear Telemetry</span>
-              <span class="tech-tag">Canvas State Engine</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/mindanao-grid-mesh/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 6: Archipelago Marine Cadence -->
-        <article class="project-card reveal" data-category="web">
-          <div class="project-card-media">
-            <img src="img/projects/marine.png" alt="Archipelago Marine Cadence Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">OCEANOGRAPHY // 2025</span>
-              <span class="card-metric-badge">Bathymetric Cartography</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">Archipelago Marine: Bathymetric Telemetry</h3>
-              <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              Deep oceanic bathymetric cartography and pelagic telemetry modeling benthic ecosystems from Macajalar Bay to Tubbataha Reefs. Interactive depth sounders, salinity charts, and tidal cycle harmonics.
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">Bathymetric Canvas</span>
-              <span class="tech-tag">Ocean Sensor Feeds</span>
-              <span class="tech-tag">Tidal Harmonics</span>
-              <span class="tech-tag">Geospatial UI</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/archipelago-marine-cadence/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 7: Cagayan Basin Corridor -->
-        <article class="project-card reveal" data-category="mobile">
-          <div class="project-card-media">
-            <img src="img/projects/basin.png" alt="Cagayan Basin Corridor Live Interface Preview" class="project-screenshot" loading="lazy">
-            <div class="media-overlay-badge">
-              <span class="card-brand-tag">HYDROLOGY // 2025</span>
-              <span class="card-metric-badge">Agro-Forestry Model</span>
-            </div>
-          </div>
-          <div class="project-card-content">
-            <div class="project-header">
-              <h3 class="project-name">Cagayan Basin Corridor: Watershed Resilience</h3>
-              <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Open Live System">&#8599;</a>
-            </div>
-            <p class="project-desc">
-              Warm editorial watershed hydrology simulator and native stingless bee (Tetragonula biroi / Kiwot) agroforestry corridor model for Cagayan de Oro River's upper basin headwaters.
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">Hydrology Simulation</span>
-              <span class="tech-tag">Agroforestry Corridor</span>
-              <span class="tech-tag">Runoff Telemetry</span>
-              <span class="tech-tag">Botanical Research</span>
-            </div>
-            <div class="project-footer-actions">
-              <a href="https://ninoredoble.github.io/cagayan-basin-corridor/" target="_blank" rel="noopener noreferrer" class="btn-card-action primary magnetic-btn">View Live Demo &nearr;</a>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-
-
-    <!-- Work Experience & Journey Timeline -->
-    <section class="experience-section" id="experience">
-      <div class="experience-container">
-        <h2 class="section-title-editorial center">
-          Destructuring My Work Experience
-        </h2>
-        <p class="section-sub-editorial center">A breakdown of roles, industry engineering, leadership, and technical foundations.</p>
-
-        <div class="experience-timeline">
-          
-          <!-- Role 1: CEPALCO -->
-          <div class="timeline-node reveal">
-            <div class="node-marker">
-              <span class="node-year">2026</span>
-            </div>
-            <div class="node-card">
-              <div class="node-header">
-                <div>
-                  <h3 class="node-role">UI/UX & System Development Intern</h3>
-                  <div class="node-company">CEPALCO (Cagayan Electric Power & Light Co., Inc.)</div>
-                </div>
-                <span class="node-pill">Enterprise Intern // 2026</span>
-              </div>
-              <ul class="node-points">
-                <li>Architected full-stack enterprise web ticketing and internal fuel-tracking systems utilizing React, FastAPI, SQLAlchemy, and PostgreSQL.</li>
-                <li>Dockerized backend microservices and configured reverse-proxy routing with Nginx for resilient deployment across local infrastructure.</li>
-                <li>Collaborated closely with system administrators and network engineers to streamline operational workflows and reduce dispatch turnaround times.</li>
-              </ul>
-              <div class="node-tags">
-                <span>FastAPI</span>
-                <span>React.js</span>
-                <span>Docker</span>
-                <span>PostgreSQL</span>
-                <span>Nginx</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Role 2: BuyNaBay -->
-          <div class="timeline-node reveal">
-            <div class="node-marker">
-              <span class="node-year">2024&ndash;<br>2025</span>
-            </div>
-            <div class="node-card">
-              <div class="node-header">
-                <div>
-                  <h3 class="node-role">Team Lead & System Analyst</h3>
-                  <div class="node-company">BuyNaBay (Campus E-Commerce & Logistics Platform)</div>
-                </div>
-                <span class="node-pill">Project Lead</span>
-              </div>
-              <ul class="node-points">
-                <li>Directed an agile team of 5 developers and designers from conceptual architecture to production deployment on Vercel.</li>
-                <li>Engineered core marketplace state engines, user authentication routines, and asynchronous catalog searching in React Native and Node.js.</li>
-                <li>Conducted systematic sprint reviews, code reviews, and schema optimizations, delivering 100% on-time milestone achievements.</li>
-              </ul>
-              <div class="node-tags">
-                <span>React Native</span>
-                <span>Node.js</span>
-                <span>System Architecture</span>
-                <span>Agile Scrum</span>
-                <span>Vercel</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Role 3: Distributed Systems & Open-Source Engineering -->
-          <div class="timeline-node reveal">
-            <div class="node-marker">
-              <span class="node-year">2024&ndash;<br>Present</span>
-            </div>
-            <div class="node-card">
-              <div class="node-header">
-                <div>
-                  <h3 class="node-role">Distributed Systems & Full-Stack Architect</h3>
-                  <div class="node-company">Independent Production Projects & Open-Source Engineering</div>
-                </div>
-                <span class="node-pill">Production Delivery</span>
-              </div>
-              <ul class="node-points">
-                <li>Shipped and actively maintain 7 live production web applications, data visualization portals, and high-concurrency APIs across Vercel, Supabase, and Docker.</li>
-                <li>Implemented real-time telemetry visualizers, procedural vector SVG canvas simulations, and resilient Redis idempotency caches.</li>
-              </ul>
-              <div class="node-tags">
-                <span>FastAPI</span>
-                <span>TypeScript</span>
-                <span>Docker</span>
-                <span>PostgreSQL</span>
-                <span>Vector Math</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Connect & Contact Section -->
-    <section class="connect-section" id="contact">
-      <div class="connect-container reveal">
-        <div class="section-kicker center" style="color: var(--brand-ember); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem;">[CHANNEL 07 // DIRECT COMMS]</div>
-        <h2 class="section-title-editorial center">
-          Start a Conversation
-        </h2>
-        <p class="section-sub-editorial center">
-          Whether you want to discuss full-stack platforms, distributed systems architecture, or upcoming opportunities, send a direct transmission or connect across verified channels.
-        </p>
-
-        <div class="contact-split-layout">
-          <!-- Column 1: Direct Verified Channels & Credentials Dossier -->
-          <div class="contact-channels-column">
-            
-            <!-- Email Channel -->
-            <div class="verified-channel-item">
-              <div class="channel-info">
-                <span class="channel-label">Official Email</span>
-                <span class="channel-value">redoble.gninoemmanuel@gmail.com</span>
-              </div>
-              <div class="channel-actions">
-                <a href="mailto:redoble.gninoemmanuel@gmail.com" class="btn-channel primary magnetic-btn">Email Directly &nearr;</a>
-                <button class="btn-channel copy-email-btn" data-email="redoble.gninoemmanuel@gmail.com">Copy Address</button>
-              </div>
-            </div>
-
-            <!-- Social Profiles Strip -->
-            <div class="social-channels-strip">
-              <a href="https://linkedin.com/in/g-redoble" target="_blank" rel="noopener noreferrer" class="social-link-item">
-                <span class="social-name">LinkedIn</span>
-                <span class="social-handle">in/g-redoble &nearr;</span>
-              </a>
-              <a href="https://github.com/ninoredoble" target="_blank" rel="noopener noreferrer" class="social-link-item">
-                <span class="social-name">GitHub</span>
-                <span class="social-handle">github.com/ninoredoble &nearr;</span>
-              </a>
-              <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="social-link-item">
-                <span class="social-name">Resume / CV</span>
-                <span class="social-handle">View PDF &nearr;</span>
-              </a>
-            </div>
-
-          </div>
-
-          <!-- Column 2: Interactive Transmission Engine (Contact Form) -->
-          <div class="contact-form-column">
-            <div class="contact-form-card" id="contact-form-wrapper">
-              <div class="form-card-header">
-                <div class="form-card-title-group">
-                  <span class="form-header-tag">TRANSMISSION // DIRECT DISPATCH</span>
-                  <h3 class="form-header-title">Send a Direct Message</h3>
-                </div>
-                <div class="form-status-pill">
-                  <span class="status-pulse-dot"></span>
-                  <span class="status-pulse-text">DIRECT INBOX DISPATCH</span>
-                </div>
-              </div>
-
-              <form id="contact-form" class="direct-contact-form" novalidate>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="contact-name" class="form-label">Your Name <span class="req">*</span></label>
-                    <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Alex Morgan" required autocomplete="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="contact-email" class="form-label">Email Address <span class="req">*</span></label>
-                    <input type="email" id="contact-email" name="email" class="form-input" placeholder="e.g. alex@company.com" required autocomplete="email">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="contact-subject" class="form-label">Subject / Purpose</label>
-                  <div class="custom-select-wrapper">
-                    <select id="contact-subject" name="subject" class="form-select">
-                      <option value="Full-Stack Project Collaboration">Full-Stack Project Collaboration</option>
-                      <option value="Distributed Systems & Architecture">Distributed Systems & Architecture</option>
-                      <option value="Full-Time Engineering Opportunity">Full-Time Engineering Opportunity</option>
-                      <option value="Technical Consultation / Advisory">Technical Consultation / Advisory</option>
-                      <option value="General Inquiry">General Inquiry</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="form-label-row">
-                    <label for="contact-message" class="form-label">Message <span class="req">*</span></label>
-                    <span class="char-count" id="char-counter">0 / 1000</span>
-                  </div>
-                  <textarea id="contact-message" name="message" class="form-textarea" rows="4" placeholder="Briefly describe your project, technical specs, or inquiry..." maxlength="1000" required></textarea>
-                </div>
-
-                <div class="form-actions-row">
-                  <button type="submit" id="contact-submit-btn" class="btn-channel primary submit-btn magnetic-btn">
-                    <span class="btn-text">Transmit Message &rarr;</span>
-                    <span class="btn-spinner" style="display:none;"></span>
-                  </button>
-                  <a href="mailto:redoble.gninoemmanuel@gmail.com" id="contact-mailto-fallback" class="btn-channel text-only" title="Open directly in your mail application">
-                    Or open in mail client &nearr;
-                  </a>
-                </div>
-              </form>
-
-              <!-- In-Card Success Confirmation -->
-              <div id="contact-form-success" class="form-success-card" style="display: none;">
-                <div class="success-icon-wrap">&#10003;</div>
-                <h4 class="success-title">Transmission Acknowledged!</h4>
-                <p class="success-body">
-                  Your message has been dispatched to <strong>redoble.gninoemmanuel@gmail.com</strong>. A confirmation has been logged and I will review and reply within 24 hours.
-                </p>
-                <button type="button" id="reset-contact-form-btn" class="btn-channel primary">Send Another Transmission</button>
-              </div>
-
-              <!-- In-Card Error Notice -->
-              <div id="contact-form-error" class="form-error-card" style="display: none;">
-                <div class="error-icon-wrap">&Delta;</div>
-                <div class="error-content">
-                  <h5 class="error-title">Transmission Failed</h5>
-                  <p class="error-body" id="contact-form-error-msg">Please check your fields or dispatch directly via your email client.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- Brand Tread Pattern Divider -->
-  <div class="gn-tread-divider"></div>
-
-  <!-- Clean Minimalist Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-          <img src="img/gnegr.svg" alt="GNEGR Mark" style="height: 18px; width: auto;" class="brand-header-icon">
-          <span class="footer-brand">&copy; 2026 G. Ni&ntilde;o Emmanuel G. Redoble (GNEGR).</span>
-        </div>
-        <span class="footer-sub">Full-stack developer and systems architect. Built to move.</span>
-      </div>
-
-      <div class="footer-right">
-        <button class="footer-term-btn" onclick="window.toggleSystemsTerminal?.()">
-          <span class="term-dot"></span> Terminal HUD (Ctrl+K)
-        </button>
-        <a href="#intro" class="footer-top-link">Back to Top &uarr;</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Interactive Systems Terminal HUD Modal (Ctrl + K) -->
-  <div class="terminal-modal" id="terminal-modal" aria-hidden="true">
-    <div class="terminal-backdrop" id="terminal-backdrop"></div>
-    <div class="terminal-window" id="terminal-window">
-      <div class="terminal-header" id="terminal-header">
-        <div class="terminal-traffic-lights">
-          <button class="light red" id="terminal-close-btn" aria-label="Close Terminal" title="Close (ESC)"></button>
-          <button class="light yellow" id="terminal-minimize-btn" aria-label="Minimize Terminal" title="Minimize"></button>
-          <button class="light green" id="terminal-maximize-btn" aria-label="Maximize Terminal" title="Maximize"></button>
-        </div>
-        <div class="terminal-title">gnegr@systems-core: ~/portfolio (v2.6)</div>
-        <div class="terminal-actions">
-          <span class="terminal-kbd-badge">ESC to exit</span>
-        </div>
-      </div>
-      <div class="terminal-body" id="terminal-body">
-        <div class="term-line term-banner">
-  ____ _   _ _____ ____ ____  
- / ___| \ | | ____/ ___|  _ \ 
-| |  _|  \| |  _|| |  _| |_) |
-| |_| | |\  | |__| |_| |  _ &lt; 
- \____|_| \_|_____\____|_| \_\
-</div>
-        <div class="term-line term-welcome">GNEGR INTERACTIVE SYSTEMS TERMINAL // NI&Ntilde;O REDOBLE</div>
-        <div class="term-line term-muted">Type <span class="term-hl">help</span> to list commands, or click any shortcut below:</div>
-        <div class="term-shortcuts">
-          <button class="term-quick-btn" data-cmd="stack">stack</button>
-          <button class="term-quick-btn" data-cmd="projects">projects</button>
-          <button class="term-quick-btn" data-cmd="exp">experience</button>
-          <button class="term-quick-btn" data-cmd="whoami">whoami</button>
-          <button class="term-quick-btn" data-cmd="contact">contact</button>
-          <button class="term-quick-btn" data-cmd="theme">theme</button>
-          <button class="term-quick-btn" data-cmd="clear">clear</button>
-        </div>
-        <div id="terminal-output"></div>
-      </div>
-      <div class="terminal-input-bar">
-        <span class="term-prompt">gnegr&gt;</span>
-        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type command here (e.g. 'stack', 'projects', 'whoami')..." autocomplete="off" spellcheck="false">
-      </div>
-    </div>
-  </div>
-
-  <!-- Global Toast Notification HUD Container -->
-  <div class="toast-container" id="toast-container" aria-live="polite"></div>
-
-  <!-- Main Application Script (ES Module with Three.js, Parallax & Cursor Physics) -->
-  <script type="module" src="js/main.js"></script>
-</body>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

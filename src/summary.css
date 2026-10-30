@@ -1,0 +1,168 @@
+/* The one-page summary: plain, fast, printable. Follows the system's light or dark setting. */
+@import '@fontsource-variable/archivo/wdth.css';
+
+:root {
+  --ink: #1b1712;
+  --paper: #f4ebdd;
+  --signal: #b8400f;
+  --soft: #e9dfcf;
+  --fg: var(--ink);
+  --bg: var(--paper);
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: var(--paper);
+    --bg: var(--ink);
+    --soft: #2a241d;
+    --signal: #f07a4a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+a:hover {
+  text-decoration-color: var(--signal);
+}
+:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+}
+.sheet {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 56px 20px 80px;
+}
+.mark {
+  display: block;
+  width: 120px;
+  height: auto;
+  aspect-ratio: 466 / 254;
+  fill: currentColor;
+  margin-bottom: 28px;
+}
+h1 {
+  font-size: clamp(44px, 9vw, 76px);
+  font-weight: 800;
+  font-stretch: 115%;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+.lede {
+  margin-top: 16px;
+  font-size: 21px;
+  line-height: 1.4;
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 22px;
+  font-weight: 600;
+}
+.links a:first-child {
+  overflow-wrap: anywhere;
+}
+.back {
+  margin-top: 14px;
+  font-size: 15px;
+}
+section {
+  margin-top: 56px;
+}
+h2 {
+  font-size: 28px;
+  font-weight: 800;
+  font-stretch: 108%;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 750;
+}
+h3 span {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+}
+article + article {
+  margin-top: 26px;
+}
+article p {
+  margin-top: 8px;
+}
+.stack {
+  font-size: 15px;
+  font-weight: 600;
+}
+ul {
+  padding-left: 1.2em;
+}
+li + li {
+  margin-top: 8px;
+}
+dl div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 12px;
+  padding: 10px 0;
+}
+dl div + div {
+  background: none;
+}
+dl div:nth-child(odd) {
+  background: var(--soft);
+  margin: 0 -12px;
+  padding: 10px 12px;
+}
+dt {
+  font-weight: 700;
+}
+@media (max-width: 520px) {
+  dl div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+@media print {
+  :root {
+    --fg: #000;
+    --bg: #fff;
+    --soft: #f1f1f1;
+  }
+  body {
+    font-size: 11pt;
+  }
+  .sheet {
+    padding: 0;
+    max-width: none;
+  }
+  .back {
+    display: none;
+  }
+  section {
+    margin-top: 22px;
+    break-inside: avoid;
+  }
+  .links a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-weight: 400;
+  }
+}

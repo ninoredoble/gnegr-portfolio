@@ -1,67 +1,32 @@
-# Nino Redoble (GNEGR) -- Personal Portfolio & Showcase
+# Niño Redoble · The Ride
 
-> Modern editorial portfolio and digital systems showcase for **G. Nino Emmanuel G. Redoble**.  
-> Live Production URL: [https://ninoredoble.is-a.dev/](https://ninoredoble.is-a.dev/)
+The portfolio at [ninoredoble.is-a.dev](https://ninoredoble.is-a.dev/): scroll and the GNEGR motorcycle rides from dawn in Cagayan de Oro to dusk at a fork in the road, stopping at each place along the way. In the workshop the bike is taken apart and laid out, one part for each thing I bring.
 
----
+People in a hurry can skip straight to the plain one-page summary at [`/summary/`](https://ninoredoble.is-a.dev/summary/), which needs no script and prints cleanly.
 
-## Architecture & Design System
+## How it works
 
-- **Brand System:** GNEGR Design Tokens (Deep Obsidian `#07090E`, Titanium Surface `#0E121A`, Safety Ember `#E24E1B`, Hot Orange `#FF6B35`)
-- **Typography:** Instrument Serif (Editorial Headline), Plus Jakarta Sans (Body), JetBrains Mono (Terminal & HUD)
-- **3D Hardware Canvas:** Interactive WebGL 2.0 Three.js viewport rendering the custom GNEGR SPEC-01 3D chassis with dynamic theme lighting and custom orbit controls.
-- **Terminal HUD (`Ctrl + K`):** Interactive keyboard-driven systems terminal emulator with live command parser, directory tree, theme switcher, and direct repository navigation.
-- **Responsive Fluid Layout:** Desktop, tablet, and mobile-optimized viewports with zero layout shift and fluid CSS variables.
+- TypeScript, Vite, GSAP ScrollTrigger and Lenis.
+- `index.html` holds every word on the page. The landscapes, road signs and the motorcycle are drawn by `src/art.ts` and written into the HTML at build time (`vite.config.ts`), so each scene shows before any script runs.
+- `src/logo.ts` is the GNEGR motorcycle, traced from `public/img/gnegr.png` and cut into six parts along the gaps in the drawing. `public/img/gnegr.svg` is the same drawing as a single light vector.
+- `src/ride.ts` is the choreography: one sticky stage, one scrubbed timeline. Each place wipes in over the last; its layers, road and sign move at their own speeds; in the workshop the bike parks and its parts fly onto the mat.
+- On phones, on short or portrait screens, and for anyone who prefers reduced motion, the same scenes simply stack one after another with no scroll-jacking (`html` without `.is-ride`).
 
----
+## Develop
 
-## Showcase Projects
-
-1. **Aether Report 2026** -- The 2026 Northern Mindanao AI & Autonomous Systems Impact Report. Multi-quarter compute telemetry, 5 regional autonomous edge clusters, and embedded in-context auditor micro-agent.
-2. **ClimaPocket Android** -- Material You 3.5 agrometeorological decision studio for Northern Mindanao smallholder cooperatives. Real-time FAO-56 Penman-Monteith evapotranspiration, pesticide drift window calculator, and offline Room DB cache.
-3. **Relay Core API** -- Production-grade UNIX TUI terminal console (`relayctl`) and webhook dispatch gateway with Redis idempotency locking and hex dump telemetry inspection.
-4. **Hablon Textile Archive** -- Open-access cultural digital museum & generative backstrap loom simulator preserving indigenous mathematical symmetries across Mindanao textile traditions.
-5. **Mindanao Grid Mesh** -- Interactive 138kV/69kV SCADA mimic board and electrical physics engine modeling generator swing dynamics, transmission breakers, and automatic under-frequency load shedding.
-6. **Archipelago Marine Cadence** -- Cross-sectional bathymetric seafloor profiler (0m to 4,200m depth) and NOAA Degree Heating Weeks coral bleaching risk engine across 8 Mindanao marine sanctuaries.
-7. **Cagayan Basin Corridor** -- Real-time watershed hydrology and flood early-warning telemetry simulator modeling 6 river gauge stations against urban levee discharge limits.
-
----
-
-## Repository Structure
-
-```
-.
-|-- css/
-|   +-- style.css                  # High-performance design token system
-|-- js/
-|   +-- main.js                    # WebGL 3D chassis, systems terminal HUD, theme engine
-|-- img/                           # Brand marks, project graphics, and vector emblems
-|   |-- projects/                  # Live production platform preview imagery
-|   |-- gnegr.png                  # Official GNEGR emblem
-|   +-- gnegr.svg                  # Vector brand mark
-|-- models/                        # 3D interactive assets
-|   +-- gnegr.glb                  # GNEGR Motorsport SPEC-01 3D chassis model
-|-- video/                         # Cinematic media assets
-|   +-- gnegr-logo-reveal.webm     # GNEGR official logo reveal parallax backdrop
-|-- CNAME                          # Custom domain target (ninoredoble.is-a.dev)
-|-- index.html                     # Master single-page portfolio
-|-- projects.html                  # Projects showcase directory
-|-- about.html                     # Biographical and engineering background
-|-- skills.html                    # Technical skills and proficiencies
-|-- contact.html                   # Inquiries and communication portal
-|-- gnegr-brand-guidelines.html    # Official GNEGR Design System specification
-+-- README.md
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # type-check and build to dist/
+npm run preview
 ```
 
----
+Add `?qa` to the URL to turn off smoothing and the intro, which makes screenshots land on exact frames.
 
-## Custom Domain & Deployment
+## Deploy
 
-- **Custom Domain:** `ninoredoble.is-a.dev` (CNAME configured)
-- **Engine:** GitHub Pages with custom apex domain routing and automated SSL certificate provisioning.
+`.github/workflows/deploy.yml` builds with Vite and publishes `dist/` to GitHub Pages on every push to `main`. `public/CNAME` keeps the custom domain.
 
----
+## Credits
 
-## License
-
-(c) 2026 G. Nino Emmanuel G. Redoble (GNEGR). Open source code published under the MIT License.
+The scroll engine started from David Yen's MIT-licensed [portfolio](https://github.com/davidyen1124/portfolio); his copyright is kept in `LICENSE`. The story, art, motorcycle and words are new.
