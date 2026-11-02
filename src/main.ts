@@ -118,8 +118,11 @@ async function startRide() {
     const at = ride.settled[id]
     if (at === undefined) return
     const y = ride.st.start + (at / ride.tl.duration()) * (ride.st.end - ride.st.start)
-    if (lenis) lenis.scrollTo(y, { duration: 2 })
-    else window.scrollTo(0, y)
+    if (lenis) {
+      // the ride's pinned length may have been added since Lenis last measured the page
+      lenis.resize()
+      lenis.scrollTo(y, { duration: 2 })
+    } else window.scrollTo(0, y)
   }
   document.addEventListener('click', (e) => {
     const a = (e.target as HTMLElement).closest<HTMLElement>('[data-goto]')
