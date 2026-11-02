@@ -20,6 +20,7 @@ export function charify(node: HTMLElement) {
           else {
             const s = document.createElement('span')
             s.className = 'char'
+            s.setAttribute('aria-hidden', 'true')
             s.textContent = c
             frag.append(s)
           }

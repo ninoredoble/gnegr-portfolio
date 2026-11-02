@@ -110,14 +110,12 @@ button {
   gap: 16px;
   color: var(--hud-ink);
   background: var(--hud-bg);
-  transition:
-    color 0.45s ease,
-    background-color 0.45s ease;
 }
 .hud__home {
   justify-self: start;
   display: flex;
   align-items: center;
+  min-height: 44px;
   gap: 10px;
   font-weight: 750;
   font-stretch: 112%;
@@ -153,8 +151,16 @@ button {
   font-weight: 600;
 }
 .hud__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   text-decoration: none;
   white-space: nowrap;
+}
+.arrow {
+  flex: none;
+  display: inline-block;
+  vertical-align: -2px;
 }
 .hud__link:hover {
   text-decoration: underline;
@@ -631,6 +637,16 @@ html:not(.is-ride) .scene--hello .scene__copy {
   left: 0;
   translate: none;
 }
+/* ultrawide screens: a layer never ends before the right edge of the window */
+.is-ride .layer--far {
+  height: max(calc(var(--h) * var(--far)), calc(100vw * 520 / 2400));
+}
+.is-ride .layer--mid {
+  height: max(calc(var(--h) * var(--mid)), calc(100vw * 420 / 2400));
+}
+.is-ride .layer--near {
+  height: max(calc(var(--h) * var(--near)), calc(100vw * 300 / 2400));
+}
 .is-ride .bike--static {
   display: none;
 }
@@ -666,7 +682,7 @@ html:not(.is-ride) .scene--hello .scene__copy {
   top: calc(var(--hud-h) + 4vh);
   left: var(--pad);
   right: var(--pad);
-  max-width: none;
+  max-width: 78rem;
   padding: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

@@ -2,14 +2,9 @@ import '@fontsource-variable/archivo/wdth.css'
 import '@fontsource/overpass/700.css'
 import './style.css'
 
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Lenis from 'lenis'
 import { $, $$, QA, reduced, rideQuery } from './lib'
-import { buildRide, intro, type Ride } from './ride'
-
-gsap.registerPlugin(ScrollTrigger)
-ScrollTrigger.config({ ignoreMobileResize: true })
+import type Lenis from 'lenis'
+import type { Ride } from './ride'
 
 const root = document.documentElement
 const riding = !reduced && rideQuery.matches
@@ -29,7 +24,7 @@ let current: HTMLElement | null = null
 function onScene(scene: HTMLElement) {
   const cs = getComputedStyle(scene)
   const bg = cs.getPropertyValue('--sky').trim()
-  const fg = cs.getPropertyValue('--fg').trim() || '#1b1712'
+  const fg = cs.color
   hud.style.setProperty('--hud-bg', bg)
   hud.style.setProperty('--hud-ink', fg)
   themeMeta.content = bg
@@ -62,18 +57,35 @@ if (navigator.clipboard) {
   })
 }
 
-if (riding) startRide()
+if (riding) void startRide()
 else startStack()
 
 /* ——— the ride ——— */
-function startRide() {
+async function startRide() {
   root.classList.add('is-ride')
+  // the animation engine is only fetched when the ride will actually run
+  let mods
+  try {
+    mods = await Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger'),
+      import('lenis'),
+      import('./ride'),
+    ])
+  } catch {
+    // the engine could not load: fall back to the stacked scenes
+    root.classList.remove('is-ride')
+    return startStack()
+  }
+  const [{ gsap }, { ScrollTrigger }, { default: LenisCtor }, { buildRide, intro }] = mods
+  gsap.registerPlugin(ScrollTrigger)
+  ScrollTrigger.config({ ignoreMobileResize: true })
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
   window.scrollTo(0, 0)
 
   let lenis: Lenis | null = null
   if (!QA) {
-    lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 0.9 })
+    lenis = new LenisCtor({ lerp: 0.1, wheelMultiplier: 0.9 })
     lenis.on('scroll', ScrollTrigger.update)
     gsap.ticker.add((t) => lenis!.raf(t * 1000))
     gsap.ticker.lagSmoothing(0)
