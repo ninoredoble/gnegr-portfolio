@@ -24,6 +24,8 @@ const SPEED = { far: 0.25, mid: 0.55, near: 1 }
 export type Ride = {
   /** seconds on the timeline where each scene has fully arrived */
   arrive: Record<string, number>
+  /** seconds on the timeline where each scene's copy has fully faded in */
+  settled: Record<string, number>
   tl: gsap.core.Timeline
   st: ScrollTrigger
   /** the scene on top at the current point of the ride */
@@ -58,6 +60,7 @@ export function buildRide(onUpdate: () => void): Ride {
     t = arrive[s.id]! + HOLD[s.id]!
   })
   const total = t
+  const settled: Record<string, number> = {}
 
   scenes.forEach((s, i) => {
     const t0 = start[s.id]!
@@ -87,6 +90,7 @@ export function buildRide(onUpdate: () => void): Ride {
       tl.set(copy, { y: 30, opacity: 0 }, 0)
       tl.fromTo(copy, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out', immediateRender: false }, t1 - 0.35)
     }
+    settled[s.id] = i === 0 ? 0 : t1 - 0.35 + 0.5 + 0.08 * Math.max(0, copy.length - 1)
     if (next) tl.to(copy, { y: -24, opacity: 0, duration: 0.6, stagger: 0.04, ease: 'power1.in' }, start[next.id]! - 0.1)
   })
 
@@ -94,7 +98,7 @@ export function buildRide(onUpdate: () => void): Ride {
   const [w1, w2] = $$('.hello__word')
   tl.to(w1!, { xPercent: -10, duration: 1.4 }, 0.2).to(w2!, { xPercent: 10, duration: 1.4 }, 0.2)
 
-  workshop(tl, stage, rider, arrive.workshop!, HOLD.workshop!)
+  settled.workshop = Math.max(settled.workshop!, workshop(tl, stage, rider, arrive.workshop!, HOLD.workshop!))
 
   // at dusk the bike catches the last light
   tl.to(rider, { fill: '#F4EBDD', duration: WIPE }, start.ahead!)
@@ -135,7 +139,7 @@ export function buildRide(onUpdate: () => void): Ride {
     }
     return order[order.length - 1]!.km
   }
-  return { arrive, tl, st, current, km }
+  return { arrive, settled, tl, st, current, km }
 }
 
 /**
@@ -143,7 +147,7 @@ export function buildRide(onUpdate: () => void): Ride {
  lifts off the bike and settles in its place on the mat (the parts on the mat start exactly where
  the same part sits on the bike, then fly home). Before the bike leaves, it all goes back together.
 */
-function workshop(tl: gsap.core.Timeline, stage: HTMLElement, rider: SVGSVGElement, t1: number, hold: number) {
+function workshop(tl: gsap.core.Timeline, stage: HTMLElement, rider: SVGSVGElement, t1: number, hold: number): number {
   const scene = $('#workshop')
   const mat = $('.parts', scene)
   const items = $$('.part', scene)
@@ -194,6 +198,7 @@ function workshop(tl: gsap.core.Timeline, stage: HTMLElement, rider: SVGSVGEleme
   tl.set($$('.part__art', scene), { opacity: 1 }, a + 1.4)
   tl.set(labels, { opacity: 0, y: 14 }, 0)
   tl.fromTo(labels, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.03, ease: 'power2.out', immediateRender: false }, a + 2.1)
+  const shown = a + 2.1 + 0.5 + 0.03 * Math.max(0, labels.length - 1)
 
   // and back together
   const b = t1 + hold - 1.5
@@ -206,4 +211,5 @@ function workshop(tl: gsap.core.Timeline, stage: HTMLElement, rider: SVGSVGEleme
   tl.set(rider, { opacity: 1 }, b + 0.9)
   tl.to(mat, { opacity: 0, duration: 0.4 }, b + 0.8)
   tl.to(rider, { x: 0, duration: 1.2, ease: 'power2.inOut' }, b + 1)
+  return shown
 }

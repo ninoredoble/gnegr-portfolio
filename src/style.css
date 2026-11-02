@@ -762,8 +762,25 @@ html:not(.is-ride) .scene--hello .scene__copy {
     --t-head: clamp(32px, 3.8vw, 56px);
     --t-huge: clamp(64px, 10.5vw, 170px);
   }
+  .is-ride .scene--workshop .scene__copy {
+    top: calc(var(--hud-h) + 2vh);
+  }
+  .is-ride .parts {
+    --k: calc(var(--h) * 0.0007);
+    bottom: 2vh;
+    padding: 2vh 2vw;
+    gap: 1.2vh 2.4vw;
+  }
+  .is-ride .part__slot {
+    margin-bottom: 0.8vh;
+  }
+  .is-ride .part h3 {
+    font-size: clamp(15px, 1.2vw, 20px);
+  }
   .is-ride .part p {
-    display: none;
+    margin-top: 2px;
+    font-size: clamp(12px, 0.9vw, 14px);
+    line-height: 1.35;
   }
 }
 

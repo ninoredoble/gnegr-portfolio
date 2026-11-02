@@ -113,9 +113,9 @@ async function startRide() {
     },
   })
 
-  // a place in the menu jumps to the moment that place has fully arrived
+  // a place in the menu jumps to the moment that place's copy is fully shown
   const goto = (id: string) => {
-    const at = ride.arrive[id]
+    const at = ride.settled[id]
     if (at === undefined) return
     const y = ride.st.start + (at / ride.tl.duration()) * (ride.st.end - ride.st.start)
     if (lenis) lenis.scrollTo(y, { duration: 2 })
@@ -136,10 +136,12 @@ async function startRide() {
 
   sync()
   void document.fonts.ready.then(() => ScrollTrigger.refresh())
-  window.addEventListener('load', () => {
+  const loaded = () => {
     ScrollTrigger.refresh()
     if (location.hash.length > 1) goto(location.hash.slice(1))
-  })
+  }
+  if (document.readyState === 'complete') loaded()
+  else window.addEventListener('load', loaded)
   if (!QA) intro()
   // screenshots need to land on exact moments of the ride
   if (QA) Object.assign(window, { __ride: { at: (t: number) => ride.st.start + (t / ride.tl.duration()) * (ride.st.end - ride.st.start), arrive: ride.arrive } })
