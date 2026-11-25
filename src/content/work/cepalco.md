@@ -22,6 +22,7 @@ shots:
     alt: "The track-your-ticket page: search by ticket number or by email."
     caption: "Customers track a ticket by its number or their email, with no account needed."
 sensitive: true
+thumb: ../../assets/work/cepalco/portal-home.jpg
 ---
 
 ## Ticketing

@@ -1,0 +1,62 @@
+---
+// Layered paper-cut mountains, echoing the Kirigami hero: a sakura ridge behind a rosewood
+// ridge that meets the rosewood section below. Each layer drifts a little as it scrolls
+// past (CSS scroll-driven animation; static where unsupported or with reduced motion).
+interface Props {
+  class?: string;
+}
+const { class: cls } = Astro.props;
+const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class:list={['ridge', cls]} aria-hidden="true">
+  <svg viewBox="0 0 1440 170" preserveAspectRatio="none">
+    <defs>
+      <filter id={id} x="-5%" y="-30%" width="110%" height="160%">
+        <feDropShadow dx="0" dy="-4" stdDeviation="5" flood-color="#4d2926" flood-opacity="0.28"></feDropShadow>
+      </filter>
+    </defs>
+    <path class="back" fill="#c46864" filter={`url(#${id})`} d="M0 170 L0 92 L110 64 L205 88 L330 30 L440 76 L560 46 L690 84 L820 22 L950 70 L1070 40 L1190 80 L1320 34 L1440 66 L1440 170 Z"></path>
+    <path class="mid" fill="#fdf6eb" filter={`url(#${id})`} d="M0 170 L0 120 L150 96 L250 116 L390 74 L520 108 L660 90 L790 118 L930 82 L1070 112 L1200 92 L1330 116 L1440 98 L1440 170 Z"></path>
+    <path class="front" fill="#7b3e3b" filter={`url(#${id})`} d="M0 170 L0 146 L180 128 L300 144 L460 118 L600 140 L760 124 L900 146 L1050 120 L1210 142 L1340 126 L1440 138 L1440 170 Z"></path>
+  </svg>
+</div>
+
+<style>
+  .ridge {
+    position: relative;
+    height: clamp(90px, 12vw, 170px);
+    overflow: hidden;
+    margin-bottom: -1px;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .back,
+      .mid {
+        animation: drift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 30%;
+      }
+      .back {
+        --rise: 34px;
+      }
+      .mid {
+        --rise: 16px;
+      }
+    }
+  }
+  @keyframes drift {
+    from {
+      transform: translateY(var(--rise));
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+</style>

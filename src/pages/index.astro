@@ -5,6 +5,7 @@ import KirigamiHero from '../components/KirigamiHero.astro';
 import WorkList from '../components/WorkList.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import WeaveBand from '../components/WeaveBand.astro';
+import ProofTags from '../components/ProofTags.astro';
 import { NAV } from '../data/nav';
 
 const all = await getCollection('work');
@@ -35,6 +36,8 @@ const featured = all
         </div>
       </div>
     </section>
+
+    <ProofTags />
 
     <WorkList items={featured} total={all.length} />
 
