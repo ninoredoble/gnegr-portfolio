@@ -6,8 +6,12 @@ import WeaveBand from '../components/WeaveBand.astro';
 
 const swatches = [
   { name: 'Paper', hex: '#FDF6EB', role: 'Background' },
-  { name: 'Rosewood', hex: '#7B3E3B', role: 'Text' },
+  { name: 'Ink', hex: '#3E2C20', role: 'Text' },
+  { name: 'Rosewood', hex: '#7B3E3B', role: 'Headings, brand' },
+  { name: 'River', hex: '#2B4F55', role: 'Footer, links' },
   { name: 'Sakura', hex: '#C46864', role: 'Accent' },
+  { name: 'Sage', hex: '#9EB084', role: 'Accent' },
+  { name: 'Sun', hex: '#EBA586', role: 'Accent' },
 ];
 ---
 
@@ -42,7 +46,7 @@ const swatches = [
 
       <section class="reveal">
         <h2 class="display">COLOUR</h2>
-        <p>Three colours, all taken from the hero scene, and nothing else.</p>
+        <p>Every colour is taken from the hero scene: paper and ink to read, rosewood for the brand, river teal to cool it, and sakura, sage and sun as accents.</p>
         <ul class="swatches">
           {
             swatches.map((s) => (
@@ -113,13 +117,13 @@ const swatches = [
     line-height: 1.6;
   }
   a {
-    color: var(--rosewood);
-    text-decoration-color: var(--sakura);
+    color: var(--river-ink);
+    text-decoration-color: var(--sun);
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
   }
   a:hover {
-    color: var(--sakura);
+    color: var(--rosewood);
   }
   .swatches {
     list-style: none;
@@ -138,7 +142,7 @@ const swatches = [
   .chip {
     width: 48px;
     height: 48px;
-    border: 2px solid var(--rosewood);
+    border: 2px solid var(--line);
   }
   @media (max-width: 820px) {
     .body {

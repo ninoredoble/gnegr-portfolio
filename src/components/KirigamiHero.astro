@@ -41,6 +41,22 @@ const [first, ...rest] = name.split(' ');
   if ((window as { __kirigamiReady?: boolean }).__kirigamiReady) onReady();
   else addEventListener('kirigami:ready', onReady, { once: true });
   setTimeout(ready, 1500);
+
+  // Coming back to the tab: browsers drop the scene's rendered tiles while the tab is hidden
+  // and redraw the big SVG piece by piece on return, which shows as a brief flicker. Hide the
+  // scene while it redraws, then fade it back in.
+  const stage = () => document.querySelector<HTMLElement>('.kirigami-stage');
+  document.addEventListener('visibilitychange', () => {
+    const s = stage();
+    if (!s) return;
+    if (document.hidden) {
+      s.classList.add('scene-resting');
+      return;
+    }
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => requestAnimationFrame(() => s.classList.remove('scene-resting'))),
+    );
+  });
 </script>
 
 <style is:global>
@@ -70,6 +86,10 @@ const [first, ...rest] = name.split(' ');
   }
   .kirigami-stage {
     transition: opacity 0.5s ease;
+  }
+  .kirigami-stage.scene-resting {
+    opacity: 0;
+    transition: none;
   }
   .js body:not(.scene-ready) .kirigami-stage {
     opacity: 0;
@@ -131,7 +151,7 @@ const [first, ...rest] = name.split(' ');
     font-size: clamp(13px, 1.3vw, 16px);
     font-weight: 700;
     letter-spacing: 0.06em;
-    box-shadow: 0 4px 0 rgb(77 41 38 / 0.25);
+    box-shadow: 0 6px 14px rgb(62 44 32 / 0.28);
   }
   .scroll {
     font-size: 13px;

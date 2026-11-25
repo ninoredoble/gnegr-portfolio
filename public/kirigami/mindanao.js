@@ -97,8 +97,13 @@
     if (started) return;
     started = true;
     apply();
-    // React may re-render a layer; put the pieces back if they go missing.
-    new MutationObserver(function () { apply(); }).observe(document.getElementById('standalone-root') || document.body, { childList: true, subtree: true });
+    // React may re-render a layer; put the pieces back if they go missing. Watch only the
+    // three layers we use (not the whole scene, where petals churn constantly).
+    var mo = new MutationObserver(function () { apply(); });
+    ['[data-depth-layer="2"]', '#kirigami-river-valley', '#kirigami-mid-trees'].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (el) mo.observe(el, { childList: true });
+    });
   }
   if (window.__kirigamiReady) start();
   else {
