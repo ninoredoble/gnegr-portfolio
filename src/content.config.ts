@@ -23,7 +23,8 @@ const work = defineCollection({
       stack: z.array(z.string()).min(1),
       /** Honest status line, e.g. "Live on the App Store", "Study: sample data". */
       status: z.string(),
-      live: z.url().optional(),
+      /** The live demo: a full URL, or a path on this site such as /lab/light-travel/. */
+      live: z.union([z.url(), z.string().regex(/^\/[a-z0-9/-]*$/)]).optional(),
       repo: z.url().optional(),
       /** Store and product links shown as buttons on the case study. */
       links: z.array(z.object({ label: z.string(), href: z.url(), primary: z.boolean().default(false) })).optional(),

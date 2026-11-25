@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -25,7 +26,13 @@ const rendered = await Promise.all(lab.map(async (w) => ({ w, Content: (await re
     <ol class="wrap list">
       {
         rendered.map(({ w, Content }, i) => (
-          <li class="item reveal" style={`--d:${(i * 0.05).toFixed(2)}s; --ac: ${['var(--river-mid)', 'var(--sage-ink)', 'var(--sun)', 'var(--olive)', 'var(--sakura)', 'var(--wood)'][i % 6]}`}>
+          <li class="item reveal" style={`--d:${(i * 0.05).toFixed(2)}s; --tilt:${i % 2 ? 1.2 : -1.2}deg; --ac: ${['var(--river-mid)', 'var(--sage-ink)', 'var(--sun)', 'var(--olive)', 'var(--sakura)', 'var(--wood)'][i % 6]}`}>
+            {(w.data.thumb || w.data.cover) && (
+              <a class="shot" href={w.data.live ?? `/work/${w.id}/`} tabindex="-1" aria-hidden="true">
+                <Picture src={w.data.thumb ?? w.data.cover!.src} alt="" widths={[360, 640, 900]} sizes="(max-width: 820px) 92vw, 46vw" formats={['avif', 'webp']} fallbackFormat="jpg" width={900} />
+                <span class="open">{w.data.live ? 'Open live ↗' : 'Read more →'}</span>
+              </a>
+            )}
             <div class="top">
               <h2 class="display">{w.data.title.toUpperCase()}</h2>
               <p class="status">{w.data.status}</p>
@@ -83,6 +90,57 @@ const rendered = await Promise.all(lab.map(async (w) => ({ w, Content: (await re
     gap: 12px;
     padding: 28px 0 32px;
     border-top: 6px solid var(--ac);
+  }
+  /* The preview: a paper print of the live page. Straightens and lifts on hover. */
+  .shot {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+    border: 6px solid var(--paper);
+    outline: 2px solid color-mix(in oklab, var(--ac) 55%, var(--ink));
+    background: var(--paper);
+    transform: rotate(var(--tilt));
+    filter: drop-shadow(0 10px 14px rgb(62 44 32 / 0.2));
+    transition:
+      transform 0.45s var(--ease-out),
+      filter 0.3s;
+  }
+  .shot :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .shot .open {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 6px 12px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.2s,
+      transform 0.3s var(--ease-out);
+  }
+  .shot:hover {
+    transform: rotate(0deg) translateY(-6px);
+    filter: drop-shadow(0 18px 22px rgb(62 44 32 / 0.28));
+  }
+  .shot:hover .open {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shot,
+    .shot .open {
+      transition: none;
+    }
   }
   .top {
     display: flex;
