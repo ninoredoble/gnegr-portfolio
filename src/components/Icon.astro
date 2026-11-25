@@ -1,0 +1,62 @@
+---
+// Small inline icons. Brand marks for Gmail and GitHub come from Simple Icons (CC0,
+// src/icons/brands.json). LinkedIn, Outlook and Yahoo aren't in Simple Icons (their owners
+// had them removed), so those use plain, generic marks instead of copied logos.
+import brands from '../icons/brands.json';
+
+interface Props {
+  name: 'gmail' | 'github' | 'linkedin' | 'outlook' | 'yahoo' | 'mail' | 'copy' | 'doc' | 'close' | 'check';
+  size?: number;
+  class?: string;
+}
+const { name, size = 22, class: cls } = Astro.props;
+const brand = (brands as Record<string, string>)[name];
+---
+
+<svg class:list={['icon', cls]} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  {brand && <path fill="currentColor" d={brand} />}
+  {
+    name === 'linkedin' && (
+      <>
+        <rect x="1.5" y="1.5" width="21" height="21" rx="4" fill="currentColor" />
+        <rect x="5.4" y="9.6" width="2.9" height="8.6" fill="var(--icon-cut, #fdf6eb)" />
+        <circle cx="6.85" cy="6.6" r="1.7" fill="var(--icon-cut, #fdf6eb)" />
+        <path fill="var(--icon-cut, #fdf6eb)" d="M10.4 9.6h2.8v1.2c.5-.9 1.6-1.45 2.9-1.45 2.3 0 3.1 1.5 3.1 3.6v5.25h-2.9v-4.6c0-1.1-.3-1.8-1.3-1.8s-1.7.75-1.7 1.9v4.5h-2.9z" />
+      </>
+    )
+  }
+  {
+    (name === 'mail' || name === 'outlook' || name === 'yahoo') && (
+      <>
+        <rect x="2" y="5" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M3 6.5l9 6.5 9-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      </>
+    )
+  }
+  {
+    name === 'copy' && (
+      <>
+        <rect x="8" y="8" width="12" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2" />
+      </>
+    )
+  }
+  {
+    name === 'doc' && (
+      <>
+        <path d="M6 2h8l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        <path d="M14 2v5h5M9 12h7M9 16h7" fill="none" stroke="currentColor" stroke-width="2" />
+      </>
+    )
+  }
+  {name === 'close' && <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />}
+  {name === 'check' && <path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />}
+</svg>
+
+<style>
+  .icon {
+    display: inline-block;
+    flex: none;
+    vertical-align: middle;
+  }
+</style>

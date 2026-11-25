@@ -45,10 +45,16 @@ const out = join(dist, 'resume.pdf');
 try {
   // Async on purpose: a sync call would block this process's own server and deadlock Chrome.
   await promisify(execFile)(chrome, ['--headless=new', '--disable-gpu', '--no-sandbox', '--no-pdf-header-footer', '--virtual-time-budget=4000', `--print-to-pdf=${out}`, url], { timeout: 60_000 });
-} finally {
+} catch (e) {
   server.close();
+  throw e;
 }
 await copyFile(out, join(dist, 'RESUME - REDOBLE.pdf'));
+
+// The footer's hover preview: the sheet as an A4-shaped image, from the same page.
+const preview = join(dist, 'resume-preview.png');
+await promisify(execFile)(chrome, ['--headless=new', '--disable-gpu', '--no-sandbox', '--hide-scrollbars', '--window-size=900,1273', '--virtual-time-budget=4000', `--screenshot=${preview}`, `${url}?preview`], { timeout: 60_000 }).catch((e) => console.error('resume preview failed:', e.message));
+server.close();
 const pages = ((await readFile(out, 'latin1')).match(/\/Type\s*\/Page[^s]/g) ?? []).length;
 console.log(`resume.pdf: ${pages} page(s)`);
 if (pages !== 1) {

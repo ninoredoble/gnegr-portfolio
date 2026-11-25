@@ -6,6 +6,7 @@ import { RESUME as R } from '../data/resume';
 ---
 
 <Base title="Resume · Niño Redoble" description={R.summary}>
+  <script is:inline slot="head">if (location.search.indexOf('preview') > -1) document.documentElement.classList.add('preview');</script>
   <div class="screen-only"><SiteHeader /></div>
   <main id="main" class="wrap">
     <div class="tools screen-only">
@@ -237,6 +238,22 @@ import { RESUME as R } from '../data/resume';
     .contact {
       text-align: left;
     }
+  }
+
+  /* ?preview: just the sheet, for the hover thumbnail the build screenshots. */
+  :global(html.preview) .screen-only {
+    display: none !important;
+  }
+  :global(html.preview body) {
+    background: #fff;
+  }
+  :global(html.preview) .sheet {
+    padding: 56px 60px;
+    font-size: 15px;
+  }
+  :global(html.preview .reveal) {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   /* One A4 page, ink-light. Uses the same three colours. */
