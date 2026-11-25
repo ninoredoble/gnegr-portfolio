@@ -9,6 +9,7 @@ stack: [HTML, CSS, JavaScript, Web Crypto API]
 status: "Study: sample events, no server"
 live: https://ninoredoble.github.io/webhook-signing-simulator/
 repo: https://github.com/ninoredoble/webhook-signing-simulator
+thumb: ../../assets/work/webhook/thumb.jpg
 ---
 
 ## What it shows

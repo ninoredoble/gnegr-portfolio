@@ -29,6 +29,8 @@ const work = defineCollection({
       /** The company the work was done at, shown with its logo. */
       org: z.object({ name: z.string(), href: z.url().optional(), logo: image().optional() }).optional(),
       cover: z.object({ src: image(), alt: z.string() }).optional(),
+      /** Small paper-card image on the home page's work list. */
+      thumb: image().optional(),
       /** Phone screens, shown as a strip. */
       screens: z.array(z.object({ src: image(), alt: z.string() })).optional(),
       /** Desktop screenshots, each shown in a browser frame. */

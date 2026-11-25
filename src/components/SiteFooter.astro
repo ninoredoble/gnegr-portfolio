@@ -1,8 +1,10 @@
 ---
 // Closing contact band shared by every page.
 import { CONTACT } from '../data/contact';
+import PaperRidge from './PaperRidge.astro';
 ---
 
+<PaperRidge class="footer-ridge" />
 <footer class="site-footer" id="contact">
   <div class="wrap inner">
     <h2 class="display reveal">SAY HELLO.</h2>
@@ -23,8 +25,10 @@ import { CONTACT } from '../data/contact';
 </footer>
 
 <style>
+  :global(.footer-ridge) {
+    margin-top: clamp(56px, 8vw, 112px);
+  }
   .site-footer {
-    margin-top: clamp(72px, 10vw, 140px);
     background: var(--rosewood);
     color: var(--paper);
   }
