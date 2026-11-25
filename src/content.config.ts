@@ -16,6 +16,8 @@ const work = defineCollection({
       featured: z.number().int().min(1).max(5).optional(),
       /** A Lab entry that still gets its own case study page. */
       page: z.boolean().default(false),
+      /** For `page` entries: the short Lab-card text (the full story lives on its page). */
+      excerpt: z.string().optional(),
       role: z.string(),
       period: z.string(),
       stack: z.array(z.string()).min(1),
