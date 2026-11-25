@@ -44,6 +44,10 @@ let scene = root.slice(open.length, -'</div>'.length);
 const ctl = scene.lastIndexOf('<div class="pointer-events-none fixed right-4 top-4 z-50');
 if (ctl < 0 || !scene.endsWith('</button></div></main>')) throw new Error('control panel markup not found');
 scene = scene.slice(0, ctl) + '</main>';
+// Clouds and houses are decorative toys: keep them clickable but out of the Tab order.
+const tabbable = (scene.match(/tabindex="0"/g) ?? []).length;
+if (tabbable === 0) throw new Error('expected tabbable clouds/houses in the scene markup');
+scene = scene.replaceAll('tabindex="0"', 'tabindex="-1"');
 writeFileSync(join(out, 'scene.html'), scene);
 
 // --- engine --------------------------------------------------------------
@@ -72,6 +76,21 @@ patch('no H toggle + unfold on load',
 patch('pause off screen',
   'let g=h=>{if(h.target?.closest("aside"))return;h.preventDefault();let C=h.deltaY*55e-5;a(S=>({...S,isPlayingUnfold:!1,unfoldProgress:Xt(S.unfoldProgress+C)}))};return window.addEventListener("wheel",g,{passive:!1}),()=>window.removeEventListener("wheel",g)',
   'let g=new IntersectionObserver(([en])=>{let on=en.isIntersecting;a(S=>S.ambientMotion===on&&S.petalsEnabled===on?S:({...S,ambientMotion:on,petalsEnabled:on}))}),el=document.querySelector(".kirigami-stage");return el&&g.observe(el),()=>g.disconnect()');
+
+// 4. No pointer parallax. It shifts eight full-size paper layers on every pointer frame,
+//    which forces a full SVG redraw and made the scene flicker on hover (also in the
+//    original template). Wind, petals, cloud hover and house clicks all stay.
+patch('no parallax',
+  'var dL={unfoldProgress:1,isPlayingUnfold:!1,ambientMotion:!0,parallaxEnabled:!0',
+  'var dL={unfoldProgress:1,isPlayingUnfold:!1,ambientMotion:!0,parallaxEnabled:!1');
+// 5. Clouds and houses out of the Tab order (matches the markup change above).
+patch('cloud tabindex', 'tabIndex:l?0:void 0', 'tabIndex:l?-1:void 0');
+patch('house tabindex', 'tabIndex:t?0:void 0', 'tabIndex:t?-1:void 0');
+// 6. Ignore resizes from a phone's address bar showing and hiding while you scroll:
+//    re-fit the camera only when the width changes or the height changes a lot.
+patch('stable camera on scroll',
+  '(0,Te.useEffect)(()=>{let E=()=>{let F=Dc(window.innerWidth,window.innerHeight);C(F),L?.(F)};',
+  '(0,Te.useEffect)(()=>{let W0=0,H0=0,E=()=>{let w=window.innerWidth,hh=window.innerHeight;if(w===W0&&Math.abs(hh-H0)<hh*.25)return;W0=w,H0=hh;let F=Dc(w,hh);C(F),L?.(F)};');
 
 const pub = join(out, '..', '..', 'public', 'kirigami');
 mkdirSync(pub, { recursive: true });

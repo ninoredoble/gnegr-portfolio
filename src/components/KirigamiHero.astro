@@ -49,13 +49,21 @@ const [first, ...rest] = name.split(' ');
   #standalone-root > main {
     position: relative;
     z-index: 0;
-    height: 100dvh;
+    /* svh, not dvh: a phone's address bar showing or hiding must not resize the scene. */
+    height: 100svh;
     width: 100%;
     overflow: hidden;
-    /* Its own compositing layer, so its constant animation never repaints the page around it. */
-    contain: layout paint;
     isolation: isolate;
-    transform: translateZ(0);
+  }
+  /* Clouds and houses stay clickable, without a focus box or a tap highlight. */
+  .kirigami-stage,
+  .kirigami-stage * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .kirigami-svg-root [role='button'],
+  .kirigami-svg-root [role='button']:focus,
+  .kirigami-svg-root [role='button']:focus-visible {
+    outline: none;
   }
   .kirigami-svg-root {
     display: block;
@@ -81,7 +89,7 @@ const [first, ...rest] = name.split(' ');
   .overlay {
     position: absolute;
     inset: 0 0 auto 0;
-    height: 100dvh;
+    height: 100svh;
     /* no z-index: it would trap the menu (z 60) under the page content (z 2) */
     pointer-events: none;
     display: flex;

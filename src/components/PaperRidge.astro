@@ -1,7 +1,10 @@
 ---
-// Layered paper-cut mountains, echoing the Kirigami hero: a sakura ridge behind a rosewood
-// ridge that meets the rosewood section below. Each layer drifts a little as it scrolls
-// past (CSS scroll-driven animation; static where unsupported or with reduced motion).
+// Layered paper-cut mountains above the footer, echoing the Kirigami hero: a sakura ridge,
+// a paper ridge with a stilt house and coconut palms standing on it, the rosewood ridge
+// in front, and the Philippine eagle gliding over. Back layers drift as they scroll in
+// (CSS scroll-driven animation; static where unsupported or with reduced motion).
+import Ornament from './Ornament.astro';
+
 interface Props {
   class?: string;
 }
@@ -10,7 +13,7 @@ const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <div class:list={['ridge', cls]} aria-hidden="true">
-  <svg viewBox="0 0 1440 170" preserveAspectRatio="none">
+  <svg class="layer" viewBox="0 0 1440 170" preserveAspectRatio="none">
     <defs>
       <filter id={id} x="-5%" y="-30%" width="110%" height="160%">
         <feDropShadow dx="0" dy="-4" stdDeviation="5" flood-color="#4d2926" flood-opacity="0.28"></feDropShadow>
@@ -18,25 +21,74 @@ const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
     </defs>
     <path class="back" fill="#c46864" filter={`url(#${id})`} d="M0 170 L0 92 L110 64 L205 88 L330 30 L440 76 L560 46 L690 84 L820 22 L950 70 L1070 40 L1190 80 L1320 34 L1440 66 L1440 170 Z"></path>
     <path class="mid" fill="#fdf6eb" filter={`url(#${id})`} d="M0 170 L0 120 L150 96 L250 116 L390 74 L520 108 L660 90 L790 118 L930 82 L1070 112 L1200 92 L1330 116 L1440 98 L1440 170 Z"></path>
-    <path class="front" fill="#7b3e3b" filter={`url(#${id})`} d="M0 170 L0 146 L180 128 L300 144 L460 118 L600 140 L760 124 L900 146 L1050 120 L1210 142 L1340 126 L1440 138 L1440 170 Z"></path>
+  </svg>
+
+  <Ornament kind="palm" class="o palm-a" />
+  <Ornament kind="palm" class="o palm-b" />
+  <Ornament kind="house" class="o house" />
+  <Ornament kind="palm" class="o palm-c" />
+  <Ornament kind="eagle" class="o eagle" />
+
+  <svg class="layer front" viewBox="0 0 1440 170" preserveAspectRatio="none">
+    <path fill="#7b3e3b" filter={`url(#${id})`} d="M0 170 L0 146 L180 128 L300 144 L460 118 L600 140 L760 124 L900 146 L1050 120 L1210 142 L1340 126 L1440 138 L1440 170 Z"></path>
   </svg>
 </div>
 
 <style>
   .ridge {
     position: relative;
-    height: clamp(90px, 12vw, 170px);
+    height: clamp(120px, 15vw, 210px);
     overflow: hidden;
     margin-bottom: -1px;
   }
-  svg {
+  .layer {
+    position: absolute;
+    inset: auto 0 0 0;
     display: block;
     width: 100%;
-    height: 100%;
+    height: clamp(90px, 12vw, 170px);
     overflow: visible;
   }
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
+  .ridge :global(.o) {
+    position: absolute;
+    height: auto;
+  }
+  .ridge :global(.palm-a) {
+    left: 6%;
+    bottom: 16%;
+    width: clamp(46px, 6vw, 84px);
+  }
+  .ridge :global(.palm-b) {
+    left: 11%;
+    bottom: 13%;
+    width: clamp(36px, 4.6vw, 64px);
+    transform: scaleX(-1);
+  }
+  .ridge :global(.house) {
+    left: 63%;
+    bottom: 15%;
+    width: clamp(56px, 7vw, 100px);
+  }
+  .ridge :global(.palm-c) {
+    left: 86%;
+    bottom: 14%;
+    width: clamp(40px, 5.2vw, 72px);
+  }
+  .ridge :global(.eagle) {
+    left: 34%;
+    top: 4%;
+    width: clamp(54px, 6vw, 92px);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .ridge :global(.eagle) {
+      animation: glide 9s ease-in-out infinite;
+    }
+    .ridge :global(.palm-a),
+    .ridge :global(.palm-c) {
+      transform-origin: 50% 100%;
+      animation: sway 6s ease-in-out infinite;
+    }
+    @supports (animation-timeline: view()) {
       .back,
       .mid {
         animation: drift linear both;
@@ -57,6 +109,26 @@ const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
     }
     to {
       transform: translateY(0);
+    }
+  }
+  @keyframes glide {
+    0%,
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+    50% {
+      translate: 28px -8px;
+      rotate: -3deg;
+    }
+  }
+  @keyframes sway {
+    0%,
+    100% {
+      rotate: 0deg;
+    }
+    50% {
+      rotate: -2.5deg;
     }
   }
 </style>
