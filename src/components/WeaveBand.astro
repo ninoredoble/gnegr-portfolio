@@ -1,0 +1,28 @@
+---
+// The woven divider (original geometry in the three brand colours).
+interface Props {
+  class?: string;
+  height?: number;
+}
+const { class: cls, height = 36 } = Astro.props;
+const id = `weave-${Math.random().toString(36).slice(2, 8)}`;
+const h = height;
+---
+
+<svg class:list={['weave-band', cls]} viewBox={`0 0 1440 ${h}`} preserveAspectRatio="none" aria-hidden="true" style={`height:${h}px`}>
+  <defs>
+    <pattern id={id} width={h} height={h} patternUnits="userSpaceOnUse">
+      <rect width={h} height={h} fill="#7b3e3b"></rect>
+      <path d={`M${h / 2} ${h * 0.08} L${h * 0.92} ${h / 2} L${h / 2} ${h * 0.92} L${h * 0.08} ${h / 2} Z`} fill="#c46864"></path>
+      <path d={`M${h / 2} ${h * 0.3} L${h * 0.7} ${h / 2} L${h / 2} ${h * 0.7} L${h * 0.3} ${h / 2} Z`} fill="#fdf6eb"></path>
+    </pattern>
+  </defs>
+  <rect width="1440" height={h} fill={`url(#${id})`}></rect>
+</svg>
+
+<style>
+  .weave-band {
+    display: block;
+    width: 100%;
+  }
+</style>

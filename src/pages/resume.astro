@@ -1,0 +1,303 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { RESUME as R } from '../data/resume';
+---
+
+<Base title="Resume · Niño Redoble" description={R.summary}>
+  <div class="screen-only"><SiteHeader /></div>
+  <main id="main" class="wrap">
+    <div class="tools screen-only">
+      <a class="btn print" href="/resume.pdf" download="Nino-Redoble-Resume.pdf">Download PDF</a>
+    </div>
+
+    <article class="sheet">
+      <header class="top">
+        <div>
+          <h1 class="display">{R.name.toUpperCase()}</h1>
+          <p class="headline">{R.headline} · {R.location}</p>
+        </div>
+        <ul class="contact">
+          {R.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </header>
+
+      <p class="summary">{R.summary}</p>
+
+      <section>
+        <h2 class="display">EXPERIENCE</h2>
+        {
+          R.experience.map((e) => (
+            <div class="role">
+              <div class="role-head">
+                <h3>
+                  {e.title}, <span class="org">{e.org}</span>
+                </h3>
+                <span class="period">{e.period}</span>
+              </div>
+              <ul>
+                {e.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+              {e.link && <a class="more screen-only" href={e.link}>Case study →</a>}
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2 class="display">SELECTED STUDIES</h2>
+        <ul class="studies">
+          {
+            R.studies.map((s) => (
+              <li>
+                <a href={s.href}>{s.label}</a>: {s.note}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="two">
+        <div>
+          <h2 class="display">SKILLS</h2>
+          <dl class="skills">
+            {
+              R.skills.map((s) => (
+                <div>
+                  <dt>{s.group}</dt>
+                  <dd>{s.items}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div>
+          <h2 class="display">EDUCATION</h2>
+          {
+            R.education.map((e) => (
+              <p class="edu">
+                <strong>{e.title}</strong>
+                <br />
+                {e.org} · {e.period}
+              </p>
+            ))
+          }
+          <ul class="honours">
+            {R.honours.map((h) => <li>{h}</li>)}
+          </ul>
+        </div>
+      </section>
+    </article>
+  </main>
+  <div class="screen-only"><SiteFooter /></div>
+</Base>
+
+<style>
+  .tools {
+    display: flex;
+    justify-content: flex-end;
+    padding-block: 8px 20px;
+  }
+  .print {
+    background: var(--rosewood);
+    border-color: var(--rosewood);
+    color: var(--paper);
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .print:hover {
+    background: var(--sakura);
+    border-color: var(--sakura);
+  }
+  .sheet {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 14px;
+    border-bottom: 3px solid var(--rosewood);
+  }
+  h1 {
+    font-size: clamp(48px, 8vw, 88px);
+    line-height: 0.85;
+  }
+  .headline {
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 17px;
+  }
+  .contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    text-align: right;
+  }
+  .contact a {
+    display: inline-block;
+    min-height: 24px;
+    padding: 2px 0;
+  }
+  .contact a,
+  .studies a,
+  .more {
+    color: var(--rosewood);
+    text-decoration-color: var(--sakura);
+    text-underline-offset: 3px;
+  }
+  .summary {
+    margin: 16px 0 4px;
+    font-size: 17px;
+  }
+  section {
+    margin-top: 22px;
+  }
+  h2 {
+    font-size: 30px;
+    line-height: 1;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rosewood);
+    margin-bottom: 10px;
+  }
+  .role {
+    margin-bottom: 14px;
+  }
+  .role-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .org {
+    font-weight: 500;
+  }
+  .period {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .role ul,
+  .studies {
+    margin: 6px 0 0;
+    padding-left: 18px;
+  }
+  .role li,
+  .studies li {
+    margin-bottom: 4px;
+  }
+  .more {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .two {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 32px;
+  }
+  .skills {
+    margin: 0;
+  }
+  .honours {
+    margin: 8px 0 0;
+    padding-left: 18px;
+  }
+  .skills > div {
+    margin-bottom: 6px;
+  }
+  dt {
+    font-weight: 700;
+    display: inline;
+  }
+  dt::after {
+    content: ': ';
+  }
+  dd {
+    display: inline;
+    margin: 0;
+  }
+  @media (max-width: 700px) {
+    .two {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .contact {
+      text-align: left;
+    }
+  }
+
+  /* One A4 page, ink-light. Uses the same three colours. */
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm 14mm;
+    }
+    :global(body) {
+      background: #fff;
+    }
+    .screen-only {
+      display: none !important;
+    }
+    :global(.wrap) {
+      padding: 0;
+      max-width: none;
+    }
+    .sheet {
+      max-width: none;
+      font-size: 10pt;
+      line-height: 1.38;
+    }
+    /* Plain, readable headings in the PDF. */
+    h1,
+    h2 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    h1 {
+      font-size: 26pt;
+      line-height: 1;
+    }
+    h2 {
+      font-size: 12.5pt;
+      letter-spacing: 0.06em;
+    }
+    .headline,
+    .summary,
+    h3 {
+      font-size: 10.5pt;
+    }
+    .contact,
+    .period {
+      font-size: 9pt;
+    }
+    section {
+      margin-top: 12px;
+      break-inside: avoid;
+    }
+    .role {
+      break-inside: avoid;
+      margin-bottom: 8px;
+    }
+    a {
+      text-decoration: none;
+    }
+    :global(.js) :global(.reveal) {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>

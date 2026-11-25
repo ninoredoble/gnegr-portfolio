@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WeaveBand from '../components/WeaveBand.astro';
+
+const swatches = [
+  { name: 'Paper', hex: '#FDF6EB', role: 'Background' },
+  { name: 'Rosewood', hex: '#7B3E3B', role: 'Text' },
+  { name: 'Sakura', hex: '#C46864', role: 'Accent' },
+];
+---
+
+<Base title="Colophon · Niño Redoble" description="How this site is made: the type, the colours, the hero scene and the tools, with credit where it's due.">
+  <SiteHeader />
+  <main id="main">
+    <header class="wrap head">
+      <h1 class="display reveal">COLOPHON</h1>
+      <p class="lede reveal" style="--d:.08s">How this site is made, and who made the parts I didn't.</p>
+    </header>
+    <WeaveBand height={20} />
+
+    <div class="wrap body">
+      <section class="reveal">
+        <h2 class="display">THE HERO</h2>
+        <p>
+          The paper landscape on the home page is <a href="https://www.openlanding.page/templates/kirigami">KIRIGAMI</a> by
+          Famanias, from openlanding.page, used under the MIT License. Its art and animation are unchanged. I added the
+          Philippine eagle, the coconut palms and the vinta, and changed how it reacts to scrolling. The licence notice
+          ships with the page.
+        </p>
+      </section>
+
+      <section class="reveal">
+        <h2 class="display">TYPE</h2>
+        <p>
+          Headlines are set in <strong>Empanada Bold</strong> by Neale Davidson of
+          <a href="https://www.pixelsagas.com/?p=3411">Pixel Sagas</a>. Everything else is
+          <strong>Familjen Grotesk</strong> by Familjen STHLM. Both are free under the SIL Open Font License.
+        </p>
+      </section>
+
+      <section class="reveal">
+        <h2 class="display">COLOUR</h2>
+        <p>Three colours, all taken from the hero scene, and nothing else.</p>
+        <ul class="swatches">
+          {
+            swatches.map((s) => (
+              <li>
+                <span class="chip" style={`background:${s.hex}`} />
+                <strong>{s.name}</strong>
+                <span>
+                  {s.role} · {s.hex}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="reveal">
+        <h2 class="display">BUILT WITH</h2>
+        <p>
+          <a href="https://astro.build/">Astro</a>, hosted on GitHub Pages at a domain from
+          <a href="https://is-a.dev/">is-a.dev</a>. The work follows the same process as my other projects: written specs,
+          automated checks before anything merges, and AI coding tools working inside those rules.
+        </p>
+      </section>
+
+      <section class="reveal">
+        <h2 class="display">HONESTY</h2>
+        <p>
+          Every claim on this site was checked against the source code or documents behind it. Studies say plainly which
+          data is real and which is sample data. If you spot something wrong, <a href="/#contact">tell me</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+  <SiteFooter />
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(32px, 6vw, 88px) clamp(28px, 4vw, 56px);
+  }
+  h1 {
+    font-size: clamp(64px, 12vw, 180px);
+    line-height: 0.84;
+  }
+  .lede {
+    margin-top: 20px;
+    max-width: 34em;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.45;
+  }
+  .body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 5vw, 64px);
+    padding-block: clamp(40px, 6vw, 80px);
+  }
+  section {
+    border-top: 3px solid var(--rosewood);
+    padding-top: 16px;
+  }
+  h2 {
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 0.95;
+    margin-bottom: 12px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  a {
+    color: var(--rosewood);
+    text-decoration-color: var(--sakura);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: var(--sakura);
+  }
+  .swatches {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .swatches li {
+    display: grid;
+    grid-template-columns: 48px auto 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  .chip {
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--rosewood);
+  }
+  @media (max-width: 820px) {
+    .body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

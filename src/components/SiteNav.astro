@@ -1,0 +1,308 @@
+---
+// Main navigation. Wide screens: a row of links. At 820px and below (and only when JS runs)
+// the row becomes a burger that unfolds a full-screen paper menu.
+// Accessibility: real <button> with aria-expanded/aria-controls, 48px target, Esc closes,
+// focus stays inside while open and returns to the button on close, links close the menu,
+// background scroll is locked. Without JS the plain row of links is shown instead.
+interface Props {
+  links: { href: string; label: string }[];
+}
+const { links } = Astro.props;
+---
+
+<nav class="site-nav" aria-label="Main">
+  <ul class="row">
+    {
+      links.map((l) => (
+        <li>
+          <a href={l.href}>{l.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+  <button class="burger" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+    <span class="bar" aria-hidden="true"></span>
+    <span class="bar" aria-hidden="true"></span>
+    <span class="bar" aria-hidden="true"></span>
+  </button>
+</nav>
+
+<div class="menu" id="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <ol class="menu-links">
+    {
+      links.map((l, i) => (
+        <li style={`--i:${i}`}>
+          <a href={l.href}>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="label display">{l.label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <svg class="menu-band" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <pattern id="menu-weave" width="28" height="28" patternUnits="userSpaceOnUse">
+        <rect width="28" height="28" fill="#7b3e3b"></rect>
+        <path d="M14 2 L26 14 L14 26 L2 14 Z" fill="#c46864"></path>
+        <path d="M14 8 L20 14 L14 20 L8 14 Z" fill="#fdf6eb"></path>
+      </pattern>
+    </defs>
+    <rect width="1440" height="28" fill="url(#menu-weave)"></rect>
+  </svg>
+</div>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.site-nav .burger');
+  const menu = document.getElementById('site-menu');
+  if (btn && menu) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const focusables = () => [btn, ...menu.querySelectorAll<HTMLElement>('a[href]')];
+    let closeTimer = 0;
+
+    const open = () => {
+      clearTimeout(closeTimer);
+      menu.hidden = false;
+      // next frame so the unfold transition runs from the closed state
+      requestAnimationFrame(() => menu.classList.add('is-open'));
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
+      document.documentElement.classList.add('menu-open');
+      menu.querySelector<HTMLElement>('a[href]')?.focus({ preventScroll: true });
+    };
+    const close = (returnFocus = true) => {
+      menu.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+      document.documentElement.classList.remove('menu-open');
+      closeTimer = window.setTimeout(() => (menu.hidden = true), reduce.matches ? 0 : 260);
+      if (returnFocus) btn.focus({ preventScroll: true });
+    };
+    const isOpen = () => btn.getAttribute('aria-expanded') === 'true';
+
+    btn.addEventListener('click', () => (isOpen() ? close() : open()));
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a[href]')) close(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!isOpen()) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+      } else if (e.key === 'Tab') {
+        const f = focusables();
+        const i = f.indexOf(document.activeElement as HTMLElement);
+        if (e.shiftKey && i <= 0) {
+          e.preventDefault();
+          f[f.length - 1].focus();
+        } else if (!e.shiftKey && i === f.length - 1) {
+          e.preventDefault();
+          f[0].focus();
+        }
+      }
+    });
+    // Rotating or resizing past the breakpoint with the menu open: close it.
+    matchMedia('(min-width: 821px)').addEventListener('change', (e) => {
+      if (e.matches && isOpen()) close(false);
+    });
+  }
+</script>
+
+<style>
+  .site-nav {
+    /* its own layer above the open menu (z 60), so the burger doubles as the close button */
+    position: relative;
+    z-index: 70;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0 clamp(14px, 2.4vw, 32px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .row a {
+    display: inline-block;
+    color: var(--rosewood);
+    text-decoration: none;
+    padding: 14px 2px;
+    pointer-events: auto;
+    transition: color 0.2s;
+    /* paper halo keeps the links legible over blossoms and clouds */
+    text-shadow:
+      0 0 6px var(--paper),
+      0 0 12px var(--paper),
+      0 1px 0 var(--paper);
+  }
+  .row a:hover {
+    color: var(--sakura);
+  }
+
+  /* Burger: hidden until the breakpoint, and only when JS can run it. */
+  .burger {
+    display: none;
+    position: relative;
+    z-index: 70;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: var(--rosewood);
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 4px 0 rgb(77 41 38 / 0.25);
+    transition:
+      background-color 0.2s,
+      transform 0.2s var(--ease-out);
+  }
+  .burger:hover {
+    background: var(--sakura);
+  }
+  .burger:active {
+    transform: translateY(2px);
+  }
+  .burger:focus-visible {
+    outline: 3px solid var(--sakura);
+    outline-offset: 3px;
+  }
+  .bar {
+    position: absolute;
+    left: 13px;
+    width: 22px;
+    height: 2.5px;
+    background: var(--paper);
+    transition:
+      transform 0.3s var(--ease-out),
+      opacity 0.2s;
+  }
+  .bar:nth-child(1) {
+    top: 16px;
+  }
+  .bar:nth-child(2) {
+    top: 23px;
+  }
+  .bar:nth-child(3) {
+    top: 30px;
+  }
+  .burger[aria-expanded='true'] .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .burger[aria-expanded='true'] .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .burger[aria-expanded='true'] .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 820px) {
+    :global(.js) .row {
+      display: none;
+    }
+    :global(.js) .burger {
+      display: block;
+    }
+  }
+
+  /* Full-screen paper menu that unfolds from the top edge. */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--paper);
+    pointer-events: auto;
+    padding: calc(clamp(16px, 3vw, 40px) + 64px) var(--gutter) 0;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.26s cubic-bezier(0.4, 0, 1, 1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .menu.is-open {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 0.5s var(--ease-out);
+  }
+  .menu-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .menu-links li {
+    border-bottom: 1px solid var(--rosewood);
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
+  }
+  .menu.is-open .menu-links li {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.45s ease calc(0.12s + var(--i) * 0.05s),
+      transform 0.55s var(--ease-out) calc(0.12s + var(--i) * 0.05s);
+  }
+  .menu-links a {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    min-height: 48px;
+    padding: 10px 0;
+    color: var(--rosewood);
+    text-decoration: none;
+  }
+  .menu-links a:focus-visible {
+    outline: 3px solid var(--sakura);
+    outline-offset: -3px;
+  }
+  .num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--rosewood);
+    min-width: 2.2em;
+  }
+  .label {
+    font-size: clamp(52px, 14vw, 96px);
+    line-height: 0.95;
+    transition:
+      color 0.2s,
+      transform 0.3s var(--ease-out);
+  }
+  .menu-links a:hover .label,
+  .menu-links a:focus-visible .label {
+    color: var(--sakura);
+    transform: translateX(8px);
+  }
+  .menu-band {
+    display: block;
+    width: calc(100% + 2 * var(--gutter));
+    margin: 32px calc(-1 * var(--gutter)) 0;
+    height: 28px;
+    flex: none;
+  }
+  :global(html.menu-open),
+  :global(html.menu-open body) {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu,
+    .menu.is-open,
+    .menu-links li,
+    .menu.is-open .menu-links li,
+    .bar,
+    .label {
+      transition: none;
+    }
+  }
+</style>
