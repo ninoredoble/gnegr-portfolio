@@ -32,9 +32,9 @@ const rendered = await Promise.all(lab.map(async (w) => ({ w, Content: (await re
             </div>
             <p class="summary">{w.data.summary}</p>
             <div class="body">
-              <Content />
+              {w.data.page ? <p>{w.data.excerpt}</p> : <Content />}
             </div>
-            {w.data.credit && <p class="credit">{w.data.credit}</p>}
+            {w.data.credit && !w.data.page && <p class="credit">{w.data.credit}</p>}
             <div class="foot">
               <ul class="stack">
                 {w.data.stack.map((s) => (

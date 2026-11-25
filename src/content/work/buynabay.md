@@ -1,6 +1,7 @@
 ---
 title: BuyNaBay
-summary: A campus marketplace where USTP students buy, sell and rent pre-loved items, with a mobile app, an admin dashboard and an on-campus kiosk. I led the team, designed the app and built the dashboard.
+summary: A campus marketplace where USTP students buy, sell and rent pre-loved items.
+excerpt: A mobile app, an admin dashboard and an on-campus kiosk. I led the five-person team, designed the app and built the dashboard.
 kind: product
 page: true
 role: Team lead · Figma design and admin dashboard
