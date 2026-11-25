@@ -65,11 +65,13 @@ patch('hide panel',
 patch('no H toggle + unfold on load',
   '(0,Pe.useEffect)(()=>{let g=h=>{if(h.key==="h"||h.key==="H"){',
   '(0,Pe.useEffect)(()=>{window.__kirigamiReady=!0,window.dispatchEvent(new Event("kirigami:ready")),window.matchMedia("(prefers-reduced-motion: reduce)").matches||window.scrollY>8||a(S=>({...S,unfoldProgress:0,isPlayingUnfold:!0}))},[]),(0,Pe.useEffect)(()=>{let g=h=>{if(!1){');
-// 3. Page scroll folds the paper (replaces a wheel hijack that blocked scrolling),
-//    and ambient motion and petals pause once the scene is off screen.
-patch('scroll fold',
+// 3. No wheel hijack (it blocked page scrolling). The scene keeps animating while it's on
+//    screen and pauses (ambient motion and petals) once it isn't. This uses an
+//    IntersectionObserver, not scroll events: re-rendering the whole scene on every scroll
+//    event made the background flicker.
+patch('pause off screen',
   'let g=h=>{if(h.target?.closest("aside"))return;h.preventDefault();let C=h.deltaY*55e-5;a(S=>({...S,isPlayingUnfold:!1,unfoldProgress:Xt(S.unfoldProgress+C)}))};return window.addEventListener("wheel",g,{passive:!1}),()=>window.removeEventListener("wheel",g)',
-  'let g=()=>{let y=window.scrollY,H=window.innerHeight||1,on=y<H*1.05,p=Xt(1-y/(H*1.1));a(S=>S.isPlayingUnfold&&y<8?S:S.unfoldProgress===p&&S.ambientMotion===on&&!S.isPlayingUnfold?S:({...S,isPlayingUnfold:!1,unfoldProgress:p,ambientMotion:on,petalsEnabled:on}))};return window.addEventListener("scroll",g,{passive:!0}),()=>window.removeEventListener("scroll",g)');
+  'let g=new IntersectionObserver(([en])=>{let on=en.isIntersecting;a(S=>S.ambientMotion===on&&S.petalsEnabled===on?S:({...S,ambientMotion:on,petalsEnabled:on}))}),el=document.querySelector(".kirigami-stage");return el&&g.observe(el),()=>g.disconnect()');
 
 const pub = join(out, '..', '..', 'public', 'kirigami');
 mkdirSync(pub, { recursive: true });

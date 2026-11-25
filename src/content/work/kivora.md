@@ -34,6 +34,7 @@ preview:
   alt: "The Kivora product page: Your menu, live at every table."
   url: mixcortex.com/kivora
 sensitive: true
+thumb: ../../assets/work/kivora/cover.jpg
 ---
 
 ## What it does

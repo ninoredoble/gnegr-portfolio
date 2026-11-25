@@ -9,6 +9,7 @@ stack: [HTML, CSS, JavaScript, SVG, DC load flow]
 status: "Study: real place names, invented figures"
 live: https://ninoredoble.github.io/mindanao-grid-mesh/
 repo: https://github.com/ninoredoble/mindanao-grid-mesh
+thumb: ../../assets/work/grid-mesh/thumb.jpg
 ---
 
 ## What it is

@@ -9,6 +9,7 @@ stack: [Written specs, Automated tests, Git hooks, Code review, Claude Code]
 status: How Kivora and this site are built
 credit: The review pipeline and task tooling I use are open-source projects by Kun Chen (firstmate, no-mistakes).
 sensitive: true
+thumb: ../../assets/work/how-i-ship/thumb.jpg
 ---
 
 ## Why it matters to me
