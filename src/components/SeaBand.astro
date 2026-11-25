@@ -1,0 +1,86 @@
+---
+// A strip of paper sea with the vinta from the hero, which sails across as the strip
+// scrolls through view (CSS scroll-driven animation). Without support, or with reduced
+// motion, the boat simply rests on the water.
+import Ornament from './Ornament.astro';
+
+const W = 1440;
+let crest = 'M0 34';
+for (let x = 0; x < W; x += 60) crest += ` q 15 -10 30 0 t 30 0`;
+let crest2 = 'M-30 48';
+for (let x = -30; x < W; x += 60) crest2 += ` q 15 -7 30 0 t 30 0`;
+---
+
+<div class="sea" aria-hidden="true">
+  <div class="boat-track">
+    <Ornament kind="vinta" class="boat" />
+  </div>
+  <svg class="water" viewBox={`0 0 ${W} 70`} preserveAspectRatio="none">
+    <path d={crest} fill="none" stroke="#c46864" stroke-width="3" stroke-linecap="round"></path>
+    <path d={crest2} fill="none" stroke="#7b3e3b" stroke-width="2.5" stroke-linecap="round"></path>
+  </svg>
+</div>
+
+<style>
+  .sea {
+    position: relative;
+    height: clamp(120px, 13vw, 170px);
+    margin-block: clamp(8px, 2vw, 24px);
+    overflow: hidden;
+  }
+  .water {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: 100%;
+    height: 70px;
+  }
+  .boat-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    height: 0;
+  }
+  .sea :global(.boat) {
+    position: absolute;
+    bottom: 0;
+    left: 14%;
+    width: clamp(96px, 10vw, 150px);
+    height: auto;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sea :global(.boat) {
+      transform-origin: 50% 100%;
+      animation: bob 3.4s ease-in-out infinite;
+    }
+    @supports (animation-timeline: view()) {
+      .boat-track {
+        animation: sail linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+      .sea :global(.boat) {
+        left: 0;
+      }
+    }
+  }
+  @keyframes sail {
+    from {
+      translate: -12% 0;
+    }
+    to {
+      translate: 88% 0;
+    }
+  }
+  @keyframes bob {
+    0%,
+    100% {
+      rotate: 0deg;
+      translate: 0 0;
+    }
+    50% {
+      rotate: 1.5deg;
+      translate: 0 -3px;
+    }
+  }
+</style>
