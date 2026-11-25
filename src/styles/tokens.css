@@ -1,15 +1,45 @@
-/* Brand tokens. Locked 2026-11-26 (BRIEF.md §3).
-   Exactly three colours, all lifted from the Kirigami scene so the hero is never recoloured.
-   No greys, no tints: hierarchy comes from size and weight, and sections may swap
-   paper-on-rosewood. Sakura is for large text (36px+), shapes, lines and hover only:
-   it is about 3.9:1 on paper, so body text and buttons stay rosewood. */
+/* Brand tokens. Every colour is lifted from the Kirigami scene, so the page below the hero
+   speaks the hero's palette, not only its reds.
+   Roles:
+     paper     canvas
+     ink       body text (the scene's window brown, 12.3:1 on paper)
+     rosewood  brand: display headings, primary buttons (7.5:1)
+     river     the cool counterweight: footer, links, focus (deep river 8.3:1, link teal 7.2:1)
+     sakura, sun, sage, olive, wood: accents for shapes, categories and large type only
+   Text rules: body and small text use ink, rosewood or river-ink. sakura (3.6:1), olive (3.9:1)
+   and river-mid (4.5:1) only at 24px+ or as fills. sun and sage are fills, never text on paper. */
 :root {
-  --paper: #fdf6eb; /* background · light neutral · the scene's sky paper */
-  --rosewood: #7b3e3b; /* text · dark colour · the scene's most-used colour */
-  --sakura: #c46864; /* accent · the blossoms */
+  --paper: #fdf6eb;
+  --cloud: #f3dfc7;
+  --ink: #3e2c20;
 
-  /* Empanada Bold by Neale Davidson (Pixel Sagas), SIL Open Font License 1.1,
-     self-hosted with its licence at /fonts/empanada/. */
+  --rosewood: #7b3e3b;
+  --sakura: #c46864;
+  --petal: #f6cbc6;
+
+  --river: #2b4f55;
+  --river-ink: #2c5a5c;
+  --river-mid: #417b7d;
+  --river-light: #9fc1be;
+
+  --sage: #9eb084;
+  --sage-pale: #c7cea7;
+  --sage-ink: #56684a;
+  --olive: #6e8262;
+
+  --sun: #eba586;
+  --sun-light: #f5c4ab;
+  --wood: #73573e;
+
+  /* Each kind of work gets its own colour (numbers, tags, case headers). */
+  --kind-product: var(--sakura);
+  --kind-process: var(--sage-ink);
+  --kind-production: var(--river-mid);
+  --kind-systems: var(--wood);
+  --kind-study: var(--olive);
+
+  --line: color-mix(in oklab, var(--ink) 22%, var(--paper));
+
   --font-display: 'Empanada', 'Arial Narrow', 'Roboto Condensed', sans-serif;
   --font-body: 'Familjen Grotesk', system-ui, sans-serif;
 

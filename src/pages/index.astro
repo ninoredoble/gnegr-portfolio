@@ -68,7 +68,7 @@ const featured = all
   }
   .intro em {
     font-style: normal;
-    color: var(--sakura);
+    color: var(--river-mid);
   }
   .intro p {
     font-size: clamp(18px, 1.6vw, 21px);
@@ -79,8 +79,8 @@ const featured = all
     font-weight: 700;
   }
   .proof a {
-    color: var(--rosewood);
-    text-decoration-color: var(--sakura);
+    color: var(--river-ink);
+    text-decoration-color: var(--sun);
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
   }
@@ -95,14 +95,19 @@ const featured = all
     color: var(--paper);
   }
   .btn.solid:hover {
-    background: var(--sakura);
-    border-color: var(--sakura);
+    background: var(--river);
+    border-color: var(--river);
   }
   .btn.line {
-    color: var(--rosewood);
+    color: var(--ink);
   }
   .btn.line:hover {
-    color: var(--sakura);
+    color: var(--river-ink);
+    border-color: var(--river-ink);
+    background: color-mix(in oklab, var(--river-light) 25%, var(--paper));
+  }
+  .btn:active {
+    transform: translateY(0);
   }
   .page :global(.site-footer) {
     margin-bottom: 0;

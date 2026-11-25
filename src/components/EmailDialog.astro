@@ -141,12 +141,12 @@ const services = [
     padding: 0;
     border: 0;
     background: var(--paper);
-    color: var(--rosewood);
-    box-shadow: 0 24px 60px rgb(77 41 38 / 0.35);
+    color: var(--ink);
+    box-shadow: 0 24px 60px rgb(16 32 34 / 0.4);
     overflow: auto;
   }
   .email::backdrop {
-    background: rgb(77 41 38 / 0.55);
+    background: rgb(27 47 51 / 0.6);
   }
   .email[open] {
     animation: pop 0.35s var(--ease-out);
@@ -162,7 +162,7 @@ const services = [
     flex-direction: column;
     gap: 14px;
     padding: clamp(20px, 4vw, 32px);
-    border-top: 10px solid var(--rosewood);
+    border-top: 10px solid var(--river);
   }
   .top {
     display: flex;
@@ -179,13 +179,13 @@ const services = [
     place-items: center;
     width: 44px;
     height: 44px;
-    border: 2px solid var(--rosewood);
+    border: 2px solid var(--ink);
     background: transparent;
-    color: var(--rosewood);
+    color: var(--ink);
     cursor: pointer;
   }
   .x:hover {
-    background: var(--rosewood);
+    background: var(--river);
     color: var(--paper);
   }
   .lede {
@@ -204,9 +204,9 @@ const services = [
     font: inherit;
     font-size: 17px;
     font-weight: 400;
-    color: var(--rosewood);
+    color: var(--ink);
     background: #fff;
-    border: 2px solid var(--rosewood);
+    border: 2px solid var(--ink);
     padding: 10px 12px;
     min-height: 44px;
     resize: vertical;
@@ -214,7 +214,7 @@ const services = [
   input:focus-visible,
   textarea:focus-visible,
   button:focus-visible {
-    outline: 3px solid var(--sakura);
+    outline: 3px solid var(--river-ink);
     outline-offset: 2px;
   }
   .error {
@@ -243,9 +243,9 @@ const services = [
     font: inherit;
     font-weight: 700;
     font-size: 16px;
-    color: var(--rosewood);
+    color: var(--ink);
     background: var(--paper);
-    border: 2px solid var(--rosewood);
+    border: 2px solid var(--ink);
     cursor: pointer;
     transition:
       background-color 0.2s,
@@ -253,7 +253,7 @@ const services = [
       transform 0.2s;
   }
   .service:hover {
-    background: var(--rosewood);
+    background: var(--river);
     color: var(--paper);
     transform: translateY(-2px);
   }
@@ -264,7 +264,7 @@ const services = [
     justify-content: space-between;
     gap: 10px;
     padding-top: 12px;
-    border-top: 1px solid var(--rosewood);
+    border-top: 1px solid var(--ink);
   }
   .addr {
     font-size: 15px;
@@ -280,12 +280,12 @@ const services = [
     font-weight: 700;
     font-size: 15px;
     color: var(--paper);
-    background: var(--rosewood);
+    background: var(--river);
     border: 0;
     cursor: pointer;
   }
   .copy:hover {
-    background: var(--sakura);
+    background: var(--ink);
   }
   .sr-only {
     position: absolute;

@@ -21,12 +21,36 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html {
+  /* browser surfaces in the palette */
+  accent-color: var(--river-ink);
+  caret-color: var(--rosewood);
+  scrollbar-color: var(--rosewood) var(--cloud);
+}
+
 body {
   margin: 0;
   background: var(--paper);
-  color: var(--rosewood);
+  color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--sun-light);
+  color: var(--ink);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--rosewood);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 h1,
@@ -36,8 +60,9 @@ p {
   margin: 0;
 }
 
-a:focus-visible {
-  outline: 3px solid var(--sakura);
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--river-ink);
   outline-offset: 3px;
 }
 

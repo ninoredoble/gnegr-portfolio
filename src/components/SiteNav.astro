@@ -43,8 +43,8 @@ const { links } = Astro.props;
   <svg class="menu-band" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <pattern id="menu-weave" width="28" height="28" patternUnits="userSpaceOnUse">
-        <rect width="28" height="28" fill="#7b3e3b"></rect>
-        <path d="M14 2 L26 14 L14 26 L2 14 Z" fill="#c46864"></path>
+        <rect width="28" height="28" fill="#2b4f55"></rect>
+        <path d="M14 2 L26 14 L14 26 L2 14 Z" fill="#eba586"></path>
         <path d="M14 8 L20 14 L14 20 L8 14 Z" fill="#fdf6eb"></path>
       </pattern>
     </defs>
@@ -143,7 +143,7 @@ const { links } = Astro.props;
       0 1px 0 var(--paper);
   }
   .row a:hover {
-    color: var(--sakura);
+    color: var(--river-ink);
   }
 
   /* Burger: hidden until the breakpoint, and only when JS can run it. */
@@ -158,19 +158,19 @@ const { links } = Astro.props;
     background: var(--rosewood);
     cursor: pointer;
     pointer-events: auto;
-    box-shadow: 0 4px 0 rgb(77 41 38 / 0.25);
+    box-shadow: 0 6px 14px rgb(62 44 32 / 0.28);
     transition:
       background-color 0.2s,
       transform 0.2s var(--ease-out);
   }
   .burger:hover {
-    background: var(--sakura);
+    background: var(--river);
   }
   .burger:active {
     transform: translateY(2px);
   }
   .burger:focus-visible {
-    outline: 3px solid var(--sakura);
+    outline: 3px solid var(--river-ink);
     outline-offset: 3px;
   }
   .bar {
@@ -261,7 +261,7 @@ const { links } = Astro.props;
     text-decoration: none;
   }
   .menu-links a:focus-visible {
-    outline: 3px solid var(--sakura);
+    outline: 3px solid var(--river-ink);
     outline-offset: -3px;
   }
   .num {
@@ -280,7 +280,7 @@ const { links } = Astro.props;
   }
   .menu-links a:hover .label,
   .menu-links a:focus-visible .label {
-    color: var(--sakura);
+    color: var(--river-ink);
     transform: translateX(8px);
   }
   .menu-band {

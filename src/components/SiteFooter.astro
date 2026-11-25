@@ -13,7 +13,7 @@ const gh = await githubCard();
 <PaperRidge class="footer-ridge" />
 <footer class="site-footer" id="contact">
   <div class="wrap inner">
-    <h2 class="display reveal">SAY HELLO.</h2>
+    <h2 class="display reveal">SAY <span>HELLO.</span></h2>
     <div>
       <p class="reveal">
         Have an app or a website in mind? Tell me what you're trying to do and I'll tell you honestly how I'd approach
@@ -94,8 +94,14 @@ const gh = await githubCard();
     margin-top: clamp(56px, 8vw, 112px);
   }
   .site-footer {
-    background: var(--rosewood);
+    background: var(--river);
     color: var(--paper);
+  }
+  .site-footer h2 {
+    color: var(--paper);
+  }
+  .site-footer h2 span {
+    color: var(--sun);
   }
   .inner {
     padding-block: clamp(56px, 8vw, 112px);
@@ -132,7 +138,7 @@ const gh = await githubCard();
     font-size: 15px;
     text-decoration: none;
     cursor: pointer;
-    --icon-cut: var(--rosewood);
+    --icon-cut: var(--river);
     transition:
       background-color 0.2s,
       border-color 0.2s,
@@ -141,18 +147,21 @@ const gh = await githubCard();
   }
   .link.solid {
     background: var(--paper);
-    color: var(--rosewood);
+    color: var(--river);
     --icon-cut: var(--paper);
   }
   .link:hover {
-    background: var(--sakura);
-    border-color: var(--sakura);
-    color: var(--paper);
-    --icon-cut: var(--sakura);
+    background: var(--sun);
+    border-color: var(--sun);
+    color: var(--ink);
+    --icon-cut: var(--sun);
     transform: translateY(-2px);
   }
+  .link:active {
+    transform: translateY(0);
+  }
   .link:focus-visible {
-    outline: 3px solid var(--sakura);
+    outline: 3px solid var(--sun);
     outline-offset: 3px;
   }
 
@@ -176,8 +185,8 @@ const gh = await githubCard();
       width: 280px;
       padding: 16px;
       background: var(--paper);
-      color: var(--rosewood);
-      box-shadow: 0 18px 36px rgb(31 12 10 / 0.45);
+      color: var(--ink);
+      box-shadow: 0 18px 36px rgb(16 32 34 / 0.45);
       opacity: 0;
       visibility: hidden;
       transform: translateY(10px) rotate(-2deg);
@@ -227,7 +236,7 @@ const gh = await githubCard();
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 2px solid var(--rosewood);
+    border: 2px solid var(--river-ink);
     object-fit: cover;
     flex: none;
   }
@@ -251,7 +260,7 @@ const gh = await githubCard();
   }
   .repo {
     padding: 2px 8px;
-    border: 1px solid var(--rosewood);
+    background: color-mix(in oklab, var(--sage) 28%, var(--paper));
     font-size: 13px;
   }
   .foot {
@@ -259,9 +268,10 @@ const gh = await githubCard();
     align-items: center;
     gap: 6px;
     padding-top: 8px;
-    border-top: 1px solid var(--rosewood);
+    border-top: 1px solid var(--line);
     font-size: 13px;
     font-weight: 700;
+    color: var(--river-ink);
   }
   .resume-card {
     width: 260px;
@@ -271,7 +281,7 @@ const gh = await githubCard();
     width: 100%;
     height: auto;
     background: #fff;
-    box-shadow: 0 4px 12px rgb(77 41 38 / 0.25);
+    box-shadow: 0 4px 12px rgb(62 44 32 / 0.25);
   }
 
   .fine {
@@ -279,7 +289,7 @@ const gh = await githubCard();
     justify-content: space-between;
     gap: 12px;
     padding-block: 18px 24px;
-    border-top: 1px solid var(--paper);
+    border-top: 1px solid color-mix(in oklab, var(--paper) 30%, var(--river));
     font-size: 14px;
   }
   .fine a {
@@ -294,6 +304,12 @@ const gh = await githubCard();
   @media (max-width: 820px) {
     .inner {
       grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  /* Too narrow for a 280px card beside the buttons: it would run off the page. */
+  @media (max-width: 600px) {
+    .card {
+      display: none;
     }
   }
   @media (prefers-reduced-motion: reduce) {

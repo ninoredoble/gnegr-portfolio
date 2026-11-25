@@ -1,6 +1,6 @@
 ---
-// Layered paper-cut mountains above the footer, echoing the Kirigami hero: a sakura ridge,
-// a paper ridge with a stilt house and coconut palms standing on it, the rosewood ridge
+// Layered paper-cut mountains above the footer, echoing the Kirigami hero: a dusty-blue ridge,
+// a pale sage ridge with a stilt house and coconut palms standing on it, the river-teal ridge
 // in front, and the Philippine eagle gliding over. Back layers drift as they scroll in
 // (CSS scroll-driven animation; static where unsupported or with reduced motion).
 import Ornament from './Ornament.astro';
@@ -16,11 +16,11 @@ const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
   <svg class="layer" viewBox="0 0 1440 170" preserveAspectRatio="none">
     <defs>
       <filter id={id} x="-5%" y="-30%" width="110%" height="160%">
-        <feDropShadow dx="0" dy="-4" stdDeviation="5" flood-color="#4d2926" flood-opacity="0.28"></feDropShadow>
+        <feDropShadow dx="0" dy="-4" stdDeviation="5" flood-color="#2f463d" flood-opacity="0.3"></feDropShadow>
       </filter>
     </defs>
-    <path class="back" fill="#c46864" filter={`url(#${id})`} d="M0 170 L0 92 L110 64 L205 88 L330 30 L440 76 L560 46 L690 84 L820 22 L950 70 L1070 40 L1190 80 L1320 34 L1440 66 L1440 170 Z"></path>
-    <path class="mid" fill="#fdf6eb" filter={`url(#${id})`} d="M0 170 L0 120 L150 96 L250 116 L390 74 L520 108 L660 90 L790 118 L930 82 L1070 112 L1200 92 L1330 116 L1440 98 L1440 170 Z"></path>
+    <path class="back" fill="#8ea6a5" filter={`url(#${id})`} d="M0 170 L0 92 L110 64 L205 88 L330 30 L440 76 L560 46 L690 84 L820 22 L950 70 L1070 40 L1190 80 L1320 34 L1440 66 L1440 170 Z"></path>
+    <path class="mid" fill="#c7cea7" filter={`url(#${id})`} d="M0 170 L0 120 L150 96 L250 116 L390 74 L520 108 L660 90 L790 118 L930 82 L1070 112 L1200 92 L1330 116 L1440 98 L1440 170 Z"></path>
   </svg>
 
   <Ornament kind="palm" class="o palm-a" />
@@ -30,7 +30,7 @@ const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
   <Ornament kind="eagle" class="o eagle" />
 
   <svg class="layer front" viewBox="0 0 1440 170" preserveAspectRatio="none">
-    <path fill="#7b3e3b" filter={`url(#${id})`} d="M0 170 L0 146 L180 128 L300 144 L460 118 L600 140 L760 124 L900 146 L1050 120 L1210 142 L1340 126 L1440 138 L1440 170 Z"></path>
+    <path fill="#2b4f55" filter={`url(#${id})`} d="M0 170 L0 146 L180 128 L300 144 L460 118 L600 140 L760 124 L900 146 L1050 120 L1210 142 L1340 126 L1440 138 L1440 170 Z"></path>
   </svg>
 </div>
 
