@@ -17,7 +17,7 @@ const gh = await githubCard();
     <div>
       <p class="reveal">
         Have an app or a website in mind? Tell me what you're trying to do and I'll tell you honestly how I'd approach
-        it. I'm based in Cagayan de Oro, and I'm also open to the right full-time role.
+        it. I work with founders and teams anywhere, remotely, and I'm open to the right full-time role.
       </p>
       <div class="links reveal" style="--d:.08s">
         <button type="button" class="link solid" data-email-open>
@@ -35,10 +35,10 @@ const gh = await githubCard();
               <img src={gh.avatar} alt="" width="56" height="56" loading="lazy" />
               <span>
                 <strong>Niño Redoble</strong>
-                <span>Designer &amp; developer</span>
+                <span>Product designer &amp; engineer</span>
               </span>
             </span>
-            <span class="line">Co-founder, MixCortex · Cagayan de Oro</span>
+            <span class="line">Co-founder, MixCortex</span>
             <span class="foot"><Icon name="linkedin" size={16} /> linkedin.com/in/g-redoble ↗</span>
           </span>
         </span>
@@ -84,10 +84,26 @@ const gh = await githubCard();
   </div>
   <div class="wrap fine">
     <span>© 2026 Niño Redoble</span>
+    <span class="clock" data-clock hidden></span>
     <a href="/colophon/">Colophon</a>
   </div>
 </footer>
 <EmailDialog />
+
+<script>
+  // "3:20 pm for me · GMT+8": my local time, so someone overseas can see my working hours.
+  const el = document.querySelector<HTMLElement>('[data-clock]');
+  if (el) {
+    const fmt = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Manila' });
+    const tick = () => (el.textContent = `${fmt.format(new Date()).toLowerCase()} for me · GMT+8`);
+    tick();
+    el.hidden = false;
+    setTimeout(() => {
+      tick();
+      setInterval(tick, 60_000);
+    }, 60_000 - (Date.now() % 60_000));
+  }
+</script>
 
 <style>
   :global(.footer-ridge) {
@@ -288,9 +304,14 @@ const gh = await githubCard();
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    padding-block: 18px 24px;
+    /* bottom room so the dock never covers the last line */
+    padding-block: 18px 104px;
     border-top: 1px solid color-mix(in oklab, var(--paper) 30%, var(--river));
     font-size: 14px;
+  }
+  .clock {
+    color: color-mix(in oklab, var(--paper) 78%, var(--river));
+    font-variant-numeric: tabular-nums;
   }
   .fine a {
     color: var(--paper);

@@ -14,7 +14,7 @@ const { name, tagline, nav } = Astro.props;
 const [first, ...rest] = name.split(' ');
 ---
 
-<section class="hero" aria-label="Introduction">
+<section class="hero" aria-label="Introduction" data-dock-sentinel>
   <div id="standalone-root" style="display:contents" set:html={scene} />
 
   <div class="overlay">
@@ -36,7 +36,10 @@ const [first, ...rest] = name.split(' ');
 <script>
   // Reveal the scene once React has hydrated it and the browser has painted it, so it never
   // shows half-drawn. Failsafe: show it after 1.5 s anyway.
-  const ready = () => document.body.classList.add('scene-ready');
+  const ready = () => {
+    if (!document.body.classList.contains('scene-ready')) performance.mark('scene-ready');
+    document.body.classList.add('scene-ready');
+  };
   const onReady = () => requestAnimationFrame(() => requestAnimationFrame(ready));
   if ((window as { __kirigamiReady?: boolean }).__kirigamiReady) onReady();
   else addEventListener('kirigami:ready', onReady, { once: true });

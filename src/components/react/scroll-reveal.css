@@ -1,0 +1,30 @@
+.sr-accent {
+  position: relative;
+  z-index: 0;
+  font-style: normal;
+  color: var(--river-mid);
+  white-space: nowrap;
+}
+/* The marker stroke under the accent words, drawn by anime.js once they've lit up. */
+.sr-mark {
+  position: absolute;
+  z-index: -1;
+  left: -0.06em;
+  right: -0.04em;
+  bottom: 0.02em;
+  width: calc(100% + 0.1em);
+  height: 0.5em;
+  overflow: visible;
+  opacity: 0;
+}
+.sr-mark.on {
+  opacity: 1;
+}
+.sr-mark path {
+  fill: none;
+  stroke: var(--sun);
+  stroke-opacity: 0.6;
+  stroke-width: 0.3em;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}

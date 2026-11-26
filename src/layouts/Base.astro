@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Dock from '../components/react/Dock';
 
 interface Props {
   title?: string;
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const {
-  title = 'Niño Redoble · Designer & developer',
+  title = 'Niño Redoble · Product designer & engineer',
   description = 'I design and build web and mobile apps for businesses, from the first sketch to the version your customers use. Co-founder of MixCortex; Kivora is live on the App Store.',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -39,6 +40,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <slot />
+    <Dock client:idle />
     <script>
       // Fade-and-rise for anything marked .reveal; rows in a list stagger via --d.
       const targets = document.querySelectorAll<HTMLElement>('.reveal');
