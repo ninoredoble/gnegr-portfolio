@@ -62,13 +62,15 @@ function patch(name, from, to) {
 patch('hide panel',
   '[t,l]=(0,Pe.useState)(!1),[u,o]=(0,Pe.useState)(!1)',
   '[t,l]=(0,Pe.useState)(!1),[u,o]=(0,Pe.useState)(!0)');
-// 2. Unfold on arrival. React must hydrate the same unfolded tree the server rendered
-//    (starting folded renders different elements and fails hydration), so the replay
-//    starts in an effect right after hydration, which also fires `kirigami:ready` so add-ons
-//    (public/kirigami/mindanao.js) only touch the DOM once React owns it. Reduced motion stays unfolded.
-patch('no H toggle + unfold on load',
+// 2. Arrive unfolded. All eight paper layers are groups inside one big SVG, so replaying the
+//    unfold redraws the whole drawing on every frame while the browser is still painting it for
+//    the first time, and the scene flashed in half-drawn on first load. React hydrates the
+//    unfolded tree the server rendered and stays there; KirigamiHero.astro fades the stage in
+//    instead (a composited fade, no redraw). The effect still fires `kirigami:ready` so add-ons
+//    (public/kirigami/mindanao.js) only touch the DOM once React owns it.
+patch('no H toggle + ready signal',
   '(0,Pe.useEffect)(()=>{let g=h=>{if(h.key==="h"||h.key==="H"){',
-  '(0,Pe.useEffect)(()=>{window.__kirigamiReady=!0,window.dispatchEvent(new Event("kirigami:ready")),window.matchMedia("(prefers-reduced-motion: reduce)").matches||window.scrollY>8||a(S=>({...S,unfoldProgress:0,isPlayingUnfold:!0}))},[]),(0,Pe.useEffect)(()=>{let g=h=>{if(!1){');
+  '(0,Pe.useEffect)(()=>{window.__kirigamiReady=!0,window.dispatchEvent(new Event("kirigami:ready"))},[]),(0,Pe.useEffect)(()=>{let g=h=>{if(!1){');
 // 3. No wheel hijack (it blocked page scrolling). The scene keeps animating while it's on
 //    screen and pauses (ambient motion and petals) once it isn't. This uses an
 //    IntersectionObserver, not scroll events: re-rendering the whole scene on every scroll
