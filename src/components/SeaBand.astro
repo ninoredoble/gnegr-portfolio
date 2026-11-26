@@ -1,54 +1,213 @@
 ---
-// A strip of paper sea with the vinta from the hero, which sails across as the strip
-// scrolls through view (CSS scroll-driven animation). Without support, or with reduced
-// motion, the boat simply rests on the water.
+// A strip of the hero's river, laid sideways: cream-green banks, four stacked teal paper layers
+// with the hero's soft offset shadows, reeds, stones and lily pads, and the vinta sailing
+// across as the strip scrolls through view (CSS scroll-driven animation).
+//
+// Speed: the river is one drawing, painted once. The currents and petals sit on their own layer
+// and slide with a transform, which the GPU handles without repainting the river.
 import Ornament from './Ornament.astro';
 
-const W = 1440;
-let crest = 'M0 34';
-for (let x = 0; x < W; x += 60) crest += ` q 15 -10 30 0 t 30 0`;
-let crest2 = 'M-30 48';
-for (let x = -30; x < W; x += 60) crest2 += ` q 15 -7 30 0 t 30 0`;
+const W = 1600;
+const H = 220;
+
+// Deterministic wobble, so the build output is stable.
+let seed = 17;
+const rand = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+
+/** A wavy line across the strip at height y. */
+function edge(y: number, amp: number, step: number, from = -40, to = W + 40) {
+  let d = `${from} ${y}`;
+  for (let x = from; x < to; x += step) {
+    const r = rand();
+    d += ` C ${x + step * 0.33} ${y - amp * r}, ${x + step * 0.66} ${y + amp * (1 - r)}, ${x + step} ${y + amp * (r - 0.5) * 0.5}`;
+  }
+  return d;
+}
+/** A layer with a wavy top edge and a flat bottom (hidden under the layer in front). */
+function band(top: number, bottom: number, amp: number, step: number) {
+  return `M ${edge(top, amp, step)} L ${W + 40} ${bottom} L -40 ${bottom} Z`;
+}
+/** A layer whose bottom edge is torn paper, traced right to left. */
+function torn(top: number, bottom: number, amp: number, step: number) {
+  let d = `M ${edge(top, amp, step)} L ${W + 40} ${bottom}`;
+  for (let x = W + 40; x > -40; x -= 18 + rand() * 22) d += ` L ${x.toFixed(1)} ${(bottom + (rand() - 0.5) * 7).toFixed(1)}`;
+  return d + ` L -40 ${bottom} Z`;
+}
+/** The hero's paper shadow: three offset copies at falling opacity, then the paper. */
+function paper(d: string, fill: string, tint: string) {
+  const offs = [
+    [5.9, 9.0, 0.047],
+    [3.2, 5.1, 0.09],
+    [1.5, 2.4, 0.151],
+  ];
+  return (
+    offs.map(([x, y, o]) => `<path d="${d}" fill="${tint}" opacity="${o}" transform="translate(${x}, ${y})"/>`).join('') +
+    `<path d="${d}" fill="${fill}"/>`
+  );
+}
+
+// Back to front. Each layer's top edge is wavy; the next layer covers the one behind from below.
+const backBank = band(54, 130, 8, 150);
+const water = [
+  { d: band(78, 176, 16, 260), fill: '#9FC1BE', tint: '#1E4345' },
+  { d: band(92, 176, 18, 210), fill: '#82B1AE', tint: '#1A3B3D' },
+  { d: band(104, 176, 16, 330), fill: '#689F9E', tint: '#163537' },
+  { d: band(118, 176, 12, 180), fill: '#528D8E', tint: '#163537' },
+];
+// The near bank: covers the river from below, with a torn lower edge that casts onto the page.
+const nearBank = torn(152, 190, 16, 240);
+
+// Reeds: thin tapered blades in clusters.
+function reeds(x: number, y: number, n: number, h: number) {
+  let s = '';
+  for (let i = 0; i < n; i++) {
+    const bx = x + (i - n / 2) * 4 + rand() * 3;
+    const hh = h * (0.6 + rand() * 0.5);
+    const lean = (rand() - 0.5) * 14;
+    const tone = ['#56684A', '#778764', '#3E4F37'][i % 3];
+    s += `<path d="M ${bx - 1.6} ${y} Q ${bx + lean * 0.4} ${y - hh * 0.6} ${bx + lean} ${y - hh} Q ${bx + lean * 0.5} ${y - hh * 0.55} ${bx + 1.6} ${y} Z" fill="${tone}"/>`;
+    if (i % 3 === 1) s += `<ellipse cx="${bx + lean}" cy="${y - hh - 5}" rx="2.6" ry="7" fill="#816247" transform="rotate(${lean} ${bx + lean} ${y - hh - 5})"/>`;
+  }
+  return s;
+}
+function stone(x: number, y: number, r: number, fill = '#B8AD97') {
+  return (
+    `<ellipse cx="${x + 2}" cy="${y + 3}" rx="${r}" ry="${r * 0.55}" fill="#3B3226" opacity="0.18"/>` +
+    `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * 0.55}" fill="${fill}"/>` +
+    `<ellipse cx="${x - r * 0.3}" cy="${y - r * 0.18}" rx="${r * 0.45}" ry="${r * 0.18}" fill="#D9D0BC" opacity="0.8"/>`
+  );
+}
+function lily(x: number, y: number, r: number) {
+  return (
+    `<path d="M ${x} ${y} L ${x + r} ${y - r * 0.12} A ${r} ${r * 0.42} 0 1 1 ${x + r * 0.7} ${y + r * 0.32} Z" fill="#3E5E46" opacity="0.25" transform="translate(2 3)"/>` +
+    `<path d="M ${x} ${y} L ${x + r} ${y - r * 0.12} A ${r} ${r * 0.42} 0 1 1 ${x + r * 0.7} ${y + r * 0.32} Z" fill="#778764"/>`
+  );
+}
+function pine(x: number, y: number, h: number) {
+  const w = h * 0.46;
+  const tones = ['#3E4F37', '#49614F', '#56684A'];
+  return [0, 0.3, 0.56]
+    .map((t, i) => {
+      const top = y - h + t * h;
+      const half = (w / 2) * (0.62 + i * 0.19);
+      const d = `M ${x} ${top} L ${x + half} ${top + h * 0.42} L ${x - half} ${top + h * 0.42} Z`;
+      return `<path d="${d}" fill="#22301F" opacity="0.16" transform="translate(2.5 3.5)"/><path d="${d}" fill="${tones[i]}"/>`;
+    })
+    .join('');
+}
+
+const art =
+  paper(backBank, '#D5DAB4', '#4E5B3C') +
+  pine(96, 66, 46) +
+  pine(122, 70, 34) +
+  pine(1342, 66, 50) +
+  pine(1372, 70, 36) +
+  pine(1398, 68, 28) +
+  reeds(260, 84, 9, 34) +
+  reeds(760, 86, 7, 28) +
+  reeds(1120, 84, 10, 36) +
+  water.map((l) => paper(l.d, l.fill, l.tint)).join('') +
+  lily(420, 132, 13) +
+  lily(446, 140, 9) +
+  lily(1012, 128, 11) +
+  paper(nearBank, '#C3CBA0', '#4E5B3C') +
+  stone(180, 166, 14) +
+  stone(204, 172, 9, '#A99E87') +
+  stone(1236, 168, 12) +
+  reeds(340, 168, 11, 40) +
+  reeds(620, 170, 8, 30) +
+  reeds(1460, 168, 12, 42) +
+  stone(1490, 172, 10, '#A99E87');
+
+// Currents: short pale dashes in the deeper water, repeated twice so the layer can loop.
+function currents() {
+  let s = '';
+  const rows = [
+    { y: 122, dash: '46 110 18 150', w: 2, c: '#D2E4E0' },
+    { y: 136, dash: '30 170 12 120', w: 1.5, c: '#BBE0DC' },
+  ];
+  for (const r of rows) {
+    let d = `M 0 ${r.y}`;
+    for (let x = 0; x < W * 2; x += 200) d += ` q 50 -3 100 0 t 100 0`;
+    s += `<path d="${d}" fill="none" stroke="${r.c}" stroke-width="${r.w}" stroke-linecap="round" stroke-dasharray="${r.dash}" opacity="0.6"/>`;
+  }
+  // A few sakura petals riding the current.
+  for (const [x, y, rot] of [
+    [240, 116, 20],
+    [690, 132, -30],
+    [1180, 112, 40],
+  ]) {
+    for (const off of [0, W]) s += `<ellipse cx="${x + off}" cy="${y}" rx="4.5" ry="2.6" fill="#F6CBC6" transform="rotate(${rot} ${x + off} ${y})"/>`;
+  }
+  return s;
+}
+const flow = currents();
 ---
 
 <div class="sea" aria-hidden="true">
-  <div class="boat-track">
-    <Ornament kind="vinta" class="boat" />
+  <div class="box">
+    <svg class="river" viewBox={`0 0 ${W} ${H}`} set:html={art} />
+    <div class="flow">
+      <svg viewBox={`0 0 ${W * 2} ${H}`} set:html={flow} />
+    </div>
+    <div class="boat-track">
+      <Ornament kind="vinta" class="boat" />
+    </div>
   </div>
-  <svg class="water" viewBox={`0 0 ${W} 70`} preserveAspectRatio="none">
-    <path d={crest} fill="none" stroke="#689f9e" stroke-width="3" stroke-linecap="round"></path>
-    <path d={crest2} fill="none" stroke="#9eb084" stroke-width="2.5" stroke-linecap="round"></path>
-  </svg>
 </div>
 
 <style>
   .sea {
     position: relative;
-    height: clamp(120px, 13vw, 170px);
-    margin-block: clamp(8px, 2vw, 24px);
     overflow: hidden;
+    margin-block: clamp(8px, 2vw, 24px);
   }
-  .water {
+  /* Fixed-shape stage: at least 960px wide, sides cropped on phones. */
+  .box {
+    position: relative;
+    width: max(100%, 960px);
+    left: 50%;
+    translate: -50% 0;
+    aspect-ratio: 1600 / 220;
+  }
+  .river {
     position: absolute;
-    inset: auto 0 0 0;
+    inset: 0;
     width: 100%;
-    height: 70px;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+  /* The current layer, clipped to the deep water so dashes never cross the banks. */
+  .flow {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    clip-path: inset(52% 0 32% 0);
+  }
+  .flow svg {
+    display: block;
+    width: 200%;
+    height: 100%;
   }
   .boat-track {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 30px;
+    bottom: 40%;
     height: 0;
   }
   .sea :global(.boat) {
     position: absolute;
     bottom: 0;
     left: 14%;
-    width: clamp(96px, 10vw, 150px);
+    width: 8.5%;
     height: auto;
   }
   @media (prefers-reduced-motion: no-preference) {
+    .flow svg {
+      animation: flow 48s linear infinite;
+    }
     .sea :global(.boat) {
       transform-origin: 50% 100%;
       animation: bob 3.4s ease-in-out infinite;
@@ -62,6 +221,14 @@ for (let x = -30; x < W; x += 60) crest2 += ` q 15 -7 30 0 t 30 0`;
       .sea :global(.boat) {
         left: 0;
       }
+    }
+  }
+  @keyframes flow {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
   @keyframes sail {

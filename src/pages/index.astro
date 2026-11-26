@@ -7,6 +7,8 @@ import SiteFooter from '../components/SiteFooter.astro';
 import WeaveBand from '../components/WeaveBand.astro';
 import SeaBand from '../components/SeaBand.astro';
 import { NAV } from '../data/nav';
+import ScrollReveal from '../components/react/ScrollReveal';
+import PaperNotes from '../components/react/PaperNotes';
 
 const all = await getCollection('work');
 const featured = all
@@ -15,13 +17,13 @@ const featured = all
 ---
 
 <Base>
-  <KirigamiHero name="NIÑO REDOBLE" tagline="DESIGNER & DEVELOPER · CAGAYAN DE ORO" nav={NAV} />
+  <KirigamiHero name="NIÑO REDOBLE" tagline="PRODUCT DESIGNER & ENGINEER" nav={NAV} />
 
   <WeaveBand class="band" />
 
   <div class="page" id="main" tabindex="-1">
     <section class="wrap intro" id="about">
-      <h2 class="display reveal">I DESIGN AND BUILD WEB AND MOBILE APPS <em>FOR BUSINESSES.</em></h2>
+      <ScrollReveal client:idle className="display" text="I DESIGN AND BUILD WEB AND MOBILE APPS" accent="FOR BUSINESSES." />
       <div class="reveal" style="--d:.1s">
         <p>
           I can take a project from the first sketch to the version your customers use. When something's new to me, I
@@ -35,6 +37,10 @@ const featured = all
           <a class="btn line" href="#contact" data-email-open>Tell me about your project</a>
         </div>
       </div>
+    </section>
+
+    <section class="wrap notes-wrap" aria-label="A few notes">
+      <PaperNotes client:visible />
     </section>
 
     <SeaBand />
@@ -62,13 +68,13 @@ const featured = all
     gap: clamp(24px, 5vw, 72px);
     align-items: end;
   }
-  .intro h2 {
+  .intro :global(h2) {
     font-size: clamp(48px, 7.6vw, 118px);
     line-height: 0.88;
   }
-  .intro em {
-    font-style: normal;
-    color: var(--river-mid);
+  .intro :global(.sr-piece) {
+    /* matches the server-rendered heading exactly, so hydrating never moves a word */
+    display: inline;
   }
   .intro p {
     font-size: clamp(18px, 1.6vw, 21px);

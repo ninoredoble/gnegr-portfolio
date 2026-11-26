@@ -4,7 +4,7 @@ import SiteNav from './SiteNav.astro';
 import { NAV } from '../data/nav';
 ---
 
-<header class="site-header wrap">
+<header class="site-header wrap" data-dock-sentinel>
   <a class="mark display" href="/" aria-label="Niño Redoble, home">NIÑO REDOBLE</a>
   <SiteNav links={NAV} />
 </header>

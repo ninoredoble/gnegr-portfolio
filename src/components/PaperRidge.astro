@@ -1,114 +1,106 @@
 ---
-// Layered paper-cut mountains above the footer, echoing the Kirigami hero: a dusty-blue ridge,
-// a pale sage ridge with a stilt house and coconut palms standing on it, the river-teal ridge
-// in front, and the Philippine eagle gliding over. Back layers drift as they scroll in
-// (CSS scroll-driven animation; static where unsupported or with reduced motion).
+// The landscape above the footer, cut from the hero's own art (scripts/build-footer-scene.mjs):
+// the hero's sky, sun and mountains, a pine valley, then the footer's teal rising out of it.
+// The palms, stilt house and eagle stand on the valley.
+//
+// Speed: the drawing is an <img>, so the browser paints it once and caches it. Only small
+// separate pieces move (the clouds as one image, the eagle and the palms), and they move with
+// transforms, which the GPU handles without redrawing the landscape.
 import Ornament from './Ornament.astro';
 
 interface Props {
   class?: string;
 }
 const { class: cls } = Astro.props;
-const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <div class:list={['ridge', cls]} aria-hidden="true">
-  <svg class="layer" viewBox="0 0 1440 170" preserveAspectRatio="none">
-    <defs>
-      <filter id={id} x="-5%" y="-30%" width="110%" height="160%">
-        <feDropShadow dx="0" dy="-4" stdDeviation="5" flood-color="#2f463d" flood-opacity="0.3"></feDropShadow>
-      </filter>
-    </defs>
-    <path class="back" fill="#8ea6a5" filter={`url(#${id})`} d="M0 170 L0 92 L110 64 L205 88 L330 30 L440 76 L560 46 L690 84 L820 22 L950 70 L1070 40 L1190 80 L1320 34 L1440 66 L1440 170 Z"></path>
-    <path class="mid" fill="#c7cea7" filter={`url(#${id})`} d="M0 170 L0 120 L150 96 L250 116 L390 74 L520 108 L660 90 L790 118 L930 82 L1070 112 L1200 92 L1330 116 L1440 98 L1440 170 Z"></path>
-  </svg>
-
-  <Ornament kind="palm" class="o palm-a" />
-  <Ornament kind="palm" class="o palm-b" />
-  <Ornament kind="house" class="o house" />
-  <Ornament kind="palm" class="o palm-c" />
-  <Ornament kind="eagle" class="o eagle" />
-
-  <svg class="layer front" viewBox="0 0 1440 170" preserveAspectRatio="none">
-    <path fill="#2b4f55" filter={`url(#${id})`} d="M0 170 L0 146 L180 128 L300 144 L460 118 L600 140 L760 124 L900 146 L1050 120 L1210 142 L1340 126 L1440 138 L1440 170 Z"></path>
-  </svg>
+  <div class="box">
+    <img class="land" src="/img/paper/footer-landscape.svg" alt="" width="1600" height="520" loading="lazy" decoding="async" />
+    <img class="clouds" src="/img/paper/footer-clouds.svg" alt="" width="1600" height="520" loading="lazy" decoding="async" />
+    <Ornament kind="palm" class="o palm-a" />
+    <Ornament kind="palm" class="o palm-b" />
+    <Ornament kind="house" class="o house" />
+    <Ornament kind="palm" class="o palm-c" />
+    <Ornament kind="eagle" class="o eagle" />
+  </div>
 </div>
 
 <style>
   .ridge {
     position: relative;
-    height: clamp(120px, 15vw, 210px);
     overflow: hidden;
     margin-bottom: -1px;
+    background: var(--river);
   }
-  .layer {
+  /* A fixed-shape stage, so the ornaments always land on the same spot of the drawing. On
+     narrow screens it stays at least 960px wide and the sides are cropped. */
+  .box {
+    position: relative;
+    width: max(100%, 960px);
+    left: 50%;
+    translate: -50% 0;
+    aspect-ratio: 1600 / 520;
+    background: var(--paper);
+  }
+  .land,
+  .clouds {
     position: absolute;
-    inset: auto 0 0 0;
-    display: block;
+    inset: 0;
     width: 100%;
-    height: clamp(90px, 12vw, 170px);
-    overflow: visible;
+    height: 100%;
+    display: block;
   }
   .ridge :global(.o) {
     position: absolute;
     height: auto;
   }
+  /* Positions are fractions of the stage; the valley's top edge sits about 85% down. */
   .ridge :global(.palm-a) {
-    left: 6%;
-    bottom: 16%;
-    width: clamp(46px, 6vw, 84px);
+    left: 22%;
+    bottom: 13.5%;
+    width: 6.4%;
   }
   .ridge :global(.palm-b) {
-    left: 11%;
+    left: 27.5%;
     bottom: 13%;
-    width: clamp(36px, 4.6vw, 64px);
+    width: 4.8%;
     transform: scaleX(-1);
   }
   .ridge :global(.house) {
-    left: 63%;
-    bottom: 15%;
-    width: clamp(56px, 7vw, 100px);
+    left: 55%;
+    bottom: 12.5%;
+    width: 6.4%;
   }
   .ridge :global(.palm-c) {
-    left: 86%;
-    bottom: 14%;
-    width: clamp(40px, 5.2vw, 72px);
+    left: 71%;
+    bottom: 13.5%;
+    width: 5.8%;
   }
   .ridge :global(.eagle) {
-    left: 34%;
-    top: 4%;
-    width: clamp(54px, 6vw, 92px);
+    left: 30%;
+    top: 38%;
+    width: 5%;
   }
   @media (prefers-reduced-motion: no-preference) {
+    .clouds {
+      animation: clouds 26s ease-in-out infinite alternate;
+    }
     .ridge :global(.eagle) {
-      animation: glide 9s ease-in-out infinite;
+      animation: glide 11s ease-in-out infinite;
     }
     .ridge :global(.palm-a),
     .ridge :global(.palm-c) {
       transform-origin: 50% 100%;
       animation: sway 6s ease-in-out infinite;
     }
-    @supports (animation-timeline: view()) {
-      .back,
-      .mid {
-        animation: drift linear both;
-        animation-timeline: view();
-        animation-range: entry 0% exit 30%;
-      }
-      .back {
-        --rise: 34px;
-      }
-      .mid {
-        --rise: 16px;
-      }
-    }
   }
-  @keyframes drift {
+  @keyframes clouds {
     from {
-      transform: translateY(var(--rise));
+      transform: translateX(-1.2%);
     }
     to {
-      transform: translateY(0);
+      transform: translateX(1.2%);
     }
   }
   @keyframes glide {
@@ -118,7 +110,7 @@ const id = `ridge-${Math.random().toString(36).slice(2, 8)}`;
       rotate: 0deg;
     }
     50% {
-      translate: 28px -8px;
+      translate: 60% -20%;
       rotate: -3deg;
     }
   }

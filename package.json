@@ -3,7 +3,7 @@
   "private": true,
   "version": "4.0.0",
   "type": "module",
-  "description": "Ni\u00f1o Redoble: AI product engineer. Portfolio site.",
+  "description": "Niño Redoble: AI product engineer. Portfolio site.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build && node scripts/resume-pdf.mjs",
@@ -15,18 +15,26 @@
     "url": "git+https://github.com/ninoredoble/gnegr-portfolio.git"
   },
   "homepage": "https://ninoredoble.is-a.dev/",
-  "author": "Ni\u00f1o Redoble",
+  "author": "Niño Redoble",
   "license": "MIT",
   "engines": {
     "node": ">=22.23.4"
   },
   "dependencies": {
+    "@astrojs/react": "^7.1.9",
     "@fontsource/familjen-grotesk": "^5.3.0",
-    "astro": "^7.4.13"
+    "animejs": "^4.5.0",
+    "astro": "^7.4.13",
+    "gsap": "^3.15.1",
+    "motion": "^14.14.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@types/node": "^22.20.7",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
     "typescript": "^6.0.3"
   }
 }
